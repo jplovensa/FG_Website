@@ -20,7 +20,24 @@ npm test
 node scripts/serve.js --dist
 ```
 
-The build creates `dist/` with only public site files. Tests check production assets and video range delivery. Browser checks should additionally cover intro completion, refresh replay, skip/Escape, video pause/play, mobile navigation, project filtering and details, reduced motion, and failed video requests.
+The build creates `dist/` with only public site files. Tests check production assets at both the domain root and a repository subpath, as well as video range delivery. Browser checks should additionally cover intro completion, refresh replay, skip/Escape, video pause/play, mobile navigation, project filtering and details, reduced motion, and failed video requests.
+
+## GitHub Pages
+
+All asset URLs are relative so the same website works at `https://jplovensa.github.io/FG_Website/` and at the domain root on Vercel.
+
+For publishing through GitHub Actions, open the repository's **Settings → Pages** and choose **GitHub Actions** as the source. The included `.github/workflows/pages.yml` builds, tests and deploys `dist/` on pushes to `main`. If needed, run **Deploy GitHub Pages** manually from the Actions tab after changing the source.
+
+Existing branch-based publishing is also supported: use branch **main**, folder **/ (root)**. The root `.nojekyll` file tells GitHub to serve the static files directly. Branch-based publishing uses the repository root, rather than the generated `dist/` folder.
+
+To reproduce GitHub Pages locally:
+
+```sh
+npm run build
+node scripts/serve.js --dist --base-path=/FG_Website/
+```
+
+Visit the server's `/FG_Website/` path. Requests outside that path intentionally return 404 so broken root-relative URLs are caught during testing.
 
 ## Vercel
 

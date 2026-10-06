@@ -16,7 +16,7 @@ function updateVideoButton() {
 }
 
 function startHero() {
-  if (!heroVideo.hasAttribute('src')) heroVideo.src = '/assets/hero.mp4';
+  if (!heroVideo.hasAttribute('src')) heroVideo.src = './assets/hero.mp4';
   return heroVideo.play().catch(() => { heroWanted = false; updateVideoButton(); });
 }
 
@@ -64,7 +64,7 @@ if (reducedMotion.matches || saveData) {
     if (event.key === 'Tab') { event.preventDefault(); skip.focus(); }
   });
   introTimer = window.setTimeout(closeIntro, 8500);
-  introVideo.src = '/assets/intro.mp4';
+  introVideo.src = './assets/intro.mp4';
   introVideo.play().catch(closeIntro);
 }
 

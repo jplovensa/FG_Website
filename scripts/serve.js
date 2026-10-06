@@ -5,11 +5,19 @@ import { resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)), process.argv.includes('--dist') ? 'dist' : '.');
+// Reproduce repository-path hosting (such as GitHub Pages) during validation.
+const basePath = process.argv.find(arg => arg.startsWith('--base-path='))?.slice('--base-path='.length) || '/';
+if (!basePath.startsWith('/') || !basePath.endsWith('/')) throw new Error('Base path must start and end with /');
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.mp4': 'video/mp4', '.txt': 'text/plain; charset=utf-8' };
 const server = createServer(async (req, res) => {
   if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405).end(); return; }
   try {
-    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    const requestedPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (basePath !== '/' && requestedPath === basePath.slice(0, -1)) {
+      res.writeHead(308, { Location: basePath }).end(); return;
+    }
+    if (!requestedPath.startsWith(basePath)) { res.writeHead(404).end('Not found'); return; }
+    const pathname = '/' + requestedPath.slice(basePath.length);
     const file = resolve(root, `.${pathname === '/' ? '/index.html' : pathname}`);
     if (!file.startsWith(root + sep) || !types[extname(file)]) { res.writeHead(404).end('Not found'); return; }
     const info = await stat(file);
