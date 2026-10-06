@@ -8,13 +8,13 @@
       name="description"
       content="Fjäll Group brings design, modular materials and precision manufacturing together to build better spaces across Asia and Australasia."
     />
-    <meta property="og:title" content="Fjäll Group — A better way to build" />
+    <meta property="og:title" content="Fjäll Group — Better spaces at every scale" />
     <meta
       property="og:description"
       content="Swedish engineering. Japanese precision. Indonesian scalability. Discover our approach to modern construction."
     />
     <meta property="og:type" content="website" />
-    <title>Fjäll Group — A better way to build</title>
+    <title>Fjäll Group — Better spaces at every scale</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
@@ -118,13 +118,14 @@
             <span class="status-dot"></span> Modern methods. Lasting
             possibilities.
           </p>
-          <h1 id="hero-title">Construction.<br /><em>Reconsidered.</em></h1>
+          <h1 id="hero-title">Better spaces.<br /><em>At every scale.</em></h1>
           <p class="hero-description">
-            Spaces that breathe. Structures that last.<br />We bring a new way
-            of thinking to the places we create.
+            From housing and workers’ accommodation to hospitality and
+            retrofit.<br />Design, advanced building systems and
+            delivery—working as one.
           </p>
           <a href="#journey" class="button button-light"
-            >Explore your building journey
+            >See how we build
             <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6 18 18 6M6 6h12v12" /></svg
           ></a>
@@ -196,19 +197,23 @@
           <article class="business">
             <div class="business-top">
               <span class="business-icon blocks" aria-hidden="true">▱</span
-              ><span class="eyebrow">Materials & manufacturing</span>
+              ><span class="eyebrow">Housing & workers’ accommodation</span>
             </div>
-            <h3>Fjäll Green Tech<span class="brand-dot">.</span></h3>
+            <h3>
+              Fjäll Affordable Development<span class="brand-dot">.</span>
+            </h3>
             <p>
-              The innovation, made tangible. Our material arm develops and
-              manufactures the GX 100 panel and BEMMELS structural systems that
-              make a different way of building possible.
+              Mass-scale development, centred on people. Fjäll Affordable
+              Development brings housing and workers’ accommodation together
+              through repeatable building systems, considered masterplanning and
+              coordinated delivery—from individual communities to large
+              development programmes.
             </p>
-            <span class="text-link"
-              >The materials that make it happen
+            <a class="text-link" href="#journey" id="affordable-journey"
+              >Homes and accommodation at scale
               <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 18 18 6M6 6h12v12" /></svg
-            ></span>
+            ></a>
           </article>
         </div>
       </section>
@@ -343,6 +348,20 @@
           >
             A modular development
           </button>
+          <button
+            type="button"
+            data-journey-type="housing"
+            aria-pressed="false"
+          >
+            Mass-scale housing
+          </button>
+          <button
+            type="button"
+            data-journey-type="workers"
+            aria-pressed="false"
+          >
+            Workers’ accommodation
+          </button>
         </div>
         <div class="journey-workspace">
           <div
@@ -351,7 +370,21 @@
             data-stage="0"
             aria-label="Illustrative building model: site planning"
           >
-            <span class="eyebrow model-caption">Fjäll / Assembly study</span>
+            <span class="eyebrow model-caption"
+              >Build with Fjäll / Guided construction scene</span
+            >
+            <canvas
+              id="construction-canvas"
+              role="img"
+              aria-label="Interactive 3D construction site with a Fjäll guide"
+              hidden
+            ></canvas>
+            <div class="scene-guide">
+              <span class="eyebrow">Your Fjäll guide</span>
+              <p id="scene-guide-text">
+                Let’s start with your site and the people who will use it.
+              </p>
+            </div>
             <svg viewBox="0 0 640 450" role="img" aria-labelledby="model-title">
               <title id="model-title">
                 An illustrative building grows from a site plan into a finished
@@ -412,6 +445,32 @@
                 />
               </g>
             </svg>
+            <div
+              class="scene-controls"
+              role="group"
+              aria-label="Explore the construction scene"
+              hidden
+            >
+              <button
+                type="button"
+                id="scene-left"
+                aria-label="Rotate view left"
+              >
+                ←</button
+              ><button
+                type="button"
+                id="scene-right"
+                aria-label="Rotate view right"
+              >
+                →</button
+              ><button type="button" id="scene-reset">Reset view</button
+              ><button type="button" id="scene-motion" aria-pressed="false">
+                Pause character
+              </button>
+            </div>
+            <p class="scene-help" id="scene-help">
+              Interactive illustration · Drag to explore the site
+            </p>
             <div class="model-bottom">
               <span id="model-stage-label">01 / Discover</span
               ><span>Concept illustration</span>
@@ -507,8 +566,8 @@
             Different places.<br />The same <em>possibility.</em>
           </h2>
           <p>
-            From expressive architecture to adaptable living spaces. Selected
-            work across hospitality, residential development and modular living.
+            Every programme, in one place. Hospitality, housing, modular living,
+            public facilities and the transformation of existing buildings.
           </p>
         </div>
 
@@ -548,19 +607,27 @@
 
         <div class="project-filters" role="group" aria-label="Filter projects">
           <button type="button" data-filter="all" aria-pressed="true">
-            All projects <span>05</span></button
+            All projects <span>09</span></button
           ><button type="button" data-filter="retrofit" aria-pressed="false">
             Retrofit</button
           ><button type="button" data-filter="hospitality" aria-pressed="false">
             Hospitality</button
           ><button type="button" data-filter="residential" aria-pressed="false">
             Residential</button
+          ><button type="button" data-filter="housing" aria-pressed="false">
+            Housing at scale</button
+          ><button
+            type="button"
+            data-filter="infrastructure"
+            aria-pressed="false"
+          >
+            Facilities</button
           ><button type="button" data-filter="modular" aria-pressed="false">
             Modular living
           </button>
         </div>
         <p class="sr-only" id="project-status" role="status" aria-live="polite">
-          Showing 5 projects
+          Showing 9 projects
         </p>
         <div class="project-grid">
           <button
@@ -666,6 +733,98 @@
               <span>Indonesia & Japan</span>
             </div>
             <p>Small footprint. Far-reaching possibilities.</p>
+          </button>
+          <button
+            class="project-card"
+            type="button"
+            data-project="bamboo"
+            data-category="hospitality"
+            aria-label="View The Bamboo Lab & Underground Club project"
+          >
+            <div class="project-image">
+              <img
+                src="./assets/bamboo-lab.webp"
+                alt="Architectural imagery of the Bamboo Lab’s organic exterior from the company profile"
+                width="1000"
+                height="715"
+                loading="lazy"
+                decoding="async"
+              /><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Hospitality & culture</span>
+            </div>
+            <div class="project-info">
+              <h3>The Bamboo Lab & Underground Club</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>Hybrid infrastructure. From lab to resort.</p></button
+          ><button
+            class="project-card"
+            type="button"
+            data-project="housing"
+            data-category="housing"
+            aria-label="View Lombok Housing Initiative project"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">250</span
+              ><span class="project-statement">Lombok Housing Initiative</span
+              ><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Mass-scale housing</span>
+            </div>
+            <div class="project-info">
+              <h3>Lombok Housing Initiative</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>A housing programme at community scale.</p></button
+          ><button
+            class="project-card"
+            type="button"
+            data-project="sport"
+            data-category="infrastructure"
+            aria-label="View Multi-Sport Facility project"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">SPORT</span
+              ><span class="project-statement">Multi-Sport Facility</span
+              ><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Community facilities</span>
+            </div>
+            <div class="project-info">
+              <h3>Multi-Sport Facility</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Space for sport. Designed for people.</p></button
+          ><button
+            class="project-card"
+            type="button"
+            data-project="villas"
+            data-category="residential"
+            aria-label="View Private Turnkey Villas project"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">100+</span
+              ><span class="project-statement">Private Turnkey Villas</span
+              ><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Residential programme</span>
+            </div>
+            <div class="project-info">
+              <h3>Private Turnkey Villas</h3>
+              <span>Indonesia</span>
+            </div>
+            <p>Individual homes. A connected delivery approach.</p>
           </button>
         </div>
       </section>
@@ -863,6 +1022,7 @@
       >
         ×</button
       ><img id="dialog-image" alt="" width="1000" height="750" />
+      <div class="dialog-summary" id="dialog-summary" hidden></div>
       <div class="dialog-copy">
         <p class="eyebrow" id="dialog-location"></p>
         <h2 id="dialog-title"></h2>

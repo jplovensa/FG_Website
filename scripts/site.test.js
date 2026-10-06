@@ -49,6 +49,17 @@ for (const basePath of ["/", "/FG_Website/"]) {
     const imports = [...js.matchAll(/from\s+['"]([^'"]+)['"]/g)].map(
       (match) => match[1],
     );
+    const experience = await (
+      await fetch(new URL("./experience.js", base))
+    ).text();
+    const sceneImports = [
+      ...experience.matchAll(/import\(['"]([^'"]+)['"]\)/g),
+    ].map((match) => match[1]);
+    assert.ok(
+      sceneImports.includes("./construction-scene.js"),
+      "The scene must be available as a lazy module",
+    );
+    imports.push(...sceneImports);
     const css = await (await fetch(new URL("./styles.css", base))).text();
     const fonts = [...css.matchAll(/url\(['"]?([^'"\)]+)['"]?\)/g)].map(
       (match) => match[1],

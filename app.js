@@ -172,6 +172,38 @@ for (const filter of filters)
   });
 
 const projects = {
+  bamboo: {
+    title: "The Bamboo Lab & Underground Club",
+    location: "Lombok, Indonesia · Hospitality & culture",
+    description:
+      "The company profile describes a three-phase programme spanning a lab, resort and underground club. Its hybrid infrastructure brings together bespoke requirements and development at scale.",
+    materials: "Hybrid BEMMELS and EPS systems",
+  },
+  housing: {
+    title: "Lombok Housing Initiative",
+    location: "Lombok, Indonesia · Mass-scale housing",
+    description:
+      "The corporate profile lists a regional-government housing programme of over 250 units, developed around rapid, disaster-resilient housing delivery. It demonstrates the scale of a coordinated housing programme.",
+    materials: "Mass-scale GX 100 building envelopes",
+    summary: "250 homes / Housing at community scale",
+  },
+  sport: {
+    title: "Multi-Sport Facility",
+    location: "Bali, Indonesia · Community facilities",
+    description:
+      "A sports-facility programme in Bali. Speak with the Fjäll team about the project’s scope and how its approach can support your facility.",
+    materials: "Project-specific specifications available from the team",
+    summary: "Multi-Sport Facility / Bali",
+  },
+  villas: {
+    title: "Private Turnkey Villas",
+    location: "Indonesia · Residential programme",
+    description:
+      "The corporate profile lists more than 100 private turnkey villas across Indonesia, reflecting a residential programme delivered through an integrated design and construction approach.",
+    materials: "Project-specific systems and turnkey delivery",
+    summary: "100+ villas / Private residential programme",
+  },
+
   nuanu: {
     title: "Nuanu Creative City",
     location: "Bali, Indonesia · Hospitality & culture",
@@ -211,8 +243,18 @@ for (const card of cards)
       project.description;
     document.querySelector("#dialog-materials").textContent = project.materials;
     const image = document.querySelector("#dialog-image");
-    image.src = card.querySelector("img").src;
-    image.alt = card.querySelector("img").alt;
+    const source = card.querySelector("img");
+    const summary = document.querySelector("#dialog-summary");
+    image.hidden = !source;
+    summary.hidden = Boolean(source);
+    if (source) {
+      image.src = source.src;
+      image.alt = source.alt;
+    } else {
+      image.removeAttribute("src");
+      image.alt = "";
+      summary.textContent = project.summary || project.title;
+    }
     dialog.showModal();
     dialog.scrollTop = 0;
   });

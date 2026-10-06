@@ -8,6 +8,7 @@ for (const file of [
   "styles.css",
   "app.js",
   "experience.js",
+  "construction-scene.js",
   "favicon.svg",
   "robots.txt",
   ".nojekyll",

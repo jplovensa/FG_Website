@@ -14,7 +14,7 @@ const journeys = {
       "A coordinated design direction, engineering requirements and an agreed scope.",
     ],
     [
-      "Fjäll Green Tech",
+      "Fjäll production team",
       "Precision before the site.",
       "Once the design and approvals are agreed, the specified panels and structural components move into controlled production. Your team plans delivery and site preparation.",
       "A manufacturing plan, specified components and a coordinated delivery sequence.",
@@ -46,7 +46,7 @@ const journeys = {
       "A coordinated concept, operational requirements and a defined project scope.",
     ],
     [
-      "Fjäll Green Tech",
+      "Fjäll production team",
       "Make consistency possible.",
       "Specified components move into precision production. Repeated room types and shared building systems are coordinated with your delivery team.",
       "A component schedule and a phased manufacturing and delivery plan.",
@@ -78,7 +78,7 @@ const journeys = {
       "An assessed design scope, engineering requirements and a phasing strategy.",
     ],
     [
-      "Fjäll Green Tech + Your team",
+      "Fjäll production team + Your team",
       "Prepare the right interventions.",
       "Where specified by the approved design, components are prepared off site. Coordinate dimensions and interfaces with the existing fabric before delivery.",
       "Specified components and an interface and installation plan.",
@@ -110,7 +110,7 @@ const journeys = {
       "A coordinated module concept and site-specific design requirements.",
     ],
     [
-      "Fjäll Green Tech",
+      "Fjäll production team",
       "Build the repeatable pieces.",
       "Specified envelopes and structural elements move into production. Your team plans quality checks, packaging and the delivery sequence.",
       "A component and manufacturing plan for the agreed deployment.",
@@ -136,10 +136,79 @@ const labels = {
   modular: "A modular development",
 };
 
+journeys.housing = [
+  [
+    "You + Fjäll Affordable Development",
+    "Start with the community.",
+    "Define who the homes are for, the site and the scale of the programme. We align the housing brief with land, infrastructure and local requirements.",
+    "A housing brief, site priorities and a programme assessment plan.",
+  ],
+  [
+    "Fjäll Affordable Development + Your design team",
+    "Plan a connected neighbourhood.",
+    "Coordinate repeatable home types with access, shared spaces, services and site-specific engineering. Masterplanning and approvals shape the development before production.",
+    "A coordinated masterplan, housing types and engineering requirements.",
+  ],
+  [
+    "Fjäll production + Delivery teams",
+    "Prepare for delivery at scale.",
+    "Specified components move into controlled production. The team coordinates repeatable systems, quality checks and delivery batches with site readiness.",
+    "A manufacturing schedule and a phased delivery plan for the agreed scope.",
+  ],
+  [
+    "Your construction + Delivery team",
+    "Build the programme in phases.",
+    "Homes and supporting infrastructure are delivered through a coordinated site sequence. Assembly, services and completion checks follow the approved plans.",
+    "Installed housing phases and quality checks against the agreed scope.",
+  ],
+  [
+    "You + Fjäll Affordable Development",
+    "A community, ready for its next chapter.",
+    "Review each agreed phase with your project team. Handover includes completion documentation, outstanding items and maintenance considerations.",
+    "Documented handovers and a clear plan for occupation and maintenance.",
+  ],
+];
+journeys.workers = [
+  [
+    "You + Fjäll Affordable Development",
+    "Put the workforce first.",
+    "Discuss workforce needs, the location and how the accommodation will operate. Define occupancy, shared amenities, access and the surveys needed for the site.",
+    "An accommodation brief and a site and operational requirements list.",
+  ],
+  [
+    "Fjäll Affordable Development + Your design team",
+    "Design for everyday dignity.",
+    "Coordinate sleeping spaces, sanitation, dining and shared facilities. Comfort, services, local requirements and site-specific engineering inform the design.",
+    "A coordinated accommodation layout, amenity plan and design requirements.",
+  ],
+  [
+    "Fjäll production + Delivery teams",
+    "Make repetition work well.",
+    "Specified building components are manufactured in coordinated batches. Repeated room types and service interfaces are planned with your delivery team.",
+    "Specified systems and a phased manufacturing and delivery plan.",
+  ],
+  [
+    "Your construction + Delivery team",
+    "Bring the accommodation together.",
+    "Accommodation blocks, services and shared facilities are assembled on a prepared site. The sequence is coordinated with operational access and the agreed inspections.",
+    "Installed accommodation and coordinated checks across the agreed scope.",
+  ],
+  [
+    "You + Your operations team",
+    "Prepare for people to move in.",
+    "Review completion, documentation and outstanding items with the project and operations teams. Agree the maintenance and operational handover before occupation.",
+    "A documented handover and an operations and maintenance brief.",
+  ],
+];
+labels.housing = "Mass-scale housing";
+labels.workers = "Workers’ accommodation";
+
 export function initJourney({ reducedMotion }) {
   let type = "home";
   let step = 0;
   let timer;
+  let scene;
+  let sceneLoading = false;
   const play = document.querySelector("#journey-play");
   const previous = document.querySelector("#journey-previous");
   const next = document.querySelector("#journey-next");
@@ -159,6 +228,8 @@ export function initJourney({ reducedMotion }) {
     document.querySelector("#journey-count").textContent = `0${step + 1} / 05`;
     document.querySelector("#model-stage-label").textContent =
       `0${step + 1} / ${stages[step]}`;
+    scene?.setType(type);
+    scene?.setStage(step);
     const model = document.querySelector("#build-model");
     model.dataset.stage = String(step);
     model.setAttribute(
@@ -182,7 +253,7 @@ export function initJourney({ reducedMotion }) {
     previous.disabled = step === 0;
     next.disabled = step === 4;
     document.querySelector("#contact-project").textContent =
-      `Let’s talk about your ${type === "retrofit" ? "existing building" : type === "home" ? "new home" : type === "hospitality" ? "hospitality project" : "modular development"} and what’s possible.`;
+      `Let’s talk about your ${type === "retrofit" ? "existing building" : type === "home" ? "new home" : type === "hospitality" ? "hospitality project" : type === "housing" ? "housing programme" : type === "workers" ? "workers’ accommodation" : "modular development"} and what’s possible.`;
     if (step === 4) stop();
   }
   function selectType(value) {
@@ -229,6 +300,9 @@ export function initJourney({ reducedMotion }) {
     }, 4500);
   });
   document
+    .querySelector("#affordable-journey")
+    .addEventListener("click", () => selectType("housing"));
+  document
     .querySelector("#retrofit-journey")
     .addEventListener("click", () => selectType("retrofit"));
   document.querySelector("#download-brief").addEventListener("click", () => {
@@ -272,6 +346,81 @@ export function initJourney({ reducedMotion }) {
     },
     { threshold: 0.05 },
   ).observe(document.querySelector("#journey"));
+
+  const model = document.querySelector("#build-model");
+  const canvas = document.querySelector("#construction-canvas");
+  const sceneControls = document.querySelector(".scene-controls");
+  const sceneMotion = document.querySelector("#scene-motion");
+  let scenePaused = false;
+  function unavailable() {
+    canvas.hidden = true;
+    model.classList.remove("has-webgl");
+    sceneControls.hidden = true;
+    document.querySelector("#scene-help").textContent =
+      "Illustrated journey · 3D is unavailable on this device";
+  }
+  const lazyScene = new IntersectionObserver(
+    async (entries) => {
+      if (!entries[0].isIntersecting || sceneLoading) return;
+      sceneLoading = true;
+      lazyScene.disconnect();
+      try {
+        const { createConstructionScene } =
+          await import("./construction-scene.js");
+        scene = createConstructionScene(canvas, {
+          reducedMotion,
+          onUnavailable: unavailable,
+        });
+        if (!scene) return;
+        model.classList.add("has-webgl");
+        canvas.tabIndex = 0;
+        sceneControls.hidden = false;
+        scene.setType(type);
+        scene.setStage(step);
+        sceneMotion.disabled = reducedMotion.matches;
+        sceneMotion.textContent = reducedMotion.matches
+          ? "Motion reduced"
+          : "Pause character";
+      } catch {
+        unavailable();
+      }
+    },
+    { rootMargin: "100px" },
+  );
+  lazyScene.observe(model);
+  document
+    .querySelector("#scene-left")
+    .addEventListener("click", () => scene?.rotate(-0.35));
+  document
+    .querySelector("#scene-right")
+    .addEventListener("click", () => scene?.rotate(0.35));
+  document
+    .querySelector("#scene-reset")
+    .addEventListener("click", () => scene?.reset());
+  sceneMotion.addEventListener("click", () => {
+    scenePaused = !scenePaused;
+    scene?.pause(scenePaused);
+    sceneMotion.setAttribute("aria-pressed", String(scenePaused));
+    sceneMotion.textContent = scenePaused
+      ? "Resume character"
+      : "Pause character";
+  });
+  canvas.addEventListener("keydown", (event) => {
+    if (["ArrowLeft", "ArrowRight", "Home"].includes(event.key)) {
+      event.preventDefault();
+      if (event.key === "Home") scene?.reset();
+      else scene?.rotate(event.key === "ArrowLeft" ? -0.2 : 0.2);
+    }
+  });
+  reducedMotion.addEventListener("change", () => {
+    sceneMotion.disabled = reducedMotion.matches;
+    sceneMotion.textContent = reducedMotion.matches
+      ? "Motion reduced"
+      : scenePaused
+        ? "Resume character"
+        : "Pause character";
+  });
+
   reducedMotion.addEventListener("change", stop);
 }
 
