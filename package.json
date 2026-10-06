@@ -1,0 +1,13 @@
+{
+  "name": "fjall-group",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "start": "node scripts/serve.js",
+    "build": "node scripts/build.js",
+    "test": "node --test scripts/site.test.js"
+  },
+  "engines": { "node": ">=22" }
+}
