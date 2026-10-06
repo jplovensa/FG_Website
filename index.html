@@ -1,84 +1,882 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#193a32">
-  <meta name="description" content="Fjäll Group brings design, modular materials and precision manufacturing together to build better spaces across Asia and Australasia.">
-  <meta property="og:title" content="Fjäll Group — A better way to build">
-  <meta property="og:description" content="Swedish engineering. Japanese precision. Indonesian scalability. Discover our approach to modern construction.">
-  <meta property="og:type" content="website">
-  <title>Fjäll Group — A better way to build</title>
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="./assets/hero-poster.webp" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./app.js" type="module"></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Fjäll Group opening film" hidden>
-    <div class="intro-top"><span class="wordmark">FJÄLL<span>GROUP</span></span><span class="eyebrow">A better way to build</span></div>
-    <video id="intro-video" muted playsinline preload="none" aria-label="Modular blocks assembling into a structure"></video>
-    <div class="intro-bottom"><span>Small pieces. Greater possibilities.</span><button class="intro-skip" id="intro-skip" type="button">Skip intro <span aria-hidden="true">↗︎</span></button></div>
-    <div class="intro-progress" aria-hidden="true"><span id="intro-progress"></span></div>
-  </div>
-
-  <header class="site-header" id="header">
-    <a class="brand" href="#home" aria-label="Fjäll Group home"><svg viewBox="0 0 48 44" aria-hidden="true"><path d="M2 28 24 3l22 25H35L24 15 13 28z"/><path d="m17 32 7-8 7 8-7 8z"/></svg><span class="wordmark">FJÄLL<span>GROUP</span></span></a>
-    <nav id="navigation" aria-label="Main navigation">
-      <a href="#about">The group</a><a href="#approach">Our approach</a><a href="#projects">Selected projects</a><a class="nav-contact" href="#contact">Let’s build <span aria-hidden="true">↗︎</span></a>
-    </nav>
-    <button id="menu-toggle" class="menu-toggle" aria-controls="navigation" aria-expanded="false" type="button">Menu <span aria-hidden="true">＋</span></button>
-  </header>
-
-  <main id="main">
-    <section class="hero" id="home" aria-labelledby="hero-title">
-      <video id="hero-video" class="hero-video" poster="./assets/hero-poster.webp" muted loop playsinline preload="none" aria-label="Coastal architecture and landscaped surroundings"></video>
-      <div class="hero-shade"></div>
-      <div class="hero-content">
-        <p class="eyebrow"><span class="status-dot"></span> Modern methods. Lasting possibilities.</p>
-        <h1 id="hero-title">A better way<br>to <em>build.</em></h1>
-        <p class="hero-description">Spaces that breathe. Structures that last.<br>We bring a new way of thinking to the places we create.</p>
-        <a href="#approach" class="button button-light">Discover our approach <span aria-hidden="true">↗︎</span></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#193a32" />
+    <meta
+      name="description"
+      content="Fjäll Group brings design, modular materials and precision manufacturing together to build better spaces across Asia and Australasia."
+    />
+    <meta property="og:title" content="Fjäll Group — A better way to build" />
+    <meta
+      property="og:description"
+      content="Swedish engineering. Japanese precision. Indonesian scalability. Discover our approach to modern construction."
+    />
+    <meta property="og:type" content="website" />
+    <title>Fjäll Group — A better way to build</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="./assets/hero-poster.webp"
+      as="image"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="./assets/fonts/inter-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div
+      class="intro"
+      id="intro"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Fjäll Group opening film"
+      hidden
+    >
+      <div class="intro-top">
+        <span class="eyebrow">Fjäll Group / Construction in motion</span
+        ><span class="eyebrow">01 — The beginning</span>
       </div>
-      <div class="hero-bottom"><a href="#about" class="scroll-link"><span aria-hidden="true">↓</span> Explore Fjäll Group</a><span class="hero-caption">Engineering possibility.<br>From Indonesia to the world.</span><button id="video-toggle" class="video-toggle" type="button" aria-label="Play background video">Play film <span aria-hidden="true">▷</span></button></div>
-      <span class="hero-index" aria-hidden="true">01 / 03</span>
-    </section>
-
-    <section class="about section-pad" id="about" aria-labelledby="about-title">
-      <div class="section-label"><span class="eyebrow">01 — The group</span><span class="eyebrow">Built on a shared vision</span></div>
-      <div class="about-intro"><h2 id="about-title">One group.<br>A world of <em>possibility.</em></h2><div class="about-copy"><p class="lead">We’re rethinking how the world builds.</p><p>Fjäll Group is a construction technology company bringing design, development and advanced modular building systems together. From considered homes to ambitious hospitality projects, we create spaces with a smarter path from idea to reality.</p><p>Swedish engineering, Japanese precision and Indonesian production. Three strengths. One connected approach.</p></div></div>
-      <div class="businesses">
-        <article class="business"><div class="business-top"><span class="business-icon" aria-hidden="true">↗︎</span><span class="eyebrow">Design & development</span></div><h3>GreenShift<span class="brand-dot">.</span></h3><p>The vision, brought together. Our design and development arm connects architecture, project management and capital coordination—from the first idea to turnkey delivery.</p><span class="text-link">The thinking behind the build <span aria-hidden="true">↗︎</span></span></article>
-        <article class="business"><div class="business-top"><span class="business-icon blocks" aria-hidden="true">▱</span><span class="eyebrow">Materials & manufacturing</span></div><h3>Fjäll Green Tech<span class="brand-dot">.</span></h3><p>The innovation, made tangible. Our material arm develops and manufactures the GX 100 panel and BEMMELS structural systems that make a different way of building possible.</p><span class="text-link">The materials that make it happen <span aria-hidden="true">↗︎</span></span></article>
+      <video
+        id="intro-video"
+        muted
+        playsinline
+        preload="none"
+        aria-label="Modular blocks assembling into a structure"
+      ></video>
+      <div class="intro-reveal" id="intro-reveal" aria-hidden="true">
+        <img src="./assets/fjall-logo.png" alt="" width="2048" height="716" />
+        <p>Spaces that breathe. Structures that last.</p>
       </div>
-    </section>
-
-    <section class="approach section-pad" id="approach" aria-labelledby="approach-title">
-      <div class="section-label"><span class="eyebrow">02 — Our approach</span><span class="eyebrow">Precision, from the start</span></div>
-      <div class="approach-heading"><h2 id="approach-title">Build differently.<br>Live <em>better.</em></h2><p>Better buildings begin long before the first day on site. We design, manufacture and assemble as one connected process.</p></div>
-      <div class="process"><article><span class="process-number">01</span><h3>Design with purpose</h3><p>Architecture and engineering work together from day one. Every space is planned around its people, its landscape and its future.</p></article><article><span class="process-number">02</span><h3>Make with precision</h3><p>Components are manufactured off site. Precision milling and controlled production reduce on-site cutting and material waste.</p></article><article><span class="process-number">03</span><h3>Assemble with confidence</h3><p>Lightweight, prefabricated systems arrive ready for assembly, simplifying logistics and shortening time spent on site.</p></article></div>
-      <div class="materials"><div class="materials-title"><p class="eyebrow">The building blocks</p><h3>New materials.<br>New possibilities.</h3><p>Two complementary technologies at the heart of our approach.</p></div><div class="material-list"><details open><summary><span><span class="eyebrow">01 / Insulated panel system</span><strong>GX 100</strong></span><span class="details-icon" aria-hidden="true">＋</span></summary><p>Precision-manufactured EPS panels create an insulated building envelope. Designed for efficient assembly and comfortable interiors, they offer an alternative to traditional masonry construction.</p></details><details><summary><span><span class="eyebrow">02 / Basalt composite system</span><strong>BEMMELS</strong></span><span class="details-icon" aria-hidden="true">＋</span></summary><p>Volcanic basalt fibre and advanced composites form lightweight structural elements. Their non-corrosive properties support projects in demanding environments, including coastal locations.</p></details></div></div>
-      <div class="approach-foot"><span class="status-dot"></span><p>Designed for homes. Engineered for hospitality. Built to scale.</p></div>
-    </section>
-
-    <section class="projects section-pad" id="projects" aria-labelledby="projects-title">
-      <div class="section-label"><span class="eyebrow">03 — Selected projects</span><span class="eyebrow">Ideas, made real</span></div>
-      <div class="projects-heading"><h2 id="projects-title">Different places.<br>The same <em>possibility.</em></h2><p>From expressive architecture to adaptable living spaces. Selected work across hospitality, residential development and modular living.</p></div>
-      <div class="project-filters" role="group" aria-label="Filter projects"><button type="button" data-filter="all" aria-pressed="true">All projects <span>04</span></button><button type="button" data-filter="hospitality" aria-pressed="false">Hospitality</button><button type="button" data-filter="residential" aria-pressed="false">Residential</button><button type="button" data-filter="modular" aria-pressed="false">Modular living</button></div>
-      <p class="sr-only" id="project-status" role="status" aria-live="polite">Showing 4 projects</p>
-      <div class="project-grid">
-        <button class="project-card" type="button" data-project="nuanu" data-category="hospitality" aria-label="View Nuanu Creative City project"><div class="project-image"><img src="./assets/nuanu.webp" alt="Nuanu Creative City’s sculptural architecture in Bali" width="1000" height="750" loading="lazy" decoding="async"><span class="project-arrow" aria-hidden="true">↗︎</span><span class="project-tag">Hospitality & culture</span></div><div class="project-info"><h3>Nuanu Creative City</h3><span>Bali, Indonesia</span></div><p>Complex geometry. Connected spaces.</p></button>
-        <button class="project-card" type="button" data-project="ulaman" data-category="hospitality" aria-label="View Ulaman Eco Resort project"><div class="project-image"><img src="./assets/ulaman.webp" alt="Organic bamboo architecture surrounded by tropical planting at Ulaman" width="1000" height="668" loading="lazy" decoding="async"><span class="project-arrow" aria-hidden="true">↗︎</span><span class="project-tag">Eco hospitality</span></div><div class="project-info"><h3>Ulaman Eco Resort</h3><span>Bali, Indonesia</span></div><p>Where engineering meets the natural world.</p></button>
-        <button class="project-card" type="button" data-project="lombok" data-category="residential" aria-label="View Kuta Lombok Estates project"><div class="project-image"><img src="./assets/lombok.webp" alt="Architectural design of Kuta Lombok Estates in a green coastal landscape" width="1000" height="782" loading="lazy" decoding="async"><span class="project-arrow" aria-hidden="true">↗︎</span><span class="project-tag">Residential</span></div><div class="project-info"><h3>Kuta Lombok Estates</h3><span>Lombok, Indonesia</span></div><p>Coastal living, thoughtfully engineered.</p></button>
-        <button class="project-card" type="button" data-project="pods" data-category="modular" aria-label="View Drop Pod Network project"><div class="project-image"><img src="./assets/pods.webp" alt="Curved modular home with glazed frontage and a pool" width="1000" height="667" loading="lazy" decoding="async"><span class="project-arrow" aria-hidden="true">↗︎</span><span class="project-tag">Modular living</span></div><div class="project-info"><h3>The Drop Pod Network</h3><span>Indonesia & Japan</span></div><p>Small footprint. Far-reaching possibilities.</p></button>
+      <div class="intro-bottom">
+        <span>Small pieces. Greater possibilities.</span
+        ><button class="intro-skip" id="intro-skip" type="button">
+          Skip intro
+          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 18 18 6M6 6h12v12" />
+          </svg>
+        </button>
       </div>
-    </section>
+      <div class="intro-progress" aria-hidden="true">
+        <span id="intro-progress"></span>
+      </div>
+    </div>
 
-    <section class="contact section-pad" id="contact" aria-labelledby="contact-title"><div><p class="eyebrow">The next possibility is yours</p><h2 id="contact-title">Let’s build<br>something <em>better.</em></h2></div><div class="contact-copy"><p>Have a site, a vision, or a question?<br>Let’s talk about what’s possible.</p><a class="button button-dark" href="tel:+6281237535508">Talk to our Bali team <span aria-hidden="true">↗︎</span></a><span class="contact-number">+62 812 3753 5508</span></div></section>
-  </main>
-  <footer class="site-footer section-pad"><div class="footer-top"><a class="brand" href="#home" aria-label="Fjäll Group home"><svg viewBox="0 0 48 44" aria-hidden="true"><path d="M2 28 24 3l22 25H35L24 15 13 28z"/><path d="m17 32 7-8 7 8-7 8z"/></svg><span class="wordmark">FJÄLL<span>GROUP</span></span></a><p>Spaces that breathe.<br>Structures that last.</p><div class="footer-location"><span class="eyebrow">Indonesia HQ</span><p>Jalan Kuta Gallery – Velvet 2 No. 17<br>Jalan Patih Jelantik, Kuta, Badung, Bali</p></div><div class="footer-location"><span class="eyebrow">Japan HQ</span><p>2-chome-6-11 Daimyo, Chuo Ward<br>Fukuoka, 810-0041, Japan</p></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> Fjäll Group</span><span>Swedish engineering · Japanese precision · Indonesian scalability</span><a href="#home">Back to top ↑</a></div></footer>
+    <header class="site-header" id="header">
+      <a class="brand" href="#home" aria-label="Fjäll Group home"
+        ><img
+          src="./assets/fjall-logo.png"
+          alt="Fjäll Group"
+          width="2048"
+          height="716"
+      /></a>
+      <nav id="navigation" aria-label="Main navigation">
+        <a href="#about">The group</a><a href="#approach">Our approach</a
+        ><a href="#journey">Build with us</a
+        ><a href="#projects">Selected projects</a
+        ><a class="nav-contact" href="#contact"
+          >Let’s build
+          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 18 18 6M6 6h12v12" /></svg
+        ></a>
+      </nav>
+      <button
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-controls="navigation"
+        aria-expanded="false"
+        type="button"
+      >
+        Menu <span aria-hidden="true">＋</span>
+      </button>
+    </header>
 
-  <dialog id="project-dialog" class="project-dialog" aria-labelledby="dialog-title"><button type="button" class="dialog-close" id="dialog-close" aria-label="Close project details">×</button><img id="dialog-image" alt="" width="1000" height="750"><div class="dialog-copy"><p class="eyebrow" id="dialog-location"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p><p class="dialog-materials"><span class="eyebrow">Materials & approach</span><span id="dialog-materials"></span></p><a href="#contact" id="dialog-contact" class="text-link">Discuss a similar project <span aria-hidden="true">↗︎</span></a></div></dialog>
-</body>
+    <main id="main">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <video
+          id="hero-video"
+          class="hero-video"
+          poster="./assets/hero-poster.webp"
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-label="Coastal architecture and landscaped surroundings"
+        ></video>
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow">
+            <span class="status-dot"></span> Modern methods. Lasting
+            possibilities.
+          </p>
+          <h1 id="hero-title">Construction.<br /><em>Reconsidered.</em></h1>
+          <p class="hero-description">
+            Spaces that breathe. Structures that last.<br />We bring a new way
+            of thinking to the places we create.
+          </p>
+          <a href="#journey" class="button button-light"
+            >Explore your building journey
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg
+          ></a>
+        </div>
+        <div class="hero-bottom">
+          <a href="#about" class="scroll-link"
+            ><span aria-hidden="true">↓</span> Explore Fjäll Group</a
+          ><span class="hero-caption"
+            >Engineering possibility.<br />From Indonesia to the world.</span
+          ><button
+            id="video-toggle"
+            class="video-toggle"
+            type="button"
+            aria-label="Play background video"
+          >
+            Play film <span aria-hidden="true">▷</span>
+          </button>
+        </div>
+        <span class="hero-index" aria-hidden="true">01 / 05</span>
+      </section>
+
+      <section
+        class="about section-pad"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">01 — The group</span
+          ><span class="eyebrow">Built on a shared vision</span>
+        </div>
+        <div class="about-intro">
+          <h2 id="about-title">
+            One group.<br />A world of <em>possibility.</em>
+          </h2>
+          <div class="about-copy">
+            <p class="lead">We’re rethinking how the world builds.</p>
+            <p>
+              Fjäll Group is a construction technology company bringing design,
+              development and advanced modular building systems together. From
+              considered homes to ambitious hospitality projects, we create
+              spaces with a smarter path from idea to reality.
+            </p>
+            <p>
+              Swedish engineering, Japanese precision and Indonesian production.
+              Three strengths. One connected approach.
+            </p>
+          </div>
+        </div>
+        <div class="businesses">
+          <article class="business">
+            <div class="business-top">
+              <span class="business-icon" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="eyebrow">Design & development</span>
+            </div>
+            <h3>GreenShift<span class="brand-dot">.</span></h3>
+            <p>
+              The vision, brought together. Our design and development arm
+              connects architecture, project management and capital
+              coordination—from the first idea to turnkey delivery.
+            </p>
+            <span class="text-link"
+              >The thinking behind the build
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12" /></svg
+            ></span>
+          </article>
+          <article class="business">
+            <div class="business-top">
+              <span class="business-icon blocks" aria-hidden="true">▱</span
+              ><span class="eyebrow">Materials & manufacturing</span>
+            </div>
+            <h3>Fjäll Green Tech<span class="brand-dot">.</span></h3>
+            <p>
+              The innovation, made tangible. Our material arm develops and
+              manufactures the GX 100 panel and BEMMELS structural systems that
+              make a different way of building possible.
+            </p>
+            <span class="text-link"
+              >The materials that make it happen
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12" /></svg
+            ></span>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="approach section-pad"
+        id="approach"
+        aria-labelledby="approach-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">02 — Our approach</span
+          ><span class="eyebrow">Precision, from the start</span>
+        </div>
+        <div class="approach-heading">
+          <h2 id="approach-title">
+            Build differently.<br />Live <em>better.</em>
+          </h2>
+          <p>
+            Better buildings begin long before the first day on site. We design,
+            manufacture and assemble as one connected process.
+          </p>
+        </div>
+        <div class="process">
+          <article>
+            <span class="process-number">01</span>
+            <h3>Design with purpose</h3>
+            <p>
+              Architecture and engineering work together from day one. Every
+              space is planned around its people, its landscape and its future.
+            </p>
+          </article>
+          <article>
+            <span class="process-number">02</span>
+            <h3>Make with precision</h3>
+            <p>
+              Components are manufactured off site. Precision milling and
+              controlled production reduce on-site cutting and material waste.
+            </p>
+          </article>
+          <article>
+            <span class="process-number">03</span>
+            <h3>Assemble with confidence</h3>
+            <p>
+              Lightweight, prefabricated systems arrive ready for assembly,
+              simplifying logistics and shortening time spent on site.
+            </p>
+          </article>
+        </div>
+        <div class="materials">
+          <div class="materials-title">
+            <p class="eyebrow">The building blocks</p>
+            <h3>New materials.<br />New possibilities.</h3>
+            <p>Two complementary technologies at the heart of our approach.</p>
+          </div>
+          <div class="material-list">
+            <details open>
+              <summary>
+                <span
+                  ><span class="eyebrow">01 / Insulated panel system</span
+                  ><strong>GX 100</strong></span
+                ><span class="details-icon" aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                Precision-manufactured EPS panels create an insulated building
+                envelope. Designed for efficient assembly and comfortable
+                interiors, they offer an alternative to traditional masonry
+                construction.
+              </p>
+            </details>
+            <details>
+              <summary>
+                <span
+                  ><span class="eyebrow">02 / Basalt composite system</span
+                  ><strong>BEMMELS</strong></span
+                ><span class="details-icon" aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                Volcanic basalt fibre and advanced composites form lightweight
+                structural elements. Their non-corrosive properties support
+                projects in demanding environments, including coastal locations.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div class="approach-foot">
+          <span class="status-dot"></span>
+          <p>Designed for homes. Engineered for hospitality. Built to scale.</p>
+        </div>
+      </section>
+
+      <section
+        class="journey section-pad"
+        id="journey"
+        aria-labelledby="journey-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">03 — Build with Fjäll</span
+          ><span class="eyebrow">From first conversation to first key</span>
+        </div>
+        <div class="journey-heading">
+          <h2 id="journey-title">
+            Your ambition.<br />A considered <em>path.</em>
+          </h2>
+          <p>
+            What happens after “let’s build”? Choose your project and walk
+            through the decisions, people and materials that bring it to life.
+          </p>
+        </div>
+        <div
+          class="journey-types"
+          role="group"
+          aria-label="Choose your project type"
+        >
+          <button type="button" data-journey-type="home" aria-pressed="true">
+            A home</button
+          ><button
+            type="button"
+            data-journey-type="hospitality"
+            aria-pressed="false"
+          >
+            A hospitality space</button
+          ><button
+            type="button"
+            data-journey-type="retrofit"
+            aria-pressed="false"
+          >
+            An existing building</button
+          ><button
+            type="button"
+            data-journey-type="modular"
+            aria-pressed="false"
+          >
+            A modular development
+          </button>
+        </div>
+        <div class="journey-workspace">
+          <div
+            class="build-model"
+            id="build-model"
+            data-stage="0"
+            aria-label="Illustrative building model: site planning"
+          >
+            <span class="eyebrow model-caption">Fjäll / Assembly study</span>
+            <svg viewBox="0 0 640 450" role="img" aria-labelledby="model-title">
+              <title id="model-title">
+                An illustrative building grows from a site plan into a finished
+                structure
+              </title>
+              <defs>
+                <pattern
+                  id="blueprint-grid"
+                  width="35"
+                  height="35"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M35 0H0V35"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width=".4"
+                    opacity=".16"
+                  />
+                </pattern>
+              </defs>
+              <rect width="640" height="450" fill="url(#blueprint-grid)" />
+              <g class="model-ground">
+                <path d="M70 295 315 152 580 305 332 445Z" />
+                <path d="M105 295 315 173 545 305 331 426Z" />
+                <path d="m315 173 16 253M105 295l440 10" />
+              </g>
+              <g class="model-design">
+                <path d="M165 283v-130l170-96 170 96v152l-170 98-170-120Z" />
+                <path
+                  d="m165 153 170 97 170-97M335 250v153M165 283l170-98 170 120"
+                />
+                <path d="m335 57 0 128" />
+              </g>
+              <g class="model-frame">
+                <path
+                  d="M165 283V153l170-96 170 96v152M335 250v153M165 153l170 97 170-97M165 283l170 120 170-98M249 105v125M420 106v150M250 202v138M420 200v151"
+                />
+              </g>
+              <g class="model-panels">
+                <path d="m165 153 170 97v153L165 283Z" />
+                <path d="m335 250 170-97v152l-170 98Z" />
+                <path
+                  class="model-window"
+                  d="m185 182 57 33v68l-57-39ZM266 228l48 27v101l-48-34ZM358 259l58-33v65l-58 34ZM440 211l44-26v67l-44 25Z"
+                />
+              </g>
+              <g class="model-roof">
+                <path d="m150 151 185-108 186 108-186 107Z" />
+                <path
+                  d="m150 151 185 107v15L150 166ZM335 258l186-107v15L335 273Z"
+                />
+              </g>
+              <g class="model-finish">
+                <path d="m130 308 205 120 194-111M123 320l212 122 202-120" />
+                <path
+                  d="M110 260v53M100 282l10-36 12 36M559 281v48M548 298l11-31 11 31"
+                />
+              </g>
+            </svg>
+            <div class="model-bottom">
+              <span id="model-stage-label">01 / Discover</span
+              ><span>Concept illustration</span>
+            </div>
+          </div>
+          <div class="journey-story">
+            <div class="journey-story-top">
+              <span class="eyebrow" id="journey-owner">You + GreenShift</span
+              ><span id="journey-count">01 / 05</span>
+            </div>
+            <h3 id="journey-stage-title">Begin with your ambition.</h3>
+            <p id="journey-description">
+              Share how you want to live, where you want to build, and what
+              matters most. Together, we turn the idea into a clear brief.
+            </p>
+            <div class="journey-deliverable">
+              <span class="eyebrow">What you take forward</span>
+              <p id="journey-deliverable">
+                A project brief, site priorities and the right questions to
+                answer.
+              </p>
+            </div>
+            <div class="journey-controls">
+              <button
+                type="button"
+                id="journey-previous"
+                aria-label="Previous journey stage"
+                disabled
+              >
+                ←</button
+              ><button type="button" id="journey-play">
+                Play the journey <span aria-hidden="true">▷</span></button
+              ><button
+                type="button"
+                id="journey-next"
+                aria-label="Next journey stage"
+              >
+                →
+              </button>
+            </div>
+            <span
+              class="sr-only"
+              id="journey-status"
+              role="status"
+              aria-live="polite"
+              >Stage 1 of 5: Discover</span
+            >
+          </div>
+        </div>
+        <div
+          class="journey-steps"
+          role="group"
+          aria-label="Choose a journey stage"
+        >
+          <button type="button" data-journey-step="0" aria-pressed="true">
+            <span>01</span>Discover</button
+          ><button type="button" data-journey-step="1" aria-pressed="false">
+            <span>02</span>Design</button
+          ><button type="button" data-journey-step="2" aria-pressed="false">
+            <span>03</span>Manufacture</button
+          ><button type="button" data-journey-step="3" aria-pressed="false">
+            <span>04</span>Assemble</button
+          ><button type="button" data-journey-step="4" aria-pressed="false">
+            <span>05</span>Handover
+          </button>
+        </div>
+        <div class="journey-foot">
+          <p>
+            An illustrative journey. Scope, engineering and programme are agreed
+            with your project team.
+          </p>
+          <button type="button" id="download-brief" class="text-link">
+            Save your starter brief <span aria-hidden="true">↓</span></button
+          ><a href="#contact" class="text-link" id="journey-contact"
+            >Start the conversation
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg
+          ></a>
+        </div>
+      </section>
+
+      <section
+        class="projects section-pad"
+        id="projects"
+        aria-labelledby="projects-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">04 — Selected projects</span
+          ><span class="eyebrow">Ideas, made real</span>
+        </div>
+        <div class="projects-heading">
+          <h2 id="projects-title">
+            Different places.<br />The same <em>possibility.</em>
+          </h2>
+          <p>
+            From expressive architecture to adaptable living spaces. Selected
+            work across hospitality, residential development and modular living.
+          </p>
+        </div>
+
+        <article class="flagship" data-category="retrofit">
+          <div class="flagship-film">
+            <video
+              id="retrofit-video"
+              poster="./assets/retrofit-poster.webp"
+              data-src="./assets/retrofit.mp4"
+              preload="none"
+              playsinline
+              aria-label="GSIH and MCC flagship retrofit showcase film"
+            ></video
+            ><button type="button" id="retrofit-play" class="film-play">
+              <span class="film-play-icon" aria-hidden="true">▷</span
+              ><span
+                >Watch the project film <small>00:51 / Sound on</small></span
+              ></button
+            ><span class="film-index eyebrow">Featured study / 01</span>
+          </div>
+          <div class="flagship-copy">
+            <p class="eyebrow">Flagship retrofit / GSIH × MCC</p>
+            <h3>A new chapter.<br />For what’s<br /><em>already here.</em></h3>
+            <p>
+              Construction excellence is also about transformation. Discover the
+              Garuda Spark Innovation Hub at Malang Creative Center: a flagship
+              retrofit bringing new purpose to existing spaces.
+            </p>
+            <a href="#journey" class="text-link" id="retrofit-journey"
+              >Explore a retrofit journey
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12" /></svg
+            ></a>
+            <p id="retrofit-status" role="status" class="film-status"></p>
+          </div>
+        </article>
+
+        <div class="project-filters" role="group" aria-label="Filter projects">
+          <button type="button" data-filter="all" aria-pressed="true">
+            All projects <span>05</span></button
+          ><button type="button" data-filter="retrofit" aria-pressed="false">
+            Retrofit</button
+          ><button type="button" data-filter="hospitality" aria-pressed="false">
+            Hospitality</button
+          ><button type="button" data-filter="residential" aria-pressed="false">
+            Residential</button
+          ><button type="button" data-filter="modular" aria-pressed="false">
+            Modular living
+          </button>
+        </div>
+        <p class="sr-only" id="project-status" role="status" aria-live="polite">
+          Showing 5 projects
+        </p>
+        <div class="project-grid">
+          <button
+            class="project-card"
+            type="button"
+            data-project="nuanu"
+            data-category="hospitality"
+            aria-label="View Nuanu Creative City project"
+          >
+            <div class="project-image">
+              <img
+                src="./assets/nuanu.webp"
+                alt="Nuanu Creative City’s sculptural architecture in Bali"
+                width="1000"
+                height="750"
+                loading="lazy"
+                decoding="async"
+              /><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Hospitality & culture</span>
+            </div>
+            <div class="project-info">
+              <h3>Nuanu Creative City</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Complex geometry. Connected spaces.</p>
+          </button>
+          <button
+            class="project-card"
+            type="button"
+            data-project="ulaman"
+            data-category="hospitality"
+            aria-label="View Ulaman Eco Resort project"
+          >
+            <div class="project-image">
+              <img
+                src="./assets/ulaman.webp"
+                alt="Organic bamboo architecture surrounded by tropical planting at Ulaman"
+                width="1000"
+                height="668"
+                loading="lazy"
+                decoding="async"
+              /><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Eco hospitality</span>
+            </div>
+            <div class="project-info">
+              <h3>Ulaman Eco Resort</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Where engineering meets the natural world.</p>
+          </button>
+          <button
+            class="project-card"
+            type="button"
+            data-project="lombok"
+            data-category="residential"
+            aria-label="View Kuta Lombok Estates project"
+          >
+            <div class="project-image">
+              <img
+                src="./assets/lombok.webp"
+                alt="Architectural design of Kuta Lombok Estates in a green coastal landscape"
+                width="1000"
+                height="782"
+                loading="lazy"
+                decoding="async"
+              /><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Residential</span>
+            </div>
+            <div class="project-info">
+              <h3>Kuta Lombok Estates</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>Coastal living, thoughtfully engineered.</p>
+          </button>
+          <button
+            class="project-card"
+            type="button"
+            data-project="pods"
+            data-category="modular"
+            aria-label="View Drop Pod Network project"
+          >
+            <div class="project-image">
+              <img
+                src="./assets/pods.webp"
+                alt="Curved modular home with glazed frontage and a pool"
+                width="1000"
+                height="667"
+                loading="lazy"
+                decoding="async"
+              /><span class="project-arrow" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
+              ><span class="project-tag">Modular living</span>
+            </div>
+            <div class="project-info">
+              <h3>The Drop Pod Network</h3>
+              <span>Indonesia & Japan</span>
+            </div>
+            <p>Small footprint. Far-reaching possibilities.</p>
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="world section-pad"
+        id="world"
+        aria-labelledby="world-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">05 — Our perspective</span
+          ><span class="eyebrow">Rooted locally. Thinking globally.</span>
+        </div>
+        <div class="world-heading">
+          <h2 id="world-title">
+            From the heart<br />of Indonesia.<br /><em>To the world.</em>
+          </h2>
+          <p>
+            Our production starts in Indonesia. Our approach brings Swedish
+            engineering and Japanese precision together, with a focus on
+            projects across Asia and Australasia.
+          </p>
+        </div>
+        <div class="world-map" id="world-map" data-region="all">
+          <svg viewBox="0 0 960 480" aria-hidden="true">
+            <defs>
+              <pattern
+                id="map-grid"
+                width="80"
+                height="60"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M80 0H0V60"
+                  fill="none"
+                  stroke="#a6b7ad"
+                  stroke-width=".4"
+                  opacity=".15"
+                />
+              </pattern>
+            </defs>
+            <rect width="960" height="480" fill="url(#map-grid)" />
+            <image href="./assets/world-map.svg" width="960" height="480" />
+            <g class="map-route route-europe">
+              <path d="M787 262Q710 70 522 78" />
+              <circle r="3">
+                <animateMotion
+                  dur="5s"
+                  repeatCount="indefinite"
+                  path="M787 262Q710 70 522 78"
+                />
+              </circle>
+            </g>
+            <g class="map-route route-japan">
+              <path d="M787 262Q875 227 829 151" />
+              <circle r="3">
+                <animateMotion
+                  dur="4s"
+                  repeatCount="indefinite"
+                  path="M787 262Q875 227 829 151"
+                />
+              </circle>
+            </g>
+            <g class="map-route route-australasia">
+              <path d="M787 262Q869 260 885 330" />
+              <circle r="3">
+                <animateMotion
+                  dur="4.5s"
+                  repeatCount="indefinite"
+                  path="M787 262Q869 260 885 330"
+                />
+              </circle>
+            </g>
+            <g class="map-destination">
+              <circle cx="522" cy="78" r="4" />
+              <text x="507" y="63" text-anchor="end">SWEDEN</text>
+              <circle cx="829" cy="151" r="4" />
+              <text x="845" y="139">JAPAN</text>
+              <circle cx="885" cy="330" r="4" />
+              <text x="867" y="357" text-anchor="end">AUSTRALASIA</text>
+            </g>
+            <g class="map-origin">
+              <circle class="origin-pulse" cx="787" cy="262" r="17" />
+              <circle cx="787" cy="262" r="5" />
+              <text x="767" y="298" text-anchor="end">INDONESIA</text>
+              <text class="map-origin-detail" x="767" y="316" text-anchor="end">
+                THE HEART OF OUR PRODUCTION
+              </text>
+            </g>
+          </svg>
+          <div class="map-legend">
+            <span class="status-dot"></span> An origin. A shared direction.<span
+              >Connections illustrate our roots and regional focus.</span
+            >
+          </div>
+        </div>
+        <div
+          class="world-regions"
+          role="group"
+          aria-label="Explore our global connections"
+        >
+          <button type="button" data-region="all" aria-pressed="true">
+            <span class="eyebrow">01 / Our foundation</span
+            ><strong>Indonesia</strong></button
+          ><button type="button" data-region="europe" aria-pressed="false">
+            <span class="eyebrow">02 / Engineering roots</span
+            ><strong>Sweden</strong></button
+          ><button type="button" data-region="japan" aria-pressed="false">
+            <span class="eyebrow">03 / Precision & deployment</span
+            ><strong>Japan</strong></button
+          ><button type="button" data-region="australasia" aria-pressed="false">
+            <span class="eyebrow">04 / Regional focus</span
+            ><strong>Australasia</strong>
+          </button>
+        </div>
+        <p class="world-story" id="world-story" role="status">
+          Indonesia is our production foundation: a base for precision
+          manufacturing and the delivery of modular building systems.
+        </p>
+        <button
+          type="button"
+          id="map-motion"
+          class="map-motion"
+          aria-pressed="false"
+        >
+          Pause map motion <span aria-hidden="true">II</span>
+        </button>
+      </section>
+
+      <section
+        class="contact section-pad"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div>
+          <p class="eyebrow">The next possibility is yours</p>
+          <h2 id="contact-title">
+            The next chapter<br />starts <em>with you.</em>
+          </h2>
+        </div>
+        <div class="contact-copy">
+          <p id="contact-project">
+            Have a site, a vision, or a question?<br />Let’s talk about what’s
+            possible.
+          </p>
+          <a class="button button-dark" href="tel:+6281237535508"
+            >Talk to our Bali team
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg></a
+          ><span class="contact-number">+62 812 3753 5508</span>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer section-pad">
+      <div class="footer-top">
+        <a class="brand" href="#home" aria-label="Fjäll Group home"
+          ><img
+            src="./assets/fjall-logo.png"
+            alt="Fjäll Group"
+            width="2048"
+            height="716"
+        /></a>
+        <p>Spaces that breathe.<br />Structures that last.</p>
+        <div class="footer-location">
+          <span class="eyebrow">Indonesia HQ</span>
+          <p>
+            Jalan Kuta Gallery – Velvet 2 No. 17<br />Jalan Patih Jelantik,
+            Kuta, Badung, Bali
+          </p>
+        </div>
+        <div class="footer-location">
+          <span class="eyebrow">Japan HQ</span>
+          <p>2-chome-6-11 Daimyo, Chuo Ward<br />Fukuoka, 810-0041, Japan</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Fjäll Group</span
+        ><span
+          >Swedish engineering · Japanese precision · Indonesian
+          scalability</span
+        ><a href="#home">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <dialog
+      id="project-dialog"
+      class="project-dialog"
+      aria-labelledby="dialog-title"
+    >
+      <button
+        type="button"
+        class="dialog-close"
+        id="dialog-close"
+        aria-label="Close project details"
+      >
+        ×</button
+      ><img id="dialog-image" alt="" width="1000" height="750" />
+      <div class="dialog-copy">
+        <p class="eyebrow" id="dialog-location"></p>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-description"></p>
+        <p class="dialog-materials">
+          <span class="eyebrow">Materials & approach</span
+          ><span id="dialog-materials"></span>
+        </p>
+        <a href="#contact" id="dialog-contact" class="text-link"
+          >Discuss a similar project
+          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 18 18 6M6 6h12v12" /></svg
+        ></a>
+      </div>
+    </dialog>
+  </body>
 </html>

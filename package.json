@@ -9,5 +9,7 @@
     "build": "node scripts/build.js",
     "test": "node --test scripts/site.test.js"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

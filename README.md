@@ -1,6 +1,6 @@
 # Fjäll Group
 
-A lightweight corporate website built with semantic HTML, CSS and vanilla JavaScript. No frontend framework, external font requests, runtime packages or credentials are required.
+A lightweight corporate website built with semantic HTML, CSS and vanilla JavaScript. The architectural monograph direction uses locally hosted Inter, the supplied Fjäll Group logo, quiet surfaces and editorial typography. No frontend framework, external font requests, runtime packages or credentials are required.
 
 ## Local development
 
@@ -45,13 +45,23 @@ Import this GitHub repository into Vercel. Select **Other** as the framework. Th
 
 ## Media and playback
 
-- `assets/intro.mp4` is the complete supplied modular-block opening film, compressed to H.264 with fast-start metadata. It plays on each load and refresh, with a skip button, Escape key, and an 8.5-second maximum waiting time.
+- `assets/intro.mp4` is the complete supplied modular-block opening film, compressed to H.264 with fast-start metadata. It fills the viewport using `object-fit: cover`, which crops the edges on narrow screens rather than letterboxing. The supplied logo reveals during the last 1.25 seconds and briefly holds before opening the website. It plays on each load and refresh, with a skip button, Escape key, and an 8.5-second maximum waiting time.
 - `assets/hero.mp4` is the complete supplied hero film, compressed in the same way. Its download begins after the intro closes so the two videos do not compete for bandwidth.
 - Both videos are muted and play inline. The hero pauses when offscreen or when the browser tab is hidden.
 - Reduced-motion or data-saving preferences bypass the intro and leave a static hero poster; the hero can be played manually. A rejected autoplay request or failed intro download reveals the page immediately.
 - Project images are optimized WebP extracts from the supplied 2026 corporate profile and load lazily. Some profile imagery may be architectural renderings; it is presented as imagery from that profile, not as independently verified completion photography.
 - Original uploads remain outside the Git checkout. Only optimized web assets are included; no large ZIP or PDF is committed.
+- `assets/retrofit.mp4` preserves the complete 51-second Garuda Spark Innovation Hub / Malang Creative Center film and its audio. It is encoded as browser-compatible H.264/AAC at 720p. The player downloads the film only after an explicit click; native controls provide pause, seek, sound and fullscreen. Playback pauses when offscreen or in a hidden tab.
+- `assets/fjall-logo.png` is the logo matching the supplied artwork, extracted from the corporate profile with its original embedded transparency mask. It is used in the header, footer and preloader. The favicon uses its geometric mark.
+
+## Interactive experience
+
+`experience.js` owns the five-stage customer journey and animated world map. Visitors can choose home, hospitality, retrofit or modular projects; move between stages; play or pause the guided sequence; and download a text starter brief. The assembly graphic is an illustrative concept, not an engineering specification or a pricing/timeline calculator. The brief download happens locally and sends no data to a server.
+
+The map uses a lightweight SVG derived from Natural Earth's public-domain [110m land dataset](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson). Connections represent Indonesia as the production base, Sweden as the engineering origin, Japan as a precision/deployment connection, and Australasia as a regional focus; they do not claim offices in every destination. Visitors can select a connection and pause motion. Animation pauses offscreen or in a hidden tab and is disabled for reduced-motion preferences.
+
+Inter is distributed under its included license in `assets/fonts/LICENSE.txt`. The locally hosted variable font is `assets/fonts/inter-latin.woff2`.
 
 ## Content
 
-The business descriptions, four featured projects, and contact number come from the supplied company profile. Project details are maintained in `app.js`; section content is in `index.html`. Technical performance and certification claims require supporting documentation before adding them to the site. The initial contact action calls the Bali team rather than submitting an unconnected form.
+The business descriptions, four image-based projects, and contact number come from the supplied company profile. The fifth, flagship retrofit feature uses the supplied Garuda Spark Innovation Hub / Malang Creative Center film. Project details are maintained in `app.js`; section content is in `index.html`. Technical performance and certification claims require supporting documentation before adding them to the site. The initial contact action calls the Bali team rather than submitting an unconnected form.
