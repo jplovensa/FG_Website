@@ -11,7 +11,7 @@ const materials = {
       "Finish → Kalci board → Fibreglass → PU glue → EPS → PU glue → Fibreglass → Kalci board → Finish.",
     discuss:
       "Project geometry, openings, checked dimensions and the finish sample—before sequenced installation.",
-    label: "GX-100 / Nine-layer build-up",
+    label: "GX-100 / Studio concept",
     graphic: "Documented GX-100 panel build-up",
     graphicDescription:
       "Nine layers: one EPS core, with PU glue, fibreglass mesh, Kalci board and custom finish on each face.",
@@ -19,8 +19,14 @@ const materials = {
     views: [
       {
         label: "Build-up",
+        image: "gx100-studio",
+        concept: true,
+        alt: "AI-assisted GX-100 concept illustrating the documented exploded build-up: finish, Kalci board, mesh, PU glue and EPS, mirrored on both faces",
+      },
+      {
+        label: "Catalogue",
         image: "gx100-layers",
-        alt: "GX-100 exploded build-up: finish, Kalci board, mesh, PU glue and EPS, mirrored on both faces",
+        alt: "Exact nine-layer GX-100 build-up supplied in the product knowledge deck",
       },
       {
         label: "Finishes",
@@ -58,8 +64,14 @@ const materials = {
     views: [
       {
         label: "Profile",
+        image: "bemmel-studio",
+        concept: true,
+        alt: "AI-assisted studio concept of an illustrative BEMMELS braided basalt I-profile",
+      },
+      {
+        label: "Catalogue",
         image: "bemmel-system",
-        alt: "Illustrative BEMMELS composite structural profiles from the product knowledge deck",
+        alt: "Illustrative BEMMELS profiles supplied in the product knowledge deck",
       },
       {
         label: "Braid",
@@ -84,12 +96,18 @@ const materials = {
       "ROR: rubber membrane + woven fibreglass. Shingles: overlapping courses on a project-approved roof assembly.",
     discuss:
       "Coordinate roof geometry, substrate, drainage, thickness, edge details and performance with the approved system specification.",
-    label: "Roofing / Original site photography",
+    label: "RoR / Studio concept",
     graphic: "Reinforced ROR membrane build-up",
     graphicDescription:
       "Rubber membrane, integrated woven fibreglass and a project-specific roof substrate; separated for clarity, not to scale.",
     source: "RoR Catalogue · Membranes, shingles and application, pp. 3–11",
     views: [
+      {
+        label: "Studio",
+        image: "ror-studio",
+        concept: true,
+        alt: "AI-assisted RoR concept showing brown, black and white shingle samples and a separate reinforced membrane sample",
+      },
       {
         label: "In application",
         image: "ror-application",
@@ -136,8 +154,9 @@ const materials = {
     views: [
       {
         label: "Applications",
-        image: "gx100-applications",
-        alt: "GX-100 private villa, resort pavilion, commercial and hybrid mid-rise application concepts; not completed project photographs",
+        image: "scale-studio",
+        concept: true,
+        alt: "AI-assisted coordinated housing and prepared material studio concept, not a completed development",
       },
       {
         label: "Preparation",
@@ -170,6 +189,7 @@ const designStages = [
 
 export function initStudio() {
   initBusinessStudies();
+  initBusinessPreviews();
   initMaterialLibrary();
   initInquiry();
 }
@@ -373,6 +393,24 @@ function initMaterialLibrary() {
       tabs.append(button);
     });
     tabs.hidden = !material.views.length;
+    const picture = material.views[selectedView];
+    view.dataset.origin = picture.concept ? "studio" : "catalogue";
+    image.style.maxWidth = picture.concept
+      ? "100%"
+      : "min(100%, " +
+        ({
+          "ror-membrane": 201,
+          "ror-shingles": 277,
+          "ror-application": 515,
+          "ror-daylight": 480,
+          "gx100-preparation": 736,
+        }[picture.image] || 1200) +
+        "px)";
+    document.querySelector("#material-view-label").textContent = assembled
+      ? "Concept build-up / Not to scale"
+      : picture.concept
+        ? "Studio concept / AI-assisted illustration"
+        : "Catalogue / Original supplied visual";
     const list = document.querySelector("#material-details");
     list.replaceChildren();
     material.details.forEach((text) => {
@@ -449,4 +487,70 @@ function initInquiry() {
       status.textContent = "";
     });
   }
+}
+
+function initBusinessPreviews() {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const saving = navigator.connection?.saveData;
+  const films = [...document.querySelectorAll("[data-business-preview]")];
+  const pausedByUser = new Set();
+  const visible = new Set();
+  function sync() {
+    const dialogOpen = document.querySelector("#business-dialog").open;
+    films.forEach((video) => {
+      const allowed =
+        visible.has(video) &&
+        !document.hidden &&
+        !dialogOpen &&
+        !pausedByUser.has(video) &&
+        !reduced.matches &&
+        !saving;
+      if (allowed) {
+        if (!video.hasAttribute("src")) video.src = video.dataset.src;
+        video.play().catch(() => {});
+      } else video.pause();
+    });
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(({ target, isIntersecting }) =>
+        isIntersecting ? visible.add(target) : visible.delete(target),
+      );
+      sync();
+    },
+    { threshold: 0.35 },
+  );
+  films.forEach((video) => observer.observe(video));
+  films.forEach((video) => {
+    const toggle = document.querySelector(
+      `[data-preview-toggle="${video.dataset.businessPreview}"]`,
+    );
+    video.addEventListener("play", () => {
+      video.parentElement.classList.add("is-playing");
+      toggle.textContent = "Pause preview";
+      toggle.setAttribute("aria-pressed", "true");
+    });
+    video.addEventListener("pause", () => {
+      video.parentElement.classList.remove("is-playing");
+      toggle.textContent = "Play preview";
+      toggle.setAttribute("aria-pressed", "false");
+    });
+    toggle.addEventListener("click", () => {
+      if (!video.paused) {
+        pausedByUser.add(video);
+        video.pause();
+      } else {
+        pausedByUser.delete(video);
+        if (!video.hasAttribute("src")) video.src = video.dataset.src;
+        video.play().catch(() => {});
+      }
+    });
+  });
+  document.addEventListener("visibilitychange", sync);
+  reduced.addEventListener("change", sync);
+  const dialog = document.querySelector("#business-dialog");
+  new MutationObserver(sync).observe(dialog, {
+    attributes: true,
+    attributeFilter: ["open"],
+  });
 }

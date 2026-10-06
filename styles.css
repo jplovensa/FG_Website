@@ -3439,7 +3439,7 @@ html {
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
-  max-height: 570px;
+  max-height: none;
   overflow: hidden;
   background: #1c3426;
 }
@@ -3659,5 +3659,88 @@ html {
   .study-divider {
     padding: 22px 24px;
     font-size: 8px;
+  }
+}
+
+/* Fit the complete film and material composition inside a stable frame. */
+.business-preview > video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  background: #f1eee7;
+}
+.preview-toggle {
+  display: block;
+  margin: 12px 0 18px auto;
+  padding: 8px 12px;
+  font-size: 10px;
+  background: transparent;
+  border: 1px solid #567160;
+  color: inherit;
+}
+.business-preview.is-playing .business-film-play {
+  opacity: 0;
+}
+.business-preview.is-playing:hover .business-film-play,
+.business-preview.is-playing:focus-visible .business-film-play {
+  opacity: 1;
+}
+#material-view[data-origin="studio"] {
+  background: #f1eee7;
+}
+.material-view {
+  background: #f1eee7;
+  padding: 64px 24px 132px;
+  min-height: 560px;
+}
+#material-image {
+  width: 100%;
+  height: 350px;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
+.material-view[data-material="ror"] #material-image {
+  max-height: none;
+}
+.material-view-tabs {
+  bottom: 86px;
+}
+.trailer-letterbox {
+  border: 0;
+  background: linear-gradient(transparent 55%, #07140dbb);
+}
+.trailer-badge {
+  top: 18px;
+}
+.trailer-titles {
+  bottom: 32px;
+}
+.is-end-card .trailer-titles {
+  inset: 0;
+}
+@media (max-width: 700px) {
+  .material-view {
+    min-height: 390px;
+    padding: 54px 12px 138px;
+  }
+  #material-image {
+    height: 210px;
+  }
+  .material-view-tabs {
+    bottom: 90px;
+  }
+  .trailer-titles {
+    bottom: 18px;
+  }
+  .trailer-titles h3 {
+    font-size: clamp(16px, 5.4vw, 23px);
+  }
+  .is-end-card .trailer-titles {
+    inset: 0;
+    padding: 14px;
+    gap: 9px;
   }
 }

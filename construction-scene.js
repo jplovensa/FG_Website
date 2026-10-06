@@ -24,11 +24,16 @@ varying vec3 vNormal;
 varying vec3 vWorld;
 void main(){
   vec3 n=normalize(vNormal);
-  float sun=max(dot(n,normalize(vec3(-.6,1.,.5))),0.);
-  float sky=.46+.14*n.y;
-  vec3 lit=uColor*(sky+sun*.48)+vec3(.055,.036,.016)*sun;
-  float grain=fract(sin(dot(floor(vWorld.xz*65.),vec2(12.9898,78.233)))*43758.5453);
-  lit*=.985+grain*.03;
+  vec3 view=normalize(uEye-vWorld);
+  vec3 key=normalize(vec3(-.55,1.,.65));
+  float sun=max(dot(n,key),0.);
+  float fill=max(dot(n,normalize(vec3(.8,.45,-.5))),0.);
+  float rim=pow(1.-max(dot(n,view),0.),3.)*max(dot(n,normalize(vec3(.4,.8,-.8))),0.);
+  vec3 lit=uColor*(.53+.11*n.y+sun*.48+fill*.12);
+  lit+=vec3(.10,.085,.065)*sun+vec3(.09,.11,.12)*rim;
+  float sheen=pow(max(dot(n,normalize(key+view)),0.),36.)*.045;
+  lit+=vec3(sheen);
+  lit=clamp((lit*(2.51*lit+.03))/(lit*(2.43*lit+.59)+.14),0.,1.);
   float fog=smoothstep(16.,48.,distance(vWorld,uEye));
   gl_FragColor=vec4(mix(lit,uAtmosphere,fog),uAlpha);
 }`;
@@ -203,8 +208,8 @@ const cubeFaces = [
 ];
 function sphereFaces() {
   const faces = [],
-    lat = 10,
-    lon = 14;
+    lat = 18,
+    lon = 24;
   const point = (i, j) => {
     const a = (i / lat) * Math.PI,
       b = (j / lon) * Math.PI * 2;
@@ -354,6 +359,10 @@ export function createConstructionScene(
     shotElapsed = 1500,
     units = 6,
     shotTime = 0;
+  const smooth = (value) => {
+    const t = Math.max(0, Math.min(1, value));
+    return t * t * (3 - 2 * t);
+  };
   const messages = [
     "Let’s start with your site and the people who will use it.",
     "We coordinate your brief, design and engineering before building.",
@@ -393,8 +402,19 @@ export function createConstructionScene(
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     gl.depthMask(false);
-    gl.uniform1f(uAlpha, 0.19);
-    draw(sphere, x + 0.3, 0.03, z + 0.2, sx, 0.018, sz, [0.16, 0.22, 0.18]);
+    for (let i = 11; i >= 0; i--) {
+      gl.uniform1f(uAlpha, 0.008 + (11 - i) * 0.001);
+      draw(
+        sphere,
+        x + 0.16,
+        0.027 + i * 0.001,
+        z + 0.1,
+        sx * (1 + i * 0.035),
+        0.012,
+        sz * (1 + i * 0.035),
+        [0.12, 0.16, 0.14],
+      );
+    }
     gl.uniform1f(uAlpha, 1);
     gl.depthMask(true);
     gl.disable(gl.BLEND);
@@ -412,12 +432,16 @@ export function createConstructionScene(
       0,
       palm ? -0.1 : 0,
     );
+    const breeze =
+      manual && !reducedMotion.matches
+        ? Math.sin(shotTime / 1900 + x * 0.35 + z * 0.2) * 0.035
+        : 0;
     if (palm) {
       for (let i = 0; i < 7; i++) {
         const a = (i * Math.PI * 2) / 7;
         draw(
           sphere,
-          x + Math.sin(a) * 0.65 * size,
+          x + Math.sin(a) * 0.65 * size + breeze,
           2.35 * size,
           z + Math.cos(a) * 0.65 * size,
           0.25 * size,
@@ -432,7 +456,7 @@ export function createConstructionScene(
       for (let i = 0; i < 3; i++)
         draw(
           sphere,
-          x + (i - 1) * 0.32 * size,
+          x + (i - 1) * 0.32 * size + breeze,
           (2 + i * 0.28) * size,
           z + (i % 2) * 0.26 * size,
           1.65 * size,
@@ -517,8 +541,8 @@ export function createConstructionScene(
       tree(x, z, 0.75 + (i % 3) * 0.2, environment === "beach"),
     );
     // A real site sits in the landscape, with a path and planted edges.
-    const community = manual && type === "housing" && units > 6;
-    const rows = Math.ceil(units / 4);
+    const community = manual && type === "housing";
+    const rows = community ? 3 : Math.ceil(units / 4);
     box(
       0,
       -0.01,
@@ -529,7 +553,7 @@ export function createConstructionScene(
       environment === "beach" ? [0.84, 0.77, 0.6] : [0.62, 0.66, 0.52],
     );
     box(0, 0.005, 2.2, 8, 0.035, 0.65, colors.slab);
-    if (stage < 2) {
+    if (!manual && stage < 2) {
       for (const x of [-4.2, 4.2])
         for (const z of [-2.7, 2.7]) {
           box(x, 0.28, z, 0.035, 0.55, 0.035, colors.helmet);
@@ -537,8 +561,21 @@ export function createConstructionScene(
         }
     }
   }
-  function building(x, z, scale, elapsed) {
+  const liftForSlats = (amount, scale) =>
+    manual ? -(1 - amount) * 0.65 * scale : 0;
+  function building(x, z, scale, elapsed, buildTime = shotTime / 1000) {
     const y = 0.1;
+    const framing = manual ? smooth((buildTime - 2) / 3) : stage >= 1 ? 1 : 0;
+    const envelope = manual
+      ? smooth((buildTime - 6) / 3.5)
+      : stage >= 3
+        ? 1
+        : 0;
+    const roofing = manual
+      ? smooth((buildTime - 10) / 2.5)
+      : stage >= 4
+        ? 1
+        : 0;
     shadow(x, z, 2.9 * scale, 2.6 * scale);
     box(x, y, z, 2.35 * scale, 0.15, 2.1 * scale, colors.slab);
     // A retrofit starts with retained fabric rather than an empty site.
@@ -571,7 +608,7 @@ export function createConstructionScene(
         colors.dark,
       );
     }
-    if (stage >= 1) {
+    if (framing > 0) {
       for (const dx of [-1, 1])
         for (const dz of [-0.9, 0.9])
           box(
@@ -586,24 +623,24 @@ export function createConstructionScene(
       for (const dz of [-0.9, 0.9])
         box(x, 0.13, z + dz * scale, 2 * scale, 0.045, 0.04, colors.plan);
     }
-    if (stage >= 1) {
-      const thickness = stage === 1 ? 0.022 : 0.075;
-      const frameColor = stage === 1 ? colors.plan : colors.frame;
+    if (framing > 0) {
+      const thickness = !manual && stage === 1 ? 0.022 : 0.075;
+      const frameColor = !manual && stage === 1 ? colors.plan : colors.frame;
       for (const dx of [-1, 1])
         for (const dz of [-0.9, 0.9])
           box(
             x + dx * scale,
-            0.75 * scale,
+            (0.1 + 0.65 * framing) * scale,
             z + dz * scale,
             thickness * scale,
-            1.35 * scale,
+            1.35 * scale * framing,
             thickness * scale,
             frameColor,
           );
       for (const dz of [-0.9, 0.9])
         box(
           x,
-          1.4 * scale,
+          (0.1 + 1.3 * framing) * scale,
           z + dz * scale,
           2.05 * scale,
           thickness * scale,
@@ -611,67 +648,69 @@ export function createConstructionScene(
           frameColor,
         );
     }
-    if (stage >= 3) {
-      const lift = reducedMotion.matches
-        ? 0
-        : Math.max(0, 1 - elapsed / 900) * 1.5;
+    if (envelope > 0) {
+      const lift = manual
+        ? -(1 - envelope) * 0.65 * scale
+        : reducedMotion.matches
+          ? 0
+          : Math.max(0, 1 - elapsed / 900) * 1.5;
       box(
         x,
         0.77 * scale + lift,
         z,
         2 * scale,
-        1.3 * scale,
+        1.3 * scale * envelope,
         1.8 * scale,
         colors.wall,
       );
       box(
         x - 0.6 * scale,
-        0.83 * scale + lift,
+        (manual ? 0.12 + 0.71 * envelope : 0.83) * scale + (manual ? 0 : lift),
         z + 0.906 * scale,
         0.48 * scale,
-        0.52 * scale,
+        0.52 * scale * (manual ? envelope : 1),
         0.025,
         colors.glass,
       );
       box(
         x + 0.55 * scale,
-        0.67 * scale + lift,
+        (manual ? 0.12 + 0.55 * envelope : 0.67) * scale + (manual ? 0 : lift),
         z + 0.907 * scale,
         0.42 * scale,
-        0.99 * scale,
+        0.99 * scale * (manual ? envelope : 1),
         0.025,
         colors.frame,
       );
       box(
         x + 1.006 * scale,
-        0.85 * scale + lift,
+        (manual ? 0.12 + 0.73 * envelope : 0.85) * scale + (manual ? 0 : lift),
         z,
         0.025,
-        0.45 * scale,
+        0.45 * scale * (manual ? envelope : 1),
         0.85 * scale,
         colors.glass,
       );
     }
-    if (stage >= 3) {
+    if (envelope > 0) {
       for (let i = 0; i < 10; i++)
         box(
           x - 0.98 * scale + i * 0.09 * scale,
-          0.77 * scale,
-          z + 0.915 * scale,
+          0.77 * scale + liftForSlats(envelope, scale),
+          z + 0.93 * scale,
           0.028 * scale,
-          1.23 * scale,
+          1.23 * scale * envelope,
           0.023,
           [0.58, 0.49, 0.36],
         );
     }
-    if (stage >= 4) {
+    if (roofing > 0) {
       draw(
         roof,
         x,
         1.43 * scale,
         z,
         2.2 * scale,
-        0.65 * scale,
+        0.65 * scale * roofing,
         2 * scale,
         colors.roof,
       );
@@ -690,14 +729,24 @@ export function createConstructionScene(
     const target = stops[stage],
       t = reducedMotion.matches ? 1 : Math.min(1, elapsed / 1100),
       ease = t * t * (3 - 2 * t);
-    character = previousCharacter.map((n, i) => n + (target[i] - n) * ease);
-    const walking = t < 1 && !paused && !reducedMotion.matches,
-      phase = now / 160,
-      bob = walking ? Math.abs(Math.sin(phase)) * 0.035 : 0;
+    if (manual) {
+      const travel = smooth((now / 1000 - 1) / 12);
+      character = [-4.2 + travel * 1.3, 2.5 - travel * 0.35];
+    } else
+      character = previousCharacter.map((n, i) => n + (target[i] - n) * ease);
+    const walking = manual
+        ? now > 1000 && now < 13000 && !reducedMotion.matches
+        : t < 1 && !paused && !reducedMotion.matches,
+      phase = now / (manual ? 360 : 160),
+      bob = walking
+        ? Math.abs(Math.sin(phase)) * 0.016
+        : !reducedMotion.matches
+          ? Math.sin(now / 1200) * 0.005
+          : 0;
     shadow(character[0], character[1], 0.6, 0.4);
     const rx = character[0],
       rz = character[1],
-      face = angle,
+      face = manual ? 0.8 + Math.sin(now / 4500) * 0.05 : angle,
       cos = Math.cos(face),
       sin = Math.sin(face);
     function part(dx, dy, dz, sx, sy, sz, color, shape = cube, tilt = 0) {
@@ -714,21 +763,70 @@ export function createConstructionScene(
         tilt,
       );
     }
-    const stride = walking ? Math.sin(phase) * 0.08 : 0;
-    part(-0.11, 0.26, stride, 0.13, 0.42, 0.16, colors.dark);
-    part(0.11, 0.26, -stride, 0.13, 0.42, 0.16, colors.dark);
+    const stride = walking ? Math.sin(phase) * 0.055 : 0;
+    part(
+      -0.11,
+      0.26,
+      stride,
+      0.13,
+      0.42,
+      0.16,
+      colors.dark,
+      cube,
+      walking ? Math.sin(phase) * 0.12 : 0,
+    );
+    part(
+      0.11,
+      0.26,
+      -stride,
+      0.13,
+      0.42,
+      0.16,
+      colors.dark,
+      cube,
+      walking ? -Math.sin(phase) * 0.12 : 0,
+    );
     part(0, 0.66, 0, 0.4, 0.46, 0.22, colors.jacket);
     part(0, 1.03, 0, 0.28, 0.29, 0.28, colors.skin, sphere);
     part(0, 1.17, 0, 0.34, 0.16, 0.34, colors.helmet, sphere);
     part(0, 1.12, 0.03, 0.36, 0.035, 0.34, colors.helmet);
-    part(-0.28, 0.64, 0, 0.1, 0.37, 0.12, colors.jacket, cube, -0.12);
+    part(
+      -0.28,
+      0.64,
+      0,
+      0.1,
+      0.37,
+      0.12,
+      colors.jacket,
+      cube,
+      -0.12 + (walking ? Math.sin(phase) * 0.12 : 0),
+    );
     part(-0.3, 0.43, 0, 0.1, 0.11, 0.12, colors.skin, sphere);
     const wave =
-      stage === 0 && !paused && !reducedMotion.matches
+      (manual || stage === 0) && !paused && !reducedMotion.matches
         ? Math.sin(now / 550) * 0.15
         : 0;
-    part(0.29, 0.8, 0, 0.1, 0.35, 0.12, colors.jacket, cube, -0.75 - wave);
-    part(0.4, 0.89, 0, 0.1, 0.11, 0.12, colors.skin, sphere);
+    part(
+      0.29,
+      manual ? 0.64 : 0.8,
+      0,
+      0.1,
+      0.35,
+      0.12,
+      colors.jacket,
+      cube,
+      manual ? 0.12 - (walking ? Math.sin(phase) * 0.12 : 0) : -0.75 - wave,
+    );
+    part(
+      manual ? 0.3 : 0.4,
+      manual ? 0.43 : 0.89,
+      0,
+      0.1,
+      0.11,
+      0.12,
+      colors.skin,
+      sphere,
+    );
     part(-0.055, 1.05, 0.13, 0.025, 0.025, 0.02, colors.dark, sphere);
     part(0.055, 1.05, 0.13, 0.025, 0.025, 0.02, colors.dark, sphere);
   }
@@ -761,7 +859,22 @@ export function createConstructionScene(
           ? 1500
           : Math.max(0, now - transitionStart),
       mass = ["housing", "workers", "modular"].includes(type);
-    if (mass) {
+    if (mass && manual) {
+      const order = [5, 6, 1, 2, 4, 7, 0, 3, 8, 9, 10, 11];
+      order.forEach((cell, i) => {
+        const age =
+          i === 0 ? (now / 1000) * 2 : (now / 1000 - (6 + (i - 1) * 0.45)) * 3;
+        const appear = smooth(age / 0.9);
+        if (appear > 0)
+          building(
+            ((cell % 4) - 1.5) * 2.45,
+            -Math.floor(cell / 4) * 1.95 + 0.3,
+            0.7 * appear,
+            elapsed,
+            age,
+          );
+      });
+    } else if (mass) {
       const columns = units > 6 ? 4 : Math.min(3, units);
       for (let i = 0; i < units; i++)
         building(
@@ -774,12 +887,12 @@ export function createConstructionScene(
       box(-0.6, 0.015, -0.5, 7, 0.06, 4, colors.slab);
       building(0, -0.3, 1.3, elapsed);
       building(-2.5, -1.1, 0.85, elapsed - 120);
-      if (stage >= 4) {
+      if (manual || stage >= 4) {
         box(3, 0.05, -1, 2, 0.08, 3, [0.4, 0.7, 0.69]);
         box(3, 0.08, -1, 1.65, 0.015, 2.65, [0.31, 0.64, 0.65]);
       }
     } else building(0, -0.5, type === "hospitality" ? 1.4 : 1, elapsed);
-    if (stage >= 2 && stage < 4) {
+    if (!manual && stage >= 2 && stage < 4) {
       const move = reducedMotion.matches ? 0 : Math.min(1, elapsed / 1200);
       const tx = 3.9 - move * 0.35;
       box(tx, 0.4, 1.5, 0.72, 0.45, 1.25, colors.truck);
@@ -790,7 +903,7 @@ export function createConstructionScene(
       for (let i = 0; i < 3; i++)
         box(tx, 0.7 + i * 0.08, 1.3, 0.63, 0.07, 0.8, colors.wall);
     }
-    if (stage === 4) {
+    if (manual || stage === 4) {
       for (const x of [-4, 4])
         for (const z of [-2.5, 2.5]) tree(x, z, 0.45, environment === "beach");
     }

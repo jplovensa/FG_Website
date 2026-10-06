@@ -192,16 +192,31 @@
               aria-label="Watch GreenShift cinematic trailer"
               aria-haspopup="dialog"
             >
-              <img
-                src="./assets/greenshift-trailer-poster.webp"
-                alt="GreenShift cinematic architectural concept"
+              <video
+                data-business-preview="greenshift"
+                data-src="./assets/greenshift-trailer.mp4"
+                poster="./assets/greenshift-trailer-poster.webp"
                 width="1280"
                 height="720"
-                loading="lazy"
-              /><span class="business-film-play"
+                muted
+                playsinline
+                loop
+                preload="none"
+                aria-hidden="true"
+              ></video
+              ><span class="business-film-play"
                 ><svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="m9 5 10 7-10 7Z" /></svg></span
               ><span class="business-film-caption">GreenShift / 00:18</span>
+            </button>
+            <button
+              type="button"
+              class="preview-toggle"
+              data-preview-toggle="greenshift"
+              aria-pressed="false"
+              aria-label="Play or pause greenshift preview"
+            >
+              Play preview
             </button>
             <h3>GreenShift<span class="brand-dot">.</span></h3>
             <p>
@@ -239,18 +254,33 @@
               aria-label="Watch Fjäll Affordable Development cinematic trailer"
               aria-haspopup="dialog"
             >
-              <img
-                src="./assets/fad-trailer-poster.webp"
-                alt="Fjäll Affordable Development cinematic architectural concept"
+              <video
+                data-business-preview="fad"
+                data-src="./assets/fad-trailer.mp4"
+                poster="./assets/fad-trailer-poster.webp"
                 width="1280"
                 height="720"
-                loading="lazy"
-              /><span class="business-film-play"
+                muted
+                playsinline
+                loop
+                preload="none"
+                aria-hidden="true"
+              ></video
+              ><span class="business-film-play"
                 ><svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="m9 5 10 7-10 7Z" /></svg></span
               ><span class="business-film-caption"
                 >Fjäll Affordable Development / 00:18</span
               >
+            </button>
+            <button
+              type="button"
+              class="preview-toggle"
+              data-preview-toggle="fad"
+              aria-pressed="false"
+              aria-label="Play or pause fad preview"
+            >
+              Play preview
             </button>
             <h3>
               Fjäll Affordable Development<span class="brand-dot">.</span>
@@ -387,8 +417,8 @@
             </div>
             <img
               id="material-image"
-              src="./assets/gx100-layers.webp"
-              alt="GX-100 nine-layer build-up supplied in the product knowledge deck"
+              src="./assets/gx100-studio.webp"
+              alt="AI-assisted studio concept of the documented GX-100 nine-layer build-up"
               width="1200"
               height="675"
               loading="lazy"

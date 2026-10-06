@@ -128,16 +128,30 @@ export function getTrailerShot(kind, seconds) {
   const shots = films[kind] || films.greenshift;
   const shot =
     shots.find((s) => time >= s.start && time < s.end) || shots.at(-1);
-  const t = Math.min(1, (time - shot.start) / (shot.end - shot.start));
-  const ease = t * t * (3 - 2 * t);
+  const smooth = (value) => {
+    const t = Math.max(0, Math.min(1, value));
+    return t * t * (3 - 2 * t);
+  };
+  const u = time / trailerDuration;
+  const growth = smooth((time - 4) / 11);
+  const theta = kind === "fad" ? 0.65 + u * 0.42 : 0.6 + u * 0.65;
+  const distance =
+    kind === "fad" ? 9 + growth * 9 : 12.8 - Math.sin(Math.PI * u) * 2;
+  const target =
+    kind === "fad" ? [-1.225 * (1 - growth), 0.65, -1.65] : [-0.65, 0.85, -0.6];
   return {
     ...shot,
     time: time * 1000,
-    elapsed: (time - shot.start) * 1000,
-    eye: shot.eye.map((n, i) => n + (shot.to[i] - n) * ease),
+    elapsed: time * 1000,
+    eye: [
+      target[0] + Math.sin(theta) * distance,
+      kind === "fad" ? 3.8 + growth * 7 : 4.8 + u * 1.5,
+      target[2] + Math.cos(theta) * distance,
+    ],
+    target,
     type: kind === "fad" ? "housing" : "greenshift",
     environment: kind === "fad" ? "forest" : "beach",
-    fov: 44,
+    fov: 42,
   };
 }
 

@@ -26,3 +26,17 @@ test("FAD moves from an individual system to a twelve-home community", () => {
   assert.equal(getTrailerShot("greenshift", 13).environment, "beach");
   assert.equal(getTrailerShot("fad", 13).environment, "forest");
 });
+
+test("camera and target remain continuous across every chapter boundary", () => {
+  for (const kind of ["greenshift", "fad"]) {
+    for (const time of [3, 6, 9, 10, 12, 15, 16]) {
+      const before = getTrailerShot(kind, time - 0.001),
+        after = getTrailerShot(kind, time + 0.001);
+      for (const key of ["eye", "target"])
+        assert.ok(
+          Math.hypot(...before[key].map((v, i) => v - after[key][i])) < 0.01,
+          `${kind} ${time} ${key}`,
+        );
+    }
+  }
+});

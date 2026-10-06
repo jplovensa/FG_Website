@@ -25,15 +25,16 @@ with sync_playwright() as p, tempfile.TemporaryDirectory(prefix='fjall-films-') 
       const logo=new Image();logo.src='./assets/fjall-logo.png';await logo.decode();
       window.renderFilm=(kind,time)=>{
         const shot=getTrailerShot(kind,time);scene.renderShot(shot);ctx.drawImage(canvas,0,0,1280,720);
-        ctx.fillStyle='#07100e';ctx.fillRect(0,0,1280,44);ctx.fillRect(0,676,1280,44);
+
         ctx.textBaseline='alphabetic';
         if(shot.endCard){
-          ctx.fillStyle='rgba(5,18,15,.62)';ctx.fillRect(0,44,1280,632);
+          ctx.fillStyle='rgba(5,18,15,.62)';ctx.fillRect(0,0,1280,720);
           ctx.drawImage(logo,530,220,220,77);ctx.textAlign='center';ctx.fillStyle='#fff';ctx.font='400 50px Inter';ctx.fillText(shot.title,640,397);ctx.font='400 18px Inter';ctx.fillText(shot.caption,640,443);
         }else{
-          const shade=ctx.createLinearGradient(0,400,0,676);shade.addColorStop(0,'rgba(5,18,15,0)');shade.addColorStop(1,'rgba(5,18,15,.85)');ctx.fillStyle=shade;ctx.fillRect(0,400,1280,276);
+          const shade=ctx.createLinearGradient(0,400,0,720);shade.addColorStop(0,'rgba(5,18,15,0)');shade.addColorStop(1,'rgba(5,18,15,.85)');ctx.fillStyle=shade;ctx.fillRect(0,400,1280,320);
           ctx.textAlign='left';ctx.fillStyle='#fff';ctx.font='400 16px Inter';ctx.fillText(shot.caption.toUpperCase(),64,564);ctx.font='400 52px Inter';ctx.fillText(shot.title,64,630);
         }
+        const fade=Math.min(1,time/.35,(18-time)/.35);if(fade<1){ctx.fillStyle=`rgba(5,14,10,${1-fade})`;ctx.fillRect(0,0,1280,720);}
         return film.toDataURL('image/png').split(',')[1];
       };
     }''')
