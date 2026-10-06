@@ -6,61 +6,43 @@ const films = {
       start: 0,
       end: 3,
       stage: 0,
-      eye: [8.5, 4.3, 11],
-      to: [6.5, 3.6, 9],
-      target: [0, 0.4, -0.8],
-      title: "Start with ambition.",
-      caption: "01 / Site + brief",
+      title: "Start with simple forms.",
+      caption: "01 / Box studies",
     },
     {
       start: 3,
       end: 6,
       stage: 1,
-      eye: [6, 6, 8],
-      to: [4.5, 5.4, 7],
-      target: [0, 0.8, -0.5],
-      title: "Design as one.",
-      caption: "02 / Architecture + engineering",
+      title: "Explore the possibilities.",
+      caption: "02 / Massing + proportion",
     },
     {
       start: 6,
       end: 9,
       stage: 2,
-      eye: [4.3, 2.8, 6],
-      to: [3.4, 2.2, 4.8],
-      target: [0, 0.9, -0.5],
-      title: "Resolve the structure.",
-      caption: "03 / Coordinated preparation",
+      title: "Let the form flow.",
+      caption: "03 / Boxes become curves",
     },
     {
       start: 9,
       end: 12,
       stage: 3,
-      eye: [-4.5, 2.6, 7],
-      to: [-3.5, 2.25, 5.8],
-      target: [-0.5, 0.7, -0.5],
-      title: "Bring the parts together.",
-      caption: "04 / Envelope + assembly",
+      title: "Shape light and space.",
+      caption: "04 / Façade + spatial design",
     },
     {
       start: 12,
       end: 16,
       stage: 4,
-      eye: [7, 3.7, 9],
-      to: [6.2, 3.1, 8],
-      target: [0, 1, -0.5],
-      title: "Spaces, considered.",
-      caption: "05 / An architectural concept",
+      title: "Architecture, considered.",
+      caption: "05 / A curved pavilion concept",
     },
     {
       start: 16,
       end: 18,
       stage: 4,
-      eye: [8.5, 6, 11],
-      to: [9.3, 6.4, 12.5],
-      target: [0, 0.7, -0.5],
       title: "GreenShift",
-      caption: "Design + development, together.",
+      caption: "Your vision. Our design arm.",
       endCard: true,
     },
   ],
@@ -134,24 +116,32 @@ export function getTrailerShot(kind, seconds) {
   };
   const u = time / trailerDuration;
   const growth = smooth((time - 4) / 11);
-  const theta = kind === "fad" ? 0.65 + u * 0.42 : 0.6 + u * 0.65;
+  const theta = kind === "fad" ? 0.65 + u * 0.42 : 0.28 + u * 0.54;
   const distance =
     kind === "fad" ? 9 + growth * 9 : 12.8 - Math.sin(Math.PI * u) * 2;
   const target =
-    kind === "fad" ? [-1.225 * (1 - growth), 0.65, -1.65] : [-0.65, 0.85, -0.6];
+    kind === "fad" ? [-1.225 * (1 - growth), 0.65, -1.65] : [0, 0.9, 0.2];
   return {
     ...shot,
     time: time * 1000,
     elapsed: time * 1000,
     eye: [
       target[0] + Math.sin(theta) * distance,
-      kind === "fad" ? 3.8 + growth * 7 : 4.8 + u * 1.5,
+      kind === "fad" ? 3.8 + growth * 7 : 5.8 + u * 1.0,
       target[2] + Math.cos(theta) * distance,
     ],
     target,
     type: kind === "fad" ? "housing" : "greenshift",
     environment: kind === "fad" ? "forest" : "beach",
     fov: 42,
+  };
+}
+
+export function getTrailerMedia(kind) {
+  const revision = kind === "greenshift" ? "?v=design-curve-1" : "";
+  return {
+    video: `./assets/${kind}-trailer.mp4${revision}`,
+    poster: `./assets/${kind}-trailer-poster.webp${revision}`,
   };
 }
 
@@ -226,8 +216,8 @@ export async function createTrailerPlayer(root, { reducedMotion }) {
     root.dataset.renderer = "webgl";
   } else useVideo();
   function loadVideo() {
-    if (video.getAttribute("src") !== `./assets/${kind}-trailer.mp4`) {
-      video.src = `./assets/${kind}-trailer.mp4`;
+    if (video.getAttribute("src") !== getTrailerMedia(kind).video) {
+      video.src = getTrailerMedia(kind).video;
       video.addEventListener(
         "loadedmetadata",
         () => {
@@ -340,9 +330,9 @@ export async function createTrailerPlayer(root, { reducedMotion }) {
       time = reducedMotion.matches ? trailerDuration : 0;
       video.removeAttribute("src");
       video.load();
-      video.poster = `./assets/${kind}-trailer-poster.webp`;
+      video.poster = getTrailerMedia(kind).poster;
       root.querySelector("[data-trailer-download]").href =
-        `./assets/${kind}-trailer.mp4`;
+        getTrailerMedia(kind).video;
       status.textContent =
         "Press Play for an 18-second cinematic concept trailer.";
       paint();

@@ -154,9 +154,8 @@ const materials = {
     views: [
       {
         label: "Applications",
-        image: "scale-studio",
-        concept: true,
-        alt: "AI-assisted coordinated housing and prepared material studio concept, not a completed development",
+        image: "gx100-applications",
+        alt: "Original supplied GX-100 application concepts for a villa, resort pavilion, commercial building and hybrid mid-rise; not completed project photographs",
       },
       {
         label: "Preparation",
@@ -222,8 +221,11 @@ function initBusinessStudies() {
         const video = root.querySelector("video");
         video.hidden = false;
         video.controls = true;
-        video.src = `./assets/${business}-trailer.mp4`;
-        video.poster = `./assets/${business}-trailer-poster.webp`;
+        const preview = document.querySelector(
+          `[data-business-preview="${business}"]`,
+        );
+        video.src = preview.dataset.src;
+        video.poster = preview.getAttribute("poster");
         root.querySelector("[data-trailer-status]").textContent =
           "Use the video controls to watch the rendered trailer.";
       });
@@ -283,7 +285,7 @@ function initBusinessStudies() {
         : "A community, considered.";
       document.querySelector("#business-dialog-description").textContent =
         design
-          ? "Explore how a clear brief becomes a coordinated architectural concept."
+          ? "Explore how simple box studies become a curved architectural concept."
           : "Explore the building blocks of mass-scale housing and workers’ accommodation.";
       document.querySelector("#design-illustration").hidden = !design;
       document.querySelector("#housing-illustration").hidden = design;

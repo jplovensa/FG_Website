@@ -40,3 +40,29 @@ test("camera and target remain continuous across every chapter boundary", () => 
     }
   }
 });
+
+import { getDesignForm, designPoint } from "../construction-scene.js";
+test("GreenShift evolves straight box geometry into a continuous curved design", () => {
+  assert.equal(getDesignForm(0).curvature, 0);
+  assert.equal(getDesignForm(11).curvature, 1);
+  assert.equal(getDesignForm(9).glazing, 0);
+  assert.equal(getDesignForm(13).glazing, 1);
+  assert.deepEqual(designPoint(3, 0, 0), [3, -0.65]);
+  assert.ok(
+    designPoint(3, 0, 1)[1] > 0.5,
+    "The final volume must bend in plan",
+  );
+  let previous = 0;
+  for (let t = 0; t <= 18; t += 0.1) {
+    const form = getDesignForm(t);
+    assert.ok(form.curvature >= previous && form.curvature <= 1);
+    previous = form.curvature;
+    for (const x of [-3.6, 0, 3.6])
+      assert.ok(designPoint(x, 1.05, form.curvature).every(Number.isFinite));
+  }
+  for (const t of [3, 6, 9, 11, 13]) {
+    const a = designPoint(3, 1, getDesignForm(t - 0.001).curvature),
+      b = designPoint(3, 1, getDesignForm(t + 0.001).curvature);
+    assert.ok(Math.hypot(...a.map((value, i) => value - b[i])) < 0.005);
+  }
+});

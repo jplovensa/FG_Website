@@ -260,6 +260,29 @@ const roofFaces = [
   ],
 ];
 
+// Deterministic design geometry is shared by the live study and rendered film.
+export function getDesignForm(seconds) {
+  const ease = (value) => {
+    const t = Math.max(0, Math.min(1, value));
+    return t * t * (3 - 2 * t);
+  };
+  return {
+    curvature: ease((seconds - 3) / 8),
+    glazing: ease((seconds - 9) / 4),
+    detail: ease((seconds - 11) / 3),
+  };
+}
+export function designPoint(x, z, curvature) {
+  const arc = curvature * 2.1;
+  if (arc < 0.00001) return [x, z - 0.65];
+  const radius = 7.2 / arc,
+    angle = (x / 7.2) * arc;
+  return [
+    (radius - z) * Math.sin(angle),
+    radius * (1 - Math.cos(angle)) + z * Math.cos(angle) - 0.65,
+  ];
+}
+
 export function createConstructionScene(
   canvas,
   {
@@ -329,6 +352,7 @@ export function createConstructionScene(
   const cube = mesh(cubeFaces),
     sphere = mesh(sphereFaces(), true),
     roof = mesh(roofFaces);
+  const designMeshes = Array.from({ length: 9 }, () => mesh(cubeFaces));
   gl.enable(gl.DEPTH_TEST);
   gl.clearColor(0.91, 0.93, 0.89, 1);
   let stage = 0,
@@ -468,7 +492,9 @@ export function createConstructionScene(
   }
   function landscape(now) {
     const mood = landscapes[environment];
-    box(0, -0.18, 0, 110, 0.3, 110, mood.ground);
+    // Dry land and sea meet at z=-6; their top faces never overlap.
+    if (environment === "beach") box(0, -0.18, 24.5, 110, 0.3, 61, mood.ground);
+    else box(0, -0.18, 0, 110, 0.3, 110, mood.ground);
     // Low rolling land dissolves into the atmospheric horizon.
     for (let i = 0; i < 9; i++) {
       const a = (i * Math.PI * 2) / 9;
@@ -511,19 +537,8 @@ export function createConstructionScene(
       }
     }
     if (environment === "beach") {
-      box(0, -0.08, -18, 110, 0.1, 24, [0.28, 0.61, 0.63]);
-      const wave =
-        paused || reducedMotion.matches ? 0 : Math.sin(now / 2200) * 0.12;
-      for (let i = 0; i < 5; i++)
-        box(
-          0,
-          -0.018,
-          -7.1 - i * 1.6 + wave,
-          85,
-          0.018,
-          0.06 + i * 0.03,
-          [0.67, 0.82, 0.77],
-        );
+      // One calm surface, below the shore. No coplanar foam strips or ground.
+      box(0, -0.24, -30.5, 110, 0.35, 49, [0.28, 0.61, 0.63]);
     }
     const spots = [
       [-6, -3],
@@ -538,7 +553,12 @@ export function createConstructionScene(
       [5, -12],
     ];
     spots.forEach(([x, z], i) =>
-      tree(x, z, 0.75 + (i % 3) * 0.2, environment === "beach"),
+      tree(
+        x,
+        environment === "beach" ? Math.max(-4, z) : z,
+        0.75 + (i % 3) * 0.2,
+        environment === "beach",
+      ),
     );
     // A real site sits in the landscape, with a path and planted edges.
     const community = manual && type === "housing";
@@ -560,6 +580,132 @@ export function createConstructionScene(
           box(x, 0.56, z, 0.16, 0.1, 0.035, colors.jacket);
         }
     }
+  }
+  function designStudy(seconds) {
+    const form = getDesignForm(seconds);
+    canvas.dataset.designCurvature = String(form.curvature);
+    canvas.dataset.designGlazing = String(form.glazing);
+    box(0, 0.015, 0.2, 8.8, 0.06, 5.8, colors.slab);
+    // A single topology bends each box into the same continuous architectural ribbon.
+    function ribbon(index, x0, x1, z0, z1, y0, y1, color, wave = 0) {
+      const faces = [],
+        segments = 32;
+      const point = (x, z, y) => {
+        const [px, pz] = designPoint(x, z, form.curvature);
+        return [
+          px,
+          y +
+            (index % 3 === 0 && y === y0
+              ? 0
+              : wave * form.curvature * Math.cos(((x / 3.8) * Math.PI) / 2)),
+          pz,
+        ];
+      };
+      for (let i = 0; i < segments; i++) {
+        const a = x0 + ((x1 - x0) * i) / segments,
+          b = x0 + ((x1 - x0) * (i + 1)) / segments;
+        faces.push(
+          [
+            point(a, z1, y0),
+            point(b, z1, y0),
+            point(b, z1, y1),
+            point(a, z1, y1),
+          ],
+          [
+            point(b, z0, y0),
+            point(a, z0, y0),
+            point(a, z0, y1),
+            point(b, z0, y1),
+          ],
+          [
+            point(a, z0, y1),
+            point(a, z1, y1),
+            point(b, z1, y1),
+            point(b, z0, y1),
+          ],
+          [
+            point(a, z1, y0),
+            point(a, z0, y0),
+            point(b, z0, y0),
+            point(b, z1, y0),
+          ],
+        );
+      }
+      faces.push(
+        [
+          point(x0, z0, y0),
+          point(x0, z1, y0),
+          point(x0, z1, y1),
+          point(x0, z0, y1),
+        ],
+        [
+          point(x1, z1, y0),
+          point(x1, z0, y0),
+          point(x1, z0, y1),
+          point(x1, z1, y1),
+        ],
+      );
+      const geometry = designMeshes[index],
+        data = triangles(faces);
+      gl.bindBuffer(gl.ARRAY_BUFFER, geometry.buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
+      geometry.count = data.length / 6;
+      draw(geometry, 0, 0, 0, 1, 1, 1, color);
+    }
+    for (let i = -1; i <= 1; i++) {
+      const center = i * (2.6 - 0.2 * form.curvature),
+        half = 1.15 + 0.04 * form.curvature;
+      const a = center - half,
+        b = center + half;
+      shadow(center, 0.1, 2.9, 2.6);
+      ribbon((i + 1) * 3, a, b, -1.05, 1.05, 0.05, 1.8, colors.wall, 0.23);
+      const overhang = 0.05 + 0.18 * form.detail;
+      ribbon(
+        (i + 1) * 3 + 1,
+        a,
+        b,
+        -1.05 - overhang,
+        1.05 + overhang,
+        1.805,
+        1.91,
+        colors.slab,
+        0.23,
+      );
+      if (form.glazing > 0) {
+        const glassHeight = 1.25 * form.glazing;
+        ribbon(
+          (i + 1) * 3 + 2,
+          a + 0.1,
+          b - 0.1,
+          1.066,
+          1.088,
+          0.82 - glassHeight / 2,
+          0.82 + glassHeight / 2,
+          colors.glass,
+        );
+        for (let j = 0; j <= 6; j++) {
+          const x = a + 0.1 + ((b - a - 0.2) * j) / 6,
+            [px, pz] = designPoint(x, 1.115, form.curvature);
+          box(
+            px,
+            0.82,
+            pz,
+            0.025,
+            glassHeight,
+            0.032,
+            [0.55, 0.47, 0.35],
+            (-x / 7.2) * form.curvature * 2.1,
+          );
+        }
+      }
+    }
+    // The designer's table establishes an architectural study rather than a building site.
+    box(-4.45, 0.72, 1.45, 1.25, 0.055, 0.65, [0.64, 0.57, 0.45]);
+    for (const dx of [-0.48, 0.48])
+      box(-4.45 + dx, 0.36, 1.45, 0.045, 0.72, 0.045, colors.frame);
+    box(-4.45, 0.756, 1.45, 0.8, 0.012, 0.45, [0.97, 0.97, 0.94]);
+    for (let i = 0; i < 3; i++)
+      box(-4.65 + i * 0.2, 0.8, 1.45, 0.13, 0.075, 0.12, colors.wall);
   }
   const liftForSlats = (amount, scale) =>
     manual ? -(1 - amount) * 0.65 * scale : 0;
@@ -788,8 +934,13 @@ export function createConstructionScene(
     );
     part(0, 0.66, 0, 0.4, 0.46, 0.22, colors.jacket);
     part(0, 1.03, 0, 0.28, 0.29, 0.28, colors.skin, sphere);
-    part(0, 1.17, 0, 0.34, 0.16, 0.34, colors.helmet, sphere);
-    part(0, 1.12, 0.03, 0.36, 0.035, 0.34, colors.helmet);
+    if (manual && type === "greenshift") {
+      part(0, 1.13, -0.015, 0.29, 0.13, 0.28, colors.dark, sphere);
+      part(0.08, 0.62, 0.2, 0.28, 0.2, 0.025, colors.dark, cube, -0.12);
+    } else {
+      part(0, 1.17, 0, 0.34, 0.16, 0.34, colors.helmet, sphere);
+      part(0, 1.12, 0.03, 0.36, 0.035, 0.34, colors.helmet);
+    }
     part(
       -0.28,
       0.64,
@@ -883,13 +1034,15 @@ export function createConstructionScene(
           0.7,
           elapsed + i * -90,
         );
+    } else if (type === "greenshift" && manual) {
+      designStudy(now / 1000);
     } else if (type === "greenshift") {
       box(-0.6, 0.015, -0.5, 7, 0.06, 4, colors.slab);
       building(0, -0.3, 1.3, elapsed);
       building(-2.5, -1.1, 0.85, elapsed - 120);
       if (manual || stage >= 4) {
         box(3, 0.05, -1, 2, 0.08, 3, [0.4, 0.7, 0.69]);
-        box(3, 0.08, -1, 1.65, 0.015, 2.65, [0.31, 0.64, 0.65]);
+        box(3, 0.106, -1, 1.65, 0.015, 2.65, [0.31, 0.64, 0.65]);
       }
     } else building(0, -0.5, type === "hospitality" ? 1.4 : 1, elapsed);
     if (!manual && stage >= 2 && stage < 4) {
@@ -905,7 +1058,13 @@ export function createConstructionScene(
     }
     if (manual || stage === 4) {
       for (const x of [-4, 4])
-        for (const z of [-2.5, 2.5]) tree(x, z, 0.45, environment === "beach");
+        for (const z of [-2.5, 2.5])
+          tree(
+            manual && type === "greenshift" && x === -4 && z === 2.5 ? -5.5 : x,
+            z,
+            0.45,
+            environment === "beach",
+          );
     }
     person(now, elapsed);
     canvas.dataset.rendered = "true";

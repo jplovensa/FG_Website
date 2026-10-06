@@ -8,6 +8,7 @@ from PIL import Image
 parser = argparse.ArgumentParser()
 parser.add_argument('--url', default='http://127.0.0.1:3004/FG_Website/')
 parser.add_argument('--samples', action='store_true')
+parser.add_argument('--kind', choices=['greenshift','fad','all'], default='all')
 args = parser.parse_args()
 assets = pathlib.Path(__file__).resolve().parent.parent / 'assets'
 with sync_playwright() as p, tempfile.TemporaryDirectory(prefix='fjall-films-') as temp:
@@ -38,7 +39,7 @@ with sync_playwright() as p, tempfile.TemporaryDirectory(prefix='fjall-films-') 
         return film.toDataURL('image/png').split(',')[1];
       };
     }''')
-    for kind in ['greenshift','fad']:
+    for kind in (['greenshift','fad'] if args.kind=='all' else [args.kind]):
         folder=pathlib.Path(temp)/kind;folder.mkdir()
         times=[4,12.5,17] if args.samples else [i/24 for i in range(432)]
         for i,t in enumerate(times):
