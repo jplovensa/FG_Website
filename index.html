@@ -185,40 +185,103 @@
                   <path d="M6 18 18 6M6 6h12v12" /></svg></span
               ><span class="eyebrow">Design & development</span>
             </div>
-            <div class="business-motion greenshift-motion" aria-hidden="true">
-              <svg viewBox="0 0 420 180" fill="none">
+            <div class="business-visual">
+              <svg
+                viewBox="0 0 640 400"
+                role="img"
+                aria-labelledby="gs-card-title"
+              >
+                <title id="gs-card-title">
+                  An architectural design study with a plan, structural frame
+                  and roof
+                </title>
                 <defs>
                   <pattern
-                    id="group-grid"
-                    width="24"
-                    height="24"
+                    id="gs-card-grid"
+                    width="28"
+                    height="28"
                     patternUnits="userSpaceOnUse"
                   >
                     <path
-                      d="M24 0H0V24"
-                      stroke="currentColor"
-                      stroke-width=".4"
-                      opacity=".2"
+                      d="M28 0H0V28"
+                      fill="none"
+                      stroke="#629d87"
+                      stroke-width=".5"
+                      opacity=".22"
                     />
                   </pattern>
                 </defs>
-                <rect width="420" height="180" fill="url(#group-grid)" />
-                <g class="vision-plan">
-                  <path d="M42 125V55h95v70H42Zm47-70v70M42 87h95" />
-                  <circle cx="89" cy="87" r="60" stroke-dasharray="2 6" />
-                </g>
-                <path
-                  class="vision-connection"
-                  d="M154 88h90"
-                  stroke-dasharray="4 6"
+                <rect width="640" height="400" fill="url(#gs-card-grid)" />
+                <ellipse
+                  cx="332"
+                  cy="323"
+                  rx="192"
+                  ry="30"
+                  fill="#315c48"
+                  opacity=".10"
                 />
-                <g class="vision-building">
+                <g class="gs-base">
                   <path
-                    d="m267 107 50 29 57-33V48l-55-30-52 30v59Zm0-59 50 29 57-29M317 77v59M319 18v59"
+                    d="m135 268 166-98 204 117-166 98Z"
+                    fill="#c4d5c7"
+                    stroke="#4e8069"
                   />
-                  <path d="m280 68 23 13v31l-23-13Zm49 15 29-17v29l-29 17Z" />
-                </g></svg
-              ><span>Brief → Design → Delivery</span>
+                  <path
+                    d="m164 266 139-78 171 99-137 78Z"
+                    fill="none"
+                    stroke="#497260"
+                  />
+                  <path
+                    d="m303 188 34 177M164 266l310 21"
+                    stroke="#497260"
+                    stroke-dasharray="4 5"
+                  />
+                </g>
+                <g class="gs-frame">
+                  <path
+                    d="M172 268V154l130-77 170 96v114M337 250v116M172 154l165 96 135-77M172 268l165 98 135-79M250 109v176M403 134v190"
+                    fill="none"
+                    stroke="#35654f"
+                    stroke-width="5"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <g class="gs-envelope">
+                  <path
+                    d="m172 154 165 96v116L172 268Z"
+                    fill="#eceee4"
+                    stroke="#4a7860"
+                  />
+                  <path
+                    d="m337 250 135-77v114L337 366Z"
+                    fill="#b3cabb"
+                    stroke="#4a7860"
+                  />
+                  <path
+                    d="m197 181 71 40v58l-71-42Zm154 82 51-29v74l-51 29Z"
+                    fill="#6daba1"
+                    stroke="#427465"
+                  />
+                </g>
+                <g class="gs-roof">
+                  <path
+                    d="m155 131 149-86 187 108-149 86Z"
+                    fill="#396c57"
+                    stroke="#204e3d"
+                  />
+                  <path
+                    d="m155 131 187 108v10L155 141Zm187 108 149-86v10l-149 86Z"
+                    fill="#244d3b"
+                  />
+                </g>
+                <g fill="none" stroke="#5a8a73" stroke-width="1">
+                  <path
+                    d="m100 277 237 136M104 267l-8 17M335 403l-7 18M509 280l39 21-189 110"
+                  />
+                  <circle cx="87" cy="100" r="24" />
+                  <path d="M76 100h22M87 89v22" />
+                </g>
+              </svg>
             </div>
             <h3>GreenShift<span class="brand-dot">.</span></h3>
             <p>
@@ -226,6 +289,14 @@
               connects architecture, project management and capital
               coordination—from the first idea to turnkey delivery.
             </p>
+            <button
+              type="button"
+              class="studio-open"
+              data-business="greenshift"
+              aria-haspopup="dialog"
+            >
+              Enter the design studio <span aria-hidden="true">+</span>
+            </button>
             <a class="text-link" href="#journey" id="greenshift-journey"
               >The thinking behind the build
               <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -241,37 +312,133 @@
                   /></svg></span
               ><span class="eyebrow">Housing & workers’ accommodation</span>
             </div>
-            <div class="business-motion fad-motion" aria-hidden="true">
-              <svg viewBox="0 0 420 180" fill="none">
+            <div class="business-visual">
+              <svg
+                viewBox="0 0 640 400"
+                role="img"
+                aria-labelledby="fad-card-title"
+              >
+                <title id="fad-card-title">
+                  Repeatable homes around shared paths in a housing community
+                </title>
                 <defs>
-                  <g id="fad-home">
-                    <path
-                      d="m0 20 24-15 25 15v36L24 71 0 57V20Zm0 0 24 14 25-14M24 34v37M24 5v29"
-                    />
-                    <path d="m6 29 11 6v14L6 43Zm24 6 12-7v17l-12 7Z" />
+                  <g
+                    id="fad-card-home"
+                    stroke="#426d5e"
+                    stroke-width=".8"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m0 30 38 21v42L0 71Z" fill="#ecece1" />
+                    <path d="m38 51 38-21v41L38 93Z" fill="#cfdfd3" />
+                    <path d="m0 30 38-23 38 23-38 21Z" fill="#54967d" />
+                    <path d="m38 7 0 44" fill="none" />
+                    <path d="m8 40 17 10v18L8 58Z" fill="#a0c6bd" />
+                    <path d="m48 57 17-10v30l-17 10Z" fill="#3e6657" />
                   </g>
                 </defs>
-                <path
-                  d="m40 113 146-83 196 111-146 83Z"
-                  stroke-dasharray="3 6"
-                  opacity=".4"
+                <ellipse
+                  cx="328"
+                  cy="326"
+                  rx="225"
+                  ry="36"
+                  fill="#315c48"
+                  opacity=".1"
                 />
-                <g class="community-unit unit-1">
-                  <use href="#fad-home" x="81" y="59" />
+                <path
+                  d="m57 208 254-152 285 157-254 159Z"
+                  fill="#c6d7c6"
+                  stroke="#618c70"
+                />
+                <path
+                  d="m101 208 226-132 223 126-226 132Z"
+                  fill="none"
+                  stroke="#f1f2e9"
+                  stroke-width="15"
+                />
+                <path
+                  d="m201 274 238-139M118 229l238-139M159 160l250 141"
+                  stroke="#f1f2e9"
+                  stroke-width="9"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="275"
+                  y="30"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="350"
+                  y="64"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="425"
+                  y="98"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="210"
+                  y="68"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="285"
+                  y="102"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="360"
+                  y="136"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="145"
+                  y="106"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="220"
+                  y="140"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="295"
+                  y="174"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="80"
+                  y="144"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="155"
+                  y="178"
+                  transform="translate(0 0)"
+                />
+                <use
+                  href="#fad-card-home"
+                  x="230"
+                  y="212"
+                  transform="translate(0 0)"
+                />
+                <g fill="#4f8265">
+                  <circle cx="95" cy="217" r="9" />
+                  <circle cx="550" cy="214" r="10" />
+                  <circle cx="346" cy="335" r="11" />
+                  <circle cx="319" cy="89" r="8" />
                 </g>
-                <g class="community-unit unit-2">
-                  <use href="#fad-home" x="141" y="25" />
-                </g>
-                <g class="community-unit unit-3">
-                  <use href="#fad-home" x="201" y="59" />
-                </g>
-                <g class="community-unit unit-4">
-                  <use href="#fad-home" x="141" y="93" />
-                </g>
-                <g class="community-unit unit-5">
-                  <use href="#fad-home" x="261" y="93" />
-                </g></svg
-              ><span>One system. Connected communities.</span>
+              </svg>
             </div>
             <h3>
               Fjäll Affordable Development<span class="brand-dot">.</span>
@@ -283,6 +450,14 @@
               coordinated delivery—from individual communities to large
               development programmes.
             </p>
+            <button
+              type="button"
+              class="studio-open"
+              data-business="fad"
+              aria-haspopup="dialog"
+            >
+              Explore housing at scale <span aria-hidden="true">+</span>
+            </button>
             <a class="text-link" href="#journey" id="affordable-journey"
               >Homes and accommodation at scale
               <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -290,13 +465,9 @@
             ></a>
           </article>
         </div>
-        <div class="group-motion-foot">
-          <span class="eyebrow"
-            >Two businesses. One connected way to build.</span
-          ><button type="button" id="group-motion" aria-pressed="false">
-            Pause graphics
-          </button>
-        </div>
+        <p class="group-studio-caption eyebrow">
+          Two businesses. Explore the thinking, then the scale.
+        </p>
       </section>
 
       <section
@@ -343,45 +514,245 @@
             </p>
           </article>
         </div>
-        <div class="materials">
-          <div class="materials-title">
-            <p class="eyebrow">The building blocks</p>
-            <h3>New materials.<br />New possibilities.</h3>
-            <p>Two complementary technologies at the heart of our approach.</p>
-          </div>
-          <div class="material-list">
-            <details open>
-              <summary>
-                <span
-                  ><span class="eyebrow">01 / Insulated panel system</span
-                  ><strong>GX 100</strong></span
-                ><span class="details-icon" aria-hidden="true">＋</span>
-              </summary>
-              <p>
-                Precision-manufactured EPS panels create an insulated building
-                envelope. Designed for efficient assembly and comfortable
-                interiors, they offer an alternative to traditional masonry
-                construction.
-              </p>
-            </details>
-            <details>
-              <summary>
-                <span
-                  ><span class="eyebrow">02 / Basalt composite system</span
-                  ><strong>BEMMELS</strong></span
-                ><span class="details-icon" aria-hidden="true">＋</span>
-              </summary>
-              <p>
-                Volcanic basalt fibre and advanced composites form lightweight
-                structural elements. Their non-corrosive properties support
-                projects in demanding environments, including coastal locations.
-              </p>
-            </details>
-          </div>
-        </div>
         <div class="approach-foot">
           <span class="status-dot"></span>
           <p>Designed for homes. Engineered for hospitality. Built to scale.</p>
+          <a class="text-link" href="#materials"
+            >Explore the material library
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg
+          ></a>
+        </div>
+      </section>
+
+      <section
+        class="material-studio section-pad"
+        id="materials"
+        aria-labelledby="materials-title"
+      >
+        <div class="section-label">
+          <span class="eyebrow">Material library / Experience studio</span
+          ><span class="eyebrow">Explore what makes the build</span>
+        </div>
+        <div class="material-studio-heading">
+          <h2 id="materials-title">
+            Meet the materials.<br />See the possibilities.
+          </h2>
+          <p>
+            Explore a panel, a structure, a roof and a supply programme.
+            Consider each part, then see how it comes together.
+          </p>
+        </div>
+        <div
+          class="material-selector"
+          role="group"
+          aria-label="Choose a material study"
+        >
+          <button type="button" data-material="eps" aria-pressed="true">
+            <span>01 / Envelope</span><strong>EPS · GX-100 Panel</strong>
+          </button>
+          <button type="button" data-material="bemmel" aria-pressed="false">
+            <span>02 / Structure</span><strong>Bemmel</strong>
+          </button>
+          <button type="button" data-material="ror" aria-pressed="false">
+            <span>03 / Roof</span><strong>RoR roof</strong>
+          </button>
+          <button type="button" data-material="scale" aria-pressed="false">
+            <span>04 / Supply</span><strong>Materials at scale</strong>
+          </button>
+        </div>
+        <div class="material-workbench">
+          <div
+            class="material-view"
+            id="material-view"
+            data-material="eps"
+            data-exploded="true"
+          >
+            <div class="material-view-top">
+              <span class="eyebrow">Fjäll / Material study</span
+              ><span id="material-view-index">01 — EPS</span>
+            </div>
+            <svg
+              viewBox="0 0 640 460"
+              role="img"
+              aria-labelledby="material-graphic-title material-graphic-description"
+            >
+              <title id="material-graphic-title">
+                Exploded EPS panel concept
+              </title>
+              <desc id="material-graphic-description">
+                A layered illustration of the panel envelope, insulated core and
+                finish.
+              </desc>
+              <defs>
+                <pattern
+                  id="eps-grain"
+                  width="9"
+                  height="9"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect width="9" height="9" fill="#e9ece1" />
+                  <circle cx="3" cy="3" r="2" fill="#c4ccba" />
+                  <circle cx="7" cy="7" r="1" fill="#d4ddca" />
+                </pattern>
+                <pattern
+                  id="bemmel-grain"
+                  width="8"
+                  height="8"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect width="8" height="8" fill="#4f6258" />
+                  <path d="M0 2h8M0 6h8" stroke="#8da599" stroke-width=".5" />
+                </pattern>
+              </defs>
+              <ellipse
+                cx="320"
+                cy="372"
+                rx="220"
+                ry="34"
+                fill="#31513c"
+                opacity=".10"
+              />
+              <g data-material-art="eps">
+                <g class="sample-layer sample-layer-bottom">
+                  <path d="m117 270 226-132 184 104-226 132Z" fill="#bdc9b8" />
+                  <path
+                    d="m117 270 184 104v12L117 282Zm184 104 226-132v12L301 386Z"
+                    fill="#819681"
+                  />
+                </g>
+                <g class="sample-layer sample-layer-middle">
+                  <path
+                    d="m117 235 226-132 184 104-226 132Z"
+                    fill="url(#eps-grain)"
+                  />
+                  <path d="m117 235 184 104v29L117 264Z" fill="#d4ddcc" />
+                  <path d="m301 339 226-132v29L301 368Z" fill="#b7c5ad" />
+                </g>
+                <g class="sample-layer sample-layer-top">
+                  <path
+                    d="m117 196 226-132 184 104-226 132Z"
+                    fill="#edf0e6"
+                    stroke="#b3c4ad"
+                  />
+                  <path
+                    d="m117 196 184 104v8L117 204Zm184 104 226-132v8L301 308Z"
+                    fill="#a4b69b"
+                  />
+                </g>
+              </g>
+              <g data-material-art="bemmel" hidden>
+                <path d="m100 306 232-133 211 117-232 134Z" fill="#ced8c9" />
+                <g class="sample-layer sample-layer-top">
+                  <path
+                    d="m144 137 43-25 318 183-43 26Z"
+                    fill="url(#bemmel-grain)"
+                  />
+                  <path d="m144 137 318 184v28L144 165Z" fill="#394f43" />
+                  <path d="m462 321 43-26v28l-43 26Z" fill="#758e7e" />
+                </g>
+                <g class="sample-layer sample-layer-middle">
+                  <path d="m169 273 281-162 25 14-281 162Z" fill="#729781" />
+                  <path
+                    d="m169 273 25 14v21l-25-14Zm25 14 281-162v21L194 308Z"
+                    fill="#3f6751"
+                  />
+                </g>
+                <path
+                  d="M156 168v132M459 342v54"
+                  stroke="#638172"
+                  stroke-dasharray="5 5"
+                />
+              </g>
+              <g data-material-art="ror" hidden>
+                <g class="sample-layer sample-layer-bottom">
+                  <path d="m96 279 221-129 222 129-221 129Z" fill="#8ba28e" />
+                  <path
+                    d="m116 279 201-115 202 115M157 303l201-115M198 327l201-115M239 351l201-115"
+                    fill="none"
+                    stroke="#49634f"
+                    stroke-width="5"
+                  />
+                </g>
+                <g class="sample-layer sample-layer-middle">
+                  <path
+                    d="m98 237 219-126 220 126-219 126Z"
+                    fill="#c7d4c0"
+                    stroke="#7b9677"
+                  />
+                </g>
+                <g class="sample-layer sample-layer-top">
+                  <path d="m140 248 184-107 85-42-184 107Z" fill="#527d69" />
+                  <path d="m225 206 184-107 85 139-184 107Z" fill="#315d49" />
+                  <path
+                    d="m140 248 85-42 85 139M225 206l184-107M181 227l184-107M267 276l184-107"
+                    fill="none"
+                    stroke="#9bbea5"
+                    stroke-width="2"
+                  />
+                </g>
+              </g>
+              <g data-material-art="scale" hidden>
+                <path d="m74 292 245-143 250 144-245 143Z" fill="#c5d3bc" />
+                <g id="material-scale-packs"></g>
+                <path
+                  d="m82 297 242 139 237-137"
+                  fill="none"
+                  stroke="#91aa84"
+                  stroke-width="2"
+                />
+              </g>
+            </svg>
+            <div class="material-view-bottom">
+              <span id="material-view-label">Envelope / Three-part study</span
+              ><button
+                type="button"
+                id="material-assembly"
+                aria-pressed="false"
+              >
+                Bring layers together
+              </button>
+            </div>
+          </div>
+          <div class="material-story">
+            <p class="eyebrow" id="material-kicker">01 / Insulated envelope</p>
+            <h3 id="material-title">EPS · GX-100 Panel</h3>
+            <p id="material-description">
+              An insulated EPS panel system for the building envelope. Explore
+              the relationship between the panel core, its surfaces and the
+              finished space.
+            </p>
+            <dl class="material-notes">
+              <div>
+                <dt>Explore</dt>
+                <dd id="material-explore">Core, panel surfaces and finish.</dd>
+              </div>
+              <div>
+                <dt>Discuss with Fjäll</dt>
+                <dd id="material-discuss">
+                  Your envelope specification, openings and assembly interfaces.
+                </dd>
+              </div>
+            </dl>
+            <div class="material-swatch" aria-hidden="true">
+              <i></i><i></i><i></i><span>Material palette</span>
+            </div>
+            <a class="text-link" href="#contact" id="material-inquiry"
+              >Discuss this material
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12" /></svg
+            ></a>
+            <p class="material-study-note">
+              Concept studies. Final assemblies and specifications are
+              coordinated for your project.
+            </p>
+            <p
+              class="sr-only"
+              id="material-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
         </div>
       </section>
 
@@ -680,101 +1051,6 @@
             Every programme, in one place. Hospitality, housing, modular living,
             public facilities and the transformation of existing buildings.
           </p>
-        </div>
-
-        <div class="portfolio-motion" id="portfolio-motion">
-          <div class="portfolio-cinema" style="--build-progress: 1">
-            <img
-              id="portfolio-motion-image"
-              src="./assets/nuanu.webp"
-              alt="Nuanu Creative City architecture"
-              width="1000"
-              height="750"
-              loading="lazy"
-            />
-            <div class="portfolio-concept" id="portfolio-concept" hidden>
-              <span class="eyebrow">Development programme</span
-              ><strong id="portfolio-concept-stat"></strong>
-              <p id="portfolio-concept-text"></p>
-            </div>
-            <svg
-              class="portfolio-structure"
-              viewBox="0 0 600 400"
-              fill="none"
-              aria-hidden="true"
-            >
-              <g class="portfolio-frame">
-                <path
-                  d="m135 235 160 94 176-103V98L300 30 135 124v111Zm0-111 160 93 176-119M295 217v112M300 30v187"
-                />
-                <path
-                  d="m190 91 160 96v110M244 60l160 98v109M135 179l160 93 176-103"
-                />
-              </g>
-              <g class="portfolio-panels">
-                <path d="m135 124 160 93v112l-160-94Z" />
-                <path d="m295 217 176-119v128L295 329Z" />
-              </g>
-            </svg>
-            <div class="portfolio-origin">
-              <img
-                src="./assets/fjall-logo.png"
-                alt="Fjäll Group"
-                width="2048"
-                height="716"
-              /><span>From ambition to a place in the world.</span>
-            </div>
-            <div class="portfolio-cinema-caption">
-              <span id="portfolio-motion-phase">04 / Built work</span
-              ><span id="portfolio-motion-location">Bali, Indonesia</span>
-            </div>
-          </div>
-          <div class="portfolio-motion-story">
-            <span class="eyebrow">From Fjäll to built work</span>
-            <h3 id="portfolio-motion-title">Nuanu Creative City</h3>
-            <p id="portfolio-motion-description">
-              Complex geometry. Connected spaces.
-            </p>
-            <label for="portfolio-project">Explore a project</label>
-            <select id="portfolio-project">
-              <option value="nuanu">Nuanu Creative City</option>
-              <option value="ulaman">Ulaman Eco Resort</option>
-              <option value="lombok">Kuta Lombok Estates</option>
-              <option value="pods">The Drop Pod Network</option>
-              <option value="bamboo">The Bamboo Lab & Underground Club</option>
-              <option value="housing">Housing at scale</option>
-              <option value="sport">Sport & public facilities</option>
-              <option value="villas">Villa development</option>
-              <option value="retrofit">GSIH × MCC retrofit</option>
-            </select>
-            <label for="portfolio-progress"
-              >Move from vision to built work</label
-            >
-            <input
-              id="portfolio-progress"
-              type="range"
-              min="0"
-              max="100"
-              value="100"
-              step="1"
-              aria-valuetext="Built work"
-            />
-            <div class="portfolio-phases" aria-hidden="true">
-              <span>Vision</span><span>Design</span><span>Assembly</span
-              ><span>Built work</span>
-            </div>
-            <div class="portfolio-motion-actions">
-              <button type="button" id="portfolio-play" aria-pressed="false">
-                Play transformation</button
-              ><button type="button" id="portfolio-detail">
-                Explore project
-              </button>
-            </div>
-            <p class="portfolio-note">
-              An illustrative process. Portfolio imagery and programme summaries
-              from the company profile.
-            </p>
-          </div>
         </div>
 
         <article class="flagship" data-category="retrofit">
@@ -1173,14 +1449,99 @@
         </div>
         <div class="contact-copy">
           <p id="contact-project">
-            Have a site, a vision, or a question?<br />Let’s talk about what’s
+            Have a site, a vision, or a question? Let’s talk about what’s
             possible.
           </p>
-          <a class="button button-dark" href="tel:+6281237535508"
-            >Talk to our Bali team
-            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg></a
-          ><span class="contact-number">+62 812 3753 5508</span>
+          <form
+            id="inquiry-form"
+            action="https://wa.me/6287786010290"
+            method="get"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="inquiry-fields">
+              <label for="inquiry-name"
+                >Your name <span>(required)</span
+                ><input
+                  id="inquiry-name"
+                  name="name"
+                  autocomplete="name"
+                  maxlength="100"
+                  required
+                  placeholder="Full name" /></label
+              ><label for="inquiry-email"
+                >Email <span>(required)</span
+                ><input
+                  id="inquiry-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="180"
+                  required
+                  placeholder="you@company.com" /></label
+              ><label for="inquiry-company"
+                >Company<input
+                  id="inquiry-company"
+                  name="company"
+                  autocomplete="organization"
+                  maxlength="140"
+                  placeholder="Company or organisation" /></label
+              ><label for="inquiry-interest"
+                >I’m interested in<select id="inquiry-interest" name="interest">
+                  <option>General inquiry</option>
+                  <option>GreenShift design & development</option>
+                  <option>FAD housing & workers’ accommodation</option>
+                  <option>EPS · GX-100 Panel</option>
+                  <option>Bemmel</option>
+                  <option>RoR roof</option>
+                  <option>Materials at scale</option>
+                  <option>Retrofit project</option>
+                </select></label
+              >
+            </div>
+            <label for="inquiry-location"
+              >Project location<input
+                id="inquiry-location"
+                name="location"
+                autocomplete="off"
+                maxlength="160"
+                placeholder="City, region or site"
+            /></label>
+            <label for="inquiry-message"
+              >Your project <span>(required)</span
+              ><textarea
+                id="inquiry-message"
+                name="text"
+                rows="4"
+                maxlength="2400"
+                required
+                placeholder="Tell us what you’d like to build, your priorities and where you are in the process."
+              ></textarea>
+            </label>
+            <button type="submit" class="button button-dark">
+              Continue to WhatsApp
+              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 18 18 6M6 6h12v12" />
+              </svg>
+            </button>
+            <p class="inquiry-note">
+              Your details become a WhatsApp message to our commercial team.
+              Review the draft and press Send in WhatsApp.
+            </p>
+            <p
+              id="inquiry-status"
+              class="inquiry-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+          <a
+            class="contact-number"
+            href="https://wa.me/6287786010290"
+            target="_blank"
+            rel="noopener noreferrer"
+            >WhatsApp / +62 877 860 10290</a
+          >
         </div>
       </section>
     </main>
@@ -1202,6 +1563,16 @@
           </p>
         </div>
         <div class="footer-location">
+          <span class="eyebrow">Jakarta / Commercial Office</span>
+          <p>IDX Tower 1, 3rd floor<br />Jakarta, Indonesia</p>
+          <a
+            href="https://wa.me/6287786010290"
+            target="_blank"
+            rel="noopener noreferrer"
+            >+62 877 860 10290</a
+          >
+        </div>
+        <div class="footer-location">
           <span class="eyebrow">Japan HQ</span>
           <p>2-chome-6-11 Daimyo, Chuo Ward<br />Fukuoka, 810-0041, Japan</p>
         </div>
@@ -1214,6 +1585,335 @@
         ><a href="#home">Back to top ↑</a>
       </div>
     </footer>
+
+    <dialog
+      id="business-dialog"
+      class="business-dialog"
+      aria-labelledby="business-dialog-title"
+    >
+      <button
+        type="button"
+        class="studio-close"
+        id="business-dialog-close"
+        aria-label="Close business illustration"
+      >
+        ×
+      </button>
+      <div class="business-dialog-heading">
+        <p class="eyebrow" id="business-dialog-kicker">
+          GreenShift / Design & development
+        </p>
+        <h2 id="business-dialog-title">The design studio.</h2>
+        <p id="business-dialog-description">
+          Explore how a clear brief becomes a coordinated architectural concept.
+        </p>
+      </div>
+      <div class="business-dialog-layout">
+        <div
+          class="business-simulation"
+          id="business-simulation"
+          data-design-stage="1"
+        >
+          <div id="design-illustration">
+            <svg
+              viewBox="0 0 640 400"
+              role="img"
+              aria-labelledby="gs-model-title"
+            >
+              <title id="gs-model-title">
+                An architectural design study with a plan, structural frame and
+                roof
+              </title>
+              <defs>
+                <pattern
+                  id="gs-model-grid"
+                  width="28"
+                  height="28"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M28 0H0V28"
+                    fill="none"
+                    stroke="#629d87"
+                    stroke-width=".5"
+                    opacity=".22"
+                  />
+                </pattern>
+              </defs>
+              <rect width="640" height="400" fill="url(#gs-model-grid)" />
+              <ellipse
+                cx="332"
+                cy="323"
+                rx="192"
+                ry="30"
+                fill="#315c48"
+                opacity=".10"
+              />
+              <g class="gs-base">
+                <path
+                  d="m135 268 166-98 204 117-166 98Z"
+                  fill="#c4d5c7"
+                  stroke="#4e8069"
+                />
+                <path
+                  d="m164 266 139-78 171 99-137 78Z"
+                  fill="none"
+                  stroke="#497260"
+                />
+                <path
+                  d="m303 188 34 177M164 266l310 21"
+                  stroke="#497260"
+                  stroke-dasharray="4 5"
+                />
+              </g>
+              <g class="gs-frame">
+                <path
+                  d="M172 268V154l130-77 170 96v114M337 250v116M172 154l165 96 135-77M172 268l165 98 135-79M250 109v176M403 134v190"
+                  fill="none"
+                  stroke="#35654f"
+                  stroke-width="5"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <g class="gs-envelope">
+                <path
+                  d="m172 154 165 96v116L172 268Z"
+                  fill="#eceee4"
+                  stroke="#4a7860"
+                />
+                <path
+                  d="m337 250 135-77v114L337 366Z"
+                  fill="#b3cabb"
+                  stroke="#4a7860"
+                />
+                <path
+                  d="m197 181 71 40v58l-71-42Zm154 82 51-29v74l-51 29Z"
+                  fill="#6daba1"
+                  stroke="#427465"
+                />
+              </g>
+              <g class="gs-roof">
+                <path
+                  d="m155 131 149-86 187 108-149 86Z"
+                  fill="#396c57"
+                  stroke="#204e3d"
+                />
+                <path
+                  d="m155 131 187 108v10L155 141Zm187 108 149-86v10l-149 86Z"
+                  fill="#244d3b"
+                />
+              </g>
+              <g fill="none" stroke="#5a8a73" stroke-width="1">
+                <path
+                  d="m100 277 237 136M104 267l-8 17M335 403l-7 18M509 280l39 21-189 110"
+                />
+                <circle cx="87" cy="100" r="24" />
+                <path d="M76 100h22M87 89v22" />
+              </g>
+            </svg>
+          </div>
+          <div id="housing-illustration" hidden>
+            <svg
+              viewBox="0 0 640 400"
+              role="img"
+              aria-labelledby="fad-model-title"
+            >
+              <title id="fad-model-title">
+                Repeatable homes around shared paths in a housing community
+              </title>
+              <defs>
+                <g
+                  id="fad-model-home"
+                  stroke="#426d5e"
+                  stroke-width=".8"
+                  stroke-linejoin="round"
+                >
+                  <path d="m0 30 38 21v42L0 71Z" fill="#ecece1" />
+                  <path d="m38 51 38-21v41L38 93Z" fill="#cfdfd3" />
+                  <path d="m0 30 38-23 38 23-38 21Z" fill="#54967d" />
+                  <path d="m38 7 0 44" fill="none" />
+                  <path d="m8 40 17 10v18L8 58Z" fill="#a0c6bd" />
+                  <path d="m48 57 17-10v30l-17 10Z" fill="#3e6657" />
+                </g>
+              </defs>
+              <ellipse
+                cx="328"
+                cy="326"
+                rx="225"
+                ry="36"
+                fill="#315c48"
+                opacity=".1"
+              />
+              <path
+                d="m57 208 254-152 285 157-254 159Z"
+                fill="#c6d7c6"
+                stroke="#618c70"
+              />
+              <path
+                d="m101 208 226-132 223 126-226 132Z"
+                fill="none"
+                stroke="#f1f2e9"
+                stroke-width="15"
+              />
+              <path
+                d="m201 274 238-139M118 229l238-139M159 160l250 141"
+                stroke="#f1f2e9"
+                stroke-width="9"
+              />
+              <use
+                href="#fad-model-home"
+                x="275"
+                y="30"
+                transform="translate(0 0)"
+                data-housing-unit="1"
+              />
+              <use
+                href="#fad-model-home"
+                x="350"
+                y="64"
+                transform="translate(0 0)"
+                data-housing-unit="2"
+              />
+              <use
+                href="#fad-model-home"
+                x="425"
+                y="98"
+                transform="translate(0 0)"
+                data-housing-unit="3"
+              />
+              <use
+                href="#fad-model-home"
+                x="210"
+                y="68"
+                transform="translate(0 0)"
+                data-housing-unit="4"
+              />
+              <use
+                href="#fad-model-home"
+                x="285"
+                y="102"
+                transform="translate(0 0)"
+                data-housing-unit="5"
+              />
+              <use
+                href="#fad-model-home"
+                x="360"
+                y="136"
+                transform="translate(0 0)"
+                data-housing-unit="6"
+              />
+              <use
+                href="#fad-model-home"
+                x="145"
+                y="106"
+                transform="translate(0 0)"
+                data-housing-unit="7"
+              />
+              <use
+                href="#fad-model-home"
+                x="220"
+                y="140"
+                transform="translate(0 0)"
+                data-housing-unit="8"
+              />
+              <use
+                href="#fad-model-home"
+                x="295"
+                y="174"
+                transform="translate(0 0)"
+                data-housing-unit="9"
+              />
+              <use
+                href="#fad-model-home"
+                x="80"
+                y="144"
+                transform="translate(0 0)"
+                data-housing-unit="10"
+              />
+              <use
+                href="#fad-model-home"
+                x="155"
+                y="178"
+                transform="translate(0 0)"
+                data-housing-unit="11"
+              />
+              <use
+                href="#fad-model-home"
+                x="230"
+                y="212"
+                transform="translate(0 0)"
+                data-housing-unit="12"
+              />
+              <g fill="#4f8265">
+                <circle cx="95" cy="217" r="9" />
+                <circle cx="550" cy="214" r="10" />
+                <circle cx="346" cy="335" r="11" />
+                <circle cx="319" cy="89" r="8" />
+              </g>
+            </svg>
+          </div>
+          <span class="simulation-caption">Fjäll / Concept illustration</span>
+        </div>
+        <div class="business-dialog-story">
+          <div id="design-controls">
+            <span class="eyebrow">Explore the design arm</span>
+            <div
+              class="design-stage-controls"
+              role="group"
+              aria-label="Choose a design stage"
+            >
+              <button type="button" data-design-stage="0" aria-pressed="false">
+                01 / Brief</button
+              ><button type="button" data-design-stage="1" aria-pressed="true">
+                02 / Structure</button
+              ><button type="button" data-design-stage="2" aria-pressed="false">
+                03 / Coordinate
+              </button>
+            </div>
+          </div>
+          <div id="housing-controls" hidden>
+            <span class="eyebrow">Explore repeatable housing</span
+            ><label for="housing-count"
+              >Homes in this concept
+              <output id="housing-count-label" for="housing-count"
+                >6</output
+              ></label
+            ><input
+              type="range"
+              id="housing-count"
+              min="1"
+              max="12"
+              step="1"
+              value="6"
+              aria-valuetext="6 illustrative homes"
+            />
+            <div class="housing-key">
+              <span>Repeatable units</span><span>Shared paths</span
+              ><span>Community space</span>
+            </div>
+          </div>
+          <h3 id="business-study-title">Bring the disciplines together.</h3>
+          <p id="business-study-description">
+            Architecture and engineering shape one coordinated design, with
+            delivery considered from the start.
+          </p>
+          <p class="simulation-note">
+            An interactive concept, with project-specific design and engineering
+            agreed by your Fjäll team.
+          </p>
+          <a class="text-link" href="#contact" id="business-inquiry"
+            >Discuss your project
+            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 18 18 6M6 6h12v12" /></svg></a
+          ><span
+            id="business-study-status"
+            class="sr-only"
+            role="status"
+            aria-live="polite"
+          ></span>
+        </div>
+      </div>
+    </dialog>
 
     <dialog
       id="project-dialog"

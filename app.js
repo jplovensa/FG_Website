@@ -1,9 +1,5 @@
-import {
-  initJourney,
-  initWorld,
-  initBrandMotion,
-  initPortfolioMotion,
-} from "./experience.js";
+import { initStudio } from "./studio.js";
+import { initJourney, initWorld } from "./experience.js";
 
 const intro = document.querySelector("#intro");
 const introVideo = document.querySelector("#intro-video");
@@ -294,8 +290,7 @@ document.querySelector("#year").textContent = new Date().getFullYear();
 
 initJourney({ reducedMotion });
 initWorld({ reducedMotion });
-initBrandMotion({ reducedMotion });
-initPortfolioMotion({ reducedMotion });
+initStudio();
 
 const retrofitVideo = document.querySelector("#retrofit-video");
 const retrofitPlay = document.querySelector("#retrofit-play");

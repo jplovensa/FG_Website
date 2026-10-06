@@ -7,7 +7,7 @@
     "dev": "node scripts/serve.js",
     "start": "node scripts/serve.js",
     "build": "node scripts/build.js",
-    "test": "node --test scripts/site.test.js"
+    "test": "node --test scripts/*.test.js"
   },
   "engines": {
     "node": ">=22"
