@@ -33,6 +33,7 @@
       crossorigin
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./responsive.css" />
     <script src="./app.js" type="module"></script>
   </head>
   <body>
@@ -192,21 +193,22 @@
               aria-label="Watch GreenShift cinematic trailer"
               aria-haspopup="dialog"
             >
-              <video
-                data-business-preview="greenshift"
-                data-src="./assets/greenshift-trailer.mp4?v=design-curve-1"
-                poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
-                width="1280"
-                height="720"
-                muted
-                playsinline
-                loop
-                preload="none"
-                aria-hidden="true"
-              ></video
-              ><span class="business-film-play"
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 10 7-10 7Z" /></svg></span
+              <span class="business-film-frame"
+                ><video
+                  data-business-preview="greenshift"
+                  data-src="./assets/greenshift-trailer.mp4?v=design-curve-1"
+                  poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
+                  width="1280"
+                  height="720"
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  aria-hidden="true"
+                ></video
+                ><span class="business-film-play"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m9 5 10 7-10 7Z" /></svg></span></span
               ><span class="business-film-caption">GreenShift / 00:18</span>
             </button>
             <button
@@ -254,21 +256,22 @@
               aria-label="Watch Fjäll Affordable Development cinematic trailer"
               aria-haspopup="dialog"
             >
-              <video
-                data-business-preview="fad"
-                data-src="./assets/fad-trailer.mp4"
-                poster="./assets/fad-trailer-poster.webp"
-                width="1280"
-                height="720"
-                muted
-                playsinline
-                loop
-                preload="none"
-                aria-hidden="true"
-              ></video
-              ><span class="business-film-play"
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 5 10 7-10 7Z" /></svg></span
+              <span class="business-film-frame"
+                ><video
+                  data-business-preview="fad"
+                  data-src="./assets/fad-trailer.mp4"
+                  poster="./assets/fad-trailer-poster.webp"
+                  width="1280"
+                  height="720"
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  aria-hidden="true"
+                ></video
+                ><span class="business-film-play"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m9 5 10 7-10 7Z" /></svg></span></span
               ><span class="business-film-caption"
                 >Fjäll Affordable Development / 00:18</span
               >
@@ -991,7 +994,9 @@
           </div>
           <div class="flagship-copy">
             <p class="eyebrow">Flagship retrofit / GSIH × MCC</p>
-            <h3>A new chapter.<br />For what’s<br /><em>already here.</em></h3>
+            <h3>
+              A new chapter. <span>For what’s <em>already here.</em></span>
+            </h3>
             <p>
               Construction excellence is also about transformation. Discover the
               Garuda Spark Innovation Hub at Malang Creative Center: a flagship
@@ -1557,6 +1562,7 @@
           </div>
           <span class="trailer-badge">Fjäll / Cinematic concept</span>
         </div>
+        <div class="trailer-copy-slot"></div>
         <div class="trailer-controls">
           <button type="button" data-trailer-play aria-pressed="false">
             Play trailer</button

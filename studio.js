@@ -528,12 +528,12 @@ function initBusinessPreviews() {
       `[data-preview-toggle="${video.dataset.businessPreview}"]`,
     );
     video.addEventListener("play", () => {
-      video.parentElement.classList.add("is-playing");
+      video.closest(".business-preview").classList.add("is-playing");
       toggle.textContent = "Pause preview";
       toggle.setAttribute("aria-pressed", "true");
     });
     video.addEventListener("pause", () => {
-      video.parentElement.classList.remove("is-playing");
+      video.closest(".business-preview").classList.remove("is-playing");
       toggle.textContent = "Play preview";
       toggle.setAttribute("aria-pressed", "false");
     });

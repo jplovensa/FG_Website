@@ -81,3 +81,7 @@ Business cards play the muted films directly inside their 16:9 frames when visib
 The material studio uses high-resolution AI-assisted illustrations for GX-100, BEMMELS and RoR. They are labelled studio concepts, based on the documented systems, not product certification or completed-project photographs. Original catalogue images remain available in dedicated views, with display size limited to their source resolution. Materials at scale retains the original supplied four-application image. Every material composition uses contain sizing in a consistent studio frame; no source image is cropped.
 
 GreenShift’s coastal water is one static surface, with the land ending at the shoreline and no coplanar foam strips. Its design massing uses continuously deformed mesh geometry, rather than swapping rectangular and curved images. Roof modules do not overlap, and their foundations remain anchored to the plinth. Regenerate only that film with `python scripts/render-trailers.py --kind greenshift --url http://localhost:3000/`.
+
+## Responsive layouts
+
+`responsive.css` contains the mobile layout contract, loaded after component styles. Film labels occupy a separate caption row, and the live trailer’s title moves below the frame on screens up to 700 px wide. Material tabs and footer controls use normal document flow rather than overlapping absolute positions. Mobile typography, forms, project metadata, and journey controls wrap with readable line spacing and larger touch targets. The retrofit headline uses semantic text spans so hidden line breaks cannot join words.

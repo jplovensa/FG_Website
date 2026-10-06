@@ -152,6 +152,18 @@ export async function createTrailerPlayer(root, { reducedMotion }) {
     seek = root.querySelector("[data-trailer-seek]");
   const replay = root.querySelector("[data-trailer-replay]"),
     status = root.querySelector("[data-trailer-status]");
+  const narrow = matchMedia("(max-width: 700px)");
+  const titles = root.querySelector(".trailer-titles");
+  function fitTitles() {
+    const host = root.querySelector(
+      narrow.matches ? ".trailer-copy-slot" : ".trailer-screen",
+    );
+    host.append(titles);
+    if (narrow.matches) titles.removeAttribute("aria-hidden");
+    else titles.setAttribute("aria-hidden", "true");
+  }
+  narrow.addEventListener("change", fitTitles);
+  fitTitles();
   let kind = "greenshift",
     time = 0,
     playing = false,

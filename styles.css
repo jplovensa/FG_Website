@@ -3011,8 +3011,8 @@ html {
 .material-view[data-material="scale"] {
   background: #e5e6d6;
 }
-.material-story .material-study-note {
-  font-size: 9px !important;
+.material-story > p.material-study-note {
+  font-size: 9px;
   margin-top: 22px;
 }
 
