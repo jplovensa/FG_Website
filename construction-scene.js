@@ -68,10 +68,14 @@ function cross(a, b) {
 function dot(a, b) {
   return a.reduce((s, n, i) => s + n * b[i], 0);
 }
-function camera(angle, aspect) {
+function camera(angle, aspect, shot) {
   const distance = aspect < 1.2 ? 14 : 11.8;
-  const eye = [Math.sin(angle) * distance, 4.8, Math.cos(angle) * distance],
-    target = [0, 1.0, -0.3];
+  const eye = shot?.eye || [
+      Math.sin(angle) * distance,
+      4.8,
+      Math.cos(angle) * distance,
+    ],
+    target = shot?.target || [0, 1.0, -0.3];
   const z = normalize(eye.map((n, i) => n - target[i])),
     x = normalize(cross([0, 1, 0], z)),
     y = cross(z, x);
@@ -93,7 +97,7 @@ function camera(angle, aspect) {
     -dot(z, eye),
     1,
   ]);
-  const f = 1 / Math.tan(Math.PI / 8),
+  const f = 1 / Math.tan(((shot?.fov || 45) * Math.PI) / 360),
     near = 0.1,
     far = 60;
   const projection = new Float32Array([
@@ -253,7 +257,12 @@ const roofFaces = [
 
 export function createConstructionScene(
   canvas,
-  { reducedMotion, onUnavailable = () => {} } = {},
+  {
+    reducedMotion = matchMedia("(prefers-reduced-motion: reduce)"),
+    onUnavailable = () => {},
+    manual = false,
+    guideElement,
+  } = {},
 ) {
   let gl;
   try {
@@ -337,7 +346,14 @@ export function createConstructionScene(
     [-3, 2.3],
     [0.3, 2.8],
   ];
-  const guide = document.querySelector("#scene-guide-text");
+  const guide =
+    guideElement === undefined
+      ? document.querySelector("#scene-guide-text")
+      : guideElement;
+  let shotCamera,
+    shotElapsed = 1500,
+    units = 6,
+    shotTime = 0;
   const messages = [
     "Let’s start with your site and the people who will use it.",
     "We coordinate your brief, design and engineering before building.",
@@ -501,13 +517,15 @@ export function createConstructionScene(
       tree(x, z, 0.75 + (i % 3) * 0.2, environment === "beach"),
     );
     // A real site sits in the landscape, with a path and planted edges.
+    const community = manual && type === "housing" && units > 6;
+    const rows = Math.ceil(units / 4);
     box(
       0,
       -0.01,
-      0,
-      9,
+      community ? 0.3 - ((rows - 1) * 1.95) / 2 : 0,
+      community ? 10 : 9,
       0.045,
-      6.3,
+      community ? rows * 1.95 + 2 : 6.3,
       environment === "beach" ? [0.84, 0.77, 0.6] : [0.62, 0.66, 0.52],
     );
     box(0, 0.005, 2.2, 8, 0.035, 0.65, colors.slab);
@@ -714,7 +732,7 @@ export function createConstructionScene(
     part(-0.055, 1.05, 0.13, 0.025, 0.025, 0.02, colors.dark, sphere);
     part(0.055, 1.05, 0.13, 0.025, 0.025, 0.02, colors.dark, sphere);
   }
-  function render(now = performance.now()) {
+  function render(now = manual ? shotTime : performance.now()) {
     if (lost) return;
     const rect = canvas.getBoundingClientRect(),
       ratio = Math.min(devicePixelRatio || 1, 1.75),
@@ -731,22 +749,35 @@ export function createConstructionScene(
     gl.useProgram(program);
     gl.enableVertexAttribArray(position);
     gl.enableVertexAttribArray(normal);
-    const view = camera(angle, width / height);
+    const view = camera(angle, width / height, shotCamera);
     gl.uniformMatrix4fv(uCamera, false, view.matrix);
     gl.uniform3fv(uEye, view.eye);
     gl.uniform3fv(uAtmosphere, sky);
     gl.uniform1f(uAlpha, 1);
     landscape(now);
-    const elapsed = paused ? 1500 : Math.max(0, now - transitionStart),
+    const elapsed = manual
+        ? shotElapsed
+        : paused
+          ? 1500
+          : Math.max(0, now - transitionStart),
       mass = ["housing", "workers", "modular"].includes(type);
     if (mass) {
-      for (let i = 0; i < 6; i++)
+      const columns = units > 6 ? 4 : Math.min(3, units);
+      for (let i = 0; i < units; i++)
         building(
-          ((i % 3) - 1) * 2.45,
-          -Math.floor(i / 3) * 1.95 + 0.3,
+          ((i % columns) - (columns - 1) / 2) * 2.45,
+          -Math.floor(i / columns) * 1.95 + 0.3,
           0.7,
           elapsed + i * -90,
         );
+    } else if (type === "greenshift") {
+      box(-0.6, 0.015, -0.5, 7, 0.06, 4, colors.slab);
+      building(0, -0.3, 1.3, elapsed);
+      building(-2.5, -1.1, 0.85, elapsed - 120);
+      if (stage >= 4) {
+        box(3, 0.05, -1, 2, 0.08, 3, [0.4, 0.7, 0.69]);
+        box(3, 0.08, -1, 1.65, 0.015, 2.65, [0.31, 0.64, 0.65]);
+      }
     } else building(0, -0.5, type === "hospitality" ? 1.4 : 1, elapsed);
     if (stage >= 2 && stage < 4) {
       const move = reducedMotion.matches ? 0 : Math.min(1, elapsed / 1200);
@@ -788,7 +819,7 @@ export function createConstructionScene(
   function requestRender() {
     cancelAnimationFrame(frame);
     render();
-    if (active && !paused && !reducedMotion.matches)
+    if (!manual && active && !paused && !reducedMotion.matches)
       frame = requestAnimationFrame(loop);
   }
   function updateStage(value) {
@@ -828,11 +859,12 @@ export function createConstructionScene(
     },
     { threshold: 0.08 },
   );
-  visibility.observe(canvas);
+  if (!manual) visibility.observe(canvas);
   const resize = new ResizeObserver(requestRender);
   resize.observe(canvas);
   document.addEventListener("visibilitychange", () => {
     active =
+      !manual &&
       !document.hidden &&
       canvas.getBoundingClientRect().bottom > 0 &&
       canvas.getBoundingClientRect().top < innerHeight;
@@ -843,6 +875,19 @@ export function createConstructionScene(
   canvas.dataset.renderer = "webgl";
   requestRender();
   return {
+    // A deterministic frame API lets trailer playback and video rendering share geometry.
+    renderShot(shot) {
+      stage = Math.max(0, Math.min(4, shot.stage));
+      type = shot.type;
+      environment = shot.environment;
+      units = Math.max(1, Math.min(24, shot.units || 6));
+      shotCamera = { eye: shot.eye, target: shot.target, fov: shot.fov || 45 };
+      shotElapsed = shot.elapsed ?? 1500;
+      previousCharacter = [...stops[stage]];
+      angle = Math.atan2(shot.eye[0], shot.eye[2]);
+      shotTime = shot.time || 0;
+      render(shotTime);
+    },
     setStage: updateStage,
     setType(value) {
       type = value;

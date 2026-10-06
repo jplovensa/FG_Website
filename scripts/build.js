@@ -7,6 +7,7 @@ for (const file of [
   "app.js",
   "experience.js",
   "studio.js",
+  "trailer-player.js",
   "construction-scene.js",
 ]) {
   execFileSync(process.execPath, ["--check", `${root}${file}`], {
@@ -21,6 +22,7 @@ for (const file of [
   "app.js",
   "experience.js",
   "studio.js",
+  "trailer-player.js",
   "construction-scene.js",
   "favicon.svg",
   "robots.txt",

@@ -60,6 +60,24 @@ for (const basePath of ["/", "/FG_Website/"]) {
       "The scene must be available as a lazy module",
     );
     imports.push(...sceneImports);
+    const studio = await (await fetch(new URL("./studio.js", base))).text();
+    const trailers = [...studio.matchAll(/import\(['"]([^'"]+)['"]\)/g)].map(
+      (match) => match[1],
+    );
+    assert.ok(
+      trailers.includes("./trailer-player.js"),
+      "Lazy trailers must ship",
+    );
+    imports.push(...trailers);
+    const player = await (
+      await fetch(new URL("./trailer-player.js", base))
+    ).text();
+    for (const kind of ["greenshift", "fad"])
+      videos.push(`./assets/${kind}-trailer.mp4`);
+    assert.ok(
+      player.includes("./construction-scene.js"),
+      "Trailers must use the local renderer",
+    );
     const css = await (await fetch(new URL("./styles.css", base))).text();
     const fonts = [...css.matchAll(/url\(['"]?([^'"\)]+)['"]?\)/g)].map(
       (match) => match[1],
