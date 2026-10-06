@@ -5,12 +5,33 @@ attribute vec3 aNormal;
 uniform mat4 uModel;
 uniform mat4 uCamera;
 varying vec3 vNormal;
-void main(){vNormal=mat3(uModel)*aNormal;gl_Position=uCamera*uModel*vec4(aPosition,1.0);}`;
+varying vec3 vWorld;
+void main(){
+  mat3 basis=mat3(uModel);
+  vec3 scaleSquared=vec3(dot(basis[0],basis[0]),dot(basis[1],basis[1]),dot(basis[2],basis[2]));
+  vNormal=basis*(aNormal/max(scaleSquared,vec3(.00001)));
+  vec4 world=uModel*vec4(aPosition,1.0);
+  vWorld=world.xyz;
+  gl_Position=uCamera*world;
+}`;
 const fragmentShader = `
 precision mediump float;
 uniform vec3 uColor;
+uniform vec3 uEye;
+uniform vec3 uAtmosphere;
+uniform float uAlpha;
 varying vec3 vNormal;
-void main(){float light=.58+.42*max(dot(normalize(vNormal),normalize(vec3(-.5,1.,.8))),0.);gl_FragColor=vec4(uColor*light,1.);}`;
+varying vec3 vWorld;
+void main(){
+  vec3 n=normalize(vNormal);
+  float sun=max(dot(n,normalize(vec3(-.6,1.,.5))),0.);
+  float sky=.46+.14*n.y;
+  vec3 lit=uColor*(sky+sun*.48)+vec3(.055,.036,.016)*sun;
+  float grain=fract(sin(dot(floor(vWorld.xz*65.),vec2(12.9898,78.233)))*43758.5453);
+  lit*=.985+grain*.03;
+  float fog=smoothstep(16.,48.,distance(vWorld,uEye));
+  gl_FragColor=vec4(mix(lit,uAtmosphere,fog),uAlpha);
+}`;
 const colors = {
   ground: [0.79, 0.83, 0.76],
   slab: [0.9, 0.91, 0.85],
@@ -48,8 +69,9 @@ function dot(a, b) {
   return a.reduce((s, n, i) => s + n * b[i], 0);
 }
 function camera(angle, aspect) {
-  const eye = [Math.sin(angle) * 12, 8.8, Math.cos(angle) * 12],
-    target = [0, 0.65, 0];
+  const distance = aspect < 1.2 ? 14 : 11.8;
+  const eye = [Math.sin(angle) * distance, 4.8, Math.cos(angle) * distance],
+    target = [0, 1.0, -0.3];
   const z = normalize(eye.map((n, i) => n - target[i])),
     x = normalize(cross([0, 1, 0], z)),
     y = cross(z, x);
@@ -92,7 +114,7 @@ function camera(angle, aspect) {
     (2 * far * near) / (near - far),
     0,
   ]);
-  return multiply(projection, view);
+  return { matrix: multiply(projection, view), eye };
 }
 function model(x, y, z, sx, sy, sz, ry = 0, rz = 0) {
   const cy = Math.cos(ry),
@@ -124,7 +146,7 @@ function model(x, y, z, sx, sy, sz, ry = 0, rz = 0) {
   }
   return m;
 }
-function triangles(faces) {
+function triangles(faces, smooth = false) {
   const data = [];
   for (const face of faces) {
     for (let i = 1; i < face.length - 1; i++) {
@@ -132,7 +154,7 @@ function triangles(faces) {
         a = tri[1].map((n, j) => n - tri[0][j]),
         b = tri[2].map((n, j) => n - tri[0][j]),
         normal = normalize(cross(a, b));
-      for (const v of tri) data.push(...v, ...normal);
+      for (const v of tri) data.push(...v, ...(smooth ? normalize(v) : normal));
     }
   }
   return new Float32Array(data);
@@ -278,9 +300,12 @@ export function createConstructionScene(
     normal = gl.getAttribLocation(program, "aNormal");
   const uModel = gl.getUniformLocation(program, "uModel"),
     uCamera = gl.getUniformLocation(program, "uCamera"),
-    uColor = gl.getUniformLocation(program, "uColor");
-  function mesh(faces) {
-    const data = triangles(faces),
+    uColor = gl.getUniformLocation(program, "uColor"),
+    uEye = gl.getUniformLocation(program, "uEye"),
+    uAtmosphere = gl.getUniformLocation(program, "uAtmosphere"),
+    uAlpha = gl.getUniformLocation(program, "uAlpha");
+  function mesh(faces, smooth = false) {
+    const data = triangles(faces, smooth),
       buffer = gl.createBuffer();
     buffers.push(buffer);
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -288,13 +313,15 @@ export function createConstructionScene(
     return { buffer, count: data.length / 6 };
   }
   const cube = mesh(cubeFaces),
-    sphere = mesh(sphereFaces()),
+    sphere = mesh(sphereFaces(), true),
     roof = mesh(roofFaces);
   gl.enable(gl.DEPTH_TEST);
   gl.clearColor(0.91, 0.93, 0.89, 1);
   let stage = 0,
     type = "home",
-    angle = 0.65,
+    angle = 0.35,
+    environment = "forest",
+    touring = false,
     active = false,
     paused = false,
     lost = false,
@@ -329,8 +356,172 @@ export function createConstructionScene(
   function box(x, y, z, sx, sy, sz, color, ry = 0, rz = 0) {
     draw(cube, x, y, z, sx, sy, sz, color, ry, rz);
   }
+  const landscapes = {
+    forest: {
+      sky: [0.76, 0.83, 0.78],
+      ground: [0.43, 0.54, 0.37],
+      hills: [0.26, 0.4, 0.31],
+    },
+    mountain: {
+      sky: [0.74, 0.82, 0.87],
+      ground: [0.62, 0.66, 0.48],
+      hills: [0.38, 0.49, 0.47],
+    },
+    beach: {
+      sky: [0.78, 0.86, 0.88],
+      ground: [0.88, 0.81, 0.64],
+      hills: [0.41, 0.57, 0.44],
+    },
+  };
+  function shadow(x, z, sx, sz) {
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.depthMask(false);
+    gl.uniform1f(uAlpha, 0.19);
+    draw(sphere, x + 0.3, 0.03, z + 0.2, sx, 0.018, sz, [0.16, 0.22, 0.18]);
+    gl.uniform1f(uAlpha, 1);
+    gl.depthMask(true);
+    gl.disable(gl.BLEND);
+  }
+  function tree(x, z, size = 1, palm = false) {
+    shadow(x, z, 1.7 * size, 1.3 * size);
+    box(
+      x,
+      1.1 * size,
+      z,
+      0.16 * size,
+      2.2 * size,
+      0.16 * size,
+      [0.36, 0.3, 0.22],
+      0,
+      palm ? -0.1 : 0,
+    );
+    if (palm) {
+      for (let i = 0; i < 7; i++) {
+        const a = (i * Math.PI * 2) / 7;
+        draw(
+          sphere,
+          x + Math.sin(a) * 0.65 * size,
+          2.35 * size,
+          z + Math.cos(a) * 0.65 * size,
+          0.25 * size,
+          0.11 * size,
+          1.75 * size,
+          [0.28, 0.46, 0.28],
+          a,
+          -0.16,
+        );
+      }
+    } else {
+      for (let i = 0; i < 3; i++)
+        draw(
+          sphere,
+          x + (i - 1) * 0.32 * size,
+          (2 + i * 0.28) * size,
+          z + (i % 2) * 0.26 * size,
+          1.65 * size,
+          1.5 * size,
+          1.55 * size,
+          [0.27 + i * 0.035, 0.43 + i * 0.025, 0.28 + i * 0.02],
+        );
+    }
+  }
+  function landscape(now) {
+    const mood = landscapes[environment];
+    box(0, -0.18, 0, 110, 0.3, 110, mood.ground);
+    // Low rolling land dissolves into the atmospheric horizon.
+    for (let i = 0; i < 9; i++) {
+      const a = (i * Math.PI * 2) / 9;
+      const tall = environment === "mountain" ? 8 + (i % 3) * 3 : 2 + (i % 3);
+      draw(
+        sphere,
+        Math.sin(a) * 25,
+        -1,
+        Math.cos(a) * 25,
+        20,
+        tall,
+        18,
+        mood.hills,
+      );
+    }
+    if (environment === "mountain") {
+      for (let i = 0; i < 4; i++) {
+        draw(
+          roof,
+          -18 + i * 12,
+          1,
+          -28,
+          16,
+          14 + i * 2,
+          13,
+          [0.36 + i * 0.025, 0.43 + i * 0.02, 0.4 + i * 0.015],
+          0.2,
+        );
+        draw(
+          roof,
+          -18 + i * 12,
+          7.3 + i * 0.9,
+          -28,
+          3.9,
+          4,
+          3.2,
+          [0.82, 0.84, 0.79],
+          0.2,
+        );
+      }
+    }
+    if (environment === "beach") {
+      box(0, -0.08, -18, 110, 0.1, 24, [0.28, 0.61, 0.63]);
+      const wave =
+        paused || reducedMotion.matches ? 0 : Math.sin(now / 2200) * 0.12;
+      for (let i = 0; i < 5; i++)
+        box(
+          0,
+          -0.018,
+          -7.1 - i * 1.6 + wave,
+          85,
+          0.018,
+          0.06 + i * 0.03,
+          [0.67, 0.82, 0.77],
+        );
+    }
+    const spots = [
+      [-6, -3],
+      [6, -3],
+      [-7, 4],
+      [7, 5],
+      [-10, -8],
+      [10, -8],
+      [-14, 0],
+      [14, 1],
+      [-5, -10],
+      [5, -12],
+    ];
+    spots.forEach(([x, z], i) =>
+      tree(x, z, 0.75 + (i % 3) * 0.2, environment === "beach"),
+    );
+    // A real site sits in the landscape, with a path and planted edges.
+    box(
+      0,
+      -0.01,
+      0,
+      9,
+      0.045,
+      6.3,
+      environment === "beach" ? [0.84, 0.77, 0.6] : [0.62, 0.66, 0.52],
+    );
+    box(0, 0.005, 2.2, 8, 0.035, 0.65, colors.slab);
+    if (stage < 2) {
+      for (const x of [-4.2, 4.2])
+        for (const z of [-2.7, 2.7]) {
+          box(x, 0.28, z, 0.035, 0.55, 0.035, colors.helmet);
+          box(x, 0.56, z, 0.16, 0.1, 0.035, colors.jacket);
+        }
+    }
+  }
   function building(x, z, scale, elapsed) {
     const y = 0.1;
+    shadow(x, z, 2.9 * scale, 2.6 * scale);
     box(x, y, z, 2.35 * scale, 0.15, 2.1 * scale, colors.slab);
     // A retrofit starts with retained fabric rather than an empty site.
     if (type === "retrofit" && stage < 3) {
@@ -443,6 +634,18 @@ export function createConstructionScene(
         colors.glass,
       );
     }
+    if (stage >= 3) {
+      for (let i = 0; i < 10; i++)
+        box(
+          x - 0.98 * scale + i * 0.09 * scale,
+          0.77 * scale,
+          z + 0.915 * scale,
+          0.028 * scale,
+          1.23 * scale,
+          0.023,
+          [0.58, 0.49, 0.36],
+        );
+    }
     if (stage >= 4) {
       draw(
         roof,
@@ -473,6 +676,7 @@ export function createConstructionScene(
     const walking = t < 1 && !paused && !reducedMotion.matches,
       phase = now / 160,
       bob = walking ? Math.abs(Math.sin(phase)) * 0.035 : 0;
+    shadow(character[0], character[1], 0.6, 0.4);
     const rx = character[0],
       rz = character[1],
       face = angle,
@@ -521,16 +725,19 @@ export function createConstructionScene(
       canvas.height = height;
     }
     gl.viewport(0, 0, width, height);
+    const sky = landscapes[environment].sky;
+    gl.clearColor(...sky, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.useProgram(program);
     gl.enableVertexAttribArray(position);
     gl.enableVertexAttribArray(normal);
-    gl.uniformMatrix4fv(uCamera, false, camera(angle, width / height));
-    box(0, -0.14, 0, 10, 0.25, 7, colors.ground);
-    box(0, 0.005, 2.2, 8, 0.035, 0.65, colors.slab);
-    for (let x = -4; x <= 4; x++)
-      box(x, 0.003, -0.45, 0.013, 0.015, 5.5, colors.plan);
-    const elapsed = Math.max(0, now - transitionStart),
+    const view = camera(angle, width / height);
+    gl.uniformMatrix4fv(uCamera, false, view.matrix);
+    gl.uniform3fv(uEye, view.eye);
+    gl.uniform3fv(uAtmosphere, sky);
+    gl.uniform1f(uAlpha, 1);
+    landscape(now);
+    const elapsed = paused ? 1500 : Math.max(0, now - transitionStart),
       mass = ["housing", "workers", "modular"].includes(type);
     if (mass) {
       for (let i = 0; i < 6; i++)
@@ -554,19 +761,19 @@ export function createConstructionScene(
     }
     if (stage === 4) {
       for (const x of [-4, 4])
-        for (const z of [-2.5, 2.5]) {
-          box(x, 0.36, z, 0.1, 0.65, 0.1, colors.frame);
-          draw(sphere, x, 0.95, z, 0.72, 1.05, 0.72, colors.tree);
-        }
+        for (const z of [-2.5, 2.5]) tree(x, z, 0.45, environment === "beach");
     }
     person(now, elapsed);
     canvas.dataset.rendered = "true";
+    canvas.dataset.environment = environment;
     canvas.dataset.stage = String(stage);
     canvas.dataset.projectType = type;
   }
   function loop(now) {
     if (!active || lost) return;
     if (now - last > 33) {
+      if (touring && !paused && !reducedMotion.matches)
+        angle += Math.min(now - last, 66) * 0.000035;
       render(now);
       last = now;
     }
@@ -574,7 +781,7 @@ export function createConstructionScene(
     if (
       !paused &&
       !reducedMotion.matches &&
-      (stage === 0 || now - transitionStart < 1500)
+      (touring || stage === 0 || now - transitionStart < 1500)
     )
       frame = requestAnimationFrame(loop);
   }
@@ -646,7 +853,17 @@ export function createConstructionScene(
       requestRender();
     },
     reset() {
-      angle = 0.65;
+      angle = 0.35;
+      requestRender();
+    },
+    setEnvironment(value) {
+      if (!landscapes[value]) return;
+      environment = value;
+      requestRender();
+    },
+    tour(value) {
+      touring = value;
+      last = performance.now();
       requestRender();
     },
     pause(value) {

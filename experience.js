@@ -300,6 +300,9 @@ export function initJourney({ reducedMotion }) {
     }, 4500);
   });
   document
+    .querySelector("#greenshift-journey")
+    .addEventListener("click", () => selectType("home"));
+  document
     .querySelector("#affordable-journey")
     .addEventListener("click", () => selectType("housing"));
   document
@@ -356,6 +359,7 @@ export function initJourney({ reducedMotion }) {
     canvas.hidden = true;
     model.classList.remove("has-webgl");
     sceneControls.hidden = true;
+    document.querySelector(".scene-environments").hidden = true;
     document.querySelector("#scene-help").textContent =
       "Illustrated journey · 3D is unavailable on this device";
   }
@@ -375,12 +379,14 @@ export function initJourney({ reducedMotion }) {
         model.classList.add("has-webgl");
         canvas.tabIndex = 0;
         sceneControls.hidden = false;
+        document.querySelector(".scene-environments").hidden = false;
+        document.querySelector("#scene-tour").disabled = reducedMotion.matches;
         scene.setType(type);
         scene.setStage(step);
         sceneMotion.disabled = reducedMotion.matches;
         sceneMotion.textContent = reducedMotion.matches
           ? "Motion reduced"
-          : "Pause character";
+          : "Pause scene";
       } catch {
         unavailable();
       }
@@ -401,9 +407,37 @@ export function initJourney({ reducedMotion }) {
     scenePaused = !scenePaused;
     scene?.pause(scenePaused);
     sceneMotion.setAttribute("aria-pressed", String(scenePaused));
-    sceneMotion.textContent = scenePaused
-      ? "Resume character"
-      : "Pause character";
+    sceneMotion.textContent = scenePaused ? "Resume scene" : "Pause scene";
+  });
+  const environmentButtons = [
+    ...document.querySelectorAll("button[data-environment]"),
+  ];
+  environmentButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      scene?.setEnvironment(button.dataset.environment);
+      environmentButtons.forEach((other) =>
+        other.setAttribute("aria-pressed", String(other === button)),
+      );
+      canvas.setAttribute(
+        "aria-label",
+        `Interactive 3D ${button.textContent.toLowerCase()} construction site with a Fjäll guide`,
+      );
+    }),
+  );
+  const tour = document.querySelector("#scene-tour");
+  tour.addEventListener("click", () => {
+    const playing = tour.getAttribute("aria-pressed") !== "true";
+    tour.setAttribute("aria-pressed", String(playing));
+    tour.textContent = playing ? "Stop orbit" : "Camera orbit";
+    scene?.tour(playing);
+  });
+  reducedMotion.addEventListener("change", () => {
+    tour.disabled = reducedMotion.matches;
+    if (reducedMotion.matches) {
+      scene?.tour(false);
+      tour.setAttribute("aria-pressed", "false");
+      tour.textContent = "Camera orbit";
+    }
   });
   canvas.addEventListener("keydown", (event) => {
     if (["ArrowLeft", "ArrowRight", "Home"].includes(event.key)) {
@@ -417,8 +451,8 @@ export function initJourney({ reducedMotion }) {
     sceneMotion.textContent = reducedMotion.matches
       ? "Motion reduced"
       : scenePaused
-        ? "Resume character"
-        : "Pause character";
+        ? "Resume scene"
+        : "Pause scene";
   });
 
   reducedMotion.addEventListener("change", stop);
@@ -484,4 +518,178 @@ export function initWorld({ reducedMotion }) {
     sync();
   });
   sync();
+}
+
+export function initBrandMotion({ reducedMotion }) {
+  const group = document.querySelector("#about");
+  const toggle = document.querySelector("#group-motion");
+  let paused = false;
+  let visible = false;
+  function sync() {
+    group.classList.toggle(
+      "graphics-paused",
+      paused || !visible || document.hidden || reducedMotion.matches,
+    );
+    toggle.disabled = reducedMotion.matches;
+    toggle.setAttribute("aria-pressed", String(paused));
+    toggle.textContent = reducedMotion.matches
+      ? "Motion reduced"
+      : paused
+        ? "Resume graphics"
+        : "Pause graphics";
+  }
+  toggle.addEventListener("click", () => {
+    paused = !paused;
+    sync();
+  });
+  new IntersectionObserver(
+    (entries) => {
+      visible = entries[0].isIntersecting;
+      sync();
+    },
+    { threshold: 0.08 },
+  ).observe(group);
+  document.addEventListener("visibilitychange", sync);
+  reducedMotion.addEventListener("change", sync);
+  sync();
+}
+
+export function initPortfolioMotion({ reducedMotion }) {
+  const section = document.querySelector("#portfolio-motion");
+  const cinema = section.querySelector(".portfolio-cinema");
+  const select = document.querySelector("#portfolio-project");
+  const slider = document.querySelector("#portfolio-progress");
+  const play = document.querySelector("#portfolio-play");
+  const image = document.querySelector("#portfolio-motion-image");
+  const concept = document.querySelector("#portfolio-concept");
+  const title = document.querySelector("#portfolio-motion-title");
+  const description = document.querySelector("#portfolio-motion-description");
+  const location = document.querySelector("#portfolio-motion-location");
+  let frame,
+    playing = false,
+    started = 0,
+    initial = 0;
+  const phases = [
+    "01 / Vision",
+    "02 / Design",
+    "03 / Assembly",
+    "04 / Built work",
+  ];
+  function render() {
+    const p = Number(slider.value) / 100;
+    cinema.style.setProperty("--build-progress", p);
+    cinema.style.setProperty("--line-progress", Math.min(1, p / 0.4));
+    cinema.style.setProperty(
+      "--reveal",
+      `${Math.max(0, Math.min(1, (p - 0.55) / 0.45)) * 100}%`,
+    );
+    cinema.style.setProperty("--origin-opacity", Math.max(0, 1 - p * 3));
+    cinema.style.setProperty(
+      "--structure-opacity",
+      Math.max(0, Math.min(1, p * 5, (1 - p) * 4)),
+    );
+    cinema.style.setProperty(
+      "--panel-opacity",
+      Math.max(0, Math.min(1, (p - 0.35) * 4)),
+    );
+    const phase = phases[Math.min(3, Math.floor(p * 4))];
+    document.querySelector("#portfolio-motion-phase").textContent = phase;
+    slider.setAttribute(
+      "aria-valuetext",
+      `${Math.round(p * 100)} percent, ${phase.split(" / ")[1]}`,
+    );
+  }
+  function stop() {
+    playing = false;
+    cancelAnimationFrame(frame);
+    play.textContent = "Play transformation";
+    play.setAttribute("aria-pressed", "false");
+  }
+  function tick(now) {
+    if (!playing) return;
+    slider.value = Math.min(100, initial + (now - started) / 65);
+    render();
+    if (Number(slider.value) === 100) stop();
+    else frame = requestAnimationFrame(tick);
+  }
+  function setProject() {
+    stop();
+    const id = select.value;
+    const card = document.querySelector(`[data-project="${id}"]`);
+    const picture = card?.querySelector("img");
+    const editorial = card?.querySelector(".is-editorial");
+    image.hidden = !!editorial;
+    concept.hidden = !editorial;
+    if (id === "retrofit") {
+      image.src = "./assets/retrofit-poster.webp";
+      image.alt = "Garuda Spark Innovation Hub at Malang Creative Center";
+      title.textContent = "GSIH × MCC";
+      location.textContent = "Malang, Indonesia";
+      description.textContent =
+        "A new purpose for an existing building. Explore our flagship retrofit film below.";
+    } else if (card) {
+      title.textContent = card.querySelector("h3").textContent;
+      location.textContent = card.querySelector(
+        ".project-info > span",
+      ).textContent;
+      description.textContent = card.querySelector(":scope > p").textContent;
+      if (picture) {
+        image.src = picture.getAttribute("src");
+        image.alt = picture.alt;
+      }
+      if (editorial) {
+        document.querySelector("#portfolio-concept-stat").textContent =
+          editorial.querySelector(".project-stat").textContent;
+        document.querySelector("#portfolio-concept-text").textContent =
+          editorial.querySelector(".project-statement").textContent;
+      }
+    }
+    slider.value = reducedMotion.matches ? 100 : 0;
+    render();
+  }
+  select.addEventListener("change", setProject);
+  slider.addEventListener("input", () => {
+    stop();
+    render();
+  });
+  play.addEventListener("click", () => {
+    if (playing) {
+      stop();
+      return;
+    }
+    if (Number(slider.value) === 100) slider.value = 0;
+    initial = Number(slider.value);
+    started = performance.now();
+    playing = true;
+    play.textContent = "Pause transformation";
+    play.setAttribute("aria-pressed", "true");
+    frame = requestAnimationFrame(tick);
+  });
+  document.querySelector("#portfolio-detail").addEventListener("click", () => {
+    stop();
+    if (select.value === "retrofit") {
+      document.querySelector('[data-filter="all"]').click();
+      document.querySelector(".flagship").scrollIntoView({
+        behavior: reducedMotion.matches ? "instant" : "smooth",
+        block: "center",
+      });
+    } else document.querySelector(`[data-project="${select.value}"]`).click();
+  });
+  function syncMotion() {
+    stop();
+    play.disabled = reducedMotion.matches;
+    play.textContent = reducedMotion.matches
+      ? "Use slider to explore"
+      : "Play transformation";
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+  });
+  new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) stop();
+  }).observe(section);
+  reducedMotion.addEventListener("change", syncMotion);
+  // Real project imagery remains the default when motion is reduced.
+  setProject();
+  syncMotion();
 }

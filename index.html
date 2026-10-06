@@ -8,7 +8,10 @@
       name="description"
       content="Fjäll Group brings design, modular materials and precision manufacturing together to build better spaces across Asia and Australasia."
     />
-    <meta property="og:title" content="Fjäll Group — Better spaces at every scale" />
+    <meta
+      property="og:title"
+      content="Fjäll Group — Better spaces at every scale"
+    />
     <meta
       property="og:description"
       content="Swedish engineering. Japanese precision. Indonesian scalability. Discover our approach to modern construction."
@@ -182,22 +185,93 @@
                   <path d="M6 18 18 6M6 6h12v12" /></svg></span
               ><span class="eyebrow">Design & development</span>
             </div>
+            <div class="business-motion greenshift-motion" aria-hidden="true">
+              <svg viewBox="0 0 420 180" fill="none">
+                <defs>
+                  <pattern
+                    id="group-grid"
+                    width="24"
+                    height="24"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M24 0H0V24"
+                      stroke="currentColor"
+                      stroke-width=".4"
+                      opacity=".2"
+                    />
+                  </pattern>
+                </defs>
+                <rect width="420" height="180" fill="url(#group-grid)" />
+                <g class="vision-plan">
+                  <path d="M42 125V55h95v70H42Zm47-70v70M42 87h95" />
+                  <circle cx="89" cy="87" r="60" stroke-dasharray="2 6" />
+                </g>
+                <path
+                  class="vision-connection"
+                  d="M154 88h90"
+                  stroke-dasharray="4 6"
+                />
+                <g class="vision-building">
+                  <path
+                    d="m267 107 50 29 57-33V48l-55-30-52 30v59Zm0-59 50 29 57-29M317 77v59M319 18v59"
+                  />
+                  <path d="m280 68 23 13v31l-23-13Zm49 15 29-17v29l-29 17Z" />
+                </g></svg
+              ><span>Brief → Design → Delivery</span>
+            </div>
             <h3>GreenShift<span class="brand-dot">.</span></h3>
             <p>
               The vision, brought together. Our design and development arm
               connects architecture, project management and capital
               coordination—from the first idea to turnkey delivery.
             </p>
-            <span class="text-link"
+            <a class="text-link" href="#journey" id="greenshift-journey"
               >The thinking behind the build
               <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 18 18 6M6 6h12v12" /></svg
-            ></span>
+            ></a>
           </article>
           <article class="business">
             <div class="business-top">
-              <span class="business-icon blocks" aria-hidden="true">▱</span
+              <span class="business-icon blocks" aria-hidden="true"
+                ><svg class="arrow-icon" viewBox="0 0 24 24">
+                  <path
+                    d="m3 9 9-5 9 5v8l-9 5-9-5V9Zm0 0 9 5 9-5M12 14v8"
+                  /></svg></span
               ><span class="eyebrow">Housing & workers’ accommodation</span>
+            </div>
+            <div class="business-motion fad-motion" aria-hidden="true">
+              <svg viewBox="0 0 420 180" fill="none">
+                <defs>
+                  <g id="fad-home">
+                    <path
+                      d="m0 20 24-15 25 15v36L24 71 0 57V20Zm0 0 24 14 25-14M24 34v37M24 5v29"
+                    />
+                    <path d="m6 29 11 6v14L6 43Zm24 6 12-7v17l-12 7Z" />
+                  </g>
+                </defs>
+                <path
+                  d="m40 113 146-83 196 111-146 83Z"
+                  stroke-dasharray="3 6"
+                  opacity=".4"
+                />
+                <g class="community-unit unit-1">
+                  <use href="#fad-home" x="81" y="59" />
+                </g>
+                <g class="community-unit unit-2">
+                  <use href="#fad-home" x="141" y="25" />
+                </g>
+                <g class="community-unit unit-3">
+                  <use href="#fad-home" x="201" y="59" />
+                </g>
+                <g class="community-unit unit-4">
+                  <use href="#fad-home" x="141" y="93" />
+                </g>
+                <g class="community-unit unit-5">
+                  <use href="#fad-home" x="261" y="93" />
+                </g></svg
+              ><span>One system. Connected communities.</span>
             </div>
             <h3>
               Fjäll Affordable Development<span class="brand-dot">.</span>
@@ -215,6 +289,13 @@
                 <path d="M6 18 18 6M6 6h12v12" /></svg
             ></a>
           </article>
+        </div>
+        <div class="group-motion-foot">
+          <span class="eyebrow"
+            >Two businesses. One connected way to build.</span
+          ><button type="button" id="group-motion" aria-pressed="false">
+            Pause graphics
+          </button>
         </div>
       </section>
 
@@ -370,6 +451,34 @@
             data-stage="0"
             aria-label="Illustrative building model: site planning"
           >
+            <div
+              class="scene-environments"
+              role="group"
+              aria-label="Choose a landscape"
+              hidden
+            >
+              <button
+                type="button"
+                data-environment="forest"
+                aria-pressed="true"
+              >
+                Forest
+              </button>
+              <button
+                type="button"
+                data-environment="mountain"
+                aria-pressed="false"
+              >
+                Mountain
+              </button>
+              <button
+                type="button"
+                data-environment="beach"
+                aria-pressed="false"
+              >
+                Beachfront
+              </button>
+            </div>
             <span class="eyebrow model-caption"
               >Build with Fjäll / Guided construction scene</span
             >
@@ -464,12 +573,14 @@
               >
                 →</button
               ><button type="button" id="scene-reset">Reset view</button
+              ><button type="button" id="scene-tour" aria-pressed="false">
+                Camera orbit</button
               ><button type="button" id="scene-motion" aria-pressed="false">
-                Pause character
+                Pause scene
               </button>
             </div>
             <p class="scene-help" id="scene-help">
-              Interactive illustration · Drag to explore the site
+              Illustrative landscape · Drag or use arrow keys to explore
             </p>
             <div class="model-bottom">
               <span id="model-stage-label">01 / Discover</span
@@ -569,6 +680,101 @@
             Every programme, in one place. Hospitality, housing, modular living,
             public facilities and the transformation of existing buildings.
           </p>
+        </div>
+
+        <div class="portfolio-motion" id="portfolio-motion">
+          <div class="portfolio-cinema" style="--build-progress: 1">
+            <img
+              id="portfolio-motion-image"
+              src="./assets/nuanu.webp"
+              alt="Nuanu Creative City architecture"
+              width="1000"
+              height="750"
+              loading="lazy"
+            />
+            <div class="portfolio-concept" id="portfolio-concept" hidden>
+              <span class="eyebrow">Development programme</span
+              ><strong id="portfolio-concept-stat"></strong>
+              <p id="portfolio-concept-text"></p>
+            </div>
+            <svg
+              class="portfolio-structure"
+              viewBox="0 0 600 400"
+              fill="none"
+              aria-hidden="true"
+            >
+              <g class="portfolio-frame">
+                <path
+                  d="m135 235 160 94 176-103V98L300 30 135 124v111Zm0-111 160 93 176-119M295 217v112M300 30v187"
+                />
+                <path
+                  d="m190 91 160 96v110M244 60l160 98v109M135 179l160 93 176-103"
+                />
+              </g>
+              <g class="portfolio-panels">
+                <path d="m135 124 160 93v112l-160-94Z" />
+                <path d="m295 217 176-119v128L295 329Z" />
+              </g>
+            </svg>
+            <div class="portfolio-origin">
+              <img
+                src="./assets/fjall-logo.png"
+                alt="Fjäll Group"
+                width="2048"
+                height="716"
+              /><span>From ambition to a place in the world.</span>
+            </div>
+            <div class="portfolio-cinema-caption">
+              <span id="portfolio-motion-phase">04 / Built work</span
+              ><span id="portfolio-motion-location">Bali, Indonesia</span>
+            </div>
+          </div>
+          <div class="portfolio-motion-story">
+            <span class="eyebrow">From Fjäll to built work</span>
+            <h3 id="portfolio-motion-title">Nuanu Creative City</h3>
+            <p id="portfolio-motion-description">
+              Complex geometry. Connected spaces.
+            </p>
+            <label for="portfolio-project">Explore a project</label>
+            <select id="portfolio-project">
+              <option value="nuanu">Nuanu Creative City</option>
+              <option value="ulaman">Ulaman Eco Resort</option>
+              <option value="lombok">Kuta Lombok Estates</option>
+              <option value="pods">The Drop Pod Network</option>
+              <option value="bamboo">The Bamboo Lab & Underground Club</option>
+              <option value="housing">Housing at scale</option>
+              <option value="sport">Sport & public facilities</option>
+              <option value="villas">Villa development</option>
+              <option value="retrofit">GSIH × MCC retrofit</option>
+            </select>
+            <label for="portfolio-progress"
+              >Move from vision to built work</label
+            >
+            <input
+              id="portfolio-progress"
+              type="range"
+              min="0"
+              max="100"
+              value="100"
+              step="1"
+              aria-valuetext="Built work"
+            />
+            <div class="portfolio-phases" aria-hidden="true">
+              <span>Vision</span><span>Design</span><span>Assembly</span
+              ><span>Built work</span>
+            </div>
+            <div class="portfolio-motion-actions">
+              <button type="button" id="portfolio-play" aria-pressed="false">
+                Play transformation</button
+              ><button type="button" id="portfolio-detail">
+                Explore project
+              </button>
+            </div>
+            <p class="portfolio-note">
+              An illustrative process. Portfolio imagery and programme summaries
+              from the company profile.
+            </p>
+          </div>
         </div>
 
         <article class="flagship" data-category="retrofit">

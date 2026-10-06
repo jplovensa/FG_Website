@@ -1,4 +1,9 @@
-import { initJourney, initWorld } from "./experience.js";
+import {
+  initJourney,
+  initWorld,
+  initBrandMotion,
+  initPortfolioMotion,
+} from "./experience.js";
 
 const intro = document.querySelector("#intro");
 const introVideo = document.querySelector("#intro-video");
@@ -121,6 +126,16 @@ new IntersectionObserver(
     syncHero();
   },
   { threshold: 0.05 },
+).observe(document.querySelector("#home"));
+
+// The reference's transparent hero navigation becomes a white bar on scroll.
+new IntersectionObserver(
+  ([entry]) => {
+    document
+      .querySelector("#header")
+      .classList.toggle("is-scrolled", entry.intersectionRatio < 0.15);
+  },
+  { threshold: [0.15] },
 ).observe(document.querySelector("#home"));
 
 const menuToggle = document.querySelector("#menu-toggle");
@@ -279,6 +294,8 @@ document.querySelector("#year").textContent = new Date().getFullYear();
 
 initJourney({ reducedMotion });
 initWorld({ reducedMotion });
+initBrandMotion({ reducedMotion });
+initPortfolioMotion({ reducedMotion });
 
 const retrofitVideo = document.querySelector("#retrofit-video");
 const retrofitPlay = document.querySelector("#retrofit-play");

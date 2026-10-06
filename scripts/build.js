@@ -1,6 +1,13 @@
 import { mkdir, rm, copyFile, cp } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 const root = fileURLToPath(new URL("../", import.meta.url));
+// Fail before replacing the previous build if a browser module cannot parse.
+for (const file of ["app.js", "experience.js", "construction-scene.js"]) {
+  execFileSync(process.execPath, ["--check", `${root}${file}`], {
+    stdio: "inherit",
+  });
+}
 await rm(`${root}dist`, { recursive: true, force: true });
 await mkdir(`${root}dist`, { recursive: true });
 for (const file of [
