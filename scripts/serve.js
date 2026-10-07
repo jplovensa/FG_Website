@@ -1,3 +1,4 @@
+import inquiryHandler from "../api/inquiry.js";
 import { createServer } from "node:http";
 import { stat } from "node:fs/promises";
 import { createReadStream } from "node:fs";
@@ -24,9 +25,16 @@ const types = {
   ".webp": "image/webp",
   ".woff2": "font/woff2",
   ".mp4": "video/mp4",
+  ".xml": "application/xml; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
 };
 const server = createServer(async (req, res) => {
+  if (
+    new URL(req.url, "http://localhost").pathname === `${basePath}api/inquiry`
+  ) {
+    await inquiryHandler(req, res);
+    return;
+  }
   if (!["GET", "HEAD"].includes(req.method)) {
     res.writeHead(405).end();
     return;

@@ -252,8 +252,6 @@ export function initJourney({ reducedMotion }) {
     );
     previous.disabled = step === 0;
     next.disabled = step === 4;
-    document.querySelector("#contact-project").textContent =
-      `Let’s talk about your ${type === "retrofit" ? "existing building" : type === "home" ? "new home" : type === "hospitality" ? "hospitality project" : type === "housing" ? "housing programme" : type === "workers" ? "workers’ accommodation" : "modular development"} and what’s possible.`;
     if (step === 4) stop();
   }
   function selectType(value) {
@@ -299,15 +297,6 @@ export function initJourney({ reducedMotion }) {
       render();
     }, 4500);
   });
-  document
-    .querySelector("#greenshift-journey")
-    .addEventListener("click", () => selectType("home"));
-  document
-    .querySelector("#affordable-journey")
-    .addEventListener("click", () => selectType("housing"));
-  document
-    .querySelector("#retrofit-journey")
-    .addEventListener("click", () => selectType("retrofit"));
   document.querySelector("#download-brief").addEventListener("click", () => {
     const text = [
       `FJÄLL GROUP — STARTER BRIEF`,

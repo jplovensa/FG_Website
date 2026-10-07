@@ -1,120 +1,123 @@
 <!doctype html>
+
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#193a32" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="#193a32" name="theme-color" />
     <meta
-      name="description"
       content="Fjäll Group brings design, modular materials and precision manufacturing together to build better spaces across Asia and Australasia."
+      name="description"
     />
     <meta
-      property="og:title"
       content="Fjäll Group — Better spaces at every scale"
+      property="og:title"
     />
     <meta
-      property="og:description"
       content="Swedish engineering. Japanese precision. Indonesian scalability. Discover our approach to modern construction."
+      property="og:description"
     />
-    <meta property="og:type" content="website" />
+    <meta content="website" property="og:type" />
     <title>Fjäll Group — Better spaces at every scale</title>
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link href="./favicon.svg" rel="icon" type="image/svg+xml" />
     <link
-      rel="preload"
-      href="./assets/hero-poster.webp"
       as="image"
       fetchpriority="high"
+      href="./assets/hero-poster.webp"
+      rel="preload"
     />
     <link
-      rel="preload"
-      href="./assets/fonts/inter-latin.woff2"
       as="font"
+      crossorigin=""
+      href="./assets/fonts/inter-latin.woff2"
+      rel="preload"
       type="font/woff2"
-      crossorigin
     />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./responsive.css" />
+    <link href="./styles.css" rel="stylesheet" />
+    <link href="./responsive.css" rel="stylesheet" />
     <script src="./app.js" type="module"></script>
+    <link href="./monograph.css" rel="stylesheet" />
+    <meta
+      content="https://jplovensa.github.io/FG_Website/assets/retrofit-poster.webp"
+      property="og:image"
+    />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div
+      aria-label="Fjäll Group opening film"
+      aria-modal="true"
       class="intro"
+      hidden=""
       id="intro"
       role="dialog"
-      aria-modal="true"
-      aria-label="Fjäll Group opening film"
-      hidden
     >
       <div class="intro-top">
         <span class="eyebrow">Fjäll Group / Construction in motion</span
         ><span class="eyebrow">01 — The beginning</span>
       </div>
       <video
-        id="intro-video"
-        muted
-        playsinline
-        preload="none"
         aria-label="Modular blocks assembling into a structure"
+        id="intro-video"
+        muted=""
+        playsinline=""
+        preload="none"
       ></video>
-      <div class="intro-reveal" id="intro-reveal" aria-hidden="true">
-        <img src="./assets/fjall-logo.png" alt="" width="2048" height="716" />
+      <div aria-hidden="true" class="intro-reveal" id="intro-reveal">
+        <img alt="" height="716" src="./assets/fjall-logo.png" width="2048" />
         <p>Spaces that breathe. Structures that last.</p>
       </div>
       <div class="intro-bottom">
         <span>Small pieces. Greater possibilities.</span
         ><button class="intro-skip" id="intro-skip" type="button">
           Skip intro
-          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 18 18 6M6 6h12v12" />
+          <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+            <path d="M6 18 18 6M6 6h12v12"></path>
           </svg>
         </button>
       </div>
-      <div class="intro-progress" aria-hidden="true">
+      <div aria-hidden="true" class="intro-progress">
         <span id="intro-progress"></span>
       </div>
     </div>
-
     <header class="site-header" id="header">
-      <a class="brand" href="#home" aria-label="Fjäll Group home"
+      <a aria-label="Fjäll Group home" class="brand" href="#home"
         ><img
-          src="./assets/fjall-logo.png"
           alt="Fjäll Group"
-          width="2048"
           height="716"
+          src="./assets/fjall-logo.png"
+          width="2048"
       /></a>
-      <nav id="navigation" aria-label="Main navigation">
-        <a href="#about">The group</a><a href="#approach">Our approach</a
-        ><a href="#journey">Build with us</a
-        ><a href="#projects">Selected projects</a
+      <nav aria-label="Main navigation" id="navigation">
+        <a href="#projects">Selected projects</a> <a href="#about">The group</a
+        ><a href="#approach">Our approach</a><a href="#journey">Build with us</a
         ><a class="nav-contact" href="#contact"
           >Let’s build
-          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 18 18 6M6 6h12v12" /></svg
+          <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+            <path d="M6 18 18 6M6 6h12v12"></path></svg
         ></a>
       </nav>
       <button
-        id="menu-toggle"
-        class="menu-toggle"
         aria-controls="navigation"
         aria-expanded="false"
+        class="menu-toggle"
+        id="menu-toggle"
         type="button"
       >
         Menu <span aria-hidden="true">＋</span>
       </button>
     </header>
-
     <main id="main">
-      <section class="hero" id="home" aria-labelledby="hero-title">
+      <section aria-labelledby="hero-title" class="hero" id="home">
         <video
-          id="hero-video"
-          class="hero-video"
-          poster="./assets/hero-poster.webp"
-          muted
-          loop
-          playsinline
-          preload="none"
           aria-label="Coastal architecture and landscaped surroundings"
+          class="hero-video"
+          id="hero-video"
+          loop=""
+          muted=""
+          playsinline=""
+          poster="./assets/hero-poster.webp"
+          preload="none"
         ></video>
         <div class="hero-shade"></div>
         <div class="hero-content">
@@ -122,42 +125,184 @@
             <span class="status-dot"></span> Modern methods. Lasting
             possibilities.
           </p>
-          <h1 id="hero-title">Better spaces.<br /><em>At every scale.</em></h1>
+          <h1 id="hero-title">
+            Considered design.<br /><em>Connected delivery.</em>
+          </h1>
           <p class="hero-description">
-            From housing and workers’ accommodation to hospitality and
-            retrofit.<br />Design, advanced building systems and
-            delivery—working as one.
+            Integrated design, building systems and construction for
+            hospitality, housing, workers’ accommodation and retrofit.
           </p>
-          <a href="#journey" class="button button-light"
-            >See how we build
-            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg
-          ></a>
+          <a
+            class="button button-light"
+            data-interest="General inquiry"
+            href="#contact"
+            >Discuss your project
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg></a
+          ><a class="hero-secondary" href="#selected-work"
+            >Explore selected work <span aria-hidden="true">↓</span></a
+          >
         </div>
         <div class="hero-bottom">
-          <a href="#about" class="scroll-link"
+          <a class="scroll-link" href="#about"
             ><span aria-hidden="true">↓</span> Explore Fjäll Group</a
           ><span class="hero-caption"
             >Engineering possibility.<br />From Indonesia to the world.</span
           ><button
-            id="video-toggle"
-            class="video-toggle"
-            type="button"
             aria-label="Play background video"
+            class="video-toggle"
+            id="video-toggle"
+            type="button"
           >
             Play film <span aria-hidden="true">▷</span>
           </button>
         </div>
-        <span class="hero-index" aria-hidden="true">01 / 05</span>
       </section>
-
       <section
-        class="about section-pad"
-        id="about"
-        aria-labelledby="about-title"
+        aria-labelledby="signature-title"
+        class="signature-work section-pad"
+        id="selected-work"
       >
         <div class="section-label">
-          <span class="eyebrow">01 — The group</span
+          <span class="eyebrow">01 — Selected work</span
+          ><span class="eyebrow">Architecture. Systems. Places.</span>
+        </div>
+        <div class="signature-heading">
+          <h2 id="signature-title">
+            The idea.<br />The detail.<br /><em>The place.</em>
+          </h2>
+          <p>
+            From a building’s next chapter to a community’s first. Three studies
+            in how design, systems and delivery come together.
+          </p>
+        </div>
+        <div class="signature-grid">
+          <a class="signature-card" href="./projects/retrofit.html"
+            ><figure>
+              <img
+                alt="Garuda Spark Innovation Hub retrofit at Malang Creative Center"
+                height="720"
+                loading="lazy"
+                src="./assets/retrofit-interior.webp"
+                width="1280"
+              />
+              <figcaption>01 / Retrofit · Malang</figcaption>
+            </figure>
+            <h3>New purpose.<br />Existing spaces.</h3>
+            <p>Garuda Spark Innovation Hub</p>
+            <span class="text-link"
+              >Read the study
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg></span></a
+          ><a class="signature-card" href="./projects/nuanu.html"
+            ><figure>
+              <img
+                alt="Nuanu Creative City imagery from the company profile"
+                height="666"
+                loading="lazy"
+                src="./assets/nuanu.webp"
+                width="1000"
+              />
+              <figcaption>02 / Hospitality &amp; culture · Bali</figcaption>
+            </figure>
+            <h3>Complex geometry.<br />Connected thinking.</h3>
+            <p>Nuanu Creative City</p>
+            <span class="text-link"
+              >Read the study
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg></span></a
+          ><a class="signature-card" href="./projects/housing.html"
+            ><figure class="signature-housing">
+              <span class="eyebrow">Programme record / Lombok</span
+              ><strong>250+</strong
+              ><span>Homes in the company-profile programme</span
+              ><span aria-hidden="true" class="plate-lines"></span>
+              <figcaption>03 / Housing at scale · Programme study</figcaption>
+            </figure>
+            <h3>A repeatable system.<br />A community ambition.</h3>
+            <p>Lombok Housing Initiative</p>
+            <span class="text-link"
+              >Read the study
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+          ></a>
+        </div>
+        <div class="signature-foot">
+          <p>
+            Project imagery and programme scope are drawn from the supplied
+            profile and flagship film.
+          </p>
+          <a class="text-link" href="#projects"
+            >Explore all nine studies
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg
+          ></a>
+        </div>
+      </section>
+      <section
+        aria-labelledby="contribution-title"
+        class="contribution section-pad"
+      >
+        <p class="eyebrow">The Fjäll contribution</p>
+        <div class="contribution-heading">
+          <h2 id="contribution-title">
+            Design ambition.<br /><em>Building intelligence.</em>
+          </h2>
+          <p>
+            The work is in the connection: a design resolved with its structure,
+            an envelope prepared for assembly, a programme planned around its
+            people.
+          </p>
+        </div>
+        <div class="contribution-grid">
+          <article>
+            <span class="eyebrow">01 / Resolve the design</span>
+            <h3>Geometry into a building system.</h3>
+            <p>
+              Nuanu’s profile connects complex forms with GX-100 panels and
+              BEMMELS reinforcement.
+            </p>
+            <a class="text-link" href="./projects/nuanu.html"
+              >Explore the contribution
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
+            ></a>
+          </article>
+          <article>
+            <span class="eyebrow">02 / Coordinate the layers</span>
+            <h3>Architecture meets the envelope.</h3>
+            <p>
+              At Ulaman, the profile describes insulated building systems
+              beneath Inspiral’s organic bamboo architecture.
+            </p>
+            <a class="text-link" href="./projects/ulaman.html"
+              >Explore the integration
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
+            ></a>
+          </article>
+          <article>
+            <span class="eyebrow">03 / Plan for repetition</span>
+            <h3>A home within a wider programme.</h3>
+            <p>
+              Lombok’s housing record introduces a coordinated approach to
+              repeatable envelopes and development at scale.
+            </p>
+            <a class="text-link" href="./projects/housing.html"
+              >Explore the programme
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
+            ></a>
+          </article>
+        </div>
+      </section>
+      <section
+        aria-labelledby="about-title"
+        class="about section-pad"
+        id="about"
+      >
+        <div class="section-label">
+          <span class="eyebrow">02 — The group</span
           ><span class="eyebrow">Built on a shared vision</span>
         </div>
         <div class="about-intro">
@@ -181,42 +326,42 @@
         <div class="businesses">
           <article class="business">
             <div class="business-top">
-              <span class="business-icon" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="eyebrow">Design & development</span>
+              <span aria-hidden="true" class="business-icon"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="eyebrow">Design &amp; development</span>
             </div>
             <button
-              type="button"
+              aria-haspopup="dialog"
+              aria-label="Watch GreenShift cinematic trailer"
               class="business-preview"
               data-business="greenshift"
-              aria-label="Watch GreenShift cinematic trailer"
-              aria-haspopup="dialog"
+              type="button"
             >
               <span class="business-film-frame"
                 ><video
+                  aria-hidden="true"
                   data-business-preview="greenshift"
                   data-src="./assets/greenshift-trailer.mp4?v=design-curve-1"
-                  poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
-                  width="1280"
                   height="720"
-                  muted
-                  playsinline
-                  loop
+                  loop=""
+                  muted=""
+                  playsinline=""
+                  poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
                   preload="none"
-                  aria-hidden="true"
+                  width="1280"
                 ></video
                 ><span class="business-film-play"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m9 5 10 7-10 7Z" /></svg></span></span
+                  ><svg aria-hidden="true" viewbox="0 0 24 24">
+                    <path d="m9 5 10 7-10 7Z"></path></svg></span></span
               ><span class="business-film-caption">GreenShift / 00:18</span>
             </button>
             <button
-              type="button"
+              aria-label="Play or pause greenshift preview"
+              aria-pressed="false"
               class="preview-toggle"
               data-preview-toggle="greenshift"
-              aria-pressed="false"
-              aria-label="Play or pause greenshift preview"
+              type="button"
             >
               Play preview
             </button>
@@ -227,61 +372,65 @@
               coordination—from the first idea to turnkey delivery.
             </p>
             <button
-              type="button"
+              aria-haspopup="dialog"
               class="studio-open"
               data-business="greenshift"
-              aria-haspopup="dialog"
+              type="button"
             >
               Enter the design studio <span aria-hidden="true">+</span>
             </button>
-            <a class="text-link" href="#journey" id="greenshift-journey"
-              >The thinking behind the build
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 18 18 6M6 6h12v12" /></svg
+            <a
+              class="text-link"
+              data-interest="GreenShift design &amp; development"
+              href="#contact"
+              id="greenshift-journey"
+              >Discuss your design &amp; development brief
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
             ></a>
           </article>
           <article class="business">
             <div class="business-top">
-              <span class="business-icon blocks" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24">
+              <span aria-hidden="true" class="business-icon blocks"
+                ><svg class="arrow-icon" viewbox="0 0 24 24">
                   <path
                     d="m3 9 9-5 9 5v8l-9 5-9-5V9Zm0 0 9 5 9-5M12 14v8"
-                  /></svg></span
-              ><span class="eyebrow">Housing & workers’ accommodation</span>
+                  ></path></svg></span
+              ><span class="eyebrow">Housing &amp; workers’ accommodation</span>
             </div>
             <button
-              type="button"
+              aria-haspopup="dialog"
+              aria-label="Watch Fjäll Affordable Development cinematic trailer"
               class="business-preview"
               data-business="fad"
-              aria-label="Watch Fjäll Affordable Development cinematic trailer"
-              aria-haspopup="dialog"
+              type="button"
             >
               <span class="business-film-frame"
                 ><video
+                  aria-hidden="true"
                   data-business-preview="fad"
                   data-src="./assets/fad-trailer.mp4"
-                  poster="./assets/fad-trailer-poster.webp"
-                  width="1280"
                   height="720"
-                  muted
-                  playsinline
-                  loop
+                  loop=""
+                  muted=""
+                  playsinline=""
+                  poster="./assets/fad-trailer-poster.webp"
                   preload="none"
-                  aria-hidden="true"
+                  width="1280"
                 ></video
                 ><span class="business-film-play"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m9 5 10 7-10 7Z" /></svg></span></span
+                  ><svg aria-hidden="true" viewbox="0 0 24 24">
+                    <path d="m9 5 10 7-10 7Z"></path></svg></span></span
               ><span class="business-film-caption"
                 >Fjäll Affordable Development / 00:18</span
               >
             </button>
             <button
-              type="button"
+              aria-label="Play or pause fad preview"
+              aria-pressed="false"
               class="preview-toggle"
               data-preview-toggle="fad"
-              aria-pressed="false"
-              aria-label="Play or pause fad preview"
+              type="button"
             >
               Play preview
             </button>
@@ -296,32 +445,57 @@
               development programmes.
             </p>
             <button
-              type="button"
+              aria-haspopup="dialog"
               class="studio-open"
               data-business="fad"
-              aria-haspopup="dialog"
+              type="button"
             >
               Explore housing at scale <span aria-hidden="true">+</span>
             </button>
-            <a class="text-link" href="#journey" id="affordable-journey"
-              >Homes and accommodation at scale
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 18 18 6M6 6h12v12" /></svg
+            <a
+              class="text-link"
+              data-interest="FAD housing &amp; workers’ accommodation"
+              href="#contact"
+              id="affordable-journey"
+              >Discuss your housing programme
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
             ></a>
           </article>
         </div>
         <p class="group-studio-caption eyebrow">
           Two businesses. Explore the thinking, then the scale.
         </p>
+        <aside class="material-service-route">
+          <p class="eyebrow">
+            For architects, builders &amp; procurement teams
+          </p>
+          <h3>Specify with the whole build in mind.</h3>
+          <p>
+            Explore GX-100, BEMMELS and RoR, then bring your drawings,
+            quantities or first questions to the team.
+          </p>
+          <a class="text-link" href="#materials"
+            >Enter the material studio
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg></a
+          ><a
+            class="text-link"
+            data-interest="Materials at scale"
+            href="#contact"
+            >Discuss specification &amp; quantities
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg
+          ></a>
+        </aside>
       </section>
-
       <section
+        aria-labelledby="approach-title"
         class="approach section-pad"
         id="approach"
-        aria-labelledby="approach-title"
       >
         <div class="section-label">
-          <span class="eyebrow">02 — Our approach</span
+          <span class="eyebrow">03 — Our approach</span
           ><span class="eyebrow">Precision, from the start</span>
         </div>
         <div class="approach-heading">
@@ -364,19 +538,577 @@
           <p>Designed for homes. Engineered for hospitality. Built to scale.</p>
           <a class="text-link" href="#materials"
             >Explore the material library
-            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg
           ></a>
         </div>
       </section>
-
       <section
-        class="material-studio section-pad"
-        id="materials"
-        aria-labelledby="materials-title"
+        aria-labelledby="projects-title"
+        class="projects section-pad"
+        id="projects"
       >
         <div class="section-label">
-          <span class="eyebrow">Material library / Experience studio</span
+          <span class="eyebrow">04 — The project index</span
+          ><span class="eyebrow">Ideas, made real</span>
+        </div>
+        <div class="projects-heading">
+          <h2 id="projects-title">The project <em>index.</em></h2>
+          <p>
+            Explore the full portfolio and programme record. Open a study to see
+            the brief, Fjäll’s documented contribution and the building systems
+            behind it.
+          </p>
+        </div>
+        <article class="flagship" data-category="retrofit">
+          <div class="flagship-film">
+            <video
+              aria-label="GSIH and MCC flagship retrofit showcase film"
+              data-src="./assets/retrofit.mp4"
+              id="retrofit-video"
+              playsinline=""
+              poster="./assets/retrofit-poster.webp"
+              preload="none"
+            ></video
+            ><button class="film-play" id="retrofit-play" type="button">
+              <span aria-hidden="true" class="film-play-icon">▷</span
+              ><span
+                >Watch the project film <small>00:51 / Sound on</small></span
+              ></button
+            ><span class="film-index eyebrow">Featured study / 01</span>
+          </div>
+          <div class="flagship-copy">
+            <p class="eyebrow">Flagship retrofit / GSIH × MCC</p>
+            <h3>
+              A new chapter. <span>For what’s <em>already here.</em></span>
+            </h3>
+            <p>
+              Construction excellence is also about transformation. Discover the
+              Garuda Spark Innovation Hub at Malang Creative Center: a flagship
+              retrofit bringing new purpose to existing spaces.
+            </p>
+            <a
+              class="text-link"
+              href="./projects/retrofit.html"
+              id="retrofit-journey"
+              >Read the project study
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
+            ></a>
+            <p class="film-status" id="retrofit-status" role="status"></p>
+          </div>
+        </article>
+        <div aria-label="Filter projects" class="project-filters" role="group">
+          <button aria-pressed="true" data-filter="all" type="button">
+            All projects <span>09</span></button
+          ><button aria-pressed="false" data-filter="retrofit" type="button">
+            Retrofit</button
+          ><button aria-pressed="false" data-filter="hospitality" type="button">
+            Hospitality</button
+          ><button aria-pressed="false" data-filter="residential" type="button">
+            Residential</button
+          ><button aria-pressed="false" data-filter="housing" type="button">
+            Housing at scale</button
+          ><button
+            aria-pressed="false"
+            data-filter="infrastructure"
+            type="button"
+          >
+            Facilities</button
+          ><button aria-pressed="false" data-filter="modular" type="button">
+            Modular living
+          </button>
+        </div>
+        <p aria-live="polite" class="sr-only" id="project-status" role="status">
+          Showing 9 projects
+        </p>
+        <div class="project-grid">
+          <a
+            aria-label="View Nuanu Creative City project"
+            class="project-card"
+            data-category="hospitality"
+            data-project="nuanu"
+            href="./projects/nuanu.html"
+          >
+            <div class="project-image">
+              <img
+                alt="Nuanu Creative City’s sculptural architecture in Bali"
+                decoding="async"
+                height="750"
+                loading="lazy"
+                src="./assets/nuanu.webp"
+                width="1000"
+              /><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Hospitality &amp; culture</span>
+            </div>
+            <div class="project-info">
+              <h3>Nuanu Creative City</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Complex geometry. Connected spaces.</p>
+          </a>
+          <a
+            aria-label="View Ulaman Eco Resort project"
+            class="project-card"
+            data-category="hospitality"
+            data-project="ulaman"
+            href="./projects/ulaman.html"
+          >
+            <div class="project-image">
+              <img
+                alt="Organic bamboo architecture surrounded by tropical planting at Ulaman"
+                decoding="async"
+                height="668"
+                loading="lazy"
+                src="./assets/ulaman.webp"
+                width="1000"
+              /><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Eco hospitality</span>
+            </div>
+            <div class="project-info">
+              <h3>Ulaman Eco Resort</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Where engineering meets the natural world.</p>
+          </a>
+          <a
+            aria-label="View Kuta Lombok Estates project"
+            class="project-card"
+            data-category="residential"
+            data-project="lombok"
+            href="./projects/lombok.html"
+          >
+            <div class="project-image">
+              <img
+                alt="Architectural design of Kuta Lombok Estates in a green coastal landscape"
+                decoding="async"
+                height="782"
+                loading="lazy"
+                src="./assets/lombok.webp"
+                width="1000"
+              /><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Residential</span>
+            </div>
+            <div class="project-info">
+              <h3>Kuta Lombok Estates</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>Coastal living, thoughtfully engineered.</p>
+          </a>
+          <a
+            aria-label="View Drop Pod Network project"
+            class="project-card"
+            data-category="modular"
+            data-project="pods"
+            href="./projects/pods.html"
+          >
+            <div class="project-image">
+              <img
+                alt="Curved modular home with glazed frontage and a pool"
+                decoding="async"
+                height="667"
+                loading="lazy"
+                src="./assets/pods.webp"
+                width="1000"
+              /><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Modular living</span>
+            </div>
+            <div class="project-info">
+              <h3>The Drop Pod Network</h3>
+              <span>Indonesia &amp; Japan</span>
+            </div>
+            <p>Small footprint. Far-reaching possibilities.</p>
+          </a>
+          <a
+            aria-label="View The Bamboo Lab &amp; Underground Club project"
+            class="project-card"
+            data-category="hospitality"
+            data-project="bamboo"
+            href="./projects/bamboo.html"
+          >
+            <div class="project-image">
+              <img
+                alt="Architectural imagery of the Bamboo Lab’s organic exterior from the company profile"
+                decoding="async"
+                height="715"
+                loading="lazy"
+                src="./assets/bamboo-lab.webp"
+                width="1000"
+              /><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Hospitality &amp; culture</span>
+            </div>
+            <div class="project-info">
+              <h3>The Bamboo Lab &amp; Underground Club</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>Hybrid infrastructure. From lab to resort.</p></a
+          ><a
+            aria-label="View Lombok Housing Initiative project"
+            class="project-card"
+            data-category="housing"
+            data-project="housing"
+            href="./projects/housing.html"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">250</span
+              ><span class="project-statement">Lombok Housing Initiative</span
+              ><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Mass-scale housing</span>
+            </div>
+            <div class="project-info">
+              <h3>Lombok Housing Initiative</h3>
+              <span>Lombok, Indonesia</span>
+            </div>
+            <p>A housing programme at community scale.</p></a
+          ><a
+            aria-label="View Multi-Sport Facility project"
+            class="project-card"
+            data-category="infrastructure"
+            data-project="sport"
+            href="./projects/sport.html"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">SPORT</span
+              ><span class="project-statement">Multi-Sport Facility</span
+              ><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Community facilities</span>
+            </div>
+            <div class="project-info">
+              <h3>Multi-Sport Facility</h3>
+              <span>Bali, Indonesia</span>
+            </div>
+            <p>Space for sport. Designed for people.</p></a
+          ><a
+            aria-label="View Private Turnkey Villas project"
+            class="project-card"
+            data-category="residential"
+            data-project="villas"
+            href="./projects/villas.html"
+          >
+            <div class="project-image is-editorial">
+              <span class="project-summary-label eyebrow"
+                >Programme overview / Company profile</span
+              ><span class="project-stat">100+</span
+              ><span class="project-statement">Private Turnkey Villas</span
+              ><span aria-hidden="true" class="project-arrow"
+                ><svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                  <path d="M6 18 18 6M6 6h12v12"></path></svg></span
+              ><span class="project-tag">Residential programme</span>
+            </div>
+            <div class="project-info">
+              <h3>Private Turnkey Villas</h3>
+              <span>Indonesia</span>
+            </div>
+            <p>Individual homes. A connected delivery approach.</p>
+          </a>
+        </div>
+      </section>
+      <section
+        aria-labelledby="journey-title"
+        class="journey section-pad"
+        id="journey"
+      >
+        <div class="section-label">
+          <span class="eyebrow">05 — Build with Fjäll</span
+          ><span class="eyebrow">From first conversation to first key</span>
+        </div>
+        <div class="journey-heading">
+          <h2 id="journey-title">
+            Your ambition.<br />A considered <em>path.</em>
+          </h2>
+          <p>
+            What happens after “let’s build”? Choose your project and walk
+            through the decisions, people and materials that bring it to life.
+          </p>
+        </div>
+        <div
+          aria-label="Choose your project type"
+          class="journey-types"
+          role="group"
+        >
+          <button aria-pressed="true" data-journey-type="home" type="button">
+            A home</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="hospitality"
+            type="button"
+          >
+            A hospitality space</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="retrofit"
+            type="button"
+          >
+            An existing building</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="modular"
+            type="button"
+          >
+            A modular development
+          </button>
+          <button
+            aria-pressed="false"
+            data-journey-type="housing"
+            type="button"
+          >
+            Mass-scale housing
+          </button>
+          <button
+            aria-pressed="false"
+            data-journey-type="workers"
+            type="button"
+          >
+            Workers’ accommodation
+          </button>
+        </div>
+        <div class="journey-workspace">
+          <div
+            aria-label="Illustrative building model: site planning"
+            class="build-model"
+            data-stage="0"
+            id="build-model"
+          >
+            <div
+              aria-label="Choose a landscape"
+              class="scene-environments"
+              hidden=""
+              role="group"
+            >
+              <button
+                aria-pressed="true"
+                data-environment="forest"
+                type="button"
+              >
+                Forest
+              </button>
+              <button
+                aria-pressed="false"
+                data-environment="mountain"
+                type="button"
+              >
+                Mountain
+              </button>
+              <button
+                aria-pressed="false"
+                data-environment="beach"
+                type="button"
+              >
+                Beachfront
+              </button>
+            </div>
+            <span class="eyebrow model-caption"
+              >Build with Fjäll / Guided construction scene</span
+            >
+            <canvas
+              aria-label="Interactive 3D construction site with a Fjäll guide"
+              hidden=""
+              id="construction-canvas"
+              role="img"
+            ></canvas>
+            <div class="scene-guide">
+              <span class="eyebrow">Your Fjäll guide</span>
+              <p id="scene-guide-text">
+                Let’s start with your site and the people who will use it.
+              </p>
+            </div>
+            <svg aria-labelledby="model-title" role="img" viewbox="0 0 640 450">
+              <title id="model-title">
+                An illustrative building grows from a site plan into a finished
+                structure
+              </title>
+              <defs>
+                <pattern
+                  height="35"
+                  id="blueprint-grid"
+                  patternunits="userSpaceOnUse"
+                  width="35"
+                >
+                  <path
+                    d="M35 0H0V35"
+                    fill="none"
+                    opacity=".16"
+                    stroke="currentColor"
+                    stroke-width=".4"
+                  ></path>
+                </pattern>
+              </defs>
+              <rect fill="url(#blueprint-grid)" height="450" width="640"></rect>
+              <g class="model-ground">
+                <path d="M70 295 315 152 580 305 332 445Z"></path>
+                <path d="M105 295 315 173 545 305 331 426Z"></path>
+                <path d="m315 173 16 253M105 295l440 10"></path>
+              </g>
+              <g class="model-design">
+                <path
+                  d="M165 283v-130l170-96 170 96v152l-170 98-170-120Z"
+                ></path>
+                <path
+                  d="m165 153 170 97 170-97M335 250v153M165 283l170-98 170 120"
+                ></path>
+                <path d="m335 57 0 128"></path>
+              </g>
+              <g class="model-frame">
+                <path
+                  d="M165 283V153l170-96 170 96v152M335 250v153M165 153l170 97 170-97M165 283l170 120 170-98M249 105v125M420 106v150M250 202v138M420 200v151"
+                ></path>
+              </g>
+              <g class="model-panels">
+                <path d="m165 153 170 97v153L165 283Z"></path>
+                <path d="m335 250 170-97v152l-170 98Z"></path>
+                <path
+                  class="model-window"
+                  d="m185 182 57 33v68l-57-39ZM266 228l48 27v101l-48-34ZM358 259l58-33v65l-58 34ZM440 211l44-26v67l-44 25Z"
+                ></path>
+              </g>
+              <g class="model-roof">
+                <path d="m150 151 185-108 186 108-186 107Z"></path>
+                <path
+                  d="m150 151 185 107v15L150 166ZM335 258l186-107v15L335 273Z"
+                ></path>
+              </g>
+              <g class="model-finish">
+                <path
+                  d="m130 308 205 120 194-111M123 320l212 122 202-120"
+                ></path>
+                <path
+                  d="M110 260v53M100 282l10-36 12 36M559 281v48M548 298l11-31 11 31"
+                ></path>
+              </g>
+            </svg>
+            <div
+              aria-label="Explore the construction scene"
+              class="scene-controls"
+              hidden=""
+              role="group"
+            >
+              <button
+                aria-label="Rotate view left"
+                id="scene-left"
+                type="button"
+              >
+                ←</button
+              ><button
+                aria-label="Rotate view right"
+                id="scene-right"
+                type="button"
+              >
+                →</button
+              ><button id="scene-reset" type="button">Reset view</button
+              ><button aria-pressed="false" id="scene-tour" type="button">
+                Camera orbit</button
+              ><button aria-pressed="false" id="scene-motion" type="button">
+                Pause scene
+              </button>
+            </div>
+            <p class="scene-help" id="scene-help">
+              Illustrative landscape · Drag or use arrow keys to explore
+            </p>
+            <div class="model-bottom">
+              <span id="model-stage-label">01 / Discover</span
+              ><span>Concept illustration</span>
+            </div>
+          </div>
+          <div class="journey-story">
+            <div class="journey-story-top">
+              <span class="eyebrow" id="journey-owner">You + GreenShift</span
+              ><span id="journey-count">01 / 05</span>
+            </div>
+            <h3 id="journey-stage-title">Begin with your ambition.</h3>
+            <p id="journey-description">
+              Share how you want to live, where you want to build, and what
+              matters most. Together, we turn the idea into a clear brief.
+            </p>
+            <div class="journey-deliverable">
+              <span class="eyebrow">What you take forward</span>
+              <p id="journey-deliverable">
+                A project brief, site priorities and the right questions to
+                answer.
+              </p>
+            </div>
+            <div class="journey-controls">
+              <button
+                aria-label="Previous journey stage"
+                disabled=""
+                id="journey-previous"
+                type="button"
+              >
+                ←</button
+              ><button id="journey-play" type="button">
+                Play the journey <span aria-hidden="true">▷</span></button
+              ><button
+                aria-label="Next journey stage"
+                id="journey-next"
+                type="button"
+              >
+                →
+              </button>
+            </div>
+            <span
+              aria-live="polite"
+              class="sr-only"
+              id="journey-status"
+              role="status"
+              >Stage 1 of 5: Discover</span
+            >
+          </div>
+        </div>
+        <div
+          aria-label="Choose a journey stage"
+          class="journey-steps"
+          role="group"
+        >
+          <button aria-pressed="true" data-journey-step="0" type="button">
+            <span>01</span>Discover</button
+          ><button aria-pressed="false" data-journey-step="1" type="button">
+            <span>02</span>Design</button
+          ><button aria-pressed="false" data-journey-step="2" type="button">
+            <span>03</span>Manufacture</button
+          ><button aria-pressed="false" data-journey-step="3" type="button">
+            <span>04</span>Assemble</button
+          ><button aria-pressed="false" data-journey-step="4" type="button">
+            <span>05</span>Handover
+          </button>
+        </div>
+        <div class="journey-foot">
+          <p>
+            An illustrative journey. Scope, engineering and programme are agreed
+            with your project team.
+          </p>
+          <button class="text-link" id="download-brief" type="button">
+            Save your starter brief <span aria-hidden="true">↓</span></button
+          ><a class="text-link" href="#contact" id="journey-contact"
+            >Start the conversation
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg
+          ></a>
+        </div>
+      </section>
+      <section
+        aria-labelledby="materials-title"
+        class="material-studio section-pad"
+        id="materials"
+      >
+        <div class="section-label">
+          <span class="eyebrow">06 — The material studio</span
           ><span class="eyebrow">Explore what makes the build</span>
         </div>
         <div class="material-studio-heading">
@@ -390,49 +1122,49 @@
           </p>
         </div>
         <div
+          aria-label="Choose a material study"
           class="material-selector"
           role="group"
-          aria-label="Choose a material study"
         >
-          <button type="button" data-material="eps" aria-pressed="true">
+          <button aria-pressed="true" data-material="eps" type="button">
             <span>01 / Envelope</span><strong>EPS · GX-100 Panel</strong>
           </button>
-          <button type="button" data-material="bemmel" aria-pressed="false">
+          <button aria-pressed="false" data-material="bemmel" type="button">
             <span>02 / Structure</span><strong>Bemmel</strong>
           </button>
-          <button type="button" data-material="ror" aria-pressed="false">
+          <button aria-pressed="false" data-material="ror" type="button">
             <span>03 / Roof</span><strong>RoR roof</strong>
           </button>
-          <button type="button" data-material="scale" aria-pressed="false">
+          <button aria-pressed="false" data-material="scale" type="button">
             <span>04 / Supply</span><strong>Materials at scale</strong>
           </button>
         </div>
         <div class="material-workbench">
           <div
             class="material-view"
-            id="material-view"
-            data-material="eps"
             data-exploded="true"
+            data-material="eps"
+            id="material-view"
           >
             <div class="material-view-top">
               <span class="eyebrow">Fjäll / Material study</span
               ><span id="material-view-index">01 — EPS</span>
             </div>
             <img
-              id="material-image"
-              src="./assets/gx100-studio.webp"
               alt="AI-assisted studio concept of the documented GX-100 nine-layer build-up"
-              width="1200"
-              height="675"
-              loading="lazy"
               decoding="async"
+              height="675"
+              id="material-image"
+              loading="lazy"
+              src="./assets/gx100-studio.webp"
+              width="1200"
             />
             <svg
-              id="panel-stack"
-              viewBox="0 0 640 400"
-              role="img"
               aria-labelledby="panel-stack-title"
-              hidden
+              hidden=""
+              id="panel-stack"
+              role="img"
+              viewbox="0 0 640 400"
             >
               <title id="panel-stack-title">
                 Assembled GX-100: finish, Kalci board, fibreglass mesh, PU glue,
@@ -441,24 +1173,24 @@
               <ellipse
                 cx="320"
                 cy="343"
-                rx="200"
-                ry="27"
                 fill="#375b38"
                 opacity=".12"
-              />
+                rx="200"
+                ry="27"
+              ></ellipse>
               <g data-panel-layer="Custom finish">
                 <path
                   d="m146 229 196-113 152 87-196 113Z"
                   fill="#c6cabc"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 229 152 87v3l-152-87Zm152 87 196-113v3L298 319Z"
                   fill="#c6cabc"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="Kalci board">
                 <path
@@ -466,13 +1198,13 @@
                   fill="#969a88"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 225 152 87v4l-152-87Zm152 87 196-113v4L298 316Z"
                   fill="#969a88"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="Fibreglass mesh">
                 <path
@@ -480,13 +1212,13 @@
                   fill="#759187"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 223 152 87v2l-152-87Zm152 87 196-113v2L298 312Z"
                   fill="#759187"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="PU glue">
                 <path
@@ -494,13 +1226,13 @@
                   fill="#d6c7a0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 221 152 87v2l-152-87Zm152 87 196-113v2L298 310Z"
                   fill="#d6c7a0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="EPS core">
                 <path
@@ -508,13 +1240,13 @@
                   fill="#e9ece0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 191 152 87v30l-152-87Zm152 87 196-113v30L298 308Z"
                   fill="#e9ece0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="PU glue">
                 <path
@@ -522,13 +1254,13 @@
                   fill="#d6c7a0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 189 152 87v2l-152-87Zm152 87 196-113v2L298 278Z"
                   fill="#d6c7a0"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="Fibreglass mesh">
                 <path
@@ -536,13 +1268,13 @@
                   fill="#759187"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 187 152 87v2l-152-87Zm152 87 196-113v2L298 276Z"
                   fill="#759187"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="Kalci board">
                 <path
@@ -550,13 +1282,13 @@
                   fill="#969a88"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 183 152 87v4l-152-87Zm152 87 196-113v4L298 274Z"
                   fill="#969a88"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
               <g data-panel-layer="Custom finish">
                 <path
@@ -564,21 +1296,21 @@
                   fill="#b4b99f"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
                 <path
                   d="m146 180 152 87v3l-152-87Zm152 87 196-113v3L298 270Z"
                   fill="#b4b99f"
                   stroke="#6c7f66"
                   stroke-width=".5"
-                />
+                ></path>
               </g>
             </svg>
             <svg
-              id="roof-study"
-              viewBox="0 0 640 460"
-              role="img"
               aria-labelledby="material-graphic-title material-graphic-description"
-              hidden
+              hidden=""
+              id="roof-study"
+              role="img"
+              viewbox="0 0 640 460"
             >
               <title id="material-graphic-title">RoR roof concept</title>
               <desc id="material-graphic-description">Concept assembly</desc>
@@ -586,41 +1318,50 @@
                 <ellipse
                   cx="318"
                   cy="367"
-                  rx="205"
-                  ry="30"
                   fill="#587252"
                   opacity=".12"
+                  rx="205"
+                  ry="30"
                   stroke="none"
-                />
-                <path d="m115 280 221-127 187 108-221 127Z" fill="#c4cfbc" />
+                ></ellipse>
+                <path
+                  d="m115 280 221-127 187 108-221 127Z"
+                  fill="#c4cfbc"
+                ></path>
                 <path
                   d="m115 280 187 108v13L115 293Zm187 108 221-127v13L302 401Z"
                   fill="#91a18b"
-                />
-                <path d="m115 216 221-127 187 108-221 127Z" fill="#dde5d8" />
+                ></path>
+                <path
+                  d="m115 216 221-127 187 108-221 127Z"
+                  fill="#dde5d8"
+                ></path>
                 <path
                   d="M135 214 322 322M155 202l187 108M176 190l187 108M197 178l187 108M218 166l187 108M239 154l187 108M260 142l187 108M281 130l187 108M302 118l187 108M323 106l187 108M132 229l220-127M153 241l220-127M174 253l220-127M195 265l220-127M216 277l220-127M237 289l220-127M258 301l220-127M279 313l220-127"
                   stroke="#80a58e"
-                />
-                <path d="m115 148 221-127 187 108-221 127Z" fill="#537d69" />
+                ></path>
+                <path
+                  d="m115 148 221-127 187 108-221 127Z"
+                  fill="#537d69"
+                ></path>
                 <path
                   d="m115 148 187 108v6L115 154Zm187 108 221-127v6L302 262Z"
                   fill="#355b49"
-                />
+                ></path>
               </g>
             </svg>
             <div
-              id="material-view-tabs"
-              class="material-view-tabs"
-              role="group"
               aria-label="Choose a product view"
+              class="material-view-tabs"
+              id="material-view-tabs"
+              role="group"
             ></div>
             <div class="material-view-bottom">
               <span id="material-view-label">GX-100 / Nine-layer build-up</span
               ><button
-                type="button"
-                id="material-assembly"
                 aria-pressed="false"
+                id="material-assembly"
+                type="button"
               >
                 See assembled stack
               </button>
@@ -655,13 +1396,13 @@
                 Product Knowledge · Exact GX-100 build-up, pp. 3–5
               </p>
             </div>
-            <div class="material-swatch" aria-hidden="true">
+            <div aria-hidden="true" class="material-swatch">
               <i></i><i></i><i></i><span>Material palette</span>
             </div>
             <a class="text-link" href="#contact" id="material-inquiry"
-              >Discuss this material
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 18 18 6M6 6h12v12" /></svg
+              >Discuss this material specification
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
             ></a>
             <p class="material-study-note">
               Product visuals from the Fjäll Product Knowledge deck and RoR
@@ -669,576 +1410,18 @@
               performance is verified per project.
             </p>
             <p
+              aria-live="polite"
               class="sr-only"
               id="material-status"
               role="status"
-              aria-live="polite"
             ></p>
           </div>
         </div>
       </section>
-
       <section
-        class="journey section-pad"
-        id="journey"
-        aria-labelledby="journey-title"
-      >
-        <div class="section-label">
-          <span class="eyebrow">03 — Build with Fjäll</span
-          ><span class="eyebrow">From first conversation to first key</span>
-        </div>
-        <div class="journey-heading">
-          <h2 id="journey-title">
-            Your ambition.<br />A considered <em>path.</em>
-          </h2>
-          <p>
-            What happens after “let’s build”? Choose your project and walk
-            through the decisions, people and materials that bring it to life.
-          </p>
-        </div>
-        <div
-          class="journey-types"
-          role="group"
-          aria-label="Choose your project type"
-        >
-          <button type="button" data-journey-type="home" aria-pressed="true">
-            A home</button
-          ><button
-            type="button"
-            data-journey-type="hospitality"
-            aria-pressed="false"
-          >
-            A hospitality space</button
-          ><button
-            type="button"
-            data-journey-type="retrofit"
-            aria-pressed="false"
-          >
-            An existing building</button
-          ><button
-            type="button"
-            data-journey-type="modular"
-            aria-pressed="false"
-          >
-            A modular development
-          </button>
-          <button
-            type="button"
-            data-journey-type="housing"
-            aria-pressed="false"
-          >
-            Mass-scale housing
-          </button>
-          <button
-            type="button"
-            data-journey-type="workers"
-            aria-pressed="false"
-          >
-            Workers’ accommodation
-          </button>
-        </div>
-        <div class="journey-workspace">
-          <div
-            class="build-model"
-            id="build-model"
-            data-stage="0"
-            aria-label="Illustrative building model: site planning"
-          >
-            <div
-              class="scene-environments"
-              role="group"
-              aria-label="Choose a landscape"
-              hidden
-            >
-              <button
-                type="button"
-                data-environment="forest"
-                aria-pressed="true"
-              >
-                Forest
-              </button>
-              <button
-                type="button"
-                data-environment="mountain"
-                aria-pressed="false"
-              >
-                Mountain
-              </button>
-              <button
-                type="button"
-                data-environment="beach"
-                aria-pressed="false"
-              >
-                Beachfront
-              </button>
-            </div>
-            <span class="eyebrow model-caption"
-              >Build with Fjäll / Guided construction scene</span
-            >
-            <canvas
-              id="construction-canvas"
-              role="img"
-              aria-label="Interactive 3D construction site with a Fjäll guide"
-              hidden
-            ></canvas>
-            <div class="scene-guide">
-              <span class="eyebrow">Your Fjäll guide</span>
-              <p id="scene-guide-text">
-                Let’s start with your site and the people who will use it.
-              </p>
-            </div>
-            <svg viewBox="0 0 640 450" role="img" aria-labelledby="model-title">
-              <title id="model-title">
-                An illustrative building grows from a site plan into a finished
-                structure
-              </title>
-              <defs>
-                <pattern
-                  id="blueprint-grid"
-                  width="35"
-                  height="35"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <path
-                    d="M35 0H0V35"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width=".4"
-                    opacity=".16"
-                  />
-                </pattern>
-              </defs>
-              <rect width="640" height="450" fill="url(#blueprint-grid)" />
-              <g class="model-ground">
-                <path d="M70 295 315 152 580 305 332 445Z" />
-                <path d="M105 295 315 173 545 305 331 426Z" />
-                <path d="m315 173 16 253M105 295l440 10" />
-              </g>
-              <g class="model-design">
-                <path d="M165 283v-130l170-96 170 96v152l-170 98-170-120Z" />
-                <path
-                  d="m165 153 170 97 170-97M335 250v153M165 283l170-98 170 120"
-                />
-                <path d="m335 57 0 128" />
-              </g>
-              <g class="model-frame">
-                <path
-                  d="M165 283V153l170-96 170 96v152M335 250v153M165 153l170 97 170-97M165 283l170 120 170-98M249 105v125M420 106v150M250 202v138M420 200v151"
-                />
-              </g>
-              <g class="model-panels">
-                <path d="m165 153 170 97v153L165 283Z" />
-                <path d="m335 250 170-97v152l-170 98Z" />
-                <path
-                  class="model-window"
-                  d="m185 182 57 33v68l-57-39ZM266 228l48 27v101l-48-34ZM358 259l58-33v65l-58 34ZM440 211l44-26v67l-44 25Z"
-                />
-              </g>
-              <g class="model-roof">
-                <path d="m150 151 185-108 186 108-186 107Z" />
-                <path
-                  d="m150 151 185 107v15L150 166ZM335 258l186-107v15L335 273Z"
-                />
-              </g>
-              <g class="model-finish">
-                <path d="m130 308 205 120 194-111M123 320l212 122 202-120" />
-                <path
-                  d="M110 260v53M100 282l10-36 12 36M559 281v48M548 298l11-31 11 31"
-                />
-              </g>
-            </svg>
-            <div
-              class="scene-controls"
-              role="group"
-              aria-label="Explore the construction scene"
-              hidden
-            >
-              <button
-                type="button"
-                id="scene-left"
-                aria-label="Rotate view left"
-              >
-                ←</button
-              ><button
-                type="button"
-                id="scene-right"
-                aria-label="Rotate view right"
-              >
-                →</button
-              ><button type="button" id="scene-reset">Reset view</button
-              ><button type="button" id="scene-tour" aria-pressed="false">
-                Camera orbit</button
-              ><button type="button" id="scene-motion" aria-pressed="false">
-                Pause scene
-              </button>
-            </div>
-            <p class="scene-help" id="scene-help">
-              Illustrative landscape · Drag or use arrow keys to explore
-            </p>
-            <div class="model-bottom">
-              <span id="model-stage-label">01 / Discover</span
-              ><span>Concept illustration</span>
-            </div>
-          </div>
-          <div class="journey-story">
-            <div class="journey-story-top">
-              <span class="eyebrow" id="journey-owner">You + GreenShift</span
-              ><span id="journey-count">01 / 05</span>
-            </div>
-            <h3 id="journey-stage-title">Begin with your ambition.</h3>
-            <p id="journey-description">
-              Share how you want to live, where you want to build, and what
-              matters most. Together, we turn the idea into a clear brief.
-            </p>
-            <div class="journey-deliverable">
-              <span class="eyebrow">What you take forward</span>
-              <p id="journey-deliverable">
-                A project brief, site priorities and the right questions to
-                answer.
-              </p>
-            </div>
-            <div class="journey-controls">
-              <button
-                type="button"
-                id="journey-previous"
-                aria-label="Previous journey stage"
-                disabled
-              >
-                ←</button
-              ><button type="button" id="journey-play">
-                Play the journey <span aria-hidden="true">▷</span></button
-              ><button
-                type="button"
-                id="journey-next"
-                aria-label="Next journey stage"
-              >
-                →
-              </button>
-            </div>
-            <span
-              class="sr-only"
-              id="journey-status"
-              role="status"
-              aria-live="polite"
-              >Stage 1 of 5: Discover</span
-            >
-          </div>
-        </div>
-        <div
-          class="journey-steps"
-          role="group"
-          aria-label="Choose a journey stage"
-        >
-          <button type="button" data-journey-step="0" aria-pressed="true">
-            <span>01</span>Discover</button
-          ><button type="button" data-journey-step="1" aria-pressed="false">
-            <span>02</span>Design</button
-          ><button type="button" data-journey-step="2" aria-pressed="false">
-            <span>03</span>Manufacture</button
-          ><button type="button" data-journey-step="3" aria-pressed="false">
-            <span>04</span>Assemble</button
-          ><button type="button" data-journey-step="4" aria-pressed="false">
-            <span>05</span>Handover
-          </button>
-        </div>
-        <div class="journey-foot">
-          <p>
-            An illustrative journey. Scope, engineering and programme are agreed
-            with your project team.
-          </p>
-          <button type="button" id="download-brief" class="text-link">
-            Save your starter brief <span aria-hidden="true">↓</span></button
-          ><a href="#contact" class="text-link" id="journey-contact"
-            >Start the conversation
-            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg
-          ></a>
-        </div>
-      </section>
-
-      <section
-        class="projects section-pad"
-        id="projects"
-        aria-labelledby="projects-title"
-      >
-        <div class="section-label">
-          <span class="eyebrow">04 — Selected projects</span
-          ><span class="eyebrow">Ideas, made real</span>
-        </div>
-        <div class="projects-heading">
-          <h2 id="projects-title">
-            Different places.<br />The same <em>possibility.</em>
-          </h2>
-          <p>
-            Every programme, in one place. Hospitality, housing, modular living,
-            public facilities and the transformation of existing buildings.
-          </p>
-        </div>
-
-        <article class="flagship" data-category="retrofit">
-          <div class="flagship-film">
-            <video
-              id="retrofit-video"
-              poster="./assets/retrofit-poster.webp"
-              data-src="./assets/retrofit.mp4"
-              preload="none"
-              playsinline
-              aria-label="GSIH and MCC flagship retrofit showcase film"
-            ></video
-            ><button type="button" id="retrofit-play" class="film-play">
-              <span class="film-play-icon" aria-hidden="true">▷</span
-              ><span
-                >Watch the project film <small>00:51 / Sound on</small></span
-              ></button
-            ><span class="film-index eyebrow">Featured study / 01</span>
-          </div>
-          <div class="flagship-copy">
-            <p class="eyebrow">Flagship retrofit / GSIH × MCC</p>
-            <h3>
-              A new chapter. <span>For what’s <em>already here.</em></span>
-            </h3>
-            <p>
-              Construction excellence is also about transformation. Discover the
-              Garuda Spark Innovation Hub at Malang Creative Center: a flagship
-              retrofit bringing new purpose to existing spaces.
-            </p>
-            <a href="#journey" class="text-link" id="retrofit-journey"
-              >Explore a retrofit journey
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 18 18 6M6 6h12v12" /></svg
-            ></a>
-            <p id="retrofit-status" role="status" class="film-status"></p>
-          </div>
-        </article>
-
-        <div class="project-filters" role="group" aria-label="Filter projects">
-          <button type="button" data-filter="all" aria-pressed="true">
-            All projects <span>09</span></button
-          ><button type="button" data-filter="retrofit" aria-pressed="false">
-            Retrofit</button
-          ><button type="button" data-filter="hospitality" aria-pressed="false">
-            Hospitality</button
-          ><button type="button" data-filter="residential" aria-pressed="false">
-            Residential</button
-          ><button type="button" data-filter="housing" aria-pressed="false">
-            Housing at scale</button
-          ><button
-            type="button"
-            data-filter="infrastructure"
-            aria-pressed="false"
-          >
-            Facilities</button
-          ><button type="button" data-filter="modular" aria-pressed="false">
-            Modular living
-          </button>
-        </div>
-        <p class="sr-only" id="project-status" role="status" aria-live="polite">
-          Showing 9 projects
-        </p>
-        <div class="project-grid">
-          <button
-            class="project-card"
-            type="button"
-            data-project="nuanu"
-            data-category="hospitality"
-            aria-label="View Nuanu Creative City project"
-          >
-            <div class="project-image">
-              <img
-                src="./assets/nuanu.webp"
-                alt="Nuanu Creative City’s sculptural architecture in Bali"
-                width="1000"
-                height="750"
-                loading="lazy"
-                decoding="async"
-              /><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Hospitality & culture</span>
-            </div>
-            <div class="project-info">
-              <h3>Nuanu Creative City</h3>
-              <span>Bali, Indonesia</span>
-            </div>
-            <p>Complex geometry. Connected spaces.</p>
-          </button>
-          <button
-            class="project-card"
-            type="button"
-            data-project="ulaman"
-            data-category="hospitality"
-            aria-label="View Ulaman Eco Resort project"
-          >
-            <div class="project-image">
-              <img
-                src="./assets/ulaman.webp"
-                alt="Organic bamboo architecture surrounded by tropical planting at Ulaman"
-                width="1000"
-                height="668"
-                loading="lazy"
-                decoding="async"
-              /><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Eco hospitality</span>
-            </div>
-            <div class="project-info">
-              <h3>Ulaman Eco Resort</h3>
-              <span>Bali, Indonesia</span>
-            </div>
-            <p>Where engineering meets the natural world.</p>
-          </button>
-          <button
-            class="project-card"
-            type="button"
-            data-project="lombok"
-            data-category="residential"
-            aria-label="View Kuta Lombok Estates project"
-          >
-            <div class="project-image">
-              <img
-                src="./assets/lombok.webp"
-                alt="Architectural design of Kuta Lombok Estates in a green coastal landscape"
-                width="1000"
-                height="782"
-                loading="lazy"
-                decoding="async"
-              /><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Residential</span>
-            </div>
-            <div class="project-info">
-              <h3>Kuta Lombok Estates</h3>
-              <span>Lombok, Indonesia</span>
-            </div>
-            <p>Coastal living, thoughtfully engineered.</p>
-          </button>
-          <button
-            class="project-card"
-            type="button"
-            data-project="pods"
-            data-category="modular"
-            aria-label="View Drop Pod Network project"
-          >
-            <div class="project-image">
-              <img
-                src="./assets/pods.webp"
-                alt="Curved modular home with glazed frontage and a pool"
-                width="1000"
-                height="667"
-                loading="lazy"
-                decoding="async"
-              /><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Modular living</span>
-            </div>
-            <div class="project-info">
-              <h3>The Drop Pod Network</h3>
-              <span>Indonesia & Japan</span>
-            </div>
-            <p>Small footprint. Far-reaching possibilities.</p>
-          </button>
-          <button
-            class="project-card"
-            type="button"
-            data-project="bamboo"
-            data-category="hospitality"
-            aria-label="View The Bamboo Lab & Underground Club project"
-          >
-            <div class="project-image">
-              <img
-                src="./assets/bamboo-lab.webp"
-                alt="Architectural imagery of the Bamboo Lab’s organic exterior from the company profile"
-                width="1000"
-                height="715"
-                loading="lazy"
-                decoding="async"
-              /><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Hospitality & culture</span>
-            </div>
-            <div class="project-info">
-              <h3>The Bamboo Lab & Underground Club</h3>
-              <span>Lombok, Indonesia</span>
-            </div>
-            <p>Hybrid infrastructure. From lab to resort.</p></button
-          ><button
-            class="project-card"
-            type="button"
-            data-project="housing"
-            data-category="housing"
-            aria-label="View Lombok Housing Initiative project"
-          >
-            <div class="project-image is-editorial">
-              <span class="project-summary-label eyebrow"
-                >Programme overview / Company profile</span
-              ><span class="project-stat">250</span
-              ><span class="project-statement">Lombok Housing Initiative</span
-              ><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Mass-scale housing</span>
-            </div>
-            <div class="project-info">
-              <h3>Lombok Housing Initiative</h3>
-              <span>Lombok, Indonesia</span>
-            </div>
-            <p>A housing programme at community scale.</p></button
-          ><button
-            class="project-card"
-            type="button"
-            data-project="sport"
-            data-category="infrastructure"
-            aria-label="View Multi-Sport Facility project"
-          >
-            <div class="project-image is-editorial">
-              <span class="project-summary-label eyebrow"
-                >Programme overview / Company profile</span
-              ><span class="project-stat">SPORT</span
-              ><span class="project-statement">Multi-Sport Facility</span
-              ><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Community facilities</span>
-            </div>
-            <div class="project-info">
-              <h3>Multi-Sport Facility</h3>
-              <span>Bali, Indonesia</span>
-            </div>
-            <p>Space for sport. Designed for people.</p></button
-          ><button
-            class="project-card"
-            type="button"
-            data-project="villas"
-            data-category="residential"
-            aria-label="View Private Turnkey Villas project"
-          >
-            <div class="project-image is-editorial">
-              <span class="project-summary-label eyebrow"
-                >Programme overview / Company profile</span
-              ><span class="project-stat">100+</span
-              ><span class="project-statement">Private Turnkey Villas</span
-              ><span class="project-arrow" aria-hidden="true"
-                ><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 18 18 6M6 6h12v12" /></svg></span
-              ><span class="project-tag">Residential programme</span>
-            </div>
-            <div class="project-info">
-              <h3>Private Turnkey Villas</h3>
-              <span>Indonesia</span>
-            </div>
-            <p>Individual homes. A connected delivery approach.</p>
-          </button>
-        </div>
-      </section>
-
-      <section
+        aria-labelledby="world-title"
         class="world section-pad"
         id="world"
-        aria-labelledby="world-title"
       >
         <div class="section-label">
           <span class="eyebrow">05 — Our perspective</span
@@ -1254,69 +1437,69 @@
             projects across Asia and Australasia.
           </p>
         </div>
-        <div class="world-map" id="world-map" data-region="all">
-          <svg viewBox="0 0 960 480" aria-hidden="true">
+        <div class="world-map" data-region="all" id="world-map">
+          <svg aria-hidden="true" viewbox="0 0 960 480">
             <defs>
               <pattern
-                id="map-grid"
-                width="80"
                 height="60"
-                patternUnits="userSpaceOnUse"
+                id="map-grid"
+                patternunits="userSpaceOnUse"
+                width="80"
               >
                 <path
                   d="M80 0H0V60"
                   fill="none"
+                  opacity=".15"
                   stroke="#a6b7ad"
                   stroke-width=".4"
-                  opacity=".15"
-                />
+                ></path>
               </pattern>
             </defs>
-            <rect width="960" height="480" fill="url(#map-grid)" />
-            <image href="./assets/world-map.svg" width="960" height="480" />
+            <rect fill="url(#map-grid)" height="480" width="960"></rect>
+            <image height="480" href="./assets/world-map.svg" width="960" />
             <g class="map-route route-europe">
-              <path d="M787 262Q710 70 522 78" />
+              <path d="M787 262Q710 70 522 78"></path>
               <circle r="3">
-                <animateMotion
+                <animatemotion
                   dur="5s"
-                  repeatCount="indefinite"
                   path="M787 262Q710 70 522 78"
-                />
+                  repeatcount="indefinite"
+                ></animatemotion>
               </circle>
             </g>
             <g class="map-route route-japan">
-              <path d="M787 262Q875 227 829 151" />
+              <path d="M787 262Q875 227 829 151"></path>
               <circle r="3">
-                <animateMotion
+                <animatemotion
                   dur="4s"
-                  repeatCount="indefinite"
                   path="M787 262Q875 227 829 151"
-                />
+                  repeatcount="indefinite"
+                ></animatemotion>
               </circle>
             </g>
             <g class="map-route route-australasia">
-              <path d="M787 262Q869 260 885 330" />
+              <path d="M787 262Q869 260 885 330"></path>
               <circle r="3">
-                <animateMotion
+                <animatemotion
                   dur="4.5s"
-                  repeatCount="indefinite"
                   path="M787 262Q869 260 885 330"
-                />
+                  repeatcount="indefinite"
+                ></animatemotion>
               </circle>
             </g>
             <g class="map-destination">
-              <circle cx="522" cy="78" r="4" />
-              <text x="507" y="63" text-anchor="end">SWEDEN</text>
-              <circle cx="829" cy="151" r="4" />
+              <circle cx="522" cy="78" r="4"></circle>
+              <text text-anchor="end" x="507" y="63">SWEDEN</text>
+              <circle cx="829" cy="151" r="4"></circle>
               <text x="845" y="139">JAPAN</text>
-              <circle cx="885" cy="330" r="4" />
-              <text x="867" y="357" text-anchor="end">AUSTRALASIA</text>
+              <circle cx="885" cy="330" r="4"></circle>
+              <text text-anchor="end" x="867" y="357">AUSTRALASIA</text>
             </g>
             <g class="map-origin">
-              <circle class="origin-pulse" cx="787" cy="262" r="17" />
-              <circle cx="787" cy="262" r="5" />
-              <text x="767" y="298" text-anchor="end">INDONESIA</text>
-              <text class="map-origin-detail" x="767" y="316" text-anchor="end">
+              <circle class="origin-pulse" cx="787" cy="262" r="17"></circle>
+              <circle cx="787" cy="262" r="5"></circle>
+              <text text-anchor="end" x="767" y="298">INDONESIA</text>
+              <text class="map-origin-detail" text-anchor="end" x="767" y="316">
                 THE HEART OF OUR PRODUCTION
               </text>
             </g>
@@ -1328,20 +1511,20 @@
           </div>
         </div>
         <div
+          aria-label="Explore our global connections"
           class="world-regions"
           role="group"
-          aria-label="Explore our global connections"
         >
-          <button type="button" data-region="all" aria-pressed="true">
+          <button aria-pressed="true" data-region="all" type="button">
             <span class="eyebrow">01 / Our foundation</span
             ><strong>Indonesia</strong></button
-          ><button type="button" data-region="europe" aria-pressed="false">
+          ><button aria-pressed="false" data-region="europe" type="button">
             <span class="eyebrow">02 / Engineering roots</span
             ><strong>Sweden</strong></button
-          ><button type="button" data-region="japan" aria-pressed="false">
-            <span class="eyebrow">03 / Precision & deployment</span
+          ><button aria-pressed="false" data-region="japan" type="button">
+            <span class="eyebrow">03 / Precision &amp; deployment</span
             ><strong>Japan</strong></button
-          ><button type="button" data-region="australasia" aria-pressed="false">
+          ><button aria-pressed="false" data-region="australasia" type="button">
             <span class="eyebrow">04 / Regional focus</span
             ><strong>Australasia</strong>
           </button>
@@ -1351,70 +1534,65 @@
           manufacturing and the delivery of modular building systems.
         </p>
         <button
-          type="button"
-          id="map-motion"
-          class="map-motion"
           aria-pressed="false"
+          class="map-motion"
+          id="map-motion"
+          type="button"
         >
           Pause map motion <span aria-hidden="true">II</span>
         </button>
       </section>
-
       <section
+        aria-labelledby="contact-title"
         class="contact section-pad"
         id="contact"
-        aria-labelledby="contact-title"
       >
         <div>
           <p class="eyebrow">The next possibility is yours</p>
           <h2 id="contact-title">
-            The next chapter<br />starts <em>with you.</em>
+            Tell us what<br />you want to <em>build.</em>
           </h2>
         </div>
         <div class="contact-copy">
           <p id="contact-project">
-            Have a site, a vision, or a question? Let’s talk about what’s
-            possible.
+            Bring us your site, your ambition or your first question. We’ll help
+            define the next conversation.
           </p>
           <form
-            id="inquiry-form"
             action="https://wa.me/6287786010290"
+            data-api="./api/inquiry"
+            data-lead-form=""
+            id="inquiry-form"
             method="get"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             <div class="inquiry-fields">
               <label for="inquiry-name"
                 >Your name <span>(required)</span
                 ><input
-                  id="inquiry-name"
-                  name="name"
                   autocomplete="name"
+                  id="inquiry-name"
                   maxlength="100"
-                  required
-                  placeholder="Full name" /></label
+                  name="name"
+                  placeholder="Full name"
+                  required="" /></label
               ><label for="inquiry-email"
-                >Email <span>(required)</span
+                >Email or WhatsApp <span>(required)</span
                 ><input
+                  autocomplete="off"
                   id="inquiry-email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
+                  inputmode="text"
                   maxlength="180"
-                  required
-                  placeholder="you@company.com" /></label
-              ><label for="inquiry-company"
-                >Company<input
-                  id="inquiry-company"
-                  name="company"
-                  autocomplete="organization"
-                  maxlength="140"
-                  placeholder="Company or organisation" /></label
+                  name="contact"
+                  placeholder="Email or WhatsApp number"
+                  required=""
+                  type="text" /></label
               ><label for="inquiry-interest"
                 >I’m interested in<select id="inquiry-interest" name="interest">
                   <option>General inquiry</option>
-                  <option>GreenShift design & development</option>
-                  <option>FAD housing & workers’ accommodation</option>
+                  <option>GreenShift design &amp; development</option>
+                  <option>FAD housing &amp; workers’ accommodation</option>
                   <option>EPS · GX-100 Panel</option>
                   <option>Bemmel</option>
                   <option>RoR roof</option>
@@ -1422,61 +1600,148 @@
                   <option>Retrofit project</option>
                 </select></label
               >
+              <label for="inquiry-location"
+                >Project location<input
+                  id="inquiry-location"
+                  maxlength="160"
+                  name="location"
+                  placeholder="City, region or site"
+              /></label>
             </div>
-            <label for="inquiry-location"
-              >Project location<input
-                id="inquiry-location"
-                name="location"
-                autocomplete="off"
-                maxlength="160"
-                placeholder="City, region or site"
-            /></label>
             <label for="inquiry-message"
               >Your project <span>(required)</span
               ><textarea
                 id="inquiry-message"
-                name="text"
-                rows="4"
                 maxlength="2400"
-                required
-                placeholder="Tell us what you’d like to build, your priorities and where you are in the process."
+                name="text"
+                placeholder="What would you like to build, and what matters most?"
+                required=""
+                rows="4"
               ></textarea>
             </label>
-            <button type="submit" class="button button-dark">
+            <details class="brief-details">
+              <summary>
+                Add project stage, scale or timing <span>(optional)</span>
+              </summary>
+              <div class="inquiry-fields">
+                <label for="inquiry-stage"
+                  >Where are you now?<select id="inquiry-stage" name="stage">
+                    <option value="">Not sure yet</option>
+                    <option>Exploring an idea</option>
+                    <option>Site secured</option>
+                    <option>Design in progress</option>
+                    <option>Ready to specify or build</option>
+                  </select></label
+                ><label for="inquiry-scale"
+                  >Project scale<input
+                    id="inquiry-scale"
+                    maxlength="120"
+                    name="scale"
+                    placeholder="Units, rooms or approximate area" /></label
+                ><label for="inquiry-timing"
+                  >Preferred timing<input
+                    id="inquiry-timing"
+                    maxlength="120"
+                    name="timing"
+                    placeholder="A target date, or still exploring" /></label
+                ><label for="inquiry-company"
+                  >Company<input
+                    autocomplete="organization"
+                    id="inquiry-company"
+                    maxlength="140"
+                    name="company"
+                    placeholder="Company or organisation"
+                /></label>
+              </div>
+            </details>
+            <input id="inquiry-project" name="project" type="hidden" /><input
+              id="inquiry-source"
+              name="source"
+              type="hidden"
+            />
+            <div aria-hidden="true" class="form-trap">
+              <label
+                >Leave this blank<input
+                  autocomplete="off"
+                  name="website"
+                  tabindex="-1"
+              /></label>
+            </div>
+            <button
+              class="button button-dark"
+              id="inquiry-submit"
+              type="submit"
+            >
               Continue to WhatsApp
-              <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 18 18 6M6 6h12v12" />
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path>
               </svg>
             </button>
             <p class="inquiry-note">
-              Your details become a WhatsApp message to our commercial team.
-              Review the draft and press Send in WhatsApp.
+              Your brief opens as a WhatsApp draft. Review it and press Send to
+              contact our commercial team.
             </p>
             <p
-              id="inquiry-status"
-              class="inquiry-status"
-              role="status"
               aria-live="polite"
+              class="inquiry-status"
+              id="inquiry-status"
+              role="status"
             ></p>
+            <a
+              class="text-link"
+              hidden=""
+              href="https://wa.me/6287786010290"
+              id="inquiry-fallback"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Continue with this brief on WhatsApp
+              <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+                <path d="M6 18 18 6M6 6h12v12"></path></svg
+            ></a>
+            <p class="inquiry-privacy">
+              Share only what is needed for your project. Your details are used
+              to respond to this inquiry.
+            </p>
           </form>
           <a
-            class="contact-number"
+            class="contact-number direct-whatsapp"
             href="https://wa.me/6287786010290"
-            target="_blank"
             rel="noopener noreferrer"
-            >WhatsApp / +62 877 860 10290</a
-          >
+            target="_blank"
+            >Prefer a conversation? WhatsApp us
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg
+          ></a>
         </div>
       </section>
     </main>
+    <nav
+      aria-label="Start your project"
+      class="mobile-lead-bar"
+      hidden=""
+      id="mobile-lead-bar"
+    >
+      <a href="#contact"
+        >Project brief
+        <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+          <path d="M6 18 18 6M6 6h12v12"></path></svg></a
+      ><a
+        href="https://wa.me/6287786010290"
+        rel="noopener noreferrer"
+        target="_blank"
+        >WhatsApp
+        <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+          <path d="M6 18 18 6M6 6h12v12"></path></svg
+      ></a>
+    </nav>
     <footer class="site-footer section-pad">
       <div class="footer-top">
-        <a class="brand" href="#home" aria-label="Fjäll Group home"
+        <a aria-label="Fjäll Group home" class="brand" href="#home"
           ><img
-            src="./assets/fjall-logo.png"
             alt="Fjäll Group"
-            width="2048"
             height="716"
+            src="./assets/fjall-logo.png"
+            width="2048"
         /></a>
         <p>Spaces that breathe.<br />Structures that last.</p>
         <div class="footer-location">
@@ -1491,8 +1756,8 @@
           <p>IDX Tower 1, 3rd floor<br />Jakarta, Indonesia</p>
           <a
             href="https://wa.me/6287786010290"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             >+62 877 860 10290</a
           >
         </div>
@@ -1509,23 +1774,22 @@
         ><a href="#home">Back to top ↑</a>
       </div>
     </footer>
-
     <dialog
-      id="business-dialog"
-      class="business-dialog"
       aria-labelledby="business-dialog-title"
+      class="business-dialog"
+      id="business-dialog"
     >
       <button
-        type="button"
+        aria-label="Close business illustration"
         class="studio-close"
         id="business-dialog-close"
-        aria-label="Close business illustration"
+        type="button"
       >
         ×
       </button>
       <div class="business-dialog-heading">
         <p class="eyebrow" id="business-dialog-kicker">
-          GreenShift / Design & development
+          GreenShift / Design &amp; development
         </p>
         <h2 id="business-dialog-title">The design studio.</h2>
         <p id="business-dialog-description">
@@ -1535,57 +1799,57 @@
       <div class="trailer-player" id="business-trailer">
         <div class="trailer-screen">
           <canvas
+            aria-label="Cinematic Fjäll construction concept trailer"
+            hidden=""
             id="trailer-canvas"
             role="img"
-            aria-label="Cinematic Fjäll construction concept trailer"
-            hidden
           ></canvas>
           <video
-            id="trailer-video"
-            poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
-            muted
-            playsinline
-            preload="none"
             aria-label="Rendered cinematic Fjäll concept trailer"
-            hidden
+            hidden=""
+            id="trailer-video"
+            muted=""
+            playsinline=""
+            poster="./assets/greenshift-trailer-poster.webp?v=design-curve-1"
+            preload="none"
           ></video>
-          <div class="trailer-letterbox" aria-hidden="true"></div>
-          <div class="trailer-titles" aria-hidden="true">
+          <div aria-hidden="true" class="trailer-letterbox"></div>
+          <div aria-hidden="true" class="trailer-titles">
             <img
-              src="./assets/fjall-logo.png"
               alt=""
-              width="2048"
               height="716"
+              src="./assets/fjall-logo.png"
+              width="2048"
             />
-            <p data-trailer-caption>01 / Site + brief</p>
-            <h3 data-trailer-title>Start with ambition.</h3>
+            <p data-trailer-caption="">01 / Site + brief</p>
+            <h3 data-trailer-title="">Start with ambition.</h3>
           </div>
           <span class="trailer-badge">Fjäll / Cinematic concept</span>
         </div>
         <div class="trailer-copy-slot"></div>
         <div class="trailer-controls">
-          <button type="button" data-trailer-play aria-pressed="false">
+          <button aria-pressed="false" data-trailer-play="" type="button">
             Play trailer</button
-          ><button type="button" data-trailer-replay>Replay</button
+          ><button data-trailer-replay="" type="button">Replay</button
           ><label class="sr-only" for="trailer-seek">Trailer position</label
           ><input
-            type="range"
-            id="trailer-seek"
-            data-trailer-seek
-            min="0"
-            max="18"
-            step=".1"
-            value="0"
             aria-valuetext="0 seconds of 18"
-          /><span data-trailer-clock>00:00 / 00:18</span
+            data-trailer-seek=""
+            id="trailer-seek"
+            max="18"
+            min="0"
+            step=".1"
+            type="range"
+            value="0"
+          /><span data-trailer-clock="">00:00 / 00:18</span
           ><a
-            data-trailer-download
+            data-trailer-download=""
+            download=""
             href="./assets/greenshift-trailer.mp4?v=design-curve-1"
-            download
             >Download film</a
           >
         </div>
-        <p data-trailer-status class="trailer-status" role="status">
+        <p class="trailer-status" data-trailer-status="" role="status">
           Press Play for an 18-second cinematic concept trailer.
         </p>
       </div>
@@ -1595,14 +1859,14 @@
       <div class="business-dialog-layout">
         <div
           class="business-simulation"
-          id="business-simulation"
           data-design-stage="1"
+          id="business-simulation"
         >
           <div id="design-illustration">
             <svg
-              viewBox="0 0 640 400"
-              role="img"
               aria-labelledby="gs-model-title"
+              role="img"
+              viewbox="0 0 640 400"
             >
               <title id="gs-model-title">
                 An architectural design study with a plan, structural frame and
@@ -1610,97 +1874,97 @@
               </title>
               <defs>
                 <pattern
-                  id="gs-model-grid"
-                  width="28"
                   height="28"
-                  patternUnits="userSpaceOnUse"
+                  id="gs-model-grid"
+                  patternunits="userSpaceOnUse"
+                  width="28"
                 >
                   <path
                     d="M28 0H0V28"
                     fill="none"
+                    opacity=".22"
                     stroke="#629d87"
                     stroke-width=".5"
-                    opacity=".22"
-                  />
+                  ></path>
                 </pattern>
               </defs>
-              <rect width="640" height="400" fill="url(#gs-model-grid)" />
+              <rect fill="url(#gs-model-grid)" height="400" width="640"></rect>
               <ellipse
                 cx="332"
                 cy="323"
-                rx="192"
-                ry="30"
                 fill="#315c48"
                 opacity=".10"
-              />
+                rx="192"
+                ry="30"
+              ></ellipse>
               <g class="gs-base">
                 <path
                   d="m135 268 166-98 204 117-166 98Z"
                   fill="#c4d5c7"
                   stroke="#4e8069"
-                />
+                ></path>
                 <path
                   d="m164 266 139-78 171 99-137 78Z"
                   fill="none"
                   stroke="#497260"
-                />
+                ></path>
                 <path
                   d="m303 188 34 177M164 266l310 21"
                   stroke="#497260"
                   stroke-dasharray="4 5"
-                />
+                ></path>
               </g>
               <g class="gs-frame">
                 <path
                   d="M172 268V154l130-77 170 96v114M337 250v116M172 154l165 96 135-77M172 268l165 98 135-79M250 109v176M403 134v190"
                   fill="none"
                   stroke="#35654f"
-                  stroke-width="5"
                   stroke-linejoin="round"
-                />
+                  stroke-width="5"
+                ></path>
               </g>
               <g class="gs-envelope">
                 <path
                   d="m172 154 165 96v116L172 268Z"
                   fill="#eceee4"
                   stroke="#4a7860"
-                />
+                ></path>
                 <path
                   d="m337 250 135-77v114L337 366Z"
                   fill="#b3cabb"
                   stroke="#4a7860"
-                />
+                ></path>
                 <path
                   d="m197 181 71 40v58l-71-42Zm154 82 51-29v74l-51 29Z"
                   fill="#6daba1"
                   stroke="#427465"
-                />
+                ></path>
               </g>
               <g class="gs-roof">
                 <path
                   d="m155 131 149-86 187 108-149 86Z"
                   fill="#396c57"
                   stroke="#204e3d"
-                />
+                ></path>
                 <path
                   d="m155 131 187 108v10L155 141Zm187 108 149-86v10l-149 86Z"
                   fill="#244d3b"
-                />
+                ></path>
               </g>
               <g fill="none" stroke="#5a8a73" stroke-width="1">
                 <path
                   d="m100 277 237 136M104 267l-8 17M335 403l-7 18M509 280l39 21-189 110"
-                />
-                <circle cx="87" cy="100" r="24" />
-                <path d="M76 100h22M87 89v22" />
+                ></path>
+                <circle cx="87" cy="100" r="24"></circle>
+                <path d="M76 100h22M87 89v22"></path>
               </g>
             </svg>
           </div>
-          <div id="housing-illustration" hidden>
+          <div hidden="" id="housing-illustration">
             <svg
-              viewBox="0 0 640 400"
-              role="img"
               aria-labelledby="fad-model-title"
+              role="img"
+              viewbox="0 0 640 400"
             >
               <title id="fad-model-title">
                 Repeatable homes around shared paths in a housing community
@@ -1709,130 +1973,130 @@
                 <g
                   id="fad-model-home"
                   stroke="#426d5e"
-                  stroke-width=".8"
                   stroke-linejoin="round"
+                  stroke-width=".8"
                 >
-                  <path d="m0 30 38 21v42L0 71Z" fill="#ecece1" />
-                  <path d="m38 51 38-21v41L38 93Z" fill="#cfdfd3" />
-                  <path d="m0 30 38-23 38 23-38 21Z" fill="#54967d" />
-                  <path d="m38 7 0 44" fill="none" />
-                  <path d="m8 40 17 10v18L8 58Z" fill="#a0c6bd" />
-                  <path d="m48 57 17-10v30l-17 10Z" fill="#3e6657" />
+                  <path d="m0 30 38 21v42L0 71Z" fill="#ecece1"></path>
+                  <path d="m38 51 38-21v41L38 93Z" fill="#cfdfd3"></path>
+                  <path d="m0 30 38-23 38 23-38 21Z" fill="#54967d"></path>
+                  <path d="m38 7 0 44" fill="none"></path>
+                  <path d="m8 40 17 10v18L8 58Z" fill="#a0c6bd"></path>
+                  <path d="m48 57 17-10v30l-17 10Z" fill="#3e6657"></path>
                 </g>
               </defs>
               <ellipse
                 cx="328"
                 cy="326"
-                rx="225"
-                ry="36"
                 fill="#315c48"
                 opacity=".1"
-              />
+                rx="225"
+                ry="36"
+              ></ellipse>
               <path
                 d="m57 208 254-152 285 157-254 159Z"
                 fill="#c6d7c6"
                 stroke="#618c70"
-              />
+              ></path>
               <path
                 d="m101 208 226-132 223 126-226 132Z"
                 fill="none"
                 stroke="#f1f2e9"
                 stroke-width="15"
-              />
+              ></path>
               <path
                 d="m201 274 238-139M118 229l238-139M159 160l250 141"
                 stroke="#f1f2e9"
                 stroke-width="9"
-              />
+              ></path>
               <use
+                data-housing-unit="1"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="275"
                 y="30"
-                transform="translate(0 0)"
-                data-housing-unit="1"
-              />
+              ></use>
               <use
+                data-housing-unit="2"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="350"
                 y="64"
-                transform="translate(0 0)"
-                data-housing-unit="2"
-              />
+              ></use>
               <use
+                data-housing-unit="3"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="425"
                 y="98"
-                transform="translate(0 0)"
-                data-housing-unit="3"
-              />
+              ></use>
               <use
+                data-housing-unit="4"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="210"
                 y="68"
-                transform="translate(0 0)"
-                data-housing-unit="4"
-              />
+              ></use>
               <use
+                data-housing-unit="5"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="285"
                 y="102"
-                transform="translate(0 0)"
-                data-housing-unit="5"
-              />
+              ></use>
               <use
+                data-housing-unit="6"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="360"
                 y="136"
-                transform="translate(0 0)"
-                data-housing-unit="6"
-              />
+              ></use>
               <use
+                data-housing-unit="7"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="145"
                 y="106"
-                transform="translate(0 0)"
-                data-housing-unit="7"
-              />
+              ></use>
               <use
+                data-housing-unit="8"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="220"
                 y="140"
-                transform="translate(0 0)"
-                data-housing-unit="8"
-              />
+              ></use>
               <use
+                data-housing-unit="9"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="295"
                 y="174"
-                transform="translate(0 0)"
-                data-housing-unit="9"
-              />
+              ></use>
               <use
+                data-housing-unit="10"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="80"
                 y="144"
-                transform="translate(0 0)"
-                data-housing-unit="10"
-              />
+              ></use>
               <use
+                data-housing-unit="11"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="155"
                 y="178"
-                transform="translate(0 0)"
-                data-housing-unit="11"
-              />
+              ></use>
               <use
+                data-housing-unit="12"
                 href="#fad-model-home"
+                transform="translate(0 0)"
                 x="230"
                 y="212"
-                transform="translate(0 0)"
-                data-housing-unit="12"
-              />
+              ></use>
               <g fill="#4f8265">
-                <circle cx="95" cy="217" r="9" />
-                <circle cx="550" cy="214" r="10" />
-                <circle cx="346" cy="335" r="11" />
-                <circle cx="319" cy="89" r="8" />
+                <circle cx="95" cy="217" r="9"></circle>
+                <circle cx="550" cy="214" r="10"></circle>
+                <circle cx="346" cy="335" r="11"></circle>
+                <circle cx="319" cy="89" r="8"></circle>
               </g>
             </svg>
           </div>
@@ -1842,34 +2106,34 @@
           <div id="design-controls">
             <span class="eyebrow">Explore the design arm</span>
             <div
+              aria-label="Choose a design stage"
               class="design-stage-controls"
               role="group"
-              aria-label="Choose a design stage"
             >
-              <button type="button" data-design-stage="0" aria-pressed="false">
+              <button aria-pressed="false" data-design-stage="0" type="button">
                 01 / Brief</button
-              ><button type="button" data-design-stage="1" aria-pressed="true">
+              ><button aria-pressed="true" data-design-stage="1" type="button">
                 02 / Structure</button
-              ><button type="button" data-design-stage="2" aria-pressed="false">
+              ><button aria-pressed="false" data-design-stage="2" type="button">
                 03 / Coordinate
               </button>
             </div>
           </div>
-          <div id="housing-controls" hidden>
+          <div hidden="" id="housing-controls">
             <span class="eyebrow">Explore repeatable housing</span
             ><label for="housing-count"
               >Homes in this concept
-              <output id="housing-count-label" for="housing-count"
+              <output for="housing-count" id="housing-count-label"
                 >6</output
               ></label
             ><input
-              type="range"
-              id="housing-count"
-              min="1"
-              max="12"
-              step="1"
-              value="6"
               aria-valuetext="6 illustrative homes"
+              id="housing-count"
+              max="12"
+              min="1"
+              step="1"
+              type="range"
+              value="6"
             />
             <div class="housing-key">
               <span>Repeatable units</span><span>Shared paths</span
@@ -1887,45 +2151,15 @@
           </p>
           <a class="text-link" href="#contact" id="business-inquiry"
             >Discuss your project
-            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 18 18 6M6 6h12v12" /></svg></a
+            <svg aria-hidden="true" class="arrow-icon" viewbox="0 0 24 24">
+              <path d="M6 18 18 6M6 6h12v12"></path></svg></a
           ><span
-            id="business-study-status"
-            class="sr-only"
-            role="status"
             aria-live="polite"
+            class="sr-only"
+            id="business-study-status"
+            role="status"
           ></span>
         </div>
-      </div>
-    </dialog>
-
-    <dialog
-      id="project-dialog"
-      class="project-dialog"
-      aria-labelledby="dialog-title"
-    >
-      <button
-        type="button"
-        class="dialog-close"
-        id="dialog-close"
-        aria-label="Close project details"
-      >
-        ×</button
-      ><img id="dialog-image" alt="" width="1000" height="750" />
-      <div class="dialog-summary" id="dialog-summary" hidden></div>
-      <div class="dialog-copy">
-        <p class="eyebrow" id="dialog-location"></p>
-        <h2 id="dialog-title"></h2>
-        <p id="dialog-description"></p>
-        <p class="dialog-materials">
-          <span class="eyebrow">Materials & approach</span
-          ><span id="dialog-materials"></span>
-        </p>
-        <a href="#contact" id="dialog-contact" class="text-link"
-          >Discuss a similar project
-          <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 18 18 6M6 6h12v12" /></svg
-        ></a>
       </div>
     </dialog>
   </body>

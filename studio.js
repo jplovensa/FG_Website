@@ -1,5 +1,6 @@
+import { initLeadForm } from "./lead-form.js";
+export { buildInquiryLink } from "./inquiry-model.js";
 // Lightweight, user-controlled illustrations and the WhatsApp inquiry handoff.
-const whatsappNumber = "6287786010290";
 const materials = {
   eps: {
     title: "EPS · GX-100 Panel",
@@ -190,7 +191,7 @@ export function initStudio() {
   initBusinessStudies();
   initBusinessPreviews();
   initMaterialLibrary();
-  initInquiry();
+  initLeadForm();
 }
 
 function initBusinessStudies() {
@@ -440,55 +441,6 @@ function initMaterialLibrary() {
       materials[selected].title;
   });
   render();
-}
-
-export function buildInquiryLink(fields) {
-  const value = (key) => String(fields.get(key) || "").trim();
-  const message = [
-    "Hello Fjäll Group, I’d like to discuss a project.",
-    "",
-    `Name: ${value("name")}`,
-    `Email: ${value("email")}`,
-    ...(value("company") ? [`Company: ${value("company")}`] : []),
-    `Interest: ${value("interest")}`,
-    ...(value("location") ? [`Project location: ${value("location")}`] : []),
-    "",
-    value("text"),
-  ].join("\n");
-  const url = new URL(`https://wa.me/${whatsappNumber}`);
-  url.searchParams.set("text", message);
-  return url.href;
-}
-
-function initInquiry() {
-  const form = document.querySelector("#inquiry-form");
-  const status = document.querySelector("#inquiry-status");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-    const fields = new FormData(form);
-    // Browser required validation does not reject whitespace-only text.
-    for (const id of ["inquiry-name", "inquiry-message"]) {
-      const input = document.getElementById(id);
-      if (!input.value.trim()) {
-        input.setCustomValidity(
-          "Please enter a few details before continuing.",
-        );
-        input.reportValidity();
-        return;
-      }
-    }
-    const url = buildInquiryLink(fields);
-    status.textContent =
-      "Opening your WhatsApp draft. Review it and press Send in WhatsApp.";
-    window.open(url, "_blank", "noopener,noreferrer");
-  });
-  for (const id of ["inquiry-name", "inquiry-message"]) {
-    document.getElementById(id).addEventListener("input", (event) => {
-      event.target.setCustomValidity("");
-      status.textContent = "";
-    });
-  }
 }
 
 function initBusinessPreviews() {

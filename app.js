@@ -60,8 +60,9 @@ function closeIntro() {
 }
 
 // Never persist a "seen" flag: the opening film plays on every page load/refresh.
+// Direct inquiry links skip the film so returning readers can start their brief.
 // Respect reduced motion and data saving; failures never lock visitors out.
-if (reducedMotion.matches || saveData) {
+if (reducedMotion.matches || saveData || location.hash === "#contact") {
   closeIntro();
 } else {
   intro.hidden = false;
@@ -161,7 +162,6 @@ document.addEventListener("keydown", (event) => {
 });
 window.matchMedia("(min-width: 701px)").addEventListener("change", closeMenu);
 
-const cards = [...document.querySelectorAll(".project-card")];
 const portfolioItems = [
   ...document.querySelectorAll("#projects [data-category]"),
 ];
@@ -182,110 +182,6 @@ for (const filter of filters)
       `Showing ${visibleCount} ${visibleCount === 1 ? "project" : "projects"}`;
   });
 
-const projects = {
-  bamboo: {
-    title: "The Bamboo Lab & Underground Club",
-    location: "Lombok, Indonesia · Hospitality & culture",
-    description:
-      "The company profile describes a three-phase programme spanning a lab, resort and underground club. Its hybrid infrastructure brings together bespoke requirements and development at scale.",
-    materials: "Hybrid BEMMELS and EPS systems",
-  },
-  housing: {
-    title: "Lombok Housing Initiative",
-    location: "Lombok, Indonesia · Mass-scale housing",
-    description:
-      "The corporate profile lists a regional-government housing programme of over 250 units, developed around rapid, disaster-resilient housing delivery. It demonstrates the scale of a coordinated housing programme.",
-    materials: "Mass-scale GX 100 building envelopes",
-    summary: "250 homes / Housing at community scale",
-  },
-  sport: {
-    title: "Multi-Sport Facility",
-    location: "Bali, Indonesia · Community facilities",
-    description:
-      "A sports-facility programme in Bali. Speak with the Fjäll team about the project’s scope and how its approach can support your facility.",
-    materials: "Project-specific specifications available from the team",
-    summary: "Multi-Sport Facility / Bali",
-  },
-  villas: {
-    title: "Private Turnkey Villas",
-    location: "Indonesia · Residential programme",
-    description:
-      "The corporate profile lists more than 100 private turnkey villas across Indonesia, reflecting a residential programme delivered through an integrated design and construction approach.",
-    materials: "Project-specific systems and turnkey delivery",
-    summary: "100+ villas / Private residential programme",
-  },
-
-  nuanu: {
-    title: "Nuanu Creative City",
-    location: "Bali, Indonesia · Hospitality & culture",
-    description:
-      "Fjäll’s work at Nuanu explores complex geometries, including a 360-degree IMAX dome and subterranean cave networks. It brings together parametric design and prefabricated construction systems.",
-    materials: "GX 100 EPS panels · BEMMELS structural reinforcement",
-  },
-  ulaman: {
-    title: "Ulaman Eco Resort",
-    location: "Bali, Indonesia · Eco hospitality",
-    description:
-      "Working with Inspiral’s organic architecture, Fjäll’s systems provide an insulated structural backbone beneath sweeping bamboo forms. A meeting of natural materials and modern construction technology.",
-    materials: "GX 100 panels · Bamboo integration · BEMMELS anchors",
-  },
-  lombok: {
-    title: "Kuta Lombok Estates",
-    location: "Lombok, Indonesia · Residential",
-    description:
-      "A development of seven coastal villas designed by architect Yasu Fukuda. The project combines a BEMMELS frame with a GX 100 building envelope to support efficient assembly in a coastal setting.",
-    materials: "BEMMELS frame · GX 100 building envelope",
-  },
-  pods: {
-    title: "The Drop Pod Network",
-    location: "Indonesia & Japan · Modular living",
-    description:
-      "Adaptable modular spaces designed for different settings, from the tropical coasts of Bali and Lombok to Japan’s alpine resorts. Prefabricated envelopes and structural chassis support repeatable deployment.",
-    materials: "Insulated EPS envelope · BEMMELS structural chassis",
-  },
-};
-const dialog = document.querySelector("#project-dialog");
-for (const card of cards)
-  card.addEventListener("click", () => {
-    const project = projects[card.dataset.project];
-    document.querySelector("#dialog-title").textContent = project.title;
-    document.querySelector("#dialog-location").textContent = project.location;
-    document.querySelector("#dialog-description").textContent =
-      project.description;
-    document.querySelector("#dialog-materials").textContent = project.materials;
-    const image = document.querySelector("#dialog-image");
-    const source = card.querySelector("img");
-    const summary = document.querySelector("#dialog-summary");
-    image.hidden = !source;
-    summary.hidden = Boolean(source);
-    if (source) {
-      image.src = source.src;
-      image.alt = source.alt;
-    } else {
-      image.removeAttribute("src");
-      image.alt = "";
-      summary.textContent = project.summary || project.title;
-    }
-    dialog.showModal();
-    dialog.scrollTop = 0;
-  });
-document
-  .querySelector("#dialog-close")
-  .addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", (event) => {
-  const bounds = dialog.getBoundingClientRect();
-  if (
-    event.target === dialog &&
-    (event.clientX < bounds.left ||
-      event.clientX > bounds.right ||
-      event.clientY < bounds.top ||
-      event.clientY > bounds.bottom)
-  )
-    dialog.close();
-});
-document
-  .querySelector("#dialog-contact")
-  .addEventListener("click", () => dialog.close());
 document.querySelector("#year").textContent = new Date().getFullYear();
 
 initJourney({ reducedMotion });

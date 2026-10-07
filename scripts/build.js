@@ -1,3 +1,4 @@
+import { buildCasePages } from "./case-pages.js";
 import { mkdir, rm, copyFile, cp } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
@@ -5,6 +6,9 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 // Fail before replacing the previous build if a browser module cannot parse.
 for (const file of [
   "app.js",
+  "lead-form.js",
+  "inquiry-model.js",
+  "case-page.js",
   "experience.js",
   "studio.js",
   "trailer-player.js",
@@ -20,7 +24,11 @@ for (const file of [
   "index.html",
   "styles.css",
   "responsive.css",
+  "monograph.css",
   "app.js",
+  "lead-form.js",
+  "inquiry-model.js",
+  "case-page.js",
   "experience.js",
   "studio.js",
   "trailer-player.js",
@@ -32,4 +40,5 @@ for (const file of [
   await copyFile(`${root}${file}`, `${root}dist/${file}`);
 }
 await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
+await buildCasePages(`${root}dist`);
 console.log("Built static site in dist/ — no runtime dependencies.");
