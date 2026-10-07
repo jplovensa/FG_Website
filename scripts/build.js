@@ -40,5 +40,7 @@ for (const file of [
   await copyFile(`${root}${file}`, `${root}dist/${file}`);
 }
 await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
+// Also keep the source-root Pages publishing path and local dev links working.
+await buildCasePages(root.replace(/\/$/, ""));
 await buildCasePages(`${root}dist`);
 console.log("Built static site in dist/ — no runtime dependencies.");

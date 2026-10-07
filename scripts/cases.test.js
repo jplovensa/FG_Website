@@ -6,6 +6,11 @@ test("all nine case studies ship with shareable metadata, local media and contex
   assert.equal(caseStudies.length, 9);
   for (const project of caseStudies) {
     const html = await readFile(`dist/projects/${project.slug}.html`, "utf8");
+    assert.equal(
+      await readFile(`projects/${project.slug}.html`, "utf8"),
+      html,
+      "Branch-based Pages and Actions must deliver the same study",
+    );
     assert.ok(html.includes('property="og:title"'));
     assert.ok(html.includes('rel="canonical"'));
     const link = html
