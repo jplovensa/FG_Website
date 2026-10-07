@@ -823,45 +823,240 @@
     padding-bottom: 90px;
   }
 }
-.commission-logos {
-  margin: 26px 0 0;
-  background: #e6e4e5;
+/* A film-led retrofit study with intact, transparent institutional marks. */
+.hero-invitation {
+  margin: 20px 0 0;
+  color: #e6ece6;
+  font-size: 12px;
+  line-height: 1.6;
 }
-.commission-logos img {
+.flagship {
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  background: #efefea;
+  border-top: 1px solid #b7bcb5;
+}
+.flagship-heading {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  padding: 38px 0 40px;
+  background: #f5f5f2;
+}
+.flagship-heading .eyebrow {
+  color: #536157;
+}
+.flagship-heading h3 br {
+  display: block;
+}
+.flagship-heading h3 {
+  font-size: clamp(30px, 3.5vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  margin: 20px 0 0;
+}
+.flagship h3 em {
+  font-style: normal;
+  color: #4e6558;
+}
+.flagship-brand {
+  display: block;
   width: 100%;
+  max-width: 360px;
   height: auto;
-  aspect-ratio: 16/9;
   object-fit: contain;
+  justify-self: end;
+}
+.flagship-film {
+  align-self: start;
+}
+.flagship-copy {
+  padding: 30px;
+}
+.flagship-copy > p:not(.eyebrow) {
+  max-width: none;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #48574c;
+}
+.flagship-copy > .flagship-lead {
+  font-size: clamp(19px, 1.7vw, 25px) !important;
+  line-height: 1.4;
+  color: #193b30;
+  letter-spacing: -0.025em;
+  margin: 18px 0;
+}
+.flagship-facts {
+  margin: 26px 0;
+  padding-top: 20px;
+  border-top: 1px solid #c8cec4;
+  display: grid;
+  gap: 14px;
+}
+.flagship-facts div {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 14px;
+}
+.flagship-facts dt {
+  font-size: 11px;
+  color: #536157;
+}
+.flagship-facts dd {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #1f382a;
+}
+.flagship .text-link {
+  font-size: 12px;
+  min-height: 44px;
+}
+.flagship-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding: 30px 0;
+  background: #f5f5f2;
+  border-bottom: 1px solid #b7bcb5;
+}
+.commission-logos {
+  margin: 0;
+  background: transparent;
 }
 .commission-logos figcaption {
-  padding: 0 18px 18px;
+  padding: 0;
+  margin-bottom: 12px;
   font-size: 10px;
-  line-height: 1.7;
-  color: #39433c;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: #536157;
+}
+.commission-logos img {
+  display: block;
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+.flagship-inquiry p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #48574c;
 }
 .case-commission {
   margin: 0 var(--gutter) 60px;
-  max-width: 860px;
+  padding: 32px 0;
+  border-top: 1px solid #c8cec4;
+  border-bottom: 1px solid #c8cec4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
 }
-.case-commission figcaption {
-  font-size: 12px;
-  padding: 0 28px 24px;
+.case-hub-logo {
+  width: 420px;
+  max-width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 1000px) {
+  .flagship {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+  .flagship-copy {
+    padding: 24px;
+  }
+  .flagship-heading {
+    gap: 30px;
+  }
 }
 @media (max-width: 700px) {
+  .hero-invitation {
+    margin-top: 16px;
+    font-size: 12px;
+  }
+  .flagship {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .flagship-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    padding: 26px 0 30px;
+  }
+  .flagship-heading h3 {
+    font-size: clamp(29px, 7.5vw, 44px);
+  }
+  .flagship-brand {
+    justify-self: start;
+    max-width: 300px;
+  }
+  .flagship-copy {
+    padding: 26px 20px;
+  }
+  .flagship-footer {
+    align-items: start;
+    flex-direction: column;
+    gap: 28px;
+    padding: 26px 0;
+  }
+  .flagship-facts {
+    margin: 24px 0 16px;
+  }
+  .commission-logos img {
+    width: 260px;
+  }
   .case-commission {
     margin: 0 20px 40px;
+    align-items: start;
+    flex-direction: column;
+    gap: 30px;
   }
-  .commission-logos figcaption {
-    font-size: 11px;
-  }
-  .case-commission figcaption {
-    padding: 0 18px 20px;
+  .case-hub-logo {
+    max-width: 100%;
+    width: 360px;
   }
 }
-/* Crop only the empty vertical margins of the film's original two-logo card. */
-.commission-logos img {
-  height: clamp(110px, 18vw, 220px);
-  aspect-ratio: auto;
-  object-fit: cover;
-  object-position: center;
+
+/* Both complete marks share one alpha-transparent asset. These viewports
+   isolate the separate artwork rows without cutting any logo elements. */
+.institutional-logo {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.hub-logo {
+  aspect-ratio: 1580 / 385;
+}
+.ministry-logo {
+  aspect-ratio: 1240 / 310;
+  width: 280px;
+  max-width: 100%;
+}
+.institutional-logo img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 2172 / 724;
+  object-fit: contain;
+}
+.hub-logo img {
+  width: 137.4684%;
+  left: -19.6203%;
+  top: 0;
+}
+.ministry-logo img {
+  width: 175.1613%;
+  left: -37.4194%;
+  top: -133.5484%;
+}
+@media (max-width: 700px) {
+  .ministry-logo {
+    width: 260px;
+  }
 }
