@@ -217,3 +217,25 @@ new IntersectionObserver(
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) retrofitVideo.pause();
 });
+
+// Only the three Selected Work cover illustrations initialise the sketch renderer.
+const selectedCovers = document.querySelectorAll(
+  "#selected-work [data-project-sketch]",
+);
+if (selectedCovers.length && !saveData) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        import("./project-sketch.js?v=selected-sketch-2")
+          .then(({ initProjectSketch }) => initProjectSketch(entry.target))
+          .catch(() => {
+            /* Keep the supplied-image cover when graphics are unavailable. */
+          });
+      }
+    },
+    { rootMargin: "120px" },
+  );
+  selectedCovers.forEach((cover) => observer.observe(cover));
+}

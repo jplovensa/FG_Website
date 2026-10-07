@@ -1291,3 +1291,40 @@
     font-size: 11px;
   }
 }
+
+/* Selected-work covers own the motion; studies open with original source imagery. */
+.signature-card figure.project-sketch {
+  aspect-ratio: 4/3;
+  background: #f1efe8;
+}
+.signature-card .sketch-fallback img {
+  object-fit: contain;
+  transform: none;
+}
+.signature-card figure.project-sketch figcaption {
+  top: 0;
+  bottom: auto;
+  padding: 12px;
+  background: #f5f3eced;
+  color: #314632;
+  font-size: 9px;
+  pointer-events: none;
+}
+.signature-card .sketch-controls {
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  gap: 8px;
+}
+.signature-card .sketch-controls button {
+  padding: 8px;
+  font-size: 10px;
+}
+.signature-study-link {
+  display: block;
+}
+.signature-study-link > p {
+  color: #5e6963;
+  font-size: 13px;
+  margin-bottom: 20px;
+}

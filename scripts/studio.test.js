@@ -31,13 +31,21 @@ test("each material has three distinct, shipped material, usage and preparation 
   }
 });
 
-test("housing study ships deck imagery and sketch fallback without commercial figures", async () => {
+test("housing study ships deck imagery without commercial figures or an internal WebGL cover", async () => {
   const html = await readFile("dist/projects/housing.html", "utf8");
   assert.match(html, /250\+ homes/);
   assert.match(html, /housing-layout.webp/);
   assert.match(html, /housing-foundation.webp/);
-  assert.match(html, /data-project-sketch="housing"/);
-  assert.match(html, /sketch-fallback/);
+  assert.doesNotMatch(html, /data-project-sketch|<canvas/);
+  const home = await readFile("dist/index.html", "utf8");
+  assert.deepEqual(
+    [...home.matchAll(/data-project-sketch="([^"]+)"/g)].map((m) => m[1]),
+    ["retrofit", "nuanu", "housing"],
+  );
+  for (const project of caseStudies) {
+    const study = await readFile(`dist/projects/${project.slug}.html`, "utf8");
+    assert.doesNotMatch(study, /data-project-sketch|<canvas/);
+  }
   assert.doesNotMatch(
     html,
     /\b(?:pricing|price|baseline turnkey|commercial proposition)\b|Rp\s*[\d.,]+/i,
