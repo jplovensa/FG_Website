@@ -3,14 +3,14 @@ export const projects = {
     title: "The Bamboo Lab & Underground Club",
     location: "Lombok, Indonesia · Hospitality & culture",
     description:
-      "The company profile describes a three-phase programme spanning a lab, resort and underground club. Its hybrid infrastructure brings together bespoke requirements and development at scale.",
+      "A lab, a resort, an underground club. Three distinct experiences, connected through a phased development and a hybrid EPS and BEMMELS building system.",
     materials: "Hybrid BEMMELS and EPS systems",
   },
   housing: {
     title: "Lombok Housing Initiative",
     location: "Lombok, Indonesia · Mass-scale housing",
     description:
-      "The corporate profile lists a regional-government housing programme of over 250 units, developed around rapid, disaster-resilient housing delivery. It demonstrates the scale of a coordinated housing programme.",
+      "A regional-government programme of more than 250 homes in Lombok. Repeatable building systems and coordinated development planning bring the individual home into a wider community ambition.",
     materials: "Mass-scale GX 100 building envelopes",
     summary: "250+ homes / Housing at community scale",
   },
@@ -18,16 +18,16 @@ export const projects = {
     title: "Multi-Sport Facility",
     location: "Bali, Indonesia · Community facilities",
     description:
-      "A sports-facility programme in Bali. Speak with the Fjäll team about the project’s scope and how its approach can support your facility.",
-    materials: "Project-specific specifications available from the team",
+      "A multi-sport programme in Bali, bringing the needs of movement, recreation and community use into one development brief.",
+    materials: "Coordinated facility design and building-system specification",
     summary: "Multi-Sport Facility / Bali",
   },
   villas: {
     title: "Private Turnkey Villas",
     location: "Indonesia · Residential programme",
     description:
-      "The corporate profile lists more than 100 private turnkey villas across Indonesia, reflecting a residential programme delivered through an integrated design and construction approach.",
-    materials: "Project-specific systems and turnkey delivery",
+      "Across Indonesia, a programme of more than 100 private villas connects individual residential briefs with an integrated approach to design and construction.",
+    materials: "Integrated design · Building systems · Turnkey delivery",
     summary: "100+ villas / Private residential programme",
   },
 
@@ -82,7 +82,7 @@ const editorial = {
     challenge:
       "Give an existing building a new civic purpose: a national hub where Indonesia’s technology ecosystem can connect, collaborate and develop.",
     approach:
-      "The KOMDIGI commission brings Garuda Spark Innovation Hub into Malang Creative Center through a coordinated retrofit. Rather than beginning with a new building, the work adapts existing spaces for a national technology-ecosystem hub. The supplied project film shows the renewed interiors and the identity of the hub.",
+      "At Malang Creative Center, a coordinated retrofit gives existing spaces a new national purpose. Commissioned by KOMDIGI, the work creates a home for Garuda Spark Innovation Hub and brings Indonesia’s technology community into a shared setting for connection and collaboration.",
     takeaway:
       "A retrofit conversation starts with a building assessment, the intended use and a coordinated intervention scope.",
     facts: [
@@ -98,12 +98,12 @@ const editorial = {
     interest: "GreenShift design & development",
     number: "02",
     headline: "Complex geometry. Connected thinking.",
-    role: "Parametric design and prefabricated building systems, as described in the company profile",
-    record: "Company-profile project",
+    role: "Parametric design · Prefabricated systems · Structural coordination",
+    record: "Architecture & building systems",
     challenge:
       "Complex geometries call for a building system that can follow the architectural idea while resolving structure and envelope together.",
     approach:
-      "The profile describes Fjäll’s work with a 360-degree IMAX dome and subterranean cave networks. GX-100 panels and BEMMELS reinforcement form part of the documented material approach.",
+      "A 360-degree IMAX dome and subterranean cave networks demand close coordination between form, structure and envelope. GX-100 panels and BEMMELS reinforcement bring a prefabricated building-system approach to Nuanu’s complex geometry.",
     takeaway:
       "Bring the architect’s geometry, structural requirements and interfaces into the same conversation before planning production.",
     facts: [
@@ -114,18 +114,17 @@ const editorial = {
   },
   housing: {
     image: "housing-olive",
-    imageSource:
-      "Fjäll Affordable Development deck / Design reference render",
+    imageSource: "FAD / Exterior design study",
     sector: "Housing at scale",
     interest: "FAD housing & workers’ accommodation",
     number: "03",
     headline: "One housing system. A community of possibilities.",
-    role: "Regional-government housing programme listed in the company profile",
-    record: "250+ housing programme / Design references",
+    role: "Composite building systems for a regional-government housing programme",
+    record: "250+ homes / Community-scale development",
     challenge:
       "Housing at scale needs repeatable components and a coordinated site strategy without losing sight of the people who will live there.",
     approach:
-      "The company profile records a Lombok programme of over 250 homes. The FAD deck adds a design language for repeatable homes: a 36 m² base-unit concept, composite EPS panel infrastructure, coordinated openings and several exterior finishes. These supplied renders and diagrams show system possibilities; the programme’s detailed unit mix and delivery status are confirmed with the team.",
+      "Lombok’s 250+ home programme brings repeatable envelopes and community planning into one development strategy. Fjäll Affordable Development explores a 36 m² base-unit concept, composite EPS panels, coordinated openings and a choice of exterior finishes. The home is considered alongside the land, infrastructure and sequence of development.",
     takeaway:
       "Define the unit mix, land conditions, infrastructure and phasing together. The development brief informs both the home and the wider community.",
     facts: [
@@ -141,12 +140,12 @@ const editorial = {
     interest: "GreenShift design & development",
     headline: "Organic architecture. A coordinated backbone.",
     role: "Insulated building systems integrated with organic architecture",
-    record: "Company-profile project",
-    credit: "Architecture: Inspiral, as credited in the profile",
+    record: "Architecture & building systems",
+    credit: "Architecture / Inspiral",
     challenge:
       "Resolve the insulated envelope beneath an organic architectural language and coordinate the meeting of bamboo and modern building systems.",
     approach:
-      "Fjäll’s profile describes GX-100 panels and BEMMELS anchors working with Inspiral’s bamboo architecture.",
+      "GX-100 panels and BEMMELS anchors meet Inspiral’s organic bamboo architecture at Ulaman. The work connects the insulated envelope to the natural structure, resolving the interfaces beneath the resort’s sweeping forms.",
     takeaway:
       "Material interfaces matter as much as individual components. Discuss the architecture, the envelope and the connections as a whole.",
     facts: [
@@ -161,12 +160,12 @@ const editorial = {
     interest: "GreenShift design & development",
     headline: "Coastal living. Considered assembly.",
     role: "BEMMELS frame and GX-100 building envelope",
-    record: "Company-profile project",
-    credit: "Architecture: Yasu Fukuda, as credited in the profile",
+    record: "Architecture & building systems",
+    credit: "Architecture / Yasu Fukuda",
     challenge:
       "Coordinate a coastal villa development through a shared structural and envelope approach.",
     approach:
-      "The company profile describes seven villas using a BEMMELS frame with a GX-100 building envelope.",
+      "Seven coastal villas by Yasu Fukuda share a coordinated BEMMELS frame and GX-100 building envelope. Structure and enclosure are considered together, bringing a repeatable assembly approach to individual homes in a coastal setting.",
     takeaway:
       "The right brief aligns site access, design, component dimensions and assembly interfaces before delivery.",
     facts: [
@@ -180,12 +179,12 @@ const editorial = {
     sector: "Hospitality & culture",
     interest: "GreenShift design & development",
     headline: "A bespoke ambition. A phased programme.",
-    role: "Hybrid infrastructure described in the company profile",
-    record: "Programme record",
+    role: "Hybrid EPS and BEMMELS infrastructure across three development phases",
+    record: "Development programme",
     challenge:
       "Bring distinct lab, resort and underground-club requirements into a coherent development programme.",
     approach:
-      "The company profile describes a three-phase programme with hybrid BEMMELS and EPS systems.",
+      "The lab, resort and underground club each ask something different of the building. A hybrid BEMMELS and EPS approach connects those requirements across three development phases, with the interfaces between uses considered alongside the sequence of delivery.",
     takeaway:
       "Clarify the requirements of each use and the interfaces between phases before choosing the delivery sequence.",
     facts: [
@@ -200,11 +199,11 @@ const editorial = {
     interest: "GreenShift design & development",
     headline: "Small footprint. Different landscapes.",
     role: "Prefabricated envelope and structural chassis programme",
-    record: "Programme record",
+    record: "Development programme",
     challenge:
       "Create repeatable modular spaces that can respond to different sites and climates.",
     approach:
-      "The profile describes deployment settings in Indonesia and Japan, using an insulated EPS envelope and BEMMELS structural chassis.",
+      "An insulated EPS envelope and BEMMELS structural chassis form a coordinated module for different landscapes. The programme spans Indonesia and Japan, connecting repeatable components with the engineering, access and climate requirements of each setting.",
     takeaway:
       "Repeatability begins with a coordinated module, then responds to each site’s engineering, access and local requirements.",
     facts: [
@@ -217,34 +216,34 @@ const editorial = {
     sector: "Community facilities",
     interest: "GreenShift design & development",
     headline: "Space for play. A shared brief.",
-    role: "Sports-facility programme listed in the company profile",
-    record: "Programme record",
+    role: "Multi-sport development programme",
+    record: "Development programme",
     challenge:
       "Start with the users, sports requirements and site conditions behind a community facility.",
     approach:
-      "The profile lists a multi-sport facility in Bali. Project-specific scope and specifications are available from the commercial team.",
+      "The Bali programme begins with a shared question: how should a facility serve the people who use it? Activity requirements, capacity, access and operations shape the brief before the building systems and delivery plan are defined.",
     takeaway:
       "A useful first brief includes the intended activities, site, capacity and operational needs.",
     facts: [
       ["Place", "Bali, Indonesia"],
       ["Programme", "Multi-sport facility"],
-      ["Specifications", "Discuss with the team"],
+      ["Specifications", "Defined around the activity brief"],
     ],
   },
   villas: {
     sector: "Residential",
     interest: "GreenShift design & development",
     headline: "Individual homes. Connected delivery.",
-    role: "Integrated design and construction programme listed in the company profile",
-    record: "Programme record",
+    role: "Integrated residential design and construction",
+    record: "Development programme",
     challenge:
       "Connect individual residential briefs with a coordinated approach to design and construction.",
     approach:
-      "The profile lists more than 100 private turnkey villas across Indonesia. The number describes the profile’s programme record; project-level dates and scope should be confirmed with the team.",
+      "More than 100 private villas sit within Fjäll’s residential programme across Indonesia. Each brief begins with a place and a way of living; a coordinated design and construction approach connects those individual priorities to the wider delivery process.",
     takeaway:
       "Start with the site, the way you want to live and the services your project requires.",
     facts: [
-      ["Programme record", "100+ villas in the profile"],
+      ["Development programme", "100+ private villas"],
       ["Place", "Indonesia"],
       ["Approach", "Turnkey residential programme"],
     ],
