@@ -13,3 +13,22 @@ for (const film of document.querySelectorAll("video")) {
     if (!entries[0].isIntersecting) film.pause();
   }).observe(film);
 }
+
+const sketch = document.querySelector("[data-project-sketch]");
+if (sketch) {
+  const observer = new IntersectionObserver(
+    async (entries) => {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      try {
+        const { initProjectSketch } =
+          await import("./project-sketch.js?v=sketch-studio-1");
+        initProjectSketch(sketch);
+      } catch {
+        /* The source-image cover remains available. */
+      }
+    },
+    { rootMargin: "200px" },
+  );
+  observer.observe(sketch);
+}

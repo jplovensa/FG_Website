@@ -1,7 +1,7 @@
 import { initLeadForm } from "./lead-form.js";
 export { buildInquiryLink } from "./inquiry-model.js";
 // Lightweight, user-controlled illustrations and the WhatsApp inquiry handoff.
-const materials = {
+export const materials = {
   eps: {
     title: "EPS · GX-100 Panel",
     kicker: "01 / Wall + envelope",
@@ -19,25 +19,25 @@ const materials = {
     source: "Product Knowledge · Exact GX-100 build-up, pp. 3–5",
     views: [
       {
-        label: "Build-up",
-        image: "gx100-studio",
+        label: "Material",
+        image: "library-eps-material",
         concept: true,
-        alt: "AI-assisted GX-100 concept illustrating the documented exploded build-up: finish, Kalci board, mesh, PU glue and EPS, mirrored on both faces",
+        alt: "Illustrative design concept — GX-100 composite panel with a central EPS core and protective layers mirrored on both faces",
+        note: "Read the build-up: EPS core, PU glue, fibreglass mesh, Kalci board and finish. The illustration communicates the material layers; approve the exact panel and finish specification with Fjäll.",
       },
       {
-        label: "Catalogue",
-        image: "gx100-layers",
-        alt: "Exact nine-layer GX-100 build-up supplied in the product knowledge deck",
+        label: "Usage",
+        image: "library-eps-usage",
+        concept: true,
+        alt: "Illustrative design concept — Design concept of a tropical courtyard pavilion using smooth composite wall panels",
+        note: "An insulated wall and envelope system for exterior and interior spaces. Openings, finish, interfaces and support conditions are resolved for the building.",
       },
       {
-        label: "Finishes",
-        image: "gx100-finishes",
-        alt: "Supplied GX-100 finish concepts, including smooth, fluted, linear relief and sculpted profiles",
-      },
-      {
-        label: "On site",
-        image: "gx100-preparation",
-        alt: "Panel installation imagery supplied in the product knowledge deck",
+        label: "Preparation",
+        image: "library-eps-preparation",
+        concept: true,
+        alt: "Illustrative design concept — Workshop concept showing a technician checking a prepared composite EPS panel",
+        note: "Coordinate dimensions and openings, review the finish sample, and check prepared panels against the approved sequence before dispatch and installation.",
       },
     ],
     detailTitle: "Specify the surface.",
@@ -64,20 +64,25 @@ const materials = {
     source: "Product Knowledge · BEMMELS, p. 6",
     views: [
       {
-        label: "Profile",
-        image: "bemmel-studio",
+        label: "Material",
+        image: "library-bemmel-material",
         concept: true,
-        alt: "AI-assisted studio concept of an illustrative BEMMELS braided basalt I-profile",
+        alt: "Illustrative design concept — Studio concept of a continuous braided-basalt composite I-profile",
+        note: "Continuous basalt fibres, consolidated into a shaped composite profile. This I-section is an illustrative form, rather than a stock product or approved structural detail.",
       },
       {
-        label: "Catalogue",
-        image: "bemmel-system",
-        alt: "Illustrative BEMMELS profiles supplied in the product knowledge deck",
+        label: "Usage",
+        image: "library-bemmel-usage",
+        concept: true,
+        alt: "Illustrative design concept — Pavilion concept illustrating braided-basalt composite framing",
+        note: "Selected structural roles are evaluated through project engineering. Resolve the loads, geometry, connections and interfaces before choosing a profile.",
       },
       {
-        label: "Braid",
-        image: "bemmel-braid",
-        alt: "Close-up illustrative continuous basalt fibre braid supplied in the product deck",
+        label: "Preparation",
+        image: "library-bemmel-preparation",
+        concept: true,
+        alt: "Illustrative design concept — Workshop concept of braided basalt fibres on a shaped mandrel",
+        note: "Braid, consolidate and shape the profile for its intended role. Production details, quality checks and connections follow the engineered specification.",
       },
     ],
     detailTitle: "Preparation, with purpose.",
@@ -104,30 +109,25 @@ const materials = {
     source: "RoR Catalogue · Membranes, shingles and application, pp. 3–11",
     views: [
       {
-        label: "Studio",
-        image: "ror-studio",
+        label: "Material",
+        image: "library-ror-material",
         concept: true,
-        alt: "AI-assisted RoR concept showing brown, black and white shingle samples and a separate reinforced membrane sample",
+        alt: "Illustrative design concept — Studio samples illustrating overlapping shingles and a fibreglass-reinforced rubber membrane",
+        note: "Choose between overlapping shingle texture and a continuous reinforced rubber membrane. Colour, thickness and build-up are confirmed through samples and the approved specification.",
       },
       {
-        label: "In application",
-        image: "ror-application",
-        alt: "Original site photograph from the catalogue: brown shingles following a sculptural roof profile",
+        label: "Usage",
+        image: "library-ror-usage",
+        concept: true,
+        alt: "Illustrative design concept — Design concept of a curved tropical pavilion roof with overlapping brown shingles",
+        note: "A roof surface that follows architectural form. Coordinate the geometry, drainage, edges and interfaces as one complete roofing assembly.",
       },
       {
-        label: "Membrane",
-        image: "ror-membrane",
-        alt: "Catalogue site photograph of membrane work on a curved roof",
-      },
-      {
-        label: "Shingles",
-        image: "ror-shingles",
-        alt: "Catalogue photograph illustrating overlapping shingle courses",
-      },
-      {
-        label: "Daylight",
-        image: "ror-daylight",
-        alt: "Catalogue daylight design view; translucent membrane selection and performance are project-specific",
+        label: "Preparation",
+        image: "library-ror-preparation",
+        concept: true,
+        alt: "Illustrative design concept — Workshop concept of roof substrate checks and fibreglass reinforcement preparation",
+        note: "Check the substrate and roof details before work starts. Use the approved preparation, reinforcement and application method; confirm compatibility and required performance.",
       },
     ],
     detailTitle: "Surface, form and specification.",
@@ -154,14 +154,25 @@ const materials = {
     source: "Product Knowledge · Preparation and application concepts, pp. 7–9",
     views: [
       {
-        label: "Applications",
-        image: "gx100-applications",
-        alt: "Original supplied GX-100 application concepts for a villa, resort pavilion, commercial building and hybrid mid-rise; not completed project photographs",
+        label: "Material",
+        image: "library-scale-material",
+        concept: true,
+        alt: "Illustrative design concept — Production concept of pre-cut composite panels supported on organised racks",
+        note: "Repeatable panel types, coordinated openings and checked interfaces turn the building specification into a prepared kit of parts.",
+      },
+      {
+        label: "Usage",
+        image: "library-scale-usage",
+        concept: true,
+        alt: "Illustrative design concept — Design concept of a repeatable tropical housing community with shared paths",
+        note: "Plan the home and community together: unit types, access, shared space, infrastructure and phasing. This is an application concept, not a completed programme photograph.",
       },
       {
         label: "Preparation",
-        image: "gx100-preparation",
-        alt: "GX-100 panel installation imagery supplied in the product knowledge deck",
+        image: "library-scale-preparation",
+        concept: true,
+        alt: "Illustrative design concept — Logistics concept of secured composite-panel racks and sequenced dispatch",
+        note: "Agree dimensions and system scope early, protect the prepared components, and coordinate delivery with the site’s installation sequence.",
       },
     ],
     detailTitle: "A clear path to delivery.",
@@ -398,22 +409,13 @@ function initMaterialLibrary() {
     tabs.hidden = !material.views.length;
     const picture = material.views[selectedView];
     view.dataset.origin = picture.concept ? "studio" : "catalogue";
-    image.style.maxWidth = picture.concept
-      ? "100%"
-      : "min(100%, " +
-        ({
-          "ror-membrane": 201,
-          "ror-shingles": 277,
-          "ror-application": 515,
-          "ror-daylight": 480,
-          "gx100-preparation": 736,
-        }[picture.image] || 1200) +
-        "px)";
+    image.style.maxWidth = "100%";
+    document.querySelector("#material-view-description").textContent = assembled
+      ? "Illustrative build-up, not to scale. Confirm the actual assembly and project details with Fjäll."
+      : picture.note;
     document.querySelector("#material-view-label").textContent = assembled
-      ? "Concept build-up / Not to scale"
-      : picture.concept
-        ? "Studio concept / AI-assisted illustration"
-        : "Catalogue / Original supplied visual";
+      ? "Build-up study / Not to scale"
+      : `${picture.label} / AI-assisted design illustration`;
     const list = document.querySelector("#material-details");
     list.replaceChildren();
     material.details.forEach((text) => {

@@ -1,4 +1,4 @@
-import { initStudio } from "./studio.js?v=material-light-2";
+import { initStudio } from "./studio.js?v=sketch-studio-1";
 import { initJourney, initWorld } from "./experience.js?v=material-light-2";
 
 const intro = document.querySelector("#intro");

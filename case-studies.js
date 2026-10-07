@@ -12,7 +12,7 @@ export const projects = {
     description:
       "The corporate profile lists a regional-government housing programme of over 250 units, developed around rapid, disaster-resilient housing delivery. It demonstrates the scale of a coordinated housing programme.",
     materials: "Mass-scale GX 100 building envelopes",
-    summary: "250 homes / Housing at community scale",
+    summary: "250+ homes / Housing at community scale",
   },
   sport: {
     title: "Multi-Sport Facility",
@@ -113,22 +113,26 @@ const editorial = {
     ],
   },
   housing: {
+    image: "housing-olive",
+    imageSource:
+      "Fjäll Affordable Development deck / Design reference render",
     sector: "Housing at scale",
     interest: "FAD housing & workers’ accommodation",
     number: "03",
     headline: "One housing system. A community of possibilities.",
     role: "Regional-government housing programme listed in the company profile",
-    record: "Programme record",
+    record: "250+ housing programme / Design references",
     challenge:
       "Housing at scale needs repeatable components and a coordinated site strategy without losing sight of the people who will live there.",
     approach:
-      "The profile lists a Lombok programme of over 250 units, centred on rapid, disaster-resilient housing delivery and GX-100 building envelopes. This is the documented programme scope, rather than a claim that every unit is complete.",
+      "The company profile records a Lombok programme of over 250 homes. The FAD deck adds a design language for repeatable homes: a 36 m² base-unit concept, composite EPS panel infrastructure, coordinated openings and several exterior finishes. These supplied renders and diagrams show system possibilities; the programme’s detailed unit mix and delivery status are confirmed with the team.",
     takeaway:
       "Define the unit mix, land conditions, infrastructure and phasing together. The development brief informs both the home and the wider community.",
     facts: [
-      ["Programme scope", "250+ units in the profile"],
+      ["Programme scope", "250+ homes"],
       ["Place", "Lombok, Indonesia"],
-      ["System", "GX-100 building envelopes"],
+      ["Design reference", "FAD 36 m² base-unit concept"],
+      ["System", "Composite EPS panel infrastructure"],
     ],
   },
   ulaman: {

@@ -1060,3 +1060,234 @@
     width: 260px;
   }
 }
+
+/* Cinematic pencil studies retain source imagery and remain usable without WebGL. */
+.project-sketch {
+  position: relative;
+  background: #f1efe8;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.project-sketch canvas,
+.sketch-fallback {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.project-sketch canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.project-sketch canvas:active {
+  cursor: grabbing;
+}
+.project-sketch canvas:focus-visible {
+  outline: 3px solid #145843;
+  outline-offset: -5px;
+}
+.project-sketch canvas[hidden],
+.sketch-controls[hidden] {
+  display: none;
+}
+.sketch-fallback > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sketch-fallback .programme-plate {
+  min-height: 0;
+  height: 100%;
+}
+.project-sketch[data-sketch-ready="true"] .sketch-fallback {
+  visibility: hidden;
+}
+.sketch-caption {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #35473c;
+  padding: 8px 10px;
+  background: #f5f3eced;
+  pointer-events: none;
+}
+.sketch-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.sketch-controls > div {
+  display: flex;
+  gap: 6px;
+}
+.sketch-controls button {
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid #a7b0a1;
+  padding: 10px 14px;
+  background: #f5f3ecf2;
+  color: #243f31;
+  font-size: 11px;
+}
+.sketch-controls button:hover {
+  background: #fff;
+}
+.case-reference {
+  margin: 0 var(--gutter) 60px;
+}
+.case-reference img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+  background: #efeee7;
+}
+.case-reference figcaption,
+.housing-design-grid figcaption {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #536357;
+  margin-top: 14px;
+}
+.case-housing-gallery {
+  margin: 0 var(--gutter) 70px;
+}
+.case-housing-gallery h2 {
+  font-size: clamp(30px, 4vw, 56px);
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  margin: 30px 0 20px;
+}
+.case-housing-gallery > p {
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #48594d;
+  margin-bottom: 36px;
+}
+.housing-design-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 24px;
+}
+.housing-design-grid figure {
+  margin: 0;
+  min-width: 0;
+}
+.housing-design-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/10;
+  object-fit: contain;
+  background: #efeee7;
+}
+.housing-design-grid figure:nth-last-child(2) img {
+  aspect-ratio: 4/3;
+}
+.housing-design-grid figure:last-child img {
+  aspect-ratio: 4/3;
+}
+/* Every material uses the same three-part studio sequence with complete images. */
+#material-view {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 0;
+  gap: 20px;
+  padding: 26px;
+}
+.material-view-top,
+.material-view-tabs,
+.material-view-bottom {
+  position: static;
+  inset: auto;
+}
+#material-view #material-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  max-height: none;
+  object-fit: contain;
+  margin: 0;
+  flex: none;
+}
+#material-view #material-image[hidden] {
+  display: none;
+}
+.material-view-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.material-view-tabs button {
+  font-size: 12px;
+  min-height: 44px;
+  padding: 10px 8px;
+}
+.material-view-tabs button:last-child:nth-child(odd) {
+  grid-column: auto;
+}
+.material-view-description {
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 0;
+  color: #465948;
+}
+.material-view-bottom {
+  gap: 16px;
+}
+@media (max-width: 700px) {
+  .project-sketch {
+    aspect-ratio: 4/3;
+  }
+  .sketch-caption {
+    left: 12px;
+    top: 12px;
+    font-size: 9px;
+  }
+  .sketch-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    gap: 8px;
+  }
+  .sketch-controls button {
+    padding: 8px;
+    font-size: 10px;
+  }
+  .sketch-controls > div {
+    gap: 4px;
+  }
+  .case-reference {
+    margin: 0 20px 40px;
+  }
+  .case-housing-gallery {
+    margin: 0 20px 50px;
+  }
+  .housing-design-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .case-housing-gallery > p {
+    font-size: 14px;
+  }
+  #material-view {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+  .material-view-tabs button {
+    font-size: 11px;
+  }
+}
