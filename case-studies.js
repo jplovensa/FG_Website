@@ -65,7 +65,7 @@ projects.retrofit = {
   title: "Garuda Spark Innovation Hub",
   location: "Malang, Indonesia · Retrofit",
   description:
-    "At Malang Creative Center, the Garuda Spark Innovation Hub gives existing spaces a new purpose. The supplied flagship film introduces this transformation and the places it creates.",
+    "Commissioned by KOMDIGI, Indonesia’s Ministry of Communication and Digital Affairs, Fjäll’s retrofit at Malang Creative Center creates a home for Garuda Spark Innovation Hub: a national hub for Indonesia’s technology ecosystem.",
   materials:
     "Existing-building assessment · Coordinated retrofit interventions",
 };
@@ -76,18 +76,20 @@ const editorial = {
     interest: "Retrofit project",
     number: "01",
     headline: "A new purpose. An existing place.",
-    role: "Flagship retrofit project presented by Fjäll Group",
+    role: "KOMDIGI-commissioned retrofit at Malang Creative Center for Garuda Spark Innovation Hub",
+    commission: "KOMDIGI / Ministry of Communication and Digital Affairs",
     record: "Project showcase",
     challenge:
-      "Start with what is already there: the existing spaces, their constraints and the people who will use them next.",
+      "Give an existing building a new civic purpose: a national hub where Indonesia’s technology ecosystem can connect, collaborate and develop.",
     approach:
-      "The project film documents the transformation at Malang Creative Center. A retrofit brief begins with the existing building and defines which spaces and systems need to change.",
+      "The KOMDIGI commission brings Garuda Spark Innovation Hub into Malang Creative Center through a coordinated retrofit. Rather than beginning with a new building, the work adapts existing spaces for a national technology-ecosystem hub. The supplied project film shows the renewed interiors and the identity of the hub.",
     takeaway:
       "A retrofit conversation starts with a building assessment, the intended use and a coordinated intervention scope.",
     facts: [
       ["Place", "Malang Creative Center"],
       ["Programme", "Garuda Spark Innovation Hub"],
-      ["Format", "51-second project film"],
+      ["Commission", "KOMDIGI"],
+      ["Purpose", "National technology-ecosystem hub"],
     ],
   },
   nuanu: {

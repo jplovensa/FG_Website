@@ -359,7 +359,7 @@ export function initJourney({ reducedMotion }) {
       lazyScene.disconnect();
       try {
         const { createConstructionScene } =
-          await import("./construction-scene.js");
+          await import("./construction-scene.js?v=material-light-2");
         scene = createConstructionScene(canvas, {
           reducedMotion,
           onUnavailable: unavailable,

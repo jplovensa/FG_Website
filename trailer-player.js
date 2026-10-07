@@ -127,7 +127,7 @@ export function getTrailerShot(kind, seconds) {
     elapsed: time * 1000,
     eye: [
       target[0] + Math.sin(theta) * distance,
-      kind === "fad" ? 3.8 + growth * 7 : 5.8 + u * 1.0,
+      kind === "fad" ? 2.8 + growth * 5.2 : 3.1 + u * 0.7,
       target[2] + Math.cos(theta) * distance,
     ],
     target,
@@ -138,7 +138,7 @@ export function getTrailerShot(kind, seconds) {
 }
 
 export function getTrailerMedia(kind) {
-  const revision = kind === "greenshift" ? "?v=design-curve-1" : "";
+  const revision = "?v=material-light-2";
   return {
     video: `./assets/${kind}-trailer.mp4${revision}`,
     poster: `./assets/${kind}-trailer-poster.webp${revision}`,
@@ -215,7 +215,8 @@ export async function createTrailerPlayer(root, { reducedMotion }) {
     status.textContent = "Rendered trailer available. Press Play to watch.";
     paint();
   }
-  const { createConstructionScene } = await import("./construction-scene.js");
+  const { createConstructionScene } =
+    await import("./construction-scene.js?v=material-light-2");
   scene = createConstructionScene(canvas, {
     reducedMotion,
     manual: true,

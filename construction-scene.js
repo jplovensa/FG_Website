@@ -1,4 +1,4 @@
-// A small, self-contained WebGL scene. No engine, textures or external models.
+// Self-contained architectural renderer: deterministic texture atlas and physical material lighting.
 const vertexShader = `
 attribute vec3 aPosition;
 attribute vec3 aNormal;
@@ -15,35 +15,106 @@ void main(){
   gl_Position=uCamera*world;
 }`;
 const fragmentShader = `
-precision mediump float;
+precision highp float;
 uniform vec3 uColor;
 uniform vec3 uEye;
 uniform vec3 uAtmosphere;
 uniform float uAlpha;
+uniform float uMaterial;
+uniform sampler2D uSurface;
+uniform vec4 uOccluders[8];
+uniform float uOccluderCount;
 varying vec3 vNormal;
 varying vec3 vWorld;
+float hash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
+float noise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
+vec3 sky(vec3 direction){float height=clamp(direction.y,0.,1.);vec3 tint=mix(vec3(.83,.87,.85),vec3(.42,.62,.75),pow(height,.45));float clouds=noise(direction*9.)*.65+noise(direction*22.)*.35;float cloud=smoothstep(.58,.76,clouds)*smoothstep(0.,.16,height);return mix(tint,vec3(.96,.94,.89),cloud*.55);}
+vec3 tile(vec2 uv,float index){vec2 offset=vec2(mod(index,2.),floor(index/2.));return texture2D(uSurface,(offset+(fract(uv)*.984+.008))*.5).rgb;}
+vec3 surface(vec3 position,vec3 normal,float index){vec3 w=pow(abs(normal),vec3(5.));w/=max(w.x+w.y+w.z,.0001);return tile(position.yz,index)*w.x+tile(position.xz,index)*w.y+tile(position.xy,index)*w.z;}
 void main(){
-  vec3 n=normalize(vNormal);
-  vec3 view=normalize(uEye-vWorld);
-  vec3 key=normalize(vec3(-.55,1.,.65));
-  float sun=max(dot(n,key),0.);
-  float fill=max(dot(n,normalize(vec3(.8,.45,-.5))),0.);
-  float rim=pow(1.-max(dot(n,view),0.),3.)*max(dot(n,normalize(vec3(.4,.8,-.8))),0.);
-  vec3 lit=uColor*(.53+.11*n.y+sun*.48+fill*.12);
-  lit+=vec3(.10,.085,.065)*sun+vec3(.09,.11,.12)*rim;
-  float sheen=pow(max(dot(n,normalize(key+view)),0.),36.)*.045;
-  lit+=vec3(sheen);
-  lit=clamp((lit*(2.51*lit+.03))/(lit*(2.43*lit+.59)+.14),0.,1.);
-  float fog=smoothstep(16.,48.,distance(vWorld,uEye));
-  gl_FragColor=vec4(mix(lit,uAtmosphere,fog),uAlpha);
+ vec3 n=normalize(vNormal),view=normalize(uEye-vWorld);
+ if(uMaterial>6.5 && uMaterial<7.5){gl_FragColor=vec4(sky(normalize(vWorld-uEye)),1.);return;}
+ vec3 base=pow(uColor,vec3(2.2));float rough=.75;float grain=1.;
+ if(uMaterial> .5 && uMaterial<3.5){float index=uMaterial-1.;vec3 tex=surface(vWorld*(uMaterial<1.5?1.5:.55),n,index);grain=tex.r;base*=mix(.77,1.15,grain);rough=uMaterial<1.5?.82:uMaterial<2.5?.56:.94;}
+ if(uMaterial>2.5 && uMaterial<3.5)base*=.8+noise(vWorld*.7)*.32;
+ if(uMaterial>5.5 && uMaterial<6.5){float fleck=noise(vWorld*9.);base*=.72+fleck*.48;rough=.94;}
+ if(uMaterial>7.5){base*=mix(.7,1.05,surface(vWorld*1.6,n,3.).r);rough=.38;}
+ // Stable world-space relief; surface detail never swims between frames.
+ float relief=(uMaterial> .5 && uMaterial<3.5)?(grain-.5)*.028:0.;
+ n=normalize(n+vec3(relief,relief*.35,-relief));
+ if(uMaterial>4.5 && uMaterial<5.5){vec2 waves=vec2(sin(vWorld.x*.34+vWorld.z*.19),cos(vWorld.z*.29-vWorld.x*.12))*.018;n=normalize(n+vec3(waves.x,0.,waves.y));rough=.12;}
+ bool glass=uMaterial>3.5 && uMaterial<4.5;if(glass)rough=.16;
+ vec3 light=normalize(vec3(-.65,.85,.52)),halfway=normalize(light+view);
+ float shade=1.;for(int i=0;i<8;i++){
+  if(float(i)>=uOccluderCount)break;vec3 delta=uOccluders[i].xyz-vWorld;float r=uOccluders[i].w;float along=dot(delta,light);
+  if(along>.02 && length(delta)>r*1.05){float spread=length(delta-light*along);shade=min(shade,mix(.42,1.,smoothstep(r*.72,r*1.2,spread)));}
+ }
+ float ndl=max(dot(n,light),0.),ndv=max(dot(n,view),.001),ndh=max(dot(n,halfway),0.),vdh=max(dot(view,halfway),0.);
+ float a=rough*rough,a2=a*a;float den=ndh*ndh*(a2-1.)+1.;float distribution=a2/(3.14159*den*den+.0001);
+ float k=(rough+1.)*(rough+1.)/8.;float visibility=(ndl/(ndl*(1.-k)+k))*(ndv/(ndv*(1.-k)+k));
+ vec3 f0=vec3(glass?.075:.04);vec3 fresnel=f0+(1.-f0)*pow(1.-vdh,5.);
+ vec3 spec=distribution*visibility*fresnel/max(4.*ndl*ndv,.001);
+ float ambient=.34+.16*max(n.y,0.);vec3 bounce=vec3(.82,.89,.78)*(.08*max(-n.y,0.));
+ vec3 lit=base*(ambient+bounce)+((1.-fresnel)*base/3.14159+spec)*vec3(2.4,2.13,1.82)*ndl*shade;
+ if(glass || (uMaterial>4.5 && uMaterial<5.5)){
+  vec3 reflected=sky(reflect(-view,n));float edge=pow(1.-ndv,4.);lit=mix(lit,reflected,glass?.34+edge*.5:.22+edge*.62);
+  if(glass){float mullion=pow(.5+.5*sin(vWorld.x*1.4+vWorld.y*.45),18.);lit+=vec3(.075,.063,.042)*mullion;}
+ }
+ float contact=smoothstep(0.,.32,max(vWorld.y,0.));if(uMaterial<3.5)lit*=.8+.2*contact;
+ lit=clamp((lit*(2.51*lit+.03))/(lit*(2.43*lit+.59)+.14),0.,1.);
+ lit=pow(lit,vec3(1./2.2));float fog=smoothstep(20.,55.,distance(vWorld,uEye));
+ gl_FragColor=vec4(mix(lit,uAtmosphere,fog*.78),uAlpha);
 }`;
+// Power-of-two, seeded surface maps stay local and add no image downloads.
+function createSurfaceAtlas(gl) {
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = 512;
+  const ctx = canvas.getContext("2d"),
+    image = ctx.createImageData(512, 512);
+  let seed = 48271;
+  for (let y = 0; y < 512; y++)
+    for (let x = 0; x < 512; x++) {
+      seed = (seed * 16807) % 2147483647;
+      const random = seed / 2147483647;
+      const tile = Math.floor(x / 256) + Math.floor(y / 256) * 2;
+      const px = x % 256,
+        py = y % 256;
+      let value =
+        tile === 0
+          ? 170 + random * 64
+          : tile === 1
+            ? 160 +
+              Math.sin(px * 0.25 + Math.sin(py * 0.035) * 2) * 25 +
+              random * 30
+            : tile === 2
+              ? 130 +
+                random * 70 +
+                Math.sin(px * 0.13) * Math.sin(py * 0.17) * 22
+              : 180 + random * 35 + Math.sin(px * 0.8) * 12;
+      const i = (y * 512 + x) * 4;
+      image.data[i] = image.data[i + 1] = image.data[i + 2] = value;
+      image.data[i + 3] = 255;
+    }
+  ctx.putImageData(image, 0, 0);
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(
+    gl.TEXTURE_2D,
+    gl.TEXTURE_MIN_FILTER,
+    gl.LINEAR_MIPMAP_LINEAR,
+  );
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  return texture;
+}
 const colors = {
   ground: [0.79, 0.83, 0.76],
   slab: [0.9, 0.91, 0.85],
   wall: [0.91, 0.9, 0.82],
-  roof: [0.32, 0.48, 0.4],
+  roof: [0.25, 0.29, 0.28],
   frame: [0.31, 0.42, 0.35],
-  glass: [0.29, 0.53, 0.5],
+  glass: [0.17, 0.26, 0.28],
   skin: [0.78, 0.59, 0.43],
   jacket: [0.21, 0.43, 0.37],
   helmet: [0.9, 0.71, 0.35],
@@ -229,6 +300,77 @@ function sphereFaces() {
       ]);
   return faces;
 }
+function trunkFaces() {
+  const faces = [];
+  for (let i = 0; i < 16; i++) {
+    const a = (i * Math.PI) / 8,
+      b = ((i + 1) * Math.PI) / 8;
+    faces.push([
+      [Math.cos(a) * 0.5, -0.5, Math.sin(a) * 0.5],
+      [Math.cos(b) * 0.5, -0.5, Math.sin(b) * 0.5],
+      [Math.cos(b) * 0.32, 0.5, Math.sin(b) * 0.32],
+      [Math.cos(a) * 0.32, 0.5, Math.sin(a) * 0.32],
+    ]);
+  }
+  return faces;
+}
+function canopyFaces(palm = false) {
+  const faces = [];
+  if (palm) {
+    for (let arm = 0; arm < 9; arm++) {
+      const theta = (arm * Math.PI * 2) / 9;
+      for (let leaf = 0; leaf < 13; leaf++)
+        for (const side of [-1, 1]) {
+          const t = (leaf + 1) / 14,
+            r = t * 0.96,
+            y = 0.2 * Math.sin(t * Math.PI) - 0.3 * t * t;
+          const base = [Math.sin(theta) * r, y, Math.cos(theta) * r];
+          const width = (1 - t) * 0.32;
+          const tip = [
+            base[0] + Math.cos(theta) * side * width,
+            base[1] - 0.08,
+            base[2] - Math.sin(theta) * side * width,
+          ];
+          faces.push([
+            base,
+            [
+              base[0] + Math.sin(theta) * 0.055,
+              base[1] + 0.015,
+              base[2] + Math.cos(theta) * 0.055,
+            ],
+            tip,
+          ]);
+        }
+    }
+  } else {
+    for (let i = 0; i < 900; i++) {
+      const theta = i * 2.399963,
+        vertical = 1 - 2 * ((i + 0.5) / 900),
+        depth = 0.62 + 0.38 * (0.5 + 0.5 * Math.sin(i * 11.31));
+      const radius = Math.sqrt(1 - vertical * vertical) * 0.5 * depth;
+      const center = [
+        Math.cos(theta) * radius,
+        vertical * 0.5 * depth,
+        Math.sin(theta) * radius,
+      ];
+      const size = 0.038 + 0.025 * (0.5 + 0.5 * Math.sin(i * 3.2)),
+        tilt = i * 1.71;
+      const u = [
+        Math.cos(theta) * size,
+        Math.sin(tilt) * size * 0.75,
+        Math.sin(theta) * size,
+      ];
+      const v = [
+        -Math.sin(theta) * size * 0.55,
+        Math.cos(tilt) * size * 0.65,
+        Math.cos(theta) * size * 0.55,
+      ];
+      const point = (a, b) => center.map((n, j) => n + u[j] * a + v[j] * b);
+      faces.push([point(-1, 0), point(0, -1), point(1, 0), point(0, 1)]);
+    }
+  }
+  return faces;
+}
 const roofFaces = [
   [
     [-0.5, 0, 0.5],
@@ -322,7 +464,22 @@ export function createConstructionScene(
     }
     program = gl.createProgram();
     gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexShader));
-    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentShader));
+    const precision = gl.getShaderPrecisionFormat(
+      gl.FRAGMENT_SHADER,
+      gl.HIGH_FLOAT,
+    );
+    gl.attachShader(
+      program,
+      compile(
+        gl.FRAGMENT_SHADER,
+        precision?.precision
+          ? fragmentShader
+          : fragmentShader.replace(
+              "precision highp float;",
+              "precision mediump float;",
+            ),
+      ),
+    );
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS))
       throw new Error(gl.getProgramInfoLog(program));
@@ -340,7 +497,12 @@ export function createConstructionScene(
     uColor = gl.getUniformLocation(program, "uColor"),
     uEye = gl.getUniformLocation(program, "uEye"),
     uAtmosphere = gl.getUniformLocation(program, "uAtmosphere"),
-    uAlpha = gl.getUniformLocation(program, "uAlpha");
+    uAlpha = gl.getUniformLocation(program, "uAlpha"),
+    uMaterial = gl.getUniformLocation(program, "uMaterial"),
+    uSurface = gl.getUniformLocation(program, "uSurface"),
+    uOccluders = gl.getUniformLocation(program, "uOccluders[0]"),
+    uOccluderCount = gl.getUniformLocation(program, "uOccluderCount");
+  const surfaceAtlas = createSurfaceAtlas(gl);
   function mesh(faces, smooth = false) {
     const data = triangles(faces, smooth),
       buffer = gl.createBuffer();
@@ -351,7 +513,20 @@ export function createConstructionScene(
   }
   const cube = mesh(cubeFaces),
     sphere = mesh(sphereFaces(), true),
-    roof = mesh(roofFaces);
+    roof = mesh(roofFaces),
+    trunk = mesh(trunkFaces()),
+    canopy = mesh(canopyFaces()),
+    palmCrown = mesh(canopyFaces(true)),
+    hill = mesh(
+      sphereFaces().map((face) =>
+        face.map(([x, y, z]) => [
+          x,
+          y * (1 + 0.13 * Math.sin(x * 14 + z * 9)),
+          z,
+        ]),
+      ),
+      true,
+    );
   const designMeshes = Array.from({ length: 9 }, () => mesh(cubeFaces));
   gl.enable(gl.DEPTH_TEST);
   gl.clearColor(0.91, 0.93, 0.89, 1);
@@ -382,7 +557,8 @@ export function createConstructionScene(
   let shotCamera,
     shotElapsed = 1500,
     units = 6,
-    shotTime = 0;
+    shotTime = 0,
+    vegetationTime = 0;
   const smooth = (value) => {
     const t = Math.max(0, Math.min(1, value));
     return t * t * (3 - 2 * t);
@@ -394,16 +570,32 @@ export function createConstructionScene(
     "Your delivery team assembles the structure, envelope and services.",
     "We review the spaces, completion checks and documentation together.",
   ];
-  function draw(mesh, x, y, z, sx, sy, sz, color, ry = 0, rz = 0) {
+  function draw(mesh, x, y, z, sx, sy, sz, color, ry = 0, rz = 0, material) {
     gl.bindBuffer(gl.ARRAY_BUFFER, mesh.buffer);
     gl.vertexAttribPointer(position, 3, gl.FLOAT, false, 24, 0);
     gl.vertexAttribPointer(normal, 3, gl.FLOAT, false, 24, 12);
     gl.uniformMatrix4fv(uModel, false, model(x, y, z, sx, sy, sz, ry, rz));
     gl.uniform3fv(uColor, color);
+    const type =
+      material ??
+      (color === colors.wall || color === colors.slab
+        ? 1
+        : color === colors.glass
+          ? 4
+          : color === colors.roof
+            ? 8
+            : color !== colors.skin &&
+                color[0] > color[1] * 1.1 &&
+                color[1] > color[2] * 1.15
+              ? 2
+              : color[1] > color[0] * 1.3 && color[1] > color[2] * 1.25
+                ? 6
+                : 0);
+    gl.uniform1f(uMaterial, type);
     gl.drawArrays(gl.TRIANGLES, 0, mesh.count);
   }
-  function box(x, y, z, sx, sy, sz, color, ry = 0, rz = 0) {
-    draw(cube, x, y, z, sx, sy, sz, color, ry, rz);
+  function box(x, y, z, sx, sy, sz, color, ry = 0, rz = 0, material) {
+    draw(cube, x, y, z, sx, sy, sz, color, ry, rz, material);
   }
   const landscapes = {
     forest: {
@@ -445,69 +637,74 @@ export function createConstructionScene(
   }
   function tree(x, z, size = 1, palm = false) {
     shadow(x, z, 1.7 * size, 1.3 * size);
-    box(
+    draw(
+      trunk,
       x,
       1.1 * size,
       z,
-      0.16 * size,
+      0.2 * size,
       2.2 * size,
-      0.16 * size,
-      [0.36, 0.3, 0.22],
+      0.2 * size,
+      [0.37, 0.29, 0.19],
       0,
-      palm ? -0.1 : 0,
+      palm ? -0.09 : 0,
+      2,
     );
-    const breeze =
-      manual && !reducedMotion.matches
-        ? Math.sin(shotTime / 1900 + x * 0.35 + z * 0.2) * 0.035
-        : 0;
-    if (palm) {
-      for (let i = 0; i < 7; i++) {
-        const a = (i * Math.PI * 2) / 7;
-        draw(
-          sphere,
-          x + Math.sin(a) * 0.65 * size + breeze,
-          2.35 * size,
-          z + Math.cos(a) * 0.65 * size,
-          0.25 * size,
-          0.11 * size,
-          1.75 * size,
-          [0.28, 0.46, 0.28],
-          a,
-          -0.16,
-        );
-      }
-    } else {
-      for (let i = 0; i < 3; i++)
-        draw(
-          sphere,
-          x + (i - 1) * 0.32 * size + breeze,
-          (2 + i * 0.28) * size,
-          z + (i % 2) * 0.26 * size,
-          1.65 * size,
-          1.5 * size,
-          1.55 * size,
-          [0.27 + i * 0.035, 0.43 + i * 0.025, 0.28 + i * 0.02],
-        );
-    }
+    const breeze = !reducedMotion.matches
+      ? Math.sin(vegetationTime / 2400 + x * 0.35 + z * 0.2) * 0.025
+      : 0;
+    if (palm)
+      draw(
+        palmCrown,
+        x + breeze,
+        2.2 * size,
+        z,
+        2.35 * size,
+        1.6 * size,
+        2.35 * size,
+        [0.24, 0.39, 0.18],
+        0.2,
+        0,
+        6,
+      );
+    else
+      draw(
+        canopy,
+        x + breeze,
+        2.25 * size,
+        z,
+        2.15 * size,
+        2.2 * size,
+        2.15 * size,
+        [0.29, 0.39, 0.21],
+        x * 0.7,
+        0,
+        6,
+      );
   }
   function landscape(now) {
     const mood = landscapes[environment];
     // Dry land and sea meet at z=-6; their top faces never overlap.
-    if (environment === "beach") box(0, -0.18, 24.5, 110, 0.3, 61, mood.ground);
-    else box(0, -0.18, 0, 110, 0.3, 110, mood.ground);
+    if (environment === "beach")
+      box(0, -0.18, 24.5, 110, 0.3, 61, mood.ground, 0, 0, 3);
+    else box(0, -0.18, 0, 110, 0.3, 110, mood.ground, 0, 0, 3);
     // Low rolling land dissolves into the atmospheric horizon.
     for (let i = 0; i < 9; i++) {
       const a = (i * Math.PI * 2) / 9;
-      const tall = environment === "mountain" ? 8 + (i % 3) * 3 : 2 + (i % 3);
+      const tall =
+        environment === "mountain" ? 12 + (i % 3) * 4 : 7 + (i % 3) * 2;
       draw(
-        sphere,
-        Math.sin(a) * 25,
-        -1,
-        Math.cos(a) * 25,
+        hill,
+        Math.sin(a) * 34,
+        -1.4,
+        Math.cos(a) * 34,
         20,
         tall,
         18,
         mood.hills,
+        0,
+        0,
+        3,
       );
     }
     if (environment === "mountain") {
@@ -538,7 +735,7 @@ export function createConstructionScene(
     }
     if (environment === "beach") {
       // One calm surface, below the shore. No coplanar foam strips or ground.
-      box(0, -0.24, -30.5, 110, 0.35, 49, [0.28, 0.61, 0.63]);
+      box(0, -0.24, -30.5, 110, 0.35, 49, [0.18, 0.43, 0.47], 0, 0, 5);
     }
     const spots = [
       [-6, -3],
@@ -895,7 +1092,7 @@ export function createConstructionScene(
       face = manual ? 0.8 + Math.sin(now / 4500) * 0.05 : angle,
       cos = Math.cos(face),
       sin = Math.sin(face);
-    function part(dx, dy, dz, sx, sy, sz, color, shape = cube, tilt = 0) {
+    function part(dx, dy, dz, sx, sy, sz, color, shape = sphere, tilt = 0) {
       draw(
         shape,
         rx + dx * cos + dz * sin,
@@ -983,6 +1180,7 @@ export function createConstructionScene(
   }
   function render(now = manual ? shotTime : performance.now()) {
     if (lost) return;
+    vegetationTime = now;
     const rect = canvas.getBoundingClientRect(),
       ratio = Math.min(devicePixelRatio || 1, 1.75),
       width = Math.max(1, Math.round(rect.width * ratio)),
@@ -1003,6 +1201,54 @@ export function createConstructionScene(
     gl.uniform3fv(uEye, view.eye);
     gl.uniform3fv(uAtmosphere, sky);
     gl.uniform1f(uAlpha, 1);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, surfaceAtlas);
+    gl.uniform1i(uSurface, 0);
+    const occluders = [];
+    if (type === "greenshift" && manual) {
+      const form = getDesignForm(shotTime / 1000);
+      for (let i = -1; i <= 1; i++) {
+        const [x, z] = designPoint(
+          i * (2.6 - 0.2 * form.curvature),
+          0,
+          form.curvature,
+        );
+        occluders.push(x, 0.9, z, 1.05);
+      }
+    } else if (manual && ["housing", "workers", "modular"].includes(type)) {
+      [5, 6, 1, 2, 4, 7, 0, 3].forEach((cell, i) => {
+        const age =
+          i === 0
+            ? shotTime / 500
+            : (shotTime / 1000 - (6 + (i - 1) * 0.45)) * 3;
+        const envelope = smooth((age - 6) / 3.5);
+        if (envelope > 0)
+          occluders.push(
+            ((cell % 4) - 1.5) * 2.45,
+            0.58 * envelope,
+            -Math.floor(cell / 4) * 1.95 + 0.3,
+            0.67 * envelope,
+          );
+      });
+    } else if (stage >= 3) {
+      if (["housing", "workers", "modular"].includes(type)) {
+        const columns = manual ? 4 : units > 6 ? 4 : Math.min(3, units);
+        for (let i = 0; i < Math.min(units, 8); i++)
+          occluders.push(
+            ((i % columns) - (columns - 1) / 2) * 2.45,
+            0.58,
+            -Math.floor(i / columns) * 1.95 + 0.3,
+            0.67,
+          );
+      } else occluders.push(0, 0.8, -0.5, 0.95);
+    }
+    const shadowData = new Float32Array(32);
+    shadowData.set(occluders);
+    gl.uniform4fv(uOccluders, shadowData);
+    gl.uniform1f(uOccluderCount, occluders.length / 4);
+    gl.depthMask(false);
+    draw(sphere, ...view.eye, 86, 86, 86, sky, 0, 0, 7);
+    gl.depthMask(true);
     landscape(now);
     const elapsed = manual
         ? shotElapsed
@@ -1068,6 +1314,7 @@ export function createConstructionScene(
     }
     person(now, elapsed);
     canvas.dataset.rendered = "true";
+    canvas.dataset.materials = "plaster,timber,terrain,glass,water,metal";
     canvas.dataset.environment = environment;
     canvas.dataset.stage = String(stage);
     canvas.dataset.projectType = type;

@@ -206,7 +206,7 @@ function initBusinessStudies() {
     trailer,
     trailerLoading;
   function loadTrailer() {
-    trailerLoading ||= import("./trailer-player.js").then(
+    trailerLoading ||= import("./trailer-player.js?v=material-light-2").then(
       ({ createTrailerPlayer }) =>
         createTrailerPlayer(document.querySelector("#business-trailer"), {
           reducedMotion: matchMedia("(prefers-reduced-motion: reduce)"),

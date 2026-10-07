@@ -56,7 +56,7 @@ for (const basePath of ["/", "/FG_Website/"]) {
       ...experience.matchAll(/import\(['"]([^'"]+)['"]\)/g),
     ].map((match) => match[1]);
     assert.ok(
-      sceneImports.includes("./construction-scene.js"),
+      sceneImports.some((path) => path.startsWith("./construction-scene.js")),
       "The scene must be available as a lazy module",
     );
     imports.push(...sceneImports);
@@ -65,7 +65,7 @@ for (const basePath of ["/", "/FG_Website/"]) {
       (match) => match[1],
     );
     assert.ok(
-      trailers.includes("./trailer-player.js"),
+      trailers.some((path) => path.startsWith("./trailer-player.js")),
       "Lazy trailers must ship",
     );
     imports.push(...trailers);
@@ -83,7 +83,7 @@ for (const basePath of ["/", "/FG_Website/"]) {
       (match) => match[1],
     );
     assert.ok(
-      imports.includes("./experience.js"),
+      imports.some((path) => path.startsWith("./experience.js")),
       "Interactive experience module must be shipped",
     );
     assert.ok(

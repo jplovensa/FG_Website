@@ -1,5 +1,5 @@
-import { initStudio } from "./studio.js";
-import { initJourney, initWorld } from "./experience.js";
+import { initStudio } from "./studio.js?v=material-light-2";
+import { initJourney, initWorld } from "./experience.js?v=material-light-2";
 
 const intro = document.querySelector("#intro");
 const introVideo = document.querySelector("#intro-video");
