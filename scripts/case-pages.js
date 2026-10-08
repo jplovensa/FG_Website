@@ -23,7 +23,7 @@ export async function buildCasePages(target) {
       nuanu: [1000, 750],
       ulaman: [1000, 667],
       lombok: [1000, 782],
-      "bamboo-lab": [1000, 715],
+      "bamboo-lab-clean": [1000, 716],
       pods: [1000, 667],
       "retrofit-interior": [1280, 720],
     }[p.image];

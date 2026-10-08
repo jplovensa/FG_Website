@@ -175,7 +175,7 @@ const editorial = {
     ],
   },
   bamboo: {
-    image: "bamboo-lab",
+    image: "bamboo-lab-clean",
     sector: "Hospitality & culture",
     interest: "GreenShift design & development",
     headline: "A bespoke ambition. A phased programme.",
