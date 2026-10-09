@@ -57,31 +57,35 @@ export const materials = {
       "Braid → Consolidate → Engineer. Continuous fibres follow the structural profile; a braid matrix locks the form into a rigid shape.",
     discuss:
       "The profile, connection and intended use are verified for your project. Final geometry and performance are engineered.",
-    label: "BEMMELS / Illustrative structural profile",
-    graphic: "BEMMELS braided basalt profile",
+    label: "BEMMELS / Braided lattice profiles",
+    graphic: "BEMMELS braided lattice profiles",
     graphicDescription:
-      "Supplied illustrative composite I-profile and a close view of the basalt braid.",
-    source: "Product Knowledge · BEMMELS, p. 6",
+      "Three open lattice profiles, with a framing application and workshop assembly.",
+    source: "BEMMELS · Profiles, framing and fabrication",
     views: [
       {
         label: "Material",
-        image: "library-bemmel-material",
+        image: "bemmel-lattice-profiles",
+        portrait: true,
+        caption: "Material / Lattice profiles",
         concept: true,
-        alt: "Illustrative design concept — Studio concept of a continuous braided-basalt composite I-profile",
-        note: "Continuous basalt fibres, consolidated into a shaped composite profile. This I-section is an illustrative form, rather than a stock product or approved structural detail.",
+        alt: "Three tall open lattice composite profiles in light, charcoal and grey finishes",
+        note: "Braided fibres form open lattice profiles. Geometry, dimensions and connections are resolved for the intended structural role.",
       },
       {
         label: "Usage",
-        image: "library-bemmel-usage",
+        image: "bemmel-lattice-frame",
+        caption: "Usage / Building frame",
         concept: true,
-        alt: "Illustrative design concept — Pavilion concept illustrating braided-basalt composite framing",
+        alt: "Open lattice columns and beams joined around a building with white infill panels",
         note: "Selected structural roles are evaluated through project engineering. Resolve the loads, geometry, connections and interfaces before choosing a profile.",
       },
       {
         label: "Preparation",
-        image: "library-bemmel-preparation",
+        image: "bemmel-lattice-workshop",
+        caption: "Preparation / Workshop assembly",
         concept: true,
-        alt: "Illustrative design concept — Workshop concept of braided basalt fibres on a shaped mandrel",
+        alt: "Two artisans assemble a braided lattice beam in a timber workshop jig",
         note: "Braid, consolidate and shape the profile for its intended role. Production details, quality checks and connections follow the engineered specification.",
       },
     ],
@@ -409,13 +413,14 @@ function initMaterialLibrary() {
     tabs.hidden = !material.views.length;
     const picture = material.views[selectedView];
     view.dataset.origin = picture.concept ? "studio" : "catalogue";
+    view.dataset.shape = picture.portrait ? "portrait" : "landscape";
     image.style.maxWidth = "100%";
     document.querySelector("#material-view-description").textContent = assembled
       ? "Illustrative build-up, not to scale. Confirm the actual assembly and project details with Fjäll."
       : picture.note;
     document.querySelector("#material-view-label").textContent = assembled
       ? "Build-up study / Not to scale"
-      : `${picture.label} / AI-assisted design illustration`;
+      : picture.caption || `${picture.label} / AI-assisted design illustration`;
     const list = document.querySelector("#material-details");
     list.replaceChildren();
     material.details.forEach((text) => {

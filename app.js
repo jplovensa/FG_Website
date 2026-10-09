@@ -1,4 +1,4 @@
-import { initStudio } from "./studio.js?v=project-planner-1";
+import { initStudio } from "./studio.js?v=bemmel-lattice-1";
 import { initJourney, initWorld } from "./experience.js?v=project-planner-1";
 
 const intro = document.querySelector("#intro");

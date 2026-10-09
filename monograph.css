@@ -1420,3 +1420,12 @@
 }
 .planner-actions #journey-contact { display: inline-flex; align-items: center; gap: 12px; }
 .planner-actions .arrow-icon { width: 18px; height: 18px; flex: 0 0 18px; }
+/* Give the tall Bemmel profiles room while preserving every image edge. */
+#material-view[data-shape="portrait"] #material-image {
+  aspect-ratio: auto;
+  height: clamp(380px, 42vw, 620px);
+  object-fit: contain;
+}
+@media (max-width: 600px) {
+  #material-view[data-shape="portrait"] #material-image { height: 430px; }
+}
