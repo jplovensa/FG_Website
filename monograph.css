@@ -1328,3 +1328,21 @@
   font-size: 13px;
   margin-bottom: 20px;
 }
+
+/* Let the modular-block film remain visible behind every intro text layer. */
+.intro-top .eyebrow,
+.intro-bottom > span,
+.intro-reveal,
+.intro-reveal img,
+.intro-reveal p {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.intro-top .eyebrow,
+.intro-bottom > span {
+  padding: 0;
+}
+.intro-reveal p {
+  color: #193c32;
+}
