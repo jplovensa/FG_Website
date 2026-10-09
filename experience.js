@@ -1,3 +1,5 @@
+import { createPlan, planningStages, planBrief, planInterest } from "./journey-planner.js";
+import { buildInquiryLink } from "./inquiry-model.js";
 const stages = ["Discover", "Design", "Manufacture", "Assemble", "Handover"];
 const journeys = {
   home: [
@@ -209,6 +211,52 @@ export function initJourney({ reducedMotion }) {
   let timer;
   let scene;
   let sceneLoading = false;
+  const plan = createPlan();
+  const options = document.querySelector("#plan-options");
+  const planInputs = ["location", "scale", "timing"];
+  function updatePlan() {
+    plan.type = type;
+    document.querySelector("#plan-summary").textContent = labels[type];
+    const count = plan.choices.filter(choice => choice !== null).length;
+    document.querySelector("#plan-progress").textContent = `${count} of 5 decisions explored${plan.location.trim() ? ` · ${plan.location.trim()}` : ""}. Your plan is ready to discuss at any stage.`;
+    document.querySelector("#plan-whatsapp").href = buildInquiryLink(new Map([
+      ["interest", planInterest(type)], ["text", planBrief(plan)],
+    ]));
+  }
+  function renderDecision() {
+    const stage = planningStages[step];
+    document.querySelector("#plan-question").textContent = stage.question;
+    options.replaceChildren(...stage.options.map(([label], index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      button.setAttribute("aria-pressed", String(plan.choices[step] === index));
+      button.addEventListener("click", () => {
+        stop();
+        plan.choices[step] = index;
+        renderDecision();
+        options.children[index]?.focus({ preventScroll: true });
+      });
+      return button;
+    }));
+    document.querySelector("#plan-next-step").textContent = stage.options[plan.choices[step]]?.[1] || "Choose an option to see what to bring to the conversation.";
+    document.querySelector("#plan-fjall").textContent = stage.fjall;
+    document.querySelector("#plan-conventional").textContent = stage.conventional;
+    document.querySelector("#plan-compare-stage").textContent = `0${step + 1} / ${stages[step]}`;
+    updatePlan();
+  }
+  planInputs.forEach(key => {
+    document.querySelector(`#plan-${key}`).addEventListener("input", event => {
+      plan[key] = event.target.value;
+      updatePlan();
+    });
+  });
+  document.querySelector("#journey-contact").addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("fjall:journey-brief", { detail: {
+      interest: planInterest(type), source: `journey:${type}`,
+      location: plan.location, scale: plan.scale, timing: plan.timing, text: planBrief(plan),
+    } }));
+  });
   const play = document.querySelector("#journey-play");
   const previous = document.querySelector("#journey-previous");
   const next = document.querySelector("#journey-next");
@@ -253,6 +301,7 @@ export function initJourney({ reducedMotion }) {
     previous.disabled = step === 0;
     next.disabled = step === 4;
     if (step === 4) stop();
+    renderDecision();
   }
   function selectType(value) {
     stop();
@@ -299,23 +348,12 @@ export function initJourney({ reducedMotion }) {
   });
   document.querySelector("#download-brief").addEventListener("click", () => {
     const text = [
-      `FJÄLL GROUP — STARTER BRIEF`,
-      `Project type: ${labels[type]}`,
-      "",
-      "Before the first conversation:",
-      "• Where is your site or existing building?",
-      "• What will the space be used for?",
-      "• What matters most: experience, scale, site constraints or budget?",
-      "• What surveys, designs or approvals already exist?",
-      "",
+      "FJÄLL GROUP — MY STARTER BRIEF", "", planBrief(plan), "",
       ...journeys[type].flatMap((stage, index) => [
         `${index + 1}. ${stages[index]} — ${stage[1]}`,
-        stage[2],
-        `Take forward: ${stage[3]}`,
-        "",
+        stage[2], `Take forward: ${stage[3]}`, "",
       ]),
-      "Illustrative journey only. Scope, engineering and programme are agreed with your project team.",
-      "",
+      "Both routes need site assessment, engineering, approvals and quality checks. Scope and programme are agreed with the project team.",
       "Contact the commercial team on WhatsApp: +62 877 860 10290",
     ].join("\n");
     const url = URL.createObjectURL(
@@ -444,6 +482,7 @@ export function initJourney({ reducedMotion }) {
         : "Pause scene";
   });
 
+  render();
   reducedMotion.addEventListener("change", stop);
 }
 

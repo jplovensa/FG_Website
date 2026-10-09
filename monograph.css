@@ -1346,3 +1346,77 @@
 .intro-reveal p {
   color: #193c32;
 }
+
+/* The project planner is an editorial workspace with a local WhatsApp brief. */
+#journey .journey-heading { align-items: start; }
+#journey .journey-heading > p { font-size: 15px; line-height: 1.7; max-width: 430px; }
+#journey .journey-types { margin-bottom: 24px; }
+.planner-details { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 24px 0 36px; border-top: 1px solid var(--line); }
+.planner-details label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 500; }
+.planner-details label > span { font-size: 10px; color: #59645f; font-weight: 400; }
+.planner-details input { width: 100%; min-width: 0; border: 0; border-bottom: 1px solid #87968f; padding: 12px 0; background: transparent; font: inherit; font-size: 14px; border-radius: 0; color: #172b26; }
+.planner-details input::placeholder { color: #647169; opacity: 1; }
+.planner-instruction { display: flex; justify-content: space-between; gap: 24px; font-size: 13px; font-weight: 600; }
+.planner-instruction span { font-size: 12px; font-weight: 400; color: #59645f; }
+#journey .journey-steps { margin: 20px 0 28px; gap: 12px; }
+#journey .journey-workspace { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+#journey .journey-story { padding: 32px; }
+#journey .journey-story h3 { margin: 24px 0 16px; font-size: clamp(26px, 2.3vw, 34px); }
+#journey .journey-story > p { min-height: 0; }
+#journey .journey-deliverable { margin-top: 20px; padding-top: 16px; }
+#journey .journey-deliverable p { min-height: 0; }
+.planner-choice { border: 0; padding: 0; margin: 24px 0 0; min-width: 0; }
+.planner-choice legend { font-size: 13px; font-weight: 600; padding: 0; margin-bottom: 12px; }
+#plan-options { display: flex; flex-wrap: wrap; gap: 8px; }
+#plan-options button { background: transparent; border: 1px solid #84938c; color: #263c33; font-size: 12px; padding: 12px 14px; text-align: left; min-height: 44px; }
+#plan-options button[aria-pressed="true"] { background: #213b31; border-color: #213b31; color: white; }
+#journey .planner-next { background: #e7ece6; color: #344a3e; font-size: 12px; line-height: 1.7; padding: 16px; margin-top: 16px; }
+#journey .journey-controls { margin-top: 24px; }
+#journey .journey-controls > button { min-height: 44px; min-width: 44px; }
+.planner-comparison { padding: 36px 0; }
+.planner-comparison-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; margin-bottom: 20px; }
+.planner-comparison-heading > .eyebrow { width: 100%; }
+.planner-comparison-heading h3 { font-size: clamp(23px, 2.4vw, 34px); font-weight: 400; letter-spacing: -.04em; }
+.planner-comparison-heading > p { margin-left: auto; font-size: 12px; color: #59645f; }
+.planner-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.planner-routes article { padding: 28px; border: 1px solid #a5afa7; }
+.planner-routes .planner-fjall { background: #e7ece6; border-color: #e7ece6; }
+.planner-routes .eyebrow { display: block; font-size: 10px; line-height: 1.7; }
+.planner-routes p { font-size: 14px; line-height: 1.8; margin-top: 18px; color: #344a3e; }
+.planner-comparison-note { margin-top: 18px; font-size: 11px; line-height: 1.8; color: #59645f; max-width: 900px; }
+.planner-handoff { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; padding: 36px; background: #19392e; color: #fff; }
+.planner-handoff h3 { font-size: clamp(26px, 3vw, 40px); letter-spacing: -.04em; line-height: 1.15; margin: 20px 0 16px; font-weight: 400; }
+.planner-handoff .eyebrow { color: #c6dbcf; }
+.planner-handoff p { font-size: 13px; color: #d3e1d7; line-height: 1.7; overflow-wrap: anywhere; }
+.planner-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.planner-actions a, .planner-actions button { font-size: 13px; line-height: 1.5; padding: 8px 0; background: transparent; color: #fff; margin: 0; }
+.planner-actions .planner-primary { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px; background: #d8e9dc; padding: 18px; color: #183a2c; }
+.planner-actions > p { font-size: 11px; }
+#journey :is(input, button, a):focus-visible { outline: 2px solid #27684f; outline-offset: 4px; }
+.planner-handoff :is(a, button):focus-visible { outline-color: white !important; }
+@media (max-width: 900px) {
+  #journey .journey-heading { flex-direction: column; gap: 24px; align-items: start; }
+  #journey .journey-heading > p { max-width: 600px; }
+  #journey .journey-workspace { grid-template-columns: minmax(0, 1fr); }
+  #journey .build-model { min-height: 460px; }
+  .planner-details { gap: 18px; }
+  .planner-handoff { gap: 28px; padding: 28px; }
+}
+@media (max-width: 600px) {
+  .planner-details, .planner-routes, .planner-handoff { grid-template-columns: minmax(0, 1fr); }
+  .planner-details { padding-bottom: 28px; gap: 24px; }
+  .planner-instruction { flex-direction: column; gap: 8px; }
+  #journey .journey-types { gap: 8px; margin-top: 28px; }
+  #journey .journey-types button { flex: 1 1 42%; padding: 12px 10px; min-height: 44px; }
+  #journey .journey-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  #journey .journey-steps button { flex-wrap: wrap; gap: 6px; padding: 12px 2px; font-size: 11px; min-height: 44px; }
+  #journey .build-model { min-height: 430px; }
+  #journey .journey-story { padding: 24px 0; }
+  #plan-options { flex-direction: column; }
+  #plan-options button { width: 100%; }
+  .planner-routes article { padding: 22px; }
+  .planner-comparison-heading > p { margin-left: 0; }
+  .planner-handoff { padding: 24px; gap: 24px; }
+}
+.planner-actions #journey-contact { display: inline-flex; align-items: center; gap: 12px; }
+.planner-actions .arrow-icon { width: 18px; height: 18px; flex: 0 0 18px; }

@@ -1,4 +1,4 @@
-import { initLeadForm } from "./lead-form.js";
+import { initLeadForm } from "./lead-form.js?v=project-planner-1";
 export { buildInquiryLink } from "./inquiry-model.js";
 // Lightweight, user-controlled illustrations and the WhatsApp inquiry handoff.
 export const materials = {

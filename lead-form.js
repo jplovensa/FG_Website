@@ -1,3 +1,4 @@
+import { mergePlanNotes } from "./journey-planner.js";
 import { buildInquiryLink, validContact } from "./inquiry-model.js";
 // Integration events contain categories only, never visitor contact or brief text.
 export function track(name, details = {}) {
@@ -36,6 +37,16 @@ export function initLeadForm() {
       ? `Inspired by ${project}? Tell us about your own project.`
       : `Let’s discuss ${interest.value === "General inquiry" ? "your project" : interest.value}. Bring a site, an ambition or a first question.`;
   }
+  let previousPlan = "";
+  document.addEventListener("fjall:journey-brief", ({ detail }) => {
+    setContext(detail.interest, "", detail.source);
+    for (const key of ["location", "scale", "timing"]) {
+      if (detail[key].trim()) form.elements[key].value = detail[key];
+    }
+    form.elements.text.value = mergePlanNotes(form.elements.text.value, previousPlan, detail.text);
+    previousPlan = detail.text;
+    document.querySelector("#contact-project").textContent = "Your project plan is here. Add your contact details and any questions, then continue on WhatsApp.";
+  });
   const params = new URLSearchParams(location.search);
   if (params.has("interest"))
     setContext(
@@ -51,20 +62,6 @@ export function initLeadForm() {
       setContext(interest.value, "", "material");
     if (link.id === "business-inquiry")
       setContext(interest.value, "", "business-studio");
-    if (link.id === "journey-contact") {
-      const type = document.querySelector(
-        '[data-journey-type][aria-pressed="true"]',
-      )?.dataset.journeyType;
-      setContext(
-        type === "retrofit"
-          ? "Retrofit project"
-          : ["housing", "workers"].includes(type)
-            ? "FAD housing & workers’ accommodation"
-            : "GreenShift design & development",
-        "",
-        `journey:${type}`,
-      );
-    }
     if (link.href.includes("wa.me/"))
       track("whatsapp_handoff", { source: "direct" });
   });
