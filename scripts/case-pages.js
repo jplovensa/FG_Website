@@ -19,7 +19,7 @@ export async function buildCasePages(target) {
     const next = caseStudies[(i + 1) % caseStudies.length];
     const plate = `<div class="programme-plate"><span class="eyebrow">${esc(p.record)}</span><strong>${esc(p.facts[0][1])}</strong><span>${esc(p.title)}</span><span class="plate-lines" aria-hidden="true"></span></div>`;
     const imageSize = {
-      "housing-olive": [942, 530],
+      "housing-olive-clean": [942, 530],
       nuanu: [1000, 750],
       ulaman: [1000, 667],
       lombok: [1000, 782],
@@ -46,7 +46,7 @@ export async function buildCasePages(target) {
     const reference =
       p.slug === "housing"
         ? `<section class="case-housing-gallery" aria-labelledby="housing-design-title"><div class="section-label"><span class="eyebrow">FAD / The home and its details</span><span class="eyebrow">Exterior · Layout · Foundation</span></div><h2 id="housing-design-title">A home, repeated.<br/>A place, made personal.</h2><p>A 36 m² base-unit concept pairs coordinated openings with a choice of exterior expressions. Explore the design studies, floor plan and foundation detail behind a repeatable home.</p><div class="housing-design-grid">${[
-            ["housing-olive", "Olive / Exterior expression", 942, 530],
+            ["housing-olive-clean", "Olive / Exterior expression", 942, 530],
             ["housing-earth", "Earth / Exterior expression", 389, 271],
             ["housing-yellow", "Golden / Exterior expression", 894, 530],
             ["housing-purple", "Purple / Exterior expression", 762, 452],

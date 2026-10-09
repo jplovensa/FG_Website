@@ -113,7 +113,7 @@ const editorial = {
     ],
   },
   housing: {
-    image: "housing-olive",
+    image: "housing-olive-clean",
     imageSource: "FAD / Exterior design study",
     sector: "Housing at scale",
     interest: "FAD housing & workers’ accommodation",
