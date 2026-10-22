@@ -1429,3 +1429,24 @@
 @media (max-width: 600px) {
   #material-view[data-shape="portrait"] #material-image { height: 430px; }
 }
+
+/* Dedicated business websites lead the group-card actions. */
+.about .business-website {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 26px;
+  padding: 18px 20px;
+  min-height: 54px;
+  background: #d6e3be;
+  color: #172b26;
+  font-size: 14px;
+  font-weight: 600;
+}
+.about .business-website:hover {
+  background: #edf3e3;
+}
+.about .business-website + .studio-open {
+  margin-top: 12px;
+}

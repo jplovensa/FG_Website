@@ -14,7 +14,7 @@ The development server uses port 3000. Set `PORT` to change it. Edit the homepag
 
 ## Business pages
 
-`greenshift.html` introduces GreenShift's design and development services; `fad.html` introduces Fjäll Affordable Development's housing and workers’ accommodation focus. Both are linked from the homepage group cards and connect back to the project portfolio, materials and inquiry form. Their inquiry links preselect the relevant business. Concept films use native, user-controlled playback.
+`greenshift.html` introduces GreenShift's design and development services; `fad.html` introduces Fjäll Affordable Development's housing and workers’ accommodation focus. The homepage group cards link primarily to the dedicated business websites at `https://jplovensa.github.io/GreenShift-/` and `https://jplovensa.github.io/FAD`. The local overview pages remain available and connect back to the project portfolio, materials and inquiry form. Their inquiry links preselect the relevant business. Concept films use native, user-controlled playback.
 
 Edit business-page content in `scripts/business-pages.js` and shared styles in `business-pages.css`. Run `npm run build` to regenerate both root pages and their production copies, including sitemap entries. Do not edit the generated HTML directly. The pages support both domain-root and repository-subpath hosting.
 

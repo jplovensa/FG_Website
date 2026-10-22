@@ -151,7 +151,10 @@ for (const basePath of ["/", "/FG_Website/"]) {
       ['greenshift', 'GreenShift design & development'],
       ['fad', 'FAD housing & workers’ accommodation'],
     ]) {
-      assert.ok(home.includes(`href="./${slug}.html"`));
+      const businessWebsite = slug === 'fad'
+        ? 'https://jplovensa.github.io/FAD'
+        : 'https://jplovensa.github.io/GreenShift-/';
+      assert.ok(home.includes(`class="business-website" href="${businessWebsite}"`));
       assert.ok(sitemap.includes(`/${slug}.html</loc>`));
       const response = await fetch(new URL(`${slug}.html`, base));
       assert.equal(response.status, 200);
