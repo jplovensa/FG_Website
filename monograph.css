@@ -1451,30 +1451,11 @@
   margin-top: 12px;
 }
 
-/* Keep the two business destinations visible before the portfolio. */
+/* Direct business links remain available in navigation and the group cards. */
 .site-header nav > .nav-business { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; }
 .nav-business .arrow-icon { width: 12px; height: 12px; }
-.business-directory { padding: 56px var(--gutter) 64px; background: #f0f2ec; color: #172b26; }
-.business-directory-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px 48px; align-items: end; margin-bottom: 30px; }
-.business-directory-heading > .eyebrow { grid-column: 1 / -1; color: #52635a; }
-.business-directory-heading h2 { font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; letter-spacing: -.045em; font-weight: 450; }
-.business-directory-heading > p:last-child { font-size: 14px; line-height: 1.65; max-width: 430px; color: #52635a; }
-.business-directory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.business-destination { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; min-width: 0; background: #fff; border: 1px solid #c7d0c6; transition: background .18s, border-color .18s; }
-.business-destination:hover { background: #e5edda; border-color: #426657; }
-.business-destination:focus-visible { outline: 3px solid #007f6d; outline-offset: 4px; }
-.destination-name { margin: 26px 0 14px; font-size: clamp(38px, 4vw, 64px); letter-spacing: -.055em; line-height: 1.05; font-weight: 500; }
-.destination-name > span { color: #008875; }
-.destination-description { font-size: 15px; line-height: 1.65; max-width: 410px; margin-bottom: 30px; }
-.destination-action { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; padding-top: 20px; margin-top: auto; border-top: 1px solid #ccd5c9; font-size: 14px; font-weight: 600; }
 .business-name-link:hover { text-decoration: underline; text-underline-offset: 6px; }
 @media (min-width: 701px) { .site-header nav { gap: clamp(10px, 1.6vw, 27px); } }
 @media (max-width: 700px) {
-  .business-directory { padding-block: 36px 40px; }
-  .business-directory-heading, .business-directory-grid { grid-template-columns: 1fr; }
-  .business-directory-heading { gap: 14px; }
-  .business-destination { padding: 26px; }
-  .destination-name { margin-top: 22px; }
   .site-header nav > .nav-business { display: flex; justify-content: space-between; padding-block: 12px; border-bottom: 1px solid #ffffff30; font-size: 18px; }
 }
-@media (prefers-reduced-motion: reduce) { .business-destination { transition: none; } }
