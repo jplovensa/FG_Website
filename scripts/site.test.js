@@ -141,3 +141,37 @@ test("server does not expose source configuration or missing assets", async () =
     assert.equal(response.status, 404, path);
   }
 });
+
+for (const basePath of ["/", "/FG_Website/"]) {
+  test(`business pages, navigation and contextual inquiries work at ${basePath}`, async () => {
+    const base = basePath === "/" ? origin : pagesOrigin;
+    const home = await (await fetch(base)).text();
+    const sitemap = await (await fetch(new URL('sitemap.xml', base))).text();
+    for (const [slug, interest] of [
+      ['greenshift', 'GreenShift design & development'],
+      ['fad', 'FAD housing & workers’ accommodation'],
+    ]) {
+      assert.ok(home.includes(`href="./${slug}.html"`));
+      assert.ok(sitemap.includes(`/${slug}.html</loc>`));
+      const response = await fetch(new URL(`${slug}.html`, base));
+      assert.equal(response.status, 200);
+      const html = await response.text();
+      assert.match(html, /<h1 id="page-title">/);
+      assert.match(html, /rel="canonical"/);
+      assert.match(html, /aria-current="page"/);
+      assert.match(html, /<video controls playsinline preload="none"/);
+      const inquiryPath = [...html.matchAll(/href="([^"]+)"/g)]
+        .map(match => match[1].replaceAll('&amp;', '&'))
+        .find(path => path.includes('interest='));
+      const inquiry = new URL(inquiryPath, base);
+      assert.equal(inquiry.searchParams.get('interest'), interest);
+      assert.equal(inquiry.searchParams.get('source'), `business:${slug}`);
+      assert.equal(inquiry.hash, '#contact');
+      assert.equal((await fetch(inquiry)).status, 200);
+      const assets = [...html.matchAll(/(?:src|href|poster)="(\.\/[^"#?]+)"/g)];
+      for (const [, asset] of assets) {
+        assert.equal((await fetch(new URL(asset, base))).status, 200, asset);
+      }
+    }
+  });
+}

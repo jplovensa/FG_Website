@@ -1,4 +1,5 @@
 import { buildCasePages } from "./case-pages.js";
+import { buildBusinessPages } from "./business-pages.js";
 import { mkdir, rm, copyFile, cp } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
@@ -9,6 +10,7 @@ for (const file of [
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
+  "business-page.js",
   "project-sketch.js",
   "experience.js",
   "journey-planner.js",
@@ -31,6 +33,8 @@ for (const file of [
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
+  "business-page.js",
+  "business-pages.css",
   "project-sketch.js",
   "experience.js",
   "journey-planner.js",
@@ -47,4 +51,6 @@ await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
 // Also keep the source-root Pages publishing path and local dev links working.
 await buildCasePages(root.replace(/\/$/, ""));
 await buildCasePages(`${root}dist`);
+await buildBusinessPages(root.replace(/\/$/, ""));
+await buildBusinessPages(`${root}dist`);
 console.log("Built static site in dist/ — no runtime dependencies.");
