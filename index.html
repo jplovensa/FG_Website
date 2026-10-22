@@ -974,323 +974,12 @@
         </div>
       </section>
       <section
-        aria-labelledby="journey-title"
-        class="journey section-pad"
-        id="journey"
-      >
-        <div class="section-label">
-          <span class="eyebrow">05 — Build with Fjäll</span
-          ><span class="eyebrow">From first conversation to first key</span>
-        </div>
-        <div class="journey-heading">
-          <h2 id="journey-title">
-            Your project.<br />A better way to <em>begin.</em>
-          </h2>
-          <p>
-            Explore how EPS and modular construction could work for you. Choose
-            your project, try the decisions at each stage and compare the process
-            with a conventional build. Then bring your plan to our team.
-          </p>
-        </div>
-        <div
-          aria-label="Choose your project type"
-          class="journey-types"
-          role="group"
-        >
-          <button aria-pressed="true" data-journey-type="home" type="button">
-            A home</button
-          ><button
-            aria-pressed="false"
-            data-journey-type="hospitality"
-            type="button"
-          >
-            A hospitality space</button
-          ><button
-            aria-pressed="false"
-            data-journey-type="retrofit"
-            type="button"
-          >
-            An existing building</button
-          ><button
-            aria-pressed="false"
-            data-journey-type="modular"
-            type="button"
-          >
-            A modular development
-          </button>
-          <button
-            aria-pressed="false"
-            data-journey-type="housing"
-            type="button"
-          >
-            Mass-scale housing
-          </button>
-          <button
-            aria-pressed="false"
-            data-journey-type="workers"
-            type="button"
-          >
-            Workers’ accommodation
-          </button>
-        </div>
-        <div class="planner-details" aria-label="Your project details">
-          <label>Where would you build? <span>Optional</span>
-            <input id="plan-location" type="text" maxlength="160" placeholder="City, region or site" autocomplete="off" />
-          </label>
-          <label>What scale do you have in mind? <span>Optional</span>
-            <input id="plan-scale" type="text" maxlength="120" placeholder="A home, 30 rooms, 250 homes…" />
-          </label>
-          <label>When would you like to begin? <span>Optional</span>
-            <input id="plan-timing" type="text" maxlength="120" placeholder="Exploring, this year, a target date…" />
-          </label>
-        </div>
-        <p class="planner-instruction">Try your journey <span>Choose a stage, then tell us what fits your project. Explore in any order.</span></p>
-        <div
-          aria-label="Choose a journey stage"
-          class="journey-steps"
-          role="group"
-        >
-          <button aria-pressed="true" data-journey-step="0" type="button">
-            <span>01</span>Discover</button
-          ><button aria-pressed="false" data-journey-step="1" type="button">
-            <span>02</span>Design</button
-          ><button aria-pressed="false" data-journey-step="2" type="button">
-            <span>03</span>Manufacture</button
-          ><button aria-pressed="false" data-journey-step="3" type="button">
-            <span>04</span>Assemble</button
-          ><button aria-pressed="false" data-journey-step="4" type="button">
-            <span>05</span>Handover
-          </button>
-        </div>
-        <div class="journey-workspace">
-          <div
-            aria-label="Illustrative building model: site planning"
-            class="build-model"
-            data-stage="0"
-            id="build-model"
-          >
-            <div
-              aria-label="Choose a landscape"
-              class="scene-environments"
-              hidden=""
-              role="group"
-            >
-              <button
-                aria-pressed="true"
-                data-environment="forest"
-                type="button"
-              >
-                Forest
-              </button>
-              <button
-                aria-pressed="false"
-                data-environment="mountain"
-                type="button"
-              >
-                Mountain
-              </button>
-              <button
-                aria-pressed="false"
-                data-environment="beach"
-                type="button"
-              >
-                Beachfront
-              </button>
-            </div>
-            <span class="eyebrow model-caption"
-              >Build with Fjäll / Guided construction scene</span
-            >
-            <canvas
-              aria-label="Interactive 3D construction site with a Fjäll guide"
-              hidden=""
-              id="construction-canvas"
-              role="img"
-            ></canvas>
-            <div class="scene-guide">
-              <span class="eyebrow">Your Fjäll guide</span>
-              <p id="scene-guide-text">
-                Let’s start with your site and the people who will use it.
-              </p>
-            </div>
-            <svg aria-labelledby="model-title" role="img" viewbox="0 0 640 450">
-              <title id="model-title">
-                An illustrative building grows from a site plan into a finished
-                structure
-              </title>
-              <defs>
-                <pattern
-                  height="35"
-                  id="blueprint-grid"
-                  patternunits="userSpaceOnUse"
-                  width="35"
-                >
-                  <path
-                    d="M35 0H0V35"
-                    fill="none"
-                    opacity=".16"
-                    stroke="currentColor"
-                    stroke-width=".4"
-                  ></path>
-                </pattern>
-              </defs>
-              <rect fill="url(#blueprint-grid)" height="450" width="640"></rect>
-              <g class="model-ground">
-                <path d="M70 295 315 152 580 305 332 445Z"></path>
-                <path d="M105 295 315 173 545 305 331 426Z"></path>
-                <path d="m315 173 16 253M105 295l440 10"></path>
-              </g>
-              <g class="model-design">
-                <path
-                  d="M165 283v-130l170-96 170 96v152l-170 98-170-120Z"
-                ></path>
-                <path
-                  d="m165 153 170 97 170-97M335 250v153M165 283l170-98 170 120"
-                ></path>
-                <path d="m335 57 0 128"></path>
-              </g>
-              <g class="model-frame">
-                <path
-                  d="M165 283V153l170-96 170 96v152M335 250v153M165 153l170 97 170-97M165 283l170 120 170-98M249 105v125M420 106v150M250 202v138M420 200v151"
-                ></path>
-              </g>
-              <g class="model-panels">
-                <path d="m165 153 170 97v153L165 283Z"></path>
-                <path d="m335 250 170-97v152l-170 98Z"></path>
-                <path
-                  class="model-window"
-                  d="m185 182 57 33v68l-57-39ZM266 228l48 27v101l-48-34ZM358 259l58-33v65l-58 34ZM440 211l44-26v67l-44 25Z"
-                ></path>
-              </g>
-              <g class="model-roof">
-                <path d="m150 151 185-108 186 108-186 107Z"></path>
-                <path
-                  d="m150 151 185 107v15L150 166ZM335 258l186-107v15L335 273Z"
-                ></path>
-              </g>
-              <g class="model-finish">
-                <path
-                  d="m130 308 205 120 194-111M123 320l212 122 202-120"
-                ></path>
-                <path
-                  d="M110 260v53M100 282l10-36 12 36M559 281v48M548 298l11-31 11 31"
-                ></path>
-              </g>
-            </svg>
-            <div
-              aria-label="Explore the construction scene"
-              class="scene-controls"
-              hidden=""
-              role="group"
-            >
-              <button
-                aria-label="Rotate view left"
-                id="scene-left"
-                type="button"
-              >
-                ←</button
-              ><button
-                aria-label="Rotate view right"
-                id="scene-right"
-                type="button"
-              >
-                →</button
-              ><button id="scene-reset" type="button">Reset view</button
-              ><button aria-pressed="false" id="scene-tour" type="button">
-                Camera orbit</button
-              ><button aria-pressed="false" id="scene-motion" type="button">
-                Pause scene
-              </button>
-            </div>
-            <p class="scene-help" id="scene-help">
-              Illustrative landscape · Drag or use arrow keys to explore
-            </p>
-            <div class="model-bottom">
-              <span id="model-stage-label">01 / Discover</span
-              ><span>Concept illustration</span>
-            </div>
-          </div>
-          <div class="journey-story">
-            <div class="journey-story-top">
-              <span class="eyebrow" id="journey-owner">You + GreenShift</span
-              ><span id="journey-count">01 / 05</span>
-            </div>
-            <h3 id="journey-stage-title">Begin with your ambition.</h3>
-            <p id="journey-description">
-              Share how you want to live, where you want to build, and what
-              matters most. Together, we turn the idea into a clear brief.
-            </p>
-            <fieldset class="planner-choice">
-              <legend id="plan-question">What should lead your brief?</legend>
-              <div id="plan-options"></div>
-            </fieldset>
-            <p id="plan-next-step" class="planner-next" aria-live="polite">Choose an option to see what to bring to your first conversation.</p>
-            <div class="journey-deliverable">
-              <span class="eyebrow">What you take forward</span>
-              <p id="journey-deliverable">
-                A project brief, site priorities and the right questions to
-                answer.
-              </p>
-            </div>
-            <div class="journey-controls">
-              <button
-                aria-label="Previous journey stage"
-                disabled=""
-                id="journey-previous"
-                type="button"
-              >
-                ←</button
-              ><button id="journey-play" type="button">
-                Play the journey <span aria-hidden="true">▷</span></button
-              ><button
-                aria-label="Next journey stage"
-                id="journey-next"
-                type="button"
-              >
-                →
-              </button>
-            </div>
-            <span
-              aria-live="polite"
-              class="sr-only"
-              id="journey-status"
-              role="status"
-              >Stage 1 of 5: Discover</span
-            >
-          </div>
-        </div>
-        <div class="planner-comparison" aria-labelledby="plan-compare-title">
-          <div class="planner-comparison-heading">
-            <span class="eyebrow">Compare the process</span>
-            <h3 id="plan-compare-title">Two routes. One considered project.</h3>
-            <p id="plan-compare-stage">01 / Discover</p>
-          </div>
-          <div class="planner-routes">
-            <article class="planner-fjall"><span class="eyebrow">With Fjäll / EPS &amp; modular</span><p id="plan-fjall"></p></article>
-            <article><span class="eyebrow">Conventional / Site-built masonry &amp; concrete</span><p id="plan-conventional"></p></article>
-          </div>
-          <p class="planner-comparison-note">Both routes need site assessment, engineering, approvals and quality checks. The right system depends on your design and location; contractors and construction methods vary. Explore the sequence here, then agree scope and programme with our team.</p>
-        </div>
-        <div class="planner-handoff">
-          <div>
-            <span class="eyebrow">Your starting point</span>
-            <h3 id="plan-summary">A home. Your next chapter.</h3>
-            <p id="plan-progress" aria-live="polite">Choose what matters to you. You can talk to us at any stage.</p>
-          </div>
-          <div class="planner-actions">
-            <a id="plan-whatsapp" class="planner-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/6287786010290">Discuss my plan on WhatsApp <svg aria-hidden="true" class="arrow-icon" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"></path></svg></a>
-            <a href="#contact" id="journey-contact">Add details to my inquiry <svg aria-hidden="true" class="arrow-icon" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"></path></svg></a>
-            <button class="text-link" id="download-brief" type="button">Save my starter brief <span aria-hidden="true">↓</span></button>
-            <p>No finished drawings needed. Review your draft in WhatsApp before sending.</p>
-          </div>
-        </div>
-      </section>
-      <section
         aria-labelledby="materials-title"
         class="material-studio section-pad"
         id="materials"
       >
         <div class="section-label">
-          <span class="eyebrow">06 — The material studio</span
+          <span class="eyebrow">05 — The material studio</span
           ><span class="eyebrow">Explore what makes the build</span>
         </div>
         <div class="material-studio-heading">
@@ -1601,6 +1290,317 @@
               id="material-status"
               role="status"
             ></p>
+          </div>
+        </div>
+      </section>
+      <section
+        aria-labelledby="journey-title"
+        class="journey section-pad"
+        id="journey"
+      >
+        <div class="section-label">
+          <span class="eyebrow">06 — Build with Fjäll</span
+          ><span class="eyebrow">From first conversation to first key</span>
+        </div>
+        <div class="journey-heading">
+          <h2 id="journey-title">
+            Your project.<br />A better way to <em>begin.</em>
+          </h2>
+          <p>
+            Explore how EPS and modular construction could work for you. Choose
+            your project, try the decisions at each stage and compare the process
+            with a conventional build. Then bring your plan to our team.
+          </p>
+        </div>
+        <div
+          aria-label="Choose your project type"
+          class="journey-types"
+          role="group"
+        >
+          <button aria-pressed="true" data-journey-type="home" type="button">
+            A home</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="hospitality"
+            type="button"
+          >
+            A hospitality space</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="retrofit"
+            type="button"
+          >
+            An existing building</button
+          ><button
+            aria-pressed="false"
+            data-journey-type="modular"
+            type="button"
+          >
+            A modular development
+          </button>
+          <button
+            aria-pressed="false"
+            data-journey-type="housing"
+            type="button"
+          >
+            Mass-scale housing
+          </button>
+          <button
+            aria-pressed="false"
+            data-journey-type="workers"
+            type="button"
+          >
+            Workers’ accommodation
+          </button>
+        </div>
+        <div class="planner-details" aria-label="Your project details">
+          <label>Where would you build? <span>Optional</span>
+            <input id="plan-location" type="text" maxlength="160" placeholder="City, region or site" autocomplete="off" />
+          </label>
+          <label>What scale do you have in mind? <span>Optional</span>
+            <input id="plan-scale" type="text" maxlength="120" placeholder="A home, 30 rooms, 250 homes…" />
+          </label>
+          <label>When would you like to begin? <span>Optional</span>
+            <input id="plan-timing" type="text" maxlength="120" placeholder="Exploring, this year, a target date…" />
+          </label>
+        </div>
+        <p class="planner-instruction">Try your journey <span>Choose a stage, then tell us what fits your project. Explore in any order.</span></p>
+        <div
+          aria-label="Choose a journey stage"
+          class="journey-steps"
+          role="group"
+        >
+          <button aria-pressed="true" data-journey-step="0" type="button">
+            <span>01</span>Discover</button
+          ><button aria-pressed="false" data-journey-step="1" type="button">
+            <span>02</span>Design</button
+          ><button aria-pressed="false" data-journey-step="2" type="button">
+            <span>03</span>Manufacture</button
+          ><button aria-pressed="false" data-journey-step="3" type="button">
+            <span>04</span>Assemble</button
+          ><button aria-pressed="false" data-journey-step="4" type="button">
+            <span>05</span>Handover
+          </button>
+        </div>
+        <div class="journey-workspace">
+          <div
+            aria-label="Illustrative building model: site planning"
+            class="build-model"
+            data-stage="0"
+            id="build-model"
+          >
+            <div
+              aria-label="Choose a landscape"
+              class="scene-environments"
+              hidden=""
+              role="group"
+            >
+              <button
+                aria-pressed="true"
+                data-environment="forest"
+                type="button"
+              >
+                Forest
+              </button>
+              <button
+                aria-pressed="false"
+                data-environment="mountain"
+                type="button"
+              >
+                Mountain
+              </button>
+              <button
+                aria-pressed="false"
+                data-environment="beach"
+                type="button"
+              >
+                Beachfront
+              </button>
+            </div>
+            <span class="eyebrow model-caption"
+              >Build with Fjäll / Guided construction scene</span
+            >
+            <canvas
+              aria-label="Interactive 3D construction site with a Fjäll guide"
+              hidden=""
+              id="construction-canvas"
+              role="img"
+            ></canvas>
+            <div class="scene-guide">
+              <span class="eyebrow">Your Fjäll guide</span>
+              <p id="scene-guide-text">
+                Let’s start with your site and the people who will use it.
+              </p>
+            </div>
+            <svg aria-labelledby="model-title" role="img" viewbox="0 0 640 450">
+              <title id="model-title">
+                An illustrative building grows from a site plan into a finished
+                structure
+              </title>
+              <defs>
+                <pattern
+                  height="35"
+                  id="blueprint-grid"
+                  patternunits="userSpaceOnUse"
+                  width="35"
+                >
+                  <path
+                    d="M35 0H0V35"
+                    fill="none"
+                    opacity=".16"
+                    stroke="currentColor"
+                    stroke-width=".4"
+                  ></path>
+                </pattern>
+              </defs>
+              <rect fill="url(#blueprint-grid)" height="450" width="640"></rect>
+              <g class="model-ground">
+                <path d="M70 295 315 152 580 305 332 445Z"></path>
+                <path d="M105 295 315 173 545 305 331 426Z"></path>
+                <path d="m315 173 16 253M105 295l440 10"></path>
+              </g>
+              <g class="model-design">
+                <path
+                  d="M165 283v-130l170-96 170 96v152l-170 98-170-120Z"
+                ></path>
+                <path
+                  d="m165 153 170 97 170-97M335 250v153M165 283l170-98 170 120"
+                ></path>
+                <path d="m335 57 0 128"></path>
+              </g>
+              <g class="model-frame">
+                <path
+                  d="M165 283V153l170-96 170 96v152M335 250v153M165 153l170 97 170-97M165 283l170 120 170-98M249 105v125M420 106v150M250 202v138M420 200v151"
+                ></path>
+              </g>
+              <g class="model-panels">
+                <path d="m165 153 170 97v153L165 283Z"></path>
+                <path d="m335 250 170-97v152l-170 98Z"></path>
+                <path
+                  class="model-window"
+                  d="m185 182 57 33v68l-57-39ZM266 228l48 27v101l-48-34ZM358 259l58-33v65l-58 34ZM440 211l44-26v67l-44 25Z"
+                ></path>
+              </g>
+              <g class="model-roof">
+                <path d="m150 151 185-108 186 108-186 107Z"></path>
+                <path
+                  d="m150 151 185 107v15L150 166ZM335 258l186-107v15L335 273Z"
+                ></path>
+              </g>
+              <g class="model-finish">
+                <path
+                  d="m130 308 205 120 194-111M123 320l212 122 202-120"
+                ></path>
+                <path
+                  d="M110 260v53M100 282l10-36 12 36M559 281v48M548 298l11-31 11 31"
+                ></path>
+              </g>
+            </svg>
+            <div
+              aria-label="Explore the construction scene"
+              class="scene-controls"
+              hidden=""
+              role="group"
+            >
+              <button
+                aria-label="Rotate view left"
+                id="scene-left"
+                type="button"
+              >
+                ←</button
+              ><button
+                aria-label="Rotate view right"
+                id="scene-right"
+                type="button"
+              >
+                →</button
+              ><button id="scene-reset" type="button">Reset view</button
+              ><button aria-pressed="false" id="scene-tour" type="button">
+                Camera orbit</button
+              ><button aria-pressed="false" id="scene-motion" type="button">
+                Pause scene
+              </button>
+            </div>
+            <p class="scene-help" id="scene-help">
+              Illustrative landscape · Drag or use arrow keys to explore
+            </p>
+            <div class="model-bottom">
+              <span id="model-stage-label">01 / Discover</span
+              ><span>Concept illustration</span>
+            </div>
+          </div>
+          <div class="journey-story">
+            <div class="journey-story-top">
+              <span class="eyebrow" id="journey-owner">You + GreenShift</span
+              ><span id="journey-count">01 / 05</span>
+            </div>
+            <h3 id="journey-stage-title">Begin with your ambition.</h3>
+            <p id="journey-description">
+              Share how you want to live, where you want to build, and what
+              matters most. Together, we turn the idea into a clear brief.
+            </p>
+            <fieldset class="planner-choice">
+              <legend id="plan-question">What should lead your brief?</legend>
+              <div id="plan-options"></div>
+            </fieldset>
+            <p id="plan-next-step" class="planner-next" aria-live="polite">Choose an option to see what to bring to your first conversation.</p>
+            <div class="journey-deliverable">
+              <span class="eyebrow">What you take forward</span>
+              <p id="journey-deliverable">
+                A project brief, site priorities and the right questions to
+                answer.
+              </p>
+            </div>
+            <div class="journey-controls">
+              <button
+                aria-label="Previous journey stage"
+                disabled=""
+                id="journey-previous"
+                type="button"
+              >
+                ←</button
+              ><button id="journey-play" type="button">
+                Play the journey <span aria-hidden="true">▷</span></button
+              ><button
+                aria-label="Next journey stage"
+                id="journey-next"
+                type="button"
+              >
+                →
+              </button>
+            </div>
+            <span
+              aria-live="polite"
+              class="sr-only"
+              id="journey-status"
+              role="status"
+              >Stage 1 of 5: Discover</span
+            >
+          </div>
+        </div>
+        <div class="planner-comparison" aria-labelledby="plan-compare-title">
+          <div class="planner-comparison-heading">
+            <span class="eyebrow">Compare the process</span>
+            <h3 id="plan-compare-title">Two routes. One considered project.</h3>
+            <p id="plan-compare-stage">01 / Discover</p>
+          </div>
+          <div class="planner-routes">
+            <article class="planner-fjall"><span class="eyebrow">With Fjäll / EPS &amp; modular</span><p id="plan-fjall"></p></article>
+            <article><span class="eyebrow">Conventional / Site-built masonry &amp; concrete</span><p id="plan-conventional"></p></article>
+          </div>
+          <p class="planner-comparison-note">Both routes need site assessment, engineering, approvals and quality checks. The right system depends on your design and location; contractors and construction methods vary. Explore the sequence here, then agree scope and programme with our team.</p>
+        </div>
+        <div class="planner-handoff">
+          <div>
+            <span class="eyebrow">Your starting point</span>
+            <h3 id="plan-summary">A home. Your next chapter.</h3>
+            <p id="plan-progress" aria-live="polite">Choose what matters to you. You can talk to us at any stage.</p>
+          </div>
+          <div class="planner-actions">
+            <a id="plan-whatsapp" class="planner-primary" target="_blank" rel="noopener noreferrer" href="https://wa.me/6287786010290">Discuss my plan on WhatsApp <svg aria-hidden="true" class="arrow-icon" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"></path></svg></a>
+            <a href="#contact" id="journey-contact">Add details to my inquiry <svg aria-hidden="true" class="arrow-icon" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"></path></svg></a>
+            <button class="text-link" id="download-brief" type="button">Save my starter brief <span aria-hidden="true">↓</span></button>
+            <p>No finished drawings needed. Review your draft in WhatsApp before sending.</p>
           </div>
         </div>
       </section>
