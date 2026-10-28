@@ -1,0 +1,41 @@
+{
+  "studio": "GreenShift Asset Repurposing Studio",
+  "media": "Original AI-assisted architectural and material concept studies generated for this studio.",
+  "film": "Original image-based animated concept film, not project footage or a measured before/after record.",
+  "library": "Curated renovation categories: finishing panels, partitions, wall finishes, flooring, joinery and lighting. Not a copy of the Fjall product catalogue.",
+  "images": [
+    "asset-existing.jpg",
+    "asset-reimagined.jpg",
+    "asset-panels.jpg",
+    "asset-partitions.jpg",
+    "asset-finishes.jpg",
+    "asset-floors.jpg",
+    "asset-joinery.jpg",
+    "asset-lighting.jpg"
+  ],
+  "film_sequence": [
+    {
+      "study": "asset-existing.jpg",
+      "visible_seconds": [
+        0,
+        14
+      ]
+    },
+    {
+      "study": "asset-reimagined.jpg",
+      "visible_seconds": [
+        10,
+        24
+      ]
+    }
+  ],
+  "film_render": {
+    "file": "asset-repurposing-smooth.mp4",
+    "fps": 60,
+    "duration_seconds": 24,
+    "transition": "Four-second dissolve at 00:10\u201300:14",
+    "camera": "Shared cosine-eased fractional-coordinate push-in; cubic sampling",
+    "playback": "Ends on the renovated interior; explicit replay instead of an abrupt background loop",
+    "reproduce": "python scripts/render-asset-film.py"
+  }
+}

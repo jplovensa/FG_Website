@@ -1,6 +1,6 @@
 import { buildCasePages } from "./case-pages.js";
 import { buildBusinessPages } from "./business-pages.js";
-import { mkdir, rm, copyFile, cp } from "node:fs/promises";
+import { mkdir, rm, copyFile, cp, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -10,7 +10,6 @@ for (const file of [
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
-  "business-page.js",
   "project-sketch.js",
   "experience.js",
   "journey-planner.js",
@@ -33,8 +32,6 @@ for (const file of [
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
-  "business-page.js",
-  "business-pages.css",
   "project-sketch.js",
   "experience.js",
   "journey-planner.js",
@@ -44,10 +41,20 @@ for (const file of [
   "favicon.svg",
   "robots.txt",
   ".nojekyll",
+  "CNAME",
 ]) {
   await copyFile(`${root}${file}`, `${root}dist/${file}`);
 }
 await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
+for (const directory of ['GreenShift', 'FAD']) {
+  await cp(`${root}${directory}`, `${root}dist/${directory}`, { recursive: true });
+}
+const site = (process.env.SITE_URL || 'https://fjallgroup.com').replace(/\/$/, '');
+for (const entry of ['GreenShift/index.html', 'GreenShift/cinematic.html', 'FAD/index.html']) {
+  const file = `${root}dist/${entry}`;
+  const html = await readFile(file, 'utf8');
+  await writeFile(file, html.replaceAll('https://fjallgroup.com/', `${site}/`));
+}
 // Also keep the source-root Pages publishing path and local dev links working.
 await buildCasePages(root.replace(/\/$/, ""));
 await buildCasePages(`${root}dist`);

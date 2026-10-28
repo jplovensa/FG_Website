@@ -1,0 +1,10 @@
+{
+  "GreenShift": {
+    "source": "https://github.com/jplovensa/GreenShift-",
+    "commit": "bfa86db88632fdc8eb48c7bca50f29732ba07c60"
+  },
+  "FAD": {
+    "source": "https://github.com/jplovensa/FAD",
+    "commit": "c32d6f975d2471f524fc140df42a053d309629ff"
+  }
+}

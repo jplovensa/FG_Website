@@ -143,38 +143,44 @@ test("server does not expose source configuration or missing assets", async () =
 });
 
 for (const basePath of ["/", "/FG_Website/"]) {
-  test(`business pages, navigation and contextual inquiries work at ${basePath}`, async () => {
+  test(`full business sites share the FG origin at ${basePath}`, async () => {
     const base = basePath === "/" ? origin : pagesOrigin;
     const home = await (await fetch(base)).text();
     const sitemap = await (await fetch(new URL('sitemap.xml', base))).text();
-    for (const [slug, interest] of [
-      ['greenshift', 'GreenShift design & development'],
-      ['fad', 'FAD housing & workers’ accommodation'],
-    ]) {
-      const businessWebsite = slug === 'fad'
-        ? 'https://jplovensa.github.io/FAD'
-        : 'https://jplovensa.github.io/GreenShift-/';
-      assert.ok(home.includes(`class="business-website" href="${businessWebsite}"`));
-      assert.ok(sitemap.includes(`/${slug}.html</loc>`));
-      const response = await fetch(new URL(`${slug}.html`, base));
+    for (const path of ['GreenShift', 'FAD']) {
+      assert.ok(home.includes(`class="business-website" href="./${path}/"`));
+      assert.ok(!home.includes('https://jplovensa.github.io/GreenShift-/'));
+      assert.ok(!home.includes('https://jplovensa.github.io/FAD'));
+      assert.ok(sitemap.includes(`/${path}/</loc>`));
+      const clean = new URL(path, base);
+      const redirect = await fetch(clean, {redirect: 'manual'});
+      assert.equal(redirect.status, 308);
+      assert.equal(redirect.headers.get('location'), `${clean.pathname}/`);
+      const pageURL = new URL(`${path}/`, base);
+      const response = await fetch(clean);
       assert.equal(response.status, 200);
+      assert.equal(response.url, pageURL.href);
       const html = await response.text();
-      assert.match(html, /<h1 id="page-title">/);
-      assert.match(html, /rel="canonical"/);
-      assert.match(html, /aria-current="page"/);
-      assert.match(html, /<video controls playsinline preload="none"/);
-      const inquiryPath = [...html.matchAll(/href="([^"]+)"/g)]
-        .map(match => match[1].replaceAll('&amp;', '&'))
-        .find(path => path.includes('interest='));
-      const inquiry = new URL(inquiryPath, base);
-      assert.equal(inquiry.searchParams.get('interest'), interest);
-      assert.equal(inquiry.searchParams.get('source'), `business:${slug}`);
-      assert.equal(inquiry.hash, '#contact');
-      assert.equal((await fetch(inquiry)).status, 200);
+      assert.ok(html.includes(`https://fjallgroup.com/${path}/`));
       const assets = [...html.matchAll(/(?:src|href|poster)="(\.\/[^"#?]+)"/g)];
-      for (const [, asset] of assets) {
-        assert.equal((await fetch(new URL(asset, base))).status, 200, asset);
+      assert.ok(assets.length > 3);
+      for (const [,asset] of assets) {
+        const file = await fetch(new URL(asset, pageURL));
+        assert.equal(file.status, 200, asset);
+        assert.ok(Number(file.headers.get('content-length')) > 0, asset);
       }
+      const legacy = await (await fetch(new URL(`${path.toLowerCase()}.html`, base))).text();
+      assert.ok(legacy.includes(`url=./${path}/`));
     }
+    const pdf = await fetch(new URL('FAD/public/fjall-commercial-deck.pdf', base));
+    assert.equal(pdf.status, 200);
+    assert.equal(pdf.headers.get('content-type'), 'application/pdf');
+    const studio = await fetch(new URL('GreenShift/assets/facade-studio.html', base));
+    assert.equal(studio.status, 200);
+    assert.match(studio.headers.get('content-security-policy'), /script-src 'self'/);
+    assert.ok(!studio.headers.get('content-security-policy').includes("script-src 'self' 'unsafe-inline'"));
+    const photo = await fetch(new URL('FAD/public/images/campus.jpg', base));
+    assert.equal(photo.status, 200);
+    assert.equal(photo.headers.get('content-type'), 'image/jpeg');
   });
 }

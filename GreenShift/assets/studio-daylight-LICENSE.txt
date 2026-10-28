@@ -1,0 +1,8 @@
+Studio Small 03 HDRI
+Source: HDRI Haven / Poly Haven, distributed in pmndrs/drei-assets
+https://github.com/pmndrs/drei-assets/blob/master/hdri/studio_small_03_1k.hdr
+https://polyhaven.com/license
+HDRI Haven / Poly Haven HDRIs are released under CC0 (public domain).
+Used for environmental lighting and reflections, not as a background image.
+
+RGBELoader: Three.js r160, MIT. See Three-RGBELoader-LICENSE.txt.

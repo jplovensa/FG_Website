@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Adapted from jplovensa.github.io/SCH-FG_GSIH_MCC/ for the GreenShift Experience Studio; locally hosted styles and Three.js. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Garuda Spark Innovation Hub MCC - Development Concept</title>
+    <link rel="stylesheet" href="./spatial-styles.css">
+    
+    <style>
+@font-face{font-family:Inter;font-style:normal;font-weight:300;font-display:swap;src:url(./inter-300.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(./inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(./inter-500.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(./inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(./inter-700.woff2) format("woff2")}
+
+        body { margin: 0; overflow: hidden; background-color: #f4f4f5; font-family: 'Inter', sans-serif; user-select: none; touch-action: none; }
+        .hide-ui { opacity: 0; transform: translateY(16px); filter: blur(4px); pointer-events: none; }
+        .show-ui { opacity: 1; transform: translateY(0); filter: blur(0px); pointer-events: auto; }
+        .dot-active { width: 2.5rem; background-color: #54d2b2; box-shadow: 0 0 12px rgba(84,210,178,0.4); }
+        .dot-inactive { width: 0.75rem; background-color: rgba(0,0,0,0.1); }
+
+        /* Cinematic Animations */
+        @keyframes cinematicContinuousZoom {
+            0% { transform: scale(0.92); }
+            100% { transform: scale(1.05); }
+        }
+        @keyframes blurReveal {
+            0% { opacity: 0; filter: blur(20px); transform: translateY(15px) scale(0.95); }
+            100% { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
+        }
+        @keyframes ambientPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .cinematic-zoom { animation: cinematicContinuousZoom 12s cubic-bezier(0.2, 0.0, 0.2, 1) forwards; }
+        .ambient-glow { animation: ambientPulse 4s ease-in-out infinite; }
+        
+        .reveal-1 { animation: blurReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; animation-delay: 0.1s; }
+        .reveal-2 { animation: blurReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; animation-delay: 0.3s; }
+        .reveal-3 { animation: blurReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; animation-delay: 0.5s; }
+        .reveal-progress { animation: blurReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; animation-delay: 0.8s; }
+
+        /* Hide scrollbars for modals */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-gray-900 selection:bg-[#54d2b2]/30">
+
+    <!-- CINEMATIC PRELOADER -->
+    <div id="preloader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f8fafc] transition-opacity duration-1000 ease-in-out opacity-100 overflow-hidden font-['Inter']">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-[#54d2b2]/20 via-transparent to-[#0a84ff]/10 blur-[100px] ambient-glow"></div>
+        </div>
+
+        <div class="cinematic-zoom flex flex-col items-center justify-center w-full h-full relative z-10 px-6">
+            <div class="reveal-1 bg-[#111111] border border-black/5 rounded-[2rem] px-6 py-4 md:px-10 md:py-6 flex items-center justify-center gap-4 md:gap-8 shadow-2xl">
+                <svg viewBox="0 0 200 250" class="h-6 md:h-12">
+                    <path d="M 10 165 L 10 190 L 190 190 L 190 130 L 10 130 L 10 70 L 100 10 L 190 70 L 190 95 M 55 38 L 55 190 M 145 38 L 145 190" fill="none" stroke="#a88854" stroke-width="12" stroke-linejoin="miter" stroke-linecap="square" />
+                    <text x="100" y="240" font-family="'Inter', sans-serif" font-size="34" font-weight="700" fill="#a88854" letter-spacing="12" text-anchor="middle">SECHA</text>
+                </svg>
+                <div class="w-px h-8 md:h-14 bg-white/10"></div>
+                <svg viewBox="0 0 650 200" class="h-5 md:h-9">
+                    <g transform="translate(10, 20)">
+                        <path d="M 10 95 L 130 25 L 240 90 L 180 125 L 130 95 L 70 130 Z" fill="#54d2b2" />
+                        <path d="M 90 120 L 140 90 L 210 130 L 160 160 Z" fill="#3c8273" />
+                    </g>
+                    <text x="260" y="110" font-family="'Inter', sans-serif" font-size="96" font-weight="900" fill="#54d2b2" letter-spacing="-2">FJÄLL</text>
+                    <text x="265" y="175" font-family="'Inter', sans-serif" font-size="64" font-weight="700" fill="transparent" stroke="#3c8273" stroke-width="2.5" letter-spacing="11">GROUP</text>
+                </svg>
+            </div>
+
+            <div class="reveal-2 mt-8 md:mt-10 flex items-center gap-2 bg-[#54d2b2]/10 border border-[#54d2b2]/20 text-[#54d2b2] px-4 py-1.5 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase">
+                <span class="w-1.5 h-1.5 bg-[#54d2b2] rounded-full animate-pulse"></span>
+                DEVELOPMENT CONCEPT
+            </div>
+
+            <h1 class="reveal-3 mt-8 text-center text-4xl md:text-[5.5rem] font-bold tracking-tighter leading-[1.05] text-[#111111]">
+                Tech Meets<br>
+                <span class="text-[#54d2b2]">Heritage.</span>
+            </h1>
+
+            <div class="mt-12 md:mt-16 w-56 md:w-72 flex flex-col items-center reveal-progress z-20">
+                <div class="w-full h-1 bg-[#e2e8f0] rounded-full overflow-hidden relative mb-4 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)]">
+                    <div id="progress-bar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#54d2b2] via-[#0a84ff] to-[#54d2b2] bg-[length:200%_100%] rounded-full shadow-[0_0_12px_rgba(84,210,178,0.8)]" style="width: 0%; animation: gradientFlow 2s linear infinite;"></div>
+                </div>
+                <div class="flex justify-between w-full text-[9px] md:text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+                    <span>Loading Hub Data</span>
+                    <span id="progress-text" class="text-gray-900 font-bold">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D CANVAS -->
+    <div id="canvas-container" class="absolute inset-0 z-0 cursor-move">
+        <canvas id="glcanvas" class="w-full h-full block outline-none"></canvas>
+    </div>
+
+    <!-- VR HUD & CONTROLS -->
+    <div id="vr-ui" class="absolute inset-0 pointer-events-none flex-col items-center justify-between z-20 hidden p-4 md:p-8">
+        
+        <!-- Game Top HUD -->
+        <div class="w-full flex justify-between items-start">
+            <div class="bg-white/80 backdrop-blur-md px-3 py-2 md:px-4 md:py-3 rounded-xl border border-black/5 text-gray-900 shadow-xl flex flex-col transition-colors duration-300" id="objective-container">
+                <span class="text-[8px] md:text-[9px] font-bold text-[#54d2b2] uppercase tracking-widest mb-0.5">PropTech Engine</span>
+                <span id="game-objective" class="text-xs md:text-sm font-bold tracking-tight transition-colors duration-300">Scan Facility Assets</span>
+            </div>
+            
+            <div class="flex flex-col items-end gap-2">
+                <div class="hidden md:block bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-white shadow-xl text-xs font-mono tracking-widest">
+                    <span class="text-[#54d2b2]">RENDER:</span> D5 WebGL2 <span class="mx-2 text-white/30">|</span> <span class="text-[#54d2b2]">PING:</span> 12ms
+                </div>
+                <div class="hidden md:block bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/5 text-white/70 text-[9px] font-mono uppercase tracking-wider">
+                    Live Telemetry Active
+                </div>
+            </div>
+        </div>
+
+        <!-- Crosshair & Interaction Prompt -->
+        <div class="flex flex-col items-center justify-center relative flex-1 w-full pointer-events-none">
+            <div class="w-1.5 h-1.5 bg-black/40 rounded-full border border-white/80 shadow-[0_0_4px_rgba(255,255,255,0.5)] transition-all duration-200" id="crosshair"></div>
+            <div id="game-prompt" class="absolute top-1/2 mt-4 bg-black/80 backdrop-blur-md text-[#54d2b2] font-mono text-[10px] tracking-widest px-3 py-1.5 rounded-lg opacity-0 transition-opacity duration-300 shadow-xl uppercase border border-[#54d2b2]/30 text-center">
+                [ Asset Scanned ]
+            </div>
+        </div>
+
+        <!-- Desktop Controls Overlay -->
+        <div class="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 items-center gap-6 text-xs font-mono text-white/70 bg-black/50 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/10 shadow-2xl pointer-events-auto">
+            <span class="flex items-center gap-2"><span class="bg-white/20 px-1.5 py-0.5 rounded text-white font-bold">C</span> Camera</span>
+            <span class="flex items-center gap-2"><span class="bg-white/20 px-1.5 py-0.5 rounded text-white font-bold">Scroll</span> Zoom</span>
+            <span class="flex items-center gap-2"><span class="bg-white/20 px-1.5 py-0.5 rounded text-white font-bold">E</span> Analyse EPS</span>
+            <span class="flex items-center gap-2 text-[#54d2b2]"><span class="bg-[#54d2b2]/20 border border-[#54d2b2]/50 px-1.5 py-0.5 rounded">ESC</span> Exit VR</span>
+        </div>
+
+        <!-- Mobile Touch Action Buttons -->
+        <div id="mobile-actions" class="absolute bottom-6 right-4 flex-col gap-3 z-50 pointer-events-auto hidden">
+            <button id="btn-mob-zoom-in" class="w-10 h-10 bg-white/90 backdrop-blur-md rounded-full text-gray-900 border border-black/10 flex items-center justify-center font-black text-lg shadow-lg active:bg-[#54d2b2] active:text-white transition-colors">+</button>
+            <button id="btn-mob-zoom-out" class="w-10 h-10 bg-white/90 backdrop-blur-md rounded-full text-gray-900 border border-black/10 flex items-center justify-center font-black text-lg shadow-lg active:bg-[#54d2b2] active:text-white transition-colors">-</button>
+            <button id="btn-mob-cam" class="w-10 h-10 bg-gray-900 backdrop-blur-md rounded-full text-white border border-black/10 flex items-center justify-center shadow-lg active:bg-[#54d2b2] transition-colors mt-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <button id="btn-mob-analyze" class="w-10 h-10 bg-[#54d2b2] backdrop-blur-md rounded-full text-white border border-[#54d2b2]/50 flex items-center justify-center shadow-lg active:bg-white active:text-[#54d2b2] font-black text-[10px] mt-2 transition-colors">EPS</button>
+            <button id="btn-exit-vr-mob" class="w-10 h-10 bg-red-500 backdrop-blur-md rounded-full text-white border border-red-400 flex items-center justify-center shadow-lg active:bg-white active:text-red-500 font-bold text-[10px] mt-4 transition-colors">X</button>
+        </div>
+
+        <!-- Mobile Virtual Joystick -->
+        <div id="mobile-joystick" class="absolute bottom-6 left-4 w-28 h-28 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hidden touch-none z-50 items-center justify-center pointer-events-auto shadow-xl">
+            <div id="mobile-joystick-knob" class="w-12 h-12 bg-white/90 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.2)] transition-transform duration-75"></div>
+        </div>
+
+    </div>
+
+    <!-- DIRECTOR GENERAL UI OVERLAY (Standard Presentation) -->
+    <div id="main-ui" class="absolute inset-0 z-10 pointer-events-none flex p-4 md:p-12 transition-all duration-1000 opacity-0 translate-y-4">
+        
+        <div class="w-full md:w-[420px] h-full flex flex-col justify-between pointer-events-auto">
+            <div class="flex flex-col items-start pt-6 md:pt-0">
+                <div class="backdrop-blur-md bg-white/70 border border-black/5 rounded-2xl p-4 md:p-6 w-fit shadow-xl">
+                    <h3 class="text-[10px] font-bold tracking-[0.3em] text-[#54d2b2] uppercase mb-1">Development Concept</h3>
+                    <h1 class="text-xs md:text-sm font-semibold tracking-wide text-gray-900 uppercase">KOMDIGI // Garuda Spark Hub</h1>
+                </div>
+            </div>
+
+            <div class="relative pb-6 md:pb-0">
+                <div id="pagination" class="flex gap-2 mb-4 md:mb-6">
+                    <button aria-label="Select presentation insight" class="dot h-1.5 rounded-full transition-all duration-500 ease-out dot-active" data-index="0"></button>
+                    <button aria-label="Select presentation insight" class="dot h-1.5 rounded-full transition-all duration-500 ease-out dot-inactive" data-index="1"></button>
+                    <button aria-label="Select presentation insight" class="dot h-1.5 rounded-full transition-all duration-500 ease-out dot-inactive" data-index="2"></button>
+                    <button aria-label="Select presentation insight" class="dot h-1.5 rounded-full transition-all duration-500 ease-out dot-inactive" data-index="3"></button>
+                    <button aria-label="Select presentation insight" class="dot h-1.5 rounded-full transition-all duration-500 ease-out dot-inactive" data-index="4"></button>
+                </div>
+
+                <div id="slide-content" class="backdrop-blur-2xl bg-white/80 border border-black/5 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-300 transform show-ui max-h-[60vh] md:max-h-none overflow-y-auto">
+                    <div class="inline-block border border-black/5 bg-gray-100/50 rounded-full px-3 py-1 mb-3 md:mb-4">
+                        <span id="slide-phase" class="text-[9px] md:text-[10px] font-mono tracking-widest text-gray-500"></span>
+                    </div>
+                    
+                    <h2 id="slide-title" class="text-2xl md:text-3xl font-bold tracking-tight leading-tight mb-1 md:mb-2 text-gray-900"></h2>
+                    <h3 id="slide-subtitle" class="text-xs md:text-sm font-semibold text-[#54d2b2] uppercase tracking-widest mb-4 md:mb-6"></h3>
+                    
+                    <p id="slide-desc" class="text-gray-600 leading-relaxed text-xs md:text-sm font-medium border-l-2 border-[#54d2b2] pl-3 md:pl-4"></p>
+
+                    <div class="flex gap-2 md:gap-3 mt-6 md:mt-8">
+                        <button id="btn-prev" aria-label="Previous insight" class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 transition-colors shadow-sm shrink-0">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button id="btn-next" aria-label="Next insight" class="flex-1 h-10 md:h-12 flex items-center justify-center gap-2 rounded-full bg-gray-900 text-white font-semibold hover:bg-black transition-all shadow-lg hover:scale-[1.02]">
+                            <span id="btn-next-text" class="text-sm">Next Insight</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute top-6 right-4 md:top-1/2 md:right-12 md:-translate-y-1/2 pointer-events-auto">
+            <button id="btn-enter-vr" class="relative group bg-white/80 backdrop-blur-xl border border-black/5 text-gray-900 hover:text-white px-3 py-5 md:px-4 md:py-8 rounded-[1rem] md:rounded-[1.5rem] transition-all duration-500 shadow-xl flex flex-col items-center gap-3 md:gap-5 overflow-hidden hover:scale-105 hover:shadow-[0_0_30px_rgba(84,210,178,0.4)]">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#54d2b2] to-[#3c8273] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="relative z-10 group-hover:stroke-white text-[#54d2b2] transition-colors duration-300 md:w-6 md:h-6"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                <span class="relative z-10 text-[9px] md:text-[10px] font-bold tracking-widest uppercase transition-colors duration-300" style="writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);">Immersive VR</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- MATERIAL ANALYSIS MODAL -->
+    <div id="material-modal" class="fixed inset-0 z-[60] flex items-center justify-end p-4 md:p-8 pointer-events-none opacity-0 transition-opacity duration-500 font-['Inter']">
+        <!-- CRITICAL FIX: Removed pointer-events-auto from this background overlay -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mat-modal-bg"></div>
+        
+        <div class="relative w-full md:w-[450px] h-full max-h-[85vh] md:max-h-full bg-white/95 backdrop-blur-3xl border border-white/50 rounded-3xl p-6 md:p-10 shadow-2xl transform translate-x-full transition-transform duration-500 overflow-y-auto flex flex-col" id="mat-modal-content">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+                <h3 class="text-[#54d2b2] font-bold tracking-[0.2em] uppercase text-xs flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-[#54d2b2] rounded-full animate-pulse"></span> Analysis
+                </h3>
+                <button id="btn-close-mat" class="text-gray-400 hover:text-gray-900 bg-gray-100 rounded-full p-2 transition-colors pointer-events-auto">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">EPS Sandwich Panel</h2>
+            <p class="text-sm text-gray-500 mb-8 leading-relaxed">Concept illustration of the documented GX-100 nine-layer build-up. Geometry is illustrative, not to scale.</p>
+
+            <div class="space-y-4 flex-1">
+                <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">01. Protective faces</h4>
+                    <p class="text-xs text-gray-500">Finish, Kalci board, fibreglass mesh and PU glue on each face.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-[#54d2b2]/10 border border-[#54d2b2]/20">
+                    <h4 class="font-bold text-[#3c8273] text-sm mb-1">02. EPS core</h4>
+                    <p class="text-xs text-[#3c8273]/80">One EPS core within a mirrored protective build-up.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">
+                    <h4 class="font-bold text-gray-900 text-sm mb-1">03. PU glue</h4>
+                    <p class="text-xs text-gray-500">Coordinate the complete build-up and finish with the approved project specification.</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex justify-between items-center text-sm mb-2">
+                    <span class="text-gray-500 font-medium">System build-up</span>
+                    <span class="font-bold text-gray-900">Nine layers</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500 font-medium">Final specification</span>
+                    <span class="font-bold text-[#54d2b2]">Project-specific</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEDICATED EPS SIMULATION HUD -->
+    <div id="simulation-hud" class="absolute bottom-24 left-1/2 -translate-x-1/2 md:bottom-8 md:left-auto md:translate-x-0 md:right-12 z-20 pointer-events-none opacity-0 transition-opacity duration-700 transform translate-y-4">
+        <div class="bg-black/90 backdrop-blur-2xl border border-[#54d2b2]/30 rounded-2xl p-5 md:p-6 text-white shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-72 md:w-80">
+            <div class="flex items-center justify-between mb-3 md:mb-4 border-b border-white/10 pb-2 md:pb-3">
+                <h4 class="text-[#54d2b2] text-[9px] md:text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#54d2b2] rounded-full animate-pulse"></span>
+                    Material Analysis
+                </h4>
+                <span class="text-[8px] md:text-[9px] font-mono text-white/50 border border-white/10 px-1.5 py-0.5 rounded">LIVE</span>
+            </div>
+            
+            <div class="space-y-2 md:space-y-3 font-mono text-[10px] md:text-xs">
+                <div class="flex justify-between items-end">
+                    <span class="text-white/50">Protective faces</span>
+                    <span class="text-right text-[#e2e8f0] font-semibold">Finish + Kalci board<br><span class="text-[8px] md:text-[9px] text-white/30">Fibreglass + PU glue</span></span>
+                </div>
+                <div class="flex justify-between items-end">
+                    <span class="text-white/50">EPS core</span>
+                    <span class="text-right text-[#e2e8f0] font-semibold">Central EPS core<br><span class="text-[8px] md:text-[9px] text-white/30">Mirrored build-up</span></span>
+                </div>
+                <div class="flex justify-between items-end pt-2 border-t border-white/5">
+                    <span class="text-white/50">Layer count</span>
+                    <span class="text-yellow-400 font-bold">9 layers</span>
+                </div>
+                <div class="flex justify-between items-end">
+                    <span class="text-white/50">Performance</span>
+                    <span class="text-[#54d2b2] font-bold">Project-specific</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="./three-0.160.0.min.js"></script>
+    
+    <script src="./spatial-presentation-inline-1.js"></script>
+</body>
+</html>

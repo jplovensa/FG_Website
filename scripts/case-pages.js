@@ -11,7 +11,7 @@ const esc = (value) =>
 export async function buildCasePages(target) {
   await mkdir(`${target}/projects`, { recursive: true });
   const site = (
-    process.env.SITE_URL || "https://jplovensa.github.io/FG_Website"
+    process.env.SITE_URL || "https://fjallgroup.com"
   ).replace(/\/$/, "");
   for (const [i, p] of caseStudies.entries()) {
     const home = "../index.html";
@@ -73,6 +73,6 @@ export async function buildCasePages(target) {
   }
   await writeFile(
     `${target}/sitemap.xml`,
-    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site}/</loc></url>${["greenshift", "fad"].map((slug) => `<url><loc>${site}/${slug}.html</loc></url>`).join("")}${caseStudies.map((p) => `<url><loc>${site}/projects/${p.slug}.html</loc></url>`).join("")}</urlset>`,
+    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site}/</loc></url>${["GreenShift", "FAD"].map((slug) => `<url><loc>${site}/${slug}/</loc></url>`).join("")}${caseStudies.map((p) => `<url><loc>${site}/projects/${p.slug}.html</loc></url>`).join("")}</urlset>`,
   );
 }

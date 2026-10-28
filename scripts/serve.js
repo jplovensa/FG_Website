@@ -1,6 +1,6 @@
 import inquiryHandler from "../api/inquiry.js";
 import { createServer } from "node:http";
-import { stat } from "node:fs/promises";
+import { stat, readFile } from "node:fs/promises";
 import { createReadStream } from "node:fs";
 import { resolve, extname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,8 +27,25 @@ const types = {
   ".mp4": "video/mp4",
   ".xml": "application/xml; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".json": "application/json; charset=utf-8",
+  ".pdf": "application/pdf",
+  ".vtt": "text/vtt; charset=utf-8",
+  ".hdr": "application/octet-stream",
+  ".zip": "application/zip",
 };
+// Exercise the deployed content policies in local browser checks too.
+const hosting = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
 const server = createServer(async (req, res) => {
+  const localPath = new URL(req.url, 'http://localhost').pathname.slice(basePath.length - 1);
+  for (const rule of hosting.headers) {
+    if (rule.source === '/(.*)' ||
+        (rule.source === '/GreenShift/(.*)' && localPath.startsWith('/GreenShift/')) ||
+        (rule.source === '/FAD/(.*)' && localPath.startsWith('/FAD/'))) {
+      for (const header of rule.headers) res.setHeader(header.key, header.value);
+    }
+  }
   if (
     new URL(req.url, "http://localhost").pathname === `${basePath}api/inquiry`
   ) {
@@ -52,16 +69,24 @@ const server = createServer(async (req, res) => {
       return;
     }
     const pathname = "/" + requestedPath.slice(basePath.length);
-    const file = resolve(
+    let file = resolve(
       root,
       `.${pathname === "/" ? "/index.html" : pathname}`,
     );
-    if (!file.startsWith(root + sep) || !types[extname(file)]) {
+    if (!file.startsWith(root + sep)) {
       res.writeHead(404).end("Not found");
       return;
     }
-    const info = await stat(file);
-    if (!info.isFile()) {
+    let info = await stat(file);
+    if (info.isDirectory()) {
+      file = resolve(file, 'index.html');
+      info = await stat(file);
+      if (!requestedPath.endsWith('/')) {
+        res.writeHead(308, { Location: `${requestedPath}/${new URL(req.url, 'http://localhost').search}` }).end();
+        return;
+      }
+    }
+    if (!info.isFile() || !types[extname(file)]) {
       res.writeHead(404).end("Not found");
       return;
     }

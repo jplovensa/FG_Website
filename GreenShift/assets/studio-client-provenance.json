@@ -1,0 +1,61 @@
+{
+  "studio_material_atlas": {
+    "file": "studio-material-atlas.png",
+    "origin": "Original AI-generated six-frame renovation material concept sheet",
+    "display": "CSS selects a tile for each category and detail view; source remains intact"
+  },
+  "studio_renovation_diptych": {
+    "file": "studio-renovation-diptych.png",
+    "origin": "Original AI-generated existing-space and renovated-space concept studies",
+    "note": "Illustrative concept, not documentation of a completed renovation"
+  },
+  "client_walkthrough_preview": {
+    "file": "client-walkthrough-preview.png",
+    "origin": "Browser screenshot of https://jplovensa.github.io/Drop-Pod-Experience-/experience.html"
+  },
+  "client_spatial_preview": {
+    "file": "client-spatial-preview.png",
+    "origin": "Browser screenshot of local spatial-presentation.html, with full source linked at https://jplovensa.github.io/SCH-FG_GSIH_MCC/"
+  },
+  "video_posters": {
+    "origin": "New frames extracted from original unchanged local videos"
+  },
+  "video_integrity": "User-uploaded refurbishment and transformation films are preserved. The client Studio Film now uses an original film rendered from the local GreenShift studio models.",
+  "refurbishment_film": {
+    "file": "refurbishment-studio.mp4",
+    "origin": "User-uploaded 456adbdb-d029-4e03-abb9-1e9c03b5da14.mp4",
+    "duration_seconds": 5.041667,
+    "encoding": "Original H.264 video and AAC audio preserved; MP4 optimized for progressive playback",
+    "poster": "refurbishment-studio-poster.jpg, frame from uploaded film"
+  },
+  "transformation_timelapse": {
+    "file": "transformation-timelapse.mp4",
+    "origin": "User-uploaded 25b11559-887f-4341-8bf7-0dc4b69e8036.mp4",
+    "duration_seconds": 5.041667,
+    "encoding": "Original 1080p H.264 video and AAC audio preserved; progressive MP4 playback",
+    "poster": "transformation-timelapse-poster.jpg, extracted from the upload",
+    "replaces": "Considered transformation image comparison slider"
+  },
+  "client_studio_film": {
+    "file": "studio-process-film.mp4",
+    "poster": "studio-process-film-poster.jpg",
+    "origin": "Original moving-camera render of the actual GreenShift interior and facade WebGL models, assembled with chapter captions and cross-dissolves. No stock, hologram or reused refurbishment footage.",
+    "duration_seconds": 18,
+    "encoding": "1280x720, H.264, 24fps, yuv420p, progressive MP4, silent",
+    "sequence": [
+      "Retained interior shell",
+      "Measured EPS partition and doorway",
+      "Japandi interior finishes, furniture and lighting",
+      "Curved facade EPS envelope",
+      "Tropical proposed facade and client review"
+    ],
+    "render_script": "scripts/render-studio-film.py",
+    "scope": "Illustrative concept studies, not documentation of completed client projects"
+  },
+  "space_brief_references": {
+    "files": "space-interior-*.webp / space-facade-*.webp",
+    "origin": "Clean moving-camera-stage renders from the actual local GreenShift WebGL interior/facade models, captured with capture-only instrumentation. No baked-in UI or sample quantity labels.",
+    "script": "scripts/capture-space-references.py",
+    "scope": "Illustrative style references, not photographs of client projects or remodels of uploaded photos."
+  }
+}
