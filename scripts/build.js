@@ -7,6 +7,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 // Fail before replacing the previous build if a browser module cannot parse.
 for (const file of [
   "app.js",
+  "analytics.js",
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
@@ -29,6 +30,7 @@ for (const file of [
   "responsive.css",
   "monograph.css",
   "app.js",
+  "analytics.js",
   "lead-form.js",
   "inquiry-model.js",
   "case-page.js",
